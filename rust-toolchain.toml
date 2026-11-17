@@ -1,0 +1,10 @@
+# Pinned toolchain. Deliberately an explicit version, not "stable" — a floating
+# channel means two runs of the same git SHA can compile under different
+# compilers, which breaks the reproducibility claim in the build plan.
+#
+# Bumping this is a deliberate act: record it in the commit message, and re-run
+# the KAT suite before trusting any measurement taken afterwards.
+[toolchain]
+channel = "1.97.1"
+components = ["rustfmt", "clippy"]
+profile = "minimal"

@@ -1,0 +1,73 @@
+{
+  "case_id": "CASE-DEMO-2026-10",
+  "cid": "31c61b10742c88dd57d0c5e95c3c2939b4e2f8443200465d96f5bdd39f8c64c3",
+  "epoch": 2,
+  "git_sha": "569fded6fad8e36f5cc91fd11b8c4f0f8cb0d49f",
+  "instance": "",
+  "others": [
+    {
+      "commitment": "987b1a03f40998f3a58997cc8e0ccd8d7a851ca4e2c21787c73dfcc0fc6ad207",
+      "index": 0
+    },
+    {
+      "commitment": "9bd90bc863db02877b85be01565e1e7012af8e30d98b6a37e8e05fa55370a347",
+      "index": 2
+    }
+  ],
+  "r_case": "02e1ec0fff14d80a42cf86c52a5765401867e0ee1f766f3078c5762e55bea4bc",
+  "tree_order": "other, evidence, other, custody",
+  "warrant_root": "b586f8e3046d0fd601d02a0435376539bd5d86b688e91f2816420e3656047f8b",
+  "warrants": [
+    {
+      "expiry": 1000,
+      "index": 1,
+      "inv_id": "47a9a18e006b5ebd3cb7c8db2a4945cb2bf78649f48b30fec4c1c364557c624b",
+      "name": "evidence",
+      "nonce": "3d17275528eaa74f3f8a773eb9ef783c8c63404eadc93b64998055a6575f5de7",
+      "nullifier": "409dd4778c06181d95c17d41b0d376dad8cdf589a24baa14093909a9b1f4c196",
+      "plane": "evidence",
+      "prove_seconds": 142.084638311,
+      "query": [
+        4,
+        10
+      ],
+      "role": 4,
+      "scope": [
+        1,
+        12
+      ],
+      "scope_commit": "0ede08854cb410cd9219dc85fe6fc63fa84280fcc63d06d9335d6faba39d4f21",
+      "secret": "4b68b8f177475fe86a84aa9b0b278524ab991c2e6e02cd3ff02ed53c80775266",
+      "window": [
+        0,
+        1000
+      ]
+    },
+    {
+      "expiry": 1000,
+      "index": 3,
+      "inv_id": "47a9a18e006b5ebd3cb7c8db2a4945cb2bf78649f48b30fec4c1c364557c624b",
+      "name": "custody",
+      "nonce": "e1d9660436482a3c27db6ea8220f2a71f9a37d492e9c4822d1e99c717966e272",
+      "nullifier": "f48f9c08aa343dcf57f2fe6c0926828cc2800e6e680b6aa6822b77ff7afd8b3f",
+      "plane": "custody",
+      "prove_seconds": 141.98493566,
+      "query": [
+        1,
+        2
+      ],
+      "role": 4,
+      "scope": [
+        1,
+        11
+      ],
+      "scope_commit": "b93981033bcd0b909cef435fc84d2eb9212a48ff28decadcd40982ffb3efdc8d",
+      "secret": "dcedfde795fe95f30c7913b9cd632ea551ba2f6f5388530b18e240987bb50b3e",
+      "window": [
+        0,
+        1000
+      ]
+    }
+  ],
+  "what": "PQ-ChainLog midterm demo warrant bundle (Require-Consultant §1ai.2). Demo only: no paper number."
+}

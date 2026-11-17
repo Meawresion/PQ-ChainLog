@@ -1,0 +1,33 @@
+# ACVP known-answer vectors --- provenance manifest
+#
+# Upstream: https://github.com/usnistgov/ACVP-Server
+# Commit:   a7f283cdc87d2d6dd93c1bac59e5622c5f9f8324
+#
+# Each row is  <sha256>  <bytes>  <name>.  'upstream/' rows are the
+# digests of the full internalProjection.json as published; the plain
+# rows are what we committed after extracting our parameter sets.
+# Regenerate or check with extract.py [--verify].
+#
+d7a62a2c3476957f56dd8d24f9004ea6776ccfe995ffe71a65bb9506dc9c7b1b     558841  upstream/ML-KEM-keyGen-FIPS203.json
+fdd5c5fecc87baffdd65f02cd85981f68cca5b0474f1b64a5c777c705058e70f     185394  ML-KEM-keyGen-FIPS203.json
+a556952ce869bb89c3a3196a701dad89647c193a34c86eafb61a9d710d5b810f    1465634  upstream/ML-KEM-encapDecap-FIPS203.json
+aa6632fc7f82261019a9fd99e22592e1ed865d41888ecda7f0c3818ad3ae9e2e     482540  ML-KEM-encapDecap-FIPS203.json
+e67ee6540d40e11506c3c4e3b1f79fc1cefcd49820db99fc61f87cc8ba463baf     882437  upstream/ML-DSA-keyGen-FIPS204.json
+06b637b695150bfc752748e8636858f2e2da9c77547ab9856ddd115af5754a0f     303518  ML-DSA-keyGen-FIPS204.json
+72dcaf5f69853ca267ccd16af9cb40949786aca0fcfbf05d1ebeba132b93af22    8971659  upstream/ML-DSA-sigGen-FIPS204.json
+d4c85ff0682543f6bfaf09ce2f07e1be2a063ff5c42adde1aa923106b3ff8f04    2997279  ML-DSA-sigGen-FIPS204.json
+47cdd6314c7f746d02421ffcba89d4dbc7bb875ac49e07a029fdfc26fba55437    4533178  upstream/ML-DSA-sigVer-FIPS204.json
+38db1608b26930c756494735546d56a0fc287f778f812d6a11152e9d2d017c1a    1495123  ML-DSA-sigVer-FIPS204.json
+d7c53a1b6450087047b57aae83a5a51a0ac89ecdb23ebe071e83fbb69ae9d920      75294  upstream/SLH-DSA-keyGen-FIPS205.json
+d08a2e506c5a8160fa9d56f5c806fb3d7077b21b178cd1356a26ca8060e5716d       5937  SLH-DSA-keyGen-FIPS205.json
+62b42e7c27fda5de8a94aba2943ae413b59b6ea08141f3bc035b1eceae235dba   38178342  upstream/SLH-DSA-sigGen-FIPS205.json
+7fb331968d67b9d070da615aab625a2b63b6f31363f053c14d67ebe70b742ec4    2172338  SLH-DSA-sigGen-FIPS205.json
+a013fc2104f4ed4799d96d51141f65b965969b2cf10646626a021b6d456ce792   30731848  upstream/SLH-DSA-sigVer-FIPS205.json
+d060d3b1dd48c3e0ab18f46dc58766aa08a5d8bbba828b069a4f6878a68b39c0    1723193  SLH-DSA-sigVer-FIPS205.json
+a9348d17e009cad62a2baa70160353f5bca936a27116f60dd5811f39b91c6991     953531  upstream/SHAKE-256-FIPS202.json
+4b8218df607e6f4b7973c7d2466263968536442bb6f55172abe2a3adfe0fcc6a     945689  SHAKE-256-FIPS202.json
+a804bbe1b4efbb775ec5a365245739ffaedad50f43d91b07ede26733e0f3b256     619104  upstream/ACVP-AES-ECB-1.0.json
+f6e5b6b13442668b88f74677c4990e3f79abc919ea9ff0e4dd099f5af0828ec7      88402  ACVP-AES-ECB-1.0.json
+6b3a858089e3071f981fa7b1c9718b5c4b1785e29d1e1986ee37394b599f726d    1152597  extra/ML-DSA-44-sigVer-FIPS204.json
+f9fc479e134cde2980b3bb7cddbcb567b2cd96fd753835243ed067699f26a023    9154174  upstream/gcmtestvectors.zip
+d7c594a8ac5c11298d6e8ec01200dd05a99cf61bcd3fe5badbbf5e23db012d24     285978  CAVP-AES-256-GCM.json

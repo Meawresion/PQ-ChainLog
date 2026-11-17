@@ -1,0 +1,83 @@
+[package]
+name = "pqcl-sm"
+description = "Secure Module: key custody behind a hardware boundary. PKCS#11 backend against a real token; Nitro Enclave backend at M5b."
+version.workspace = true
+edition.workspace = true
+# ⚠️ Overrides the workspace's 1.97. This crate is reachable from the SP1
+# guest, whose pinned toolchain is older than the host's, and a `rust-version`
+# above it makes `cargo prove build` refuse the package outright. The MSRV is a
+# floor for consumers, not the version we build with — `rust-toolchain.toml`
+# still pins 1.97.1 for every host build, and `cargo prove build` is what
+# verifies this floor is real.
+rust-version = "1.85"
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[features]
+default = ["pkcs11", "roles"]
+# ⭐ The role traits — `AgentModule` and `InvestigatorModule` — and with them
+# the `pqcl-chainproof` dependency that `derive_trapdoor`'s `Authorisation`
+# witness comes from.
+#
+# ⛔ **Gated because the SP1 guest reaches this crate and needs none of it.**
+# The chain is guest -> pqcl-warrant -> pqcl-sm, and everything past that arrow
+# wants exactly one item: `Plane`. Left ungated, `pqcl-chainproof` -- an
+# Ethereum RLP and Merkle-Patricia-trie decoder -- was compiled into a zkVM
+# guest that never calls it, which is both dead weight in the circuit's build
+# and a dependency nobody would defend on purpose.
+#
+# It surfaced as an MSRV error rather than as bloat: chainproof carries the
+# workspace's `rust-version = 1.97` and the SP1 toolchain is 1.96.0-dev, so
+# `cargo prove build` refused the package outright. The error was the symptom;
+# this is the disease.
+roles = ["dep:pqcl-chainproof"]
+# The PKCS#11 backend. Default on, but gated so `Plane` and the role traits can
+# be reached from the SP1 guest, where cryptoki's C FFI will not build.
+pkcs11 = ["dep:cryptoki", "pqcl-primitives/full"]
+# The host-software Secure Module: the enclave's own source, minus the boundary.
+# DEFAULT OFF, and it must stay that way — the design record makes
+# that one of the four conditions under which it was approved at all. The paper
+# build path must never enable it. `Backend::HostSoftware.is_publishable()` is
+# the second line of defence if it somehow is.
+host-software = ["append-types", "pqcl-primitives/full"]
+# ⭐ **The custody-append request language, with no keys behind it** (M13 A18).
+# `CustodyAppender` and the types it speaks: what a harness needs in order to
+# build records *through* a Secure Module without itself being one.
+#
+# Split out of `host-software` because the harness is the paper build path,
+# and row 11b's condition 4 says that path must never enable the host-software
+# module. This feature compiles no key-holding code at all — only the trait, the
+# request and response types, and the token helper — so a harness can take it
+# and still have no way to produce a record except through an appender it was
+# handed.
+#
+# ⛔ Never part of `default`: the SP1 guest takes this crate with
+# `--no-default-features` and must not see any of it; `feature_shape`'s tests
+# are what catch a slip.
+append-types = ["dep:pqcl-pipeline", "dep:pqcl-capsule", "dep:pqcl-dsse"]
+
+[dependencies]
+pqcl-primitives = { path = "../pqcl-primitives", default-features = false }
+# The on-chain search precondition of design §7b′. The SM needs the
+# `Authorisation` witness type, which is the whole enforcement mechanism — see
+# `InvestigatorModule::derive_trapdoor`.
+pqcl-chainproof = { path = "../pqcl-chainproof", optional = true }
+# The record builder, the key schedule and the custody index — the three
+# things a custody append is made of. ⚠️ `pqcl-pipeline` must never depend on
+# `pqcl-sm`: that would be a cycle, and it is why `Plane`'s index-key byte lives
+# in `pqcl-primitives` rather than here.
+pqcl-pipeline = { path = "../pqcl-pipeline", optional = true }
+pqcl-capsule = { path = "../pqcl-capsule", optional = true }
+pqcl-dsse = { path = "../pqcl-dsse", optional = true }
+# Safe wrapper over the PKCS#11 C API. The workspace denies `unsafe_code`, and
+# this crate honours that: every FFI call goes through cryptoki, which contains
+# the unsafe itself. We do not hand-roll the bindings.
+cryptoki = { version = "0.12.0", optional = true }
+
+# `Plane` crosses the host/guest boundary as SP1 input, so it must serialize.
+# Pure Rust, `no_std`-capable, and it reaches RISC-V unchanged.
+serde = { version = "1", features = ["derive"] }
+
+[lints]
+workspace = true

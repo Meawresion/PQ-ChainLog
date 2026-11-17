@@ -1,0 +1,22 @@
+[package]
+name = "baseline-doris-fu"
+description = "Structural reimplementation of the Doris follow-up (Nguyen et al., ProvSec 2025): Count-Min sketch, XEBFF and its EDB construction, counted. A baseline, never part of the system under test."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-primitives = { path = "../../crates/pqcl-primitives" }
+
+# M15, `search`: the PRF `F`, keyed AES-256, is ODXT's, as for the SDSSE-CQ and
+# VCFB ports, so every comparator's PRF is the same function.
+baseline-odxt = { path = "../odxt" }
+# `SE` (Doris's AES-CBC for `e`; a CTR stream for XBPE's `SE.Enc(K, 0^λ)`).
+aes = "0.8"
+rand = "0.8"
+
+[lints]
+workspace = true

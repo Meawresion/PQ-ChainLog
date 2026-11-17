@@ -1,0 +1,4 @@
+# Generated per run by generate.sh: keys and chain data for a disposable network.
+# Tracked, they would dirty the tree and every record stamped after them.
+networkFiles/
+nodes/

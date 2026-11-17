@@ -1,0 +1,29 @@
+[package]
+name = "baseline-odxt"
+description = "Faithful reimplementation of ODXT (Patranabis & Mukhopadhyay, NDSS 2021). A baseline, never part of the system under test."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-dsse = { path = "../../crates/pqcl-dsse" }
+
+# ODXT's cross-tags require a prime-order group with scalar exponentiation.
+# Ristretto255 over Curve25519 is that group; see UPGRADES.md for why the
+# ristretto abstraction rather than raw Curve25519, which the paper names.
+curve25519-dalek = { version = "4.1", default-features = false, features = ["alloc", "precomputed-tables", "zeroize"] }
+
+# The paper realises every PRF with AES-256 in counter mode. Keeping that rather
+# than substituting our own SHAKE256 PRF is the difference between measuring
+# ODXT and measuring a variant of it.
+aes = "0.8"
+
+# Figure 9 step 5(e) permutes each cross-token row. That is a leakage-bearing
+# step, not a test convenience, so the RNG is a real dependency.
+rand = "0.8"
+
+[lints]
+workspace = true

@@ -1,0 +1,42 @@
+# What must not enter an image build context.
+#
+# ⭐ **This is a PCR0 concern, not just a speed one.** The enclave image's
+# measurement is the deployment's identity, so the build context should contain
+# the source and nothing that varies between machines or between runs. A
+# `target/` directory full of incremental artefacts is the clearest example:
+# it is large, it differs per developer, and none of it belongs inside the
+# trusted computing base.
+#
+# It is also a correctness concern for the `forensics/` and `datasets/` trees —
+# those hold multi-gigabyte real evidence that has no business being copied into
+# any container.
+
+# Build output. Rebuilt inside the image from source.
+target/
+**/target/
+
+# Real forensic artefacts and corpora: gigabytes, and not in git either.
+datasets/artefacts/
+datasets/enron/
+forensics/out/
+forensics/symbols/
+
+# Chain state and validator private keys. ⛔ Never in an image.
+besu/networkFiles/
+besu/nodes/
+geth-legacy/
+
+# Baseline output and vendored upstreams that the enclave has no use for.
+baselines/*/results/
+baselines/doris/upstream/
+contracts/out/
+contracts/cache/
+contracts/lib/
+
+# Enclave build output, so a rebuild does not ingest its own previous EIF.
+nitro/out/
+
+# Version control and editor noise.
+.git/
+.gitignore
+**/*.swp

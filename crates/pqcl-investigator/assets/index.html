@@ -1,0 +1,1330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PQ-ChainLog console</title>
+<style>
+/* Direction: an evidence room's ledger. Quiet graphite chrome; colour only
+   where it means something (a side of the seam, a seal that holds or broke). */
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --inset: #f2f1ee; --hover: #ebeae6;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #6b6964;
+  --line: rgba(11, 11, 11, .10); --grid: #e1e0d9; --axis: #c3c2b7;
+  --accent: #256abf; --accent-ink: #1c5cab; --on-accent: #ffffff;
+  --ok: #006300; --bad: #b42727; --warn: #8a5a00; --warn-bg: #fdf3dc; --bad-bg: #fbe9e7;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #6250d6;
+  --heat: 42, 120, 214;
+  --mono: "Cascadia Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI Variable Text", "Segoe UI", sans-serif;
+  --ease: cubic-bezier(.2, 0, 0, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --inset: #232321; --hover: #2a2a28;
+    --ink: #f0efec; --ink-2: #c3c2b7; --muted: #9a988f;
+    --line: rgba(255, 255, 255, .10); --grid: #2c2c2a; --axis: #383835;
+    --accent: #f0efec; --accent-ink: #86b6ef; --on-accent: #0b0b0b;
+    --ok: #4cc24c; --bad: #e66767; --warn: #fab219; --warn-bg: #2e2612; --bad-bg: #331b1b;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #0ca30c; --s7: #9085e9;
+    --heat: 57, 135, 229;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--page); color: var(--ink); font: 14px/1.5 var(--sans); }
+button, input, select { font: inherit; color: inherit; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Shell */
+.shell { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: 100dvh; }
+aside.nav { position: sticky; top: 0; height: 100dvh; border-right: 1px solid var(--line); background: var(--surface); padding: 20px 12px; display: flex; flex-direction: column; gap: 4px; }
+.brand { padding: 0 8px 16px; }
+.brand b { display: block; font-size: 16px; font-weight: 600; }
+.brand span { font-size: 12px; color: var(--muted); }
+.nav a { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: 8px; color: var(--ink-2); text-decoration: none; transition: background-color .12s var(--ease), color .12s var(--ease); }
+.nav a:hover { background: var(--hover); color: var(--ink); }
+.nav a.on { background: var(--inset); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); font-weight: 500; }
+.nav a svg { flex: none; }
+.nav .grp { font-size: 12px; color: var(--muted); padding: 16px 10px 4px; }
+.nav .foot { margin-top: auto; padding: 12px 10px 0; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
+svg.i { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+.top { position: sticky; top: 0; z-index: 3; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; padding: 12px 32px; background: color-mix(in srgb, var(--page) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
+.top .st { display: inline-flex; align-items: center; gap: 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex: none; }
+.dot.live { background: var(--ok); }
+.dot.busy { background: var(--warn); }
+.dot.bad { background: var(--bad); }
+.top b { color: var(--ink); font-weight: 500; }
+
+main { padding: 28px 32px 64px; max-width: 1480px; }
+.page { display: none; }
+.page.on { display: block; }
+h1 { font-size: 24px; font-weight: 600; margin: 0 0 4px; letter-spacing: -.01em; }
+.lede { margin: 0 0 24px; color: var(--ink-2); max-width: 72ch; }
+h2 { font-size: 16px; font-weight: 600; margin: 0 0 12px; }
+h3 { font-size: 14px; font-weight: 600; margin: 0 0 8px; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+
+.grid { display: grid; gap: 16px; }
+.cols-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.cols-side { grid-template-columns: minmax(300px, 360px) minmax(0, 1fr); align-items: start; }
+.cols-guide { grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); align-items: start; }
+.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1180px) { .cols-side, .cols-guide, .cols-2, .cols-3 { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; min-width: 0; }
+.card + .card { margin-top: 0; }
+.stack > * + * { margin-top: 16px; }
+
+/* Figures */
+.figs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.fig { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+.fig .k { font-size: 12px; color: var(--muted); }
+.fig .v { font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.fig .s { font-size: 12px; color: var(--ink-2); }
+
+/* Controls */
+label.f { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--ink-2); min-width: 0; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+.row > label.f { flex: 1 1 140px; }
+input, select { height: 36px; padding: 0 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); min-width: 0; transition: border-color .12s var(--ease); }
+input:hover, select:hover { border-color: var(--axis); }
+input.mono { font-family: var(--mono); font-size: 13px; }
+:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
+.btn { height: 36px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font-weight: 500; white-space: nowrap; transition: background-color .12s var(--ease), border-color .12s var(--ease), transform .08s var(--ease); }
+.btn:hover { background: var(--hover); }
+.btn:active { transform: scale(.98); }
+.btn.primary { background: var(--accent); color: var(--on-accent); border-color: transparent; }
+.btn.primary:hover { background: color-mix(in srgb, var(--accent) 88%, var(--ink)); }
+.btn.danger { color: var(--bad); }
+.btn.wrap { white-space: normal; height: auto; min-height: 36px; padding: 8px 14px; }
+.btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg { display: inline-flex; padding: 2px; border-radius: 10px; background: var(--inset); border: 1px solid var(--line); }
+.seg button { height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--ink-2); cursor: pointer; }
+.seg button.on { background: var(--surface); color: var(--ink); box-shadow: 0 0 0 1px var(--line); font-weight: 500; }
+.err { color: var(--bad); font-size: 13px; white-space: pre-wrap; }
+.err:empty { display: none; }
+.err:not(:empty) { background: var(--bad-bg); padding: 8px 12px; border-radius: 8px; }
+.group { padding-top: 16px; border-top: 1px solid var(--line); }
+.group:first-child { padding-top: 0; border-top: 0; }
+.group h3 { display: flex; justify-content: space-between; align-items: baseline; }
+.group h3 span { font-weight: 400; font-size: 12px; color: var(--muted); }
+
+/* Result panels: the client beside the evidence store */
+.result h2 { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; justify-content: space-between; }
+.stamp { font-size: 12px; font-weight: 400; color: var(--muted); }
+.stamp.pre { color: var(--warn); }
+.verdict { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; margin-bottom: 8px; }
+.verdict.ok { color: var(--ok); }
+.verdict.no { color: var(--bad); }
+.sides { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 1400px) { .sides { grid-template-columns: minmax(0, 1fr); } }
+.side { border-radius: 10px; background: var(--inset); padding: 12px 16px; min-width: 0; }
+.side h4 { margin: 0 0 4px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.side h4 i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+dl { margin: 0; }
+dt { font-size: 12px; color: var(--muted); margin-top: 10px; }
+dd { margin: 2px 0 0; font-size: 13px; overflow-wrap: anywhere; white-space: pre-wrap; }
+.tag { font-family: var(--mono); font-size: 12px; padding: 1px 6px 1px 8px; border-radius: 4px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); border-left: 2px solid var(--axis); white-space: nowrap; }
+
+/* Tables */
+.tw { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; font-weight: 500; color: var(--muted); }
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
+.checks { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; }
+.ck { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); }
+.ck.ok { color: var(--ok); }
+.ck.bad { color: var(--bad); font-weight: 600; }
+.ck svg { width: 14px; height: 14px; stroke-width: 2; }
+.pill { font-size: 12px; padding: 1px 8px; border-radius: 6px; background: var(--inset); color: var(--ink-2); white-space: nowrap; }
+.pill.warn { background: var(--warn-bg); color: var(--warn); }
+.pill.bad { background: var(--bad-bg); color: var(--bad); }
+details > summary { cursor: pointer; color: var(--ink-2); font-weight: 500; list-style: none; display: flex; align-items: center; gap: 6px; }
+details > summary::before { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(-45deg); transition: transform .12s var(--ease); }
+details[open] > summary::before { transform: rotate(45deg); }
+details > summary::-webkit-details-marker { display: none; }
+
+/* Custody graph */
+.graphbox { overflow-x: auto; }
+svg.g text { fill: var(--ink); font: 12px var(--sans); }
+svg.g text.m { fill: var(--muted); font-size: 11px; }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--ink-2); margin-top: 8px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { display: inline-block; width: 20px; border-top: 2px solid; }
+
+/* Custody lanes */
+.lanewrap { position: relative; }
+.lanes { overflow-x: auto; }
+.lanelabels { position: absolute; left: 0; top: 0; background: var(--surface); box-shadow: 1px 0 0 var(--line); z-index: 1; }
+svg.ln text { font: 12px var(--sans); fill: var(--ink); }
+svg.ln text.m { fill: var(--muted); font-size: 11px; }
+svg.ln text.b { font-weight: 500; }
+svg.ln .lane { cursor: pointer; }
+svg.ln .lane:hover rect.bg { fill: var(--inset); }
+.lkey { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12px; color: var(--ink-2); margin-top: 12px; }
+.lkey span { display: inline-flex; align-items: center; gap: 6px; }
+.lkey svg { width: 18px; height: 14px; overflow: visible; }
+
+/* Chain explorer */
+.blocks { display: flex; gap: 4px; align-items: center; overflow: hidden; padding: 4px 0 8px; }
+.blk { flex: none; width: 30px; height: 30px; border-radius: 6px; border: 1px solid var(--line); background: var(--inset); display: grid; place-items: center; font-size: 11px; font-variant-numeric: tabular-nums; color: var(--muted); cursor: pointer; transition: background-color .12s var(--ease); }
+.blk.tx { background: var(--s1); border-color: transparent; color: #fff; font-weight: 600; }
+.blk.on { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink); }
+.blk:hover { background: var(--hover); }
+.blk.tx:hover { background: color-mix(in srgb, var(--s1) 85%, var(--ink)); }
+.blkaxis { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+tr.sel td { background: var(--inset); }
+tr.click { cursor: pointer; }
+tr.click:hover td { background: var(--hover); }
+.match { color: var(--ok); font-size: 12px; display: inline-flex; gap: 4px; align-items: center; }
+.match svg { width: 14px; height: 14px; stroke-width: 2; }
+.words { font-family: var(--mono); font-size: 12px; background: var(--inset); border-radius: 8px; padding: 10px 12px; overflow-x: auto; line-height: 1.7; }
+.words span { color: var(--muted); margin-right: 10px; }
+
+/* Search */
+.examples { display: flex; flex-wrap: wrap; gap: 6px; }
+.examples button { font-family: var(--mono); font-size: 12px; min-height: 28px; padding: 4px 8px; text-align: left; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; color: var(--ink-2); }
+.examples button:hover { background: var(--hover); color: var(--ink); }
+.hidden { display: none !important; }
+
+/* Guide */
+ol.script { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+ol.script li { counter-increment: s; display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 4px 12px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); }
+ol.script li::before { content: counter(s); font-variant-numeric: tabular-nums; font-weight: 600; color: var(--muted); width: 24px; height: 24px; border-radius: 6px; background: var(--inset); display: grid; place-items: center; font-size: 12px; }
+ol.script .w { font-size: 12px; color: var(--muted); }
+ol.script .d { font-weight: 500; }
+ol.script .p { color: var(--ink-2); font-size: 13px; }
+ol.script code, .lede code { font-family: var(--mono); font-size: 12px; background: var(--inset); padding: 1px 5px; border-radius: 4px; }
+ol.steps { list-style: none; margin: 0; padding: 0; }
+ol.steps li { display: grid; grid-template-columns: 28px 1fr; gap: 8px; padding: 8px; border-radius: 8px; }
+ol.steps li.next { background: var(--inset); }
+ol.steps .n { font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+ol.steps .done .n { color: var(--ok); }
+ol.steps .ph { font-size: 12px; color: var(--muted); }
+
+/* Performance */
+.perfbar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-bottom: 16px; }
+.perfbar .lbl { font-size: 12px; color: var(--muted); margin-right: 6px; }
+.chart { position: relative; }
+.chart canvas { display: block; width: 100%; }
+.chart .tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, .12); white-space: nowrap; z-index: 2; display: none; }
+.chart .tip .r { display: flex; align-items: center; gap: 6px; }
+.chart .tip i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+.chart .tip b { margin-left: auto; padding-left: 12px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.ckey { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink-2); margin: -4px 0 8px; }
+.ckey span { display: inline-flex; align-items: center; gap: 6px; }
+.ckey i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.ckey b { font-weight: 500; font-variant-numeric: tabular-nums; color: var(--ink); }
+.bar { height: 6px; border-radius: 3px; background: var(--inset); overflow: hidden; min-width: 60px; }
+.bar > i { display: block; height: 100%; background: var(--s1); border-radius: 3px; }
+.stackbar { display: flex; gap: 2px; height: 12px; border-radius: 4px; overflow: hidden; background: var(--inset); margin: 6px 0 10px; }
+.stackbar i { display: block; height: 100%; min-width: 2px; }
+.tree { font-size: 13px; }
+.tree .tr { display: grid; grid-template-columns: minmax(0, 1fr) 64px 90px 90px 56px; gap: 8px; align-items: center; padding: 4px 6px; border-radius: 6px; cursor: default; }
+.tree .tr:hover { background: var(--inset); }
+.tree .tr.h { color: var(--muted); font-size: 12px; }
+.tree .nm { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.tree .nm span.t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tree .tg { width: 14px; flex: none; color: var(--muted); cursor: pointer; text-align: center; user-select: none; }
+.tree i.sd { width: 8px; height: 8px; border-radius: 2px; flex: none; display: inline-block; }
+.timeline { position: relative; border-radius: 8px; background: var(--inset); overflow: hidden; }
+.timeline .sp { position: absolute; height: 22px; border-radius: 4px; font-size: 11px; line-height: 22px; padding: 0 6px; color: #fff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; box-shadow: 0 0 0 1px var(--surface); }
+.timeline .sp.s4 { color: #0b0b0b; }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  aside.nav { position: static; height: auto; flex-direction: row; flex-wrap: wrap; padding: 12px 16px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .brand, .nav .grp, .nav .foot { display: none; }
+  .top, main { padding-left: 16px; padding-right: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="nav" aria-label="Pages">
+    <div class="brand"><b>PQ-ChainLog</b><span>Investigator's console, loopback only</span></div>
+    <a href="#guide" data-page="guide"><svg class="i" viewBox="0 0 24 24"><path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>Guide</a>
+    <div class="grp">Three corners</div>
+    <a href="#ingest" data-page="ingest"><svg class="i" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"/></svg>Ingestion</a>
+    <a href="#custody" data-page="custody"><svg class="i" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>Chain of custody</a>
+    <a href="#search" data-page="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search</a>
+    <div class="grp">System</div>
+    <a href="#chain" data-page="chain"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4M17.5 10v4"/></svg>Chain explorer</a>
+    <a href="#perf" data-page="perf"><svg class="i" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Performance</a>
+    <a href="#walk" data-page="walk"><svg class="i" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg>Walkthrough</a>
+    <div class="foot">Laptop run: one validator, host-software Secure Module. No number here is a paper result</div>
+  </aside>
+
+  <div>
+    <div class="top" id="top">
+      <span class="st"><i class="dot" id="st-dot"></i><span id="st-text">Connecting</span></span>
+      <span class="st">Block <b class="num" id="st-block">…</b></span>
+      <span class="st">Open epoch <b class="num" id="st-epoch">…</b></span>
+      <span class="st" id="st-transit"></span>
+      <span class="st" id="st-course"></span>
+    </div>
+    <main>
+
+<!-- ============================== Guide -->
+<section class="page" id="page-guide">
+  <h1>Presenter guide</h1>
+  <p class="lede">The warm-up has already sealed the two real artefacts (a disk image and a network capture), handed one over, anchored epoch 1 and issued both warrants. Follow these steps in order. Restart <code>scripts/demo.sh</code> to reset the case.</p>
+  <div class="grid cols-guide">
+    <div class="card">
+      <ol class="script" id="script"></ol>
+    </div>
+    <div class="stack">
+      <div class="card">
+        <h2>What ran before the audience arrived</h2>
+        <div id="warm"></div>
+      </div>
+      <div class="card">
+        <h2>Cast</h2>
+        <div class="tw" id="cast"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Ingestion -->
+<section class="page" id="page-ingest">
+  <h1>Log ingestion</h1>
+  <p class="lede">Synthetic lines through the real pipeline: sealed, signed and indexed. New lines stay pending until their epoch is anchored.</p>
+  <div class="figs" id="ing-figs"></div>
+  <div class="grid cols-side">
+    <div class="card stack">
+      <h2>New burst</h2>
+      <div class="row">
+        <label class="f">Lines<input id="ing-lines" class="num" type="number" min="1" max="5000" value="300"></label>
+        <label class="f">Log type<select id="ing-mix"><option value="mixed">Mixed</option><option value="auth">Auth (sshd)</option><option value="web">Web (nginx)</option><option value="fw">Firewall</option><option value="sys">System</option></select></label>
+      </div>
+      <button class="btn primary act" id="ing-go">Ingest burst</button>
+      <div class="err" id="ing-err"></div>
+    </div>
+    <div class="card result" id="ing-panel"></div>
+  </div>
+</section>
+
+<!-- ============================== Custody -->
+<section class="page" id="page-custody">
+  <h1>Chain of custody</h1>
+  <p class="lede">Hand evidence between people, anchor the epoch on the live chain, verify any item from public data.</p>
+  <div class="figs" id="coc-figs"></div>
+  <div class="grid cols-side">
+    <div class="card stack">
+      <div class="group">
+        <label class="f">Evidence item<select id="coc-cap"></select></label>
+        <p class="small muted" id="coc-holder" style="margin:6px 0 0"></p>
+      </div>
+      <div class="group stack">
+        <h3>Transfer <span>both sides sign</span></h3>
+        <div class="row">
+          <label class="f">From<select id="coc-from"></select></label>
+          <label class="f">To<select id="coc-to"></select></label>
+        </div>
+        <div class="btns">
+          <button class="btn act" id="coc-release">Release</button>
+          <button class="btn act" id="coc-receive">Receive</button>
+        </div>
+      </div>
+      <div class="group stack">
+        <h3>Examine <span>no custody change</span></h3>
+        <div class="row">
+          <label class="f">Analyst<select id="coc-analyst"></select></label>
+          <button class="btn act" id="coc-analyze">Analyse disk image</button>
+        </div>
+        <div class="row">
+          <label class="f">Reader<select id="coc-reader"></select></label>
+          <button class="btn act" id="coc-access">Record access</button>
+        </div>
+      </div>
+      <div class="group stack">
+        <h3>Anchor and check</h3>
+        <button class="btn primary act" id="coc-anchor">Close epoch and anchor</button>
+        <div class="btns">
+          <button class="btn act" id="coc-verify">Verify history</button>
+          <button class="btn danger act" id="coc-tamper">Tamper one byte</button>
+        </div>
+      </div>
+      <div class="err" id="coc-err"></div>
+    </div>
+    <div class="stack">
+      <div class="card">
+        <h2>Who held each item, and when</h2>
+        <div class="lanewrap"><div class="lanes" id="lanes"></div><div class="lanelabels" id="lanelabels"></div></div>
+        <div class="lkey" id="lkey"></div>
+        <details style="margin-top:16px"><summary>Network view: people and items</summary>
+          <div class="graphbox" id="graph" style="margin-top:12px"></div>
+          <div class="legend"><span><i style="border-color:var(--s1)"></i>Collect</span><span><i style="border-color:var(--s3)"></i>Transfer, both halves signed</span><span><i style="border-color:var(--s4);border-top-style:dashed"></i>In transit</span><span><i style="border-color:var(--muted);border-top-style:dotted"></i>Analyse or access</span></div>
+        </details>
+      </div>
+      <div class="card result" id="coc-panel"></div>
+      <div class="card"><details open><summary>Custody chains, every check recomputed on each refresh</summary><div class="tw" id="chains" style="margin-top:12px"></div></details></div>
+      <div class="card"><details><summary>Anchored epochs</summary><div class="tw" id="epochs" style="margin-top:12px"></div></details></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Search -->
+<section class="page" id="page-search">
+  <h1>Search under warrant</h1>
+  <p class="lede">Keyword and range search over the encrypted index, limited by the warrant. Every answer is checked against a plaintext oracle.</p>
+  <div class="grid cols-side">
+    <div class="card stack">
+      <div class="seg" role="tablist"><button id="pl-ev" class="on">Evidence</button><button id="pl-coc">Custody records</button></div>
+      <div id="form-ev" class="stack">
+        <label class="f">First term, one keyword<input id="q-s" class="mono" value="log:auth" spellcheck="false"></label>
+        <label class="f">Filter: AND, OR, NOT, ( ), bytes:LO..HI, dur:LO..HI, ts:last:Nh<input id="q-psi" class="mono" value="act:login-fail AND user:mallory" spellcheck="false"></label>
+        <div class="examples" id="examples"></div>
+      </div>
+      <div id="form-coc" class="row hidden">
+        <label class="f">Event<select id="q-event"><option value="">Any</option><option>COLLECT</option><option>TRANSFER</option><option>ANALYZE</option><option>ACCESS</option></select></label>
+        <label class="f">Person<select id="q-actor"></select></label>
+      </div>
+      <button class="btn primary act" id="q-go">Search</button>
+      <div class="err" id="q-err"></div>
+    </div>
+    <div class="stack">
+      <div class="card result" id="q-panel"></div>
+      <div class="card"><h2>Warrants</h2><div class="tw" id="warrant"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Chain explorer -->
+<section class="page" id="page-chain">
+  <h1>Chain explorer</h1>
+  <p class="lede">What anyone running a node can read: every block, and every call to the anchor contract decoded against its ABI. Values the client holds are matched beside them. No signature, record or person appears on chain.</p>
+  <div class="err" id="cx-err"></div>
+  <div class="figs" id="cx-figs"></div>
+  <div class="card" style="margin-bottom:16px">
+    <h2 style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px"><span>Latest blocks</span><span class="small muted" style="font-weight:400" id="cx-blocknote"></span></h2>
+    <div class="blocks" id="cx-blocks"></div>
+    <div class="blkaxis" id="cx-axis"></div>
+    <div id="cx-block" class="small" style="margin-top:12px"></div>
+  </div>
+  <div class="grid cols-2">
+    <div class="card"><h2>Transactions</h2><div class="tw" id="cx-txs"></div></div>
+    <div class="card" id="cx-detail"><h2>Transaction</h2><p class="muted">Select one</p></div>
+  </div>
+</section>
+
+<!-- ============================== Performance -->
+<section class="page" id="page-perf">
+  <h1>Performance</h1>
+  <p class="lede">Live counters from the kernel, from the seam between the investigator's client and the evidence store, and from the worker's own spans. Both sides share one worker thread here, so the split by side comes from the spans.</p>
+  <div class="perfbar">
+    <span><span class="lbl">Update every</span><span class="seg" id="pf-every"><button data-v="50" class="on">50 ms</button><button data-v="200">200 ms</button><button data-v="1000">1 s</button></span></span>
+    <span><span class="lbl">Window</span><span class="seg" id="pf-win"><button data-v="15000">15 s</button><button data-v="60000" class="on">60 s</button></span></span>
+    <button class="btn" id="pf-pause">Pause</button>
+    <button class="btn" id="pf-reset">Reset profiler</button>
+    <span class="small muted" id="pf-note"></span>
+  </div>
+  <div class="figs" id="pf-figs"></div>
+  <div class="card" style="margin-bottom:16px">
+    <h2>Worker time by side</h2>
+    <div class="ckey" id="key-sides"></div>
+    <div class="chart" id="ch-sides"><canvas height="240"></canvas><div class="tip"></div></div>
+  </div>
+  <div class="grid cols-2" style="margin-bottom:16px">
+    <div class="card"><h2>CPU <span class="small muted" style="font-weight:400">percent of one core, averaged over 250 ms</span></h2><div class="ckey" id="key-cpu"></div><div class="chart" id="ch-cpu"><canvas height="160"></canvas><div class="tip"></div></div></div>
+    <div class="card"><h2>Memory</h2><div class="ckey" id="key-mem"></div><div class="chart" id="ch-mem"><canvas height="160"></canvas><div class="tip"></div></div></div>
+    <div class="card"><h2>Client ↔ evidence store traffic</h2><div class="ckey" id="key-net"></div><div class="chart" id="ch-net"><canvas height="160"></canvas><div class="tip"></div></div></div>
+    <div class="card"><h2>Load per CPU core</h2><div class="ckey" id="key-heat"></div><div class="chart" id="ch-heat"><canvas height="160"></canvas><div class="tip"></div></div></div>
+  </div>
+  <div class="grid cols-2" style="margin-bottom:16px">
+    <div class="card"><h2>Storage now</h2><div id="pf-storage"></div></div>
+    <div class="card"><h2>Messages across the seam</h2><div class="tw" id="pf-kinds"></div></div>
+  </div>
+  <div class="grid cols-2" style="margin-bottom:16px">
+    <div class="card"><h2>Profiler</h2><p class="small muted" style="margin:-4px 0 8px">Where the worker's time went, by named span. Self time excludes child spans</p><div class="tree" id="pf-tree"></div></div>
+    <div class="card"><h2>Last action, span by span</h2><div id="pf-timeline"></div></div>
+  </div>
+  <div class="card"><h2>Threads</h2><div class="tw" id="pf-threads"></div></div>
+</section>
+
+<!-- ============================== Walkthrough -->
+<section class="page" id="page-walk">
+  <h1>Walkthrough</h1>
+  <p class="lede">The midterm sequence, one phase at a time. A backup for when the corners are not wanted.</p>
+  <div class="grid cols-side">
+    <div class="card stack">
+      <ol class="steps" id="steps"></ol>
+      <button class="btn primary wrap" id="run" style="width:100%">Run next step</button>
+      <div class="err" id="err"></div>
+    </div>
+    <div class="stack">
+      <div class="card result" id="panel"><p class="muted">No step yet</p></div>
+      <div class="card"><details><summary>Earlier steps</summary><div id="history"></div></details></div>
+    </div>
+  </div>
+</section>
+
+    </main>
+  </div>
+</div>
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const clock = (t) => t ? new Date(t * 1000).toLocaleTimeString() : "";
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const ICON = {
+  ok: '<svg class="i" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>',
+  no: '<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  dot: '<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/></svg>',
+};
+const SIDES = [["client", "Investigator's client", "--s1"], ["store", "Evidence store", "--s2"], ["chain", "Chain wait", "--s3"], ["tool", "Forensic tool", "--s4"]];
+const sideColor = (name) => css((SIDES.find((s) => s[0] === name) || [0, 0, "--muted"])[2]);
+let state = null;
+let plane = "evidence";
+
+function fmtBytes(b) {
+  if (b == null || isNaN(b)) return "–";
+  const u = ["B", "kB", "MB", "GB"];
+  let i = 0, v = Number(b);
+  while (Math.abs(v) >= 1000 && i < u.length - 1) { v /= 1000; i++; }
+  return `${v >= 100 || i === 0 ? v.toFixed(0) : v.toFixed(1)} ${u[i]}`;
+}
+const fmtMs = (us) => us >= 1e6 ? `${(us / 1e6).toFixed(2)} s` : `${(us / 1e3).toFixed(us >= 1e5 ? 0 : 1)} ms`;
+
+// A 64-hex value is shown as a short evidence tag; the full value is on hover.
+function val(v) {
+  const s = String(v ?? "");
+  if (/^[0-9a-f]{64}$/.test(s)) return `<span class="tag" title="${s}">${s.slice(0, 10)}…${s.slice(-4)}</span>`;
+  return esc(s);
+}
+
+function side(title, color, rows) {
+  const items = (rows || []).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${val(v)}</dd>`).join("");
+  return `<div class="side"><h4><i style="background:${color}"></i>${title}</h4><dl>${items}</dl></div>`;
+}
+
+// Every panel says how it was produced. A pre-run panel can never look live.
+function stamp(entry) {
+  if (!entry) return "";
+  const took = entry.took_s != null ? `${Number(entry.took_s).toFixed(entry.took_s < 10 ? 2 : 1)} s` : "";
+  return entry.mode === "pre-run"
+    ? `<span class="stamp pre">Pre-run during the warm-up at ${esc(clock(entry.ran_at))}, ${esc(took)}, not re-run</span>`
+    : `<span class="stamp">Live at ${esc(clock(entry.ran_at))}, ${esc(took)}</span>`;
+}
+
+function panelHtml(entry, title) {
+  const p = entry.panel || {};
+  let verdict = "";
+  if (p.refused === true) verdict = `<div class="verdict no">${ICON.no}Refused by the warrant</div>`;
+  else if (p.oracle_equal === true) verdict = `<div class="verdict ok">${ICON.ok}${esc(p.results)} result${p.results === 1 ? "" : "s"}, equal to the plaintext oracle</div>`;
+  else if (p.oracle_equal === false) verdict = `<div class="verdict no">${ICON.no}Disagrees with the plaintext oracle</div>`;
+  return `<h2><span>${esc(title)}</span>${stamp(entry)}</h2>${verdict}
+    <div class="sides">${side("Investigator's client", "var(--s1)", p.client)}${side("Evidence store sees", "var(--s2)", p.server)}</div>`;
+}
+
+function fig(k, v, s) { return `<div class="fig"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div>${s ? `<div class="s">${esc(s)}</div>` : ""}</div>`; }
+function ck(ok, label) { return `<span class="ck ${ok ? "ok" : ""}" title="${label}">${ok ? ICON.ok : ICON.dot}${label}</span>`; }
+
+function lastFor(corner) {
+  const log = (state && state.corner_log) || [];
+  for (let i = log.length - 1; i >= 0; i--) if (log[i].corner === corner) return log[i];
+  return null;
+}
+
+function fillSelect(sel, options, keep) {
+  const cur = sel.value;
+  const html = options.map(([v, t]) => `<option value="${esc(v)}">${esc(t)}</option>`).join("");
+  if (sel.dataset.html !== html) { sel.innerHTML = html; sel.dataset.html = html; }
+  if (keep && [...sel.options].some((o) => o.value === cur)) sel.value = cur;
+}
+
+// ------------------------------------------------------------ guide
+const SCRIPT = [
+  ["ingest", "Ingestion", "Ingest a burst of 300 mixed lines", "Each line is sealed, signed and indexed now. The store receives only addresses, ciphertext and opaque tags"],
+  ["search", "Search", "Search <code>log:auth</code> with <code>act:login-fail AND user:mallory</code>", "The new lines are pending: their epoch is still open, so they are not evaluated yet"],
+  ["search", "Search", "Pick the example <code>ip:203.0.113.66</code> and search", "Refused by the warrant. Network identifiers are outside it, and nothing reaches the store"],
+  ["custody", "Chain of custody", "Choose the burst, transfer first-responder-1 → evidence-store-1, Release, then Receive", "A pending edge until the receipt; the receiver re-verifies d_ev over the stored ciphertext"],
+  ["custody", "Chain of custody", "Try a transfer to analyst-1", "Refused by the role table: an analyst examines but never takes custody"],
+  ["custody", "Chain of custody", "Close epoch and anchor", "Two of three custodians approve, an SLH-DSA co-signature is made, and six 32-byte words go on chain"],
+  ["chain", "Chain explorer", "Open the newest commitRoot transaction", "Each argument is matched to the client's own value; nothing else about the case is on chain"],
+  ["search", "Search", "Repeat the mallory search", "Now the lines are covered, and the answer equals the plaintext oracle"],
+  ["search", "Search", "Switch to Custody records, event TRANSFER", "A separate index under its own warrant; the store cannot tell which event or person was asked for"],
+  ["custody", "Chain of custody", "Verify history on an item, then Tamper one byte on item 1", "Verification uses public data only; the altered ciphertext is caught and located"],
+  ["perf", "Performance", "Ingest another burst and watch the split by side", "The client's crypto against the store's work, the chain wait, and the profiler's tree"],
+];
+function renderGuide() {
+  $("script").innerHTML = SCRIPT.map(([page, where, what, point]) =>
+    `<li><div><div class="w">${where}</div><div class="d">${what}</div><div class="p">${point}</div></div><a class="btn" href="#${page}" style="display:inline-flex;align-items:center;text-decoration:none">Open</a></li>`).join("");
+}
+
+const PLACE = {"first-responder-1": "at the scene", "first-responder-2": "at the scene", "evidence-store-1": "evidence store", "lab-locker-1": "forensic lab locker", "court-clerk-1": "court evidence room", "analyst-1": "forensic lab", "analyst-2": "forensic lab", "investigator-1": "case team"};
+const actorLabel = (c) => `${c.id} · ${c.role}`;
+
+// ------------------------------------------------------------ custody graph
+function renderGraph(g) {
+  if (!g || !g.nodes || g.nodes.length === 0) { $("graph").innerHTML = '<p class="muted">No custody records yet</p>'; return; }
+  // One node per person: each record blinds its actor commitment afresh, so the
+  // server-side graph has a node per record; the openings held here merge them.
+  const all = g.nodes.filter((n) => n.kind === "custodian");
+  const cust = [];
+  for (const n of all) if (!cust.some((c) => c.label === n.label)) cust.push(n);
+  const caps = g.nodes.filter((n) => n.kind === "capsule");
+  const W = Math.max(720, caps.length * 230, cust.length * 170), H = 300, pos = {};
+  cust.forEach((n, i) => pos[n.id] = {x: (i + 0.5) * W / Math.max(cust.length, 1), y: 70});
+  for (const n of all) pos[n.id] = pos[cust.find((c) => c.label === n.label).id];
+  caps.forEach((n, i) => pos[n.id] = {x: (i + 0.5) * W / Math.max(caps.length, 1), y: 244});
+  const color = {COLLECT: "var(--s1)", TRANSFER: "var(--s3)", DISPOSE: "var(--bad)"};
+  let edges = "", k = 0;
+  for (const e of g.edges) {
+    const a = pos[e.from], b = pos[e.to] || {x: W - 40, y: 70};
+    if (!a) continue;
+    let stroke = color[e.event] || "var(--muted)", dash = "";
+    if (e.state === "pending") { stroke = "var(--s4)"; dash = 'stroke-dasharray="7 5"'; }
+    if (e.state === "activity") dash = 'stroke-dasharray="2 4"';
+    k += 1;
+    let d;
+    if (e.event === "TRANSFER") {
+      const mx = (a.x + b.x) / 2, my = Math.min(a.y, b.y) - 44 - 8 * (k % 3);
+      d = `M${a.x},${a.y - 18} Q${mx},${my} ${b.x},${b.y - 18}`;
+    } else {
+      const off = (k % 5 - 2) * 6;
+      d = `M${a.x + off},${a.y + 18} L${b.x + off},${b.y - 18}`;
+    }
+    edges += `<path d="${d}" fill="none" stroke="${stroke}" stroke-width="2" ${dash}><title>${esc(e.event)}, ${esc(e.state)}</title></path>`;
+  }
+  let nodes = "";
+  for (const n of cust) {
+    const p = pos[n.id];
+    nodes += `<g><rect x="${p.x - 76}" y="${p.y - 18}" width="152" height="36" rx="8" fill="var(--surface)" stroke="var(--axis)"/>
+      <text x="${p.x}" y="${p.y - 1}" text-anchor="middle">${esc(n.label)}</text>
+      <text x="${p.x}" y="${p.y + 12}" text-anchor="middle" class="m">${n.opened ? esc(n.role) : "commitment only"}</text></g>`;
+  }
+  for (const n of caps) {
+    const p = pos[n.id];
+    const st = n.status === "closed" ? "var(--bad)" : n.status === "in transit" ? "var(--s4)" : "var(--axis)";
+    const label = n.label.length > 28 ? n.label.slice(0, 27) + "…" : n.label;
+    nodes += `<g><rect x="${p.x - 108}" y="${p.y - 18}" width="216" height="36" rx="4" fill="var(--inset)" stroke="${st}" stroke-width="${n.status === "in transit" ? 2 : 1}"/>
+      <text x="${p.x}" y="${p.y - 1}" text-anchor="middle">${esc(label)}</text>
+      <text x="${p.x}" y="${p.y + 12}" text-anchor="middle" class="m">${n.records} records, ${esc(n.status)}</text></g>`;
+  }
+  $("graph").innerHTML = `<svg class="g" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Custody graph">${edges}${nodes}</svg>`;
+}
+
+// ------------------------------------------------------------ custody lanes
+// One row per item. A bar is a stretch of custody, labelled with the holder;
+// marks on it are the signed records. Columns are records in time order,
+// grouped under the epoch that anchors them.
+const ROLE_COLOR = {DEFR: "--s1", custodian: "--s3", DES: "--s2", investigator: "--s7"};
+const roleColor = (r) => `var(${ROLE_COLOR[r] || "--muted"})`;
+const EVENT_LABEL = {COLLECT: "collect", ANALYZE: "analyse", ACCESS: "access", DISPOSE: "dispose", EXPORT: "export", SEAL: "seal"};
+
+function markShape(kind, x, y, color, filled, bad) {
+  const f = filled ? color : "var(--surface)";
+  const ring = bad ? `<circle cx="${x}" cy="${y}" r="11" fill="none" stroke="var(--bad)" stroke-width="2"/>` : "";
+  const st = `stroke="${color}" stroke-width="2" fill="${f}"`;
+  switch (kind) {
+    case "release": return ring + `<path d="M${x - 6},${y - 6} L${x + 6},${y} L${x - 6},${y + 6} Z" ${st} stroke-linejoin="round"/>`;
+    case "receive": return ring + `<path d="M${x + 6},${y - 6} L${x - 6},${y} L${x + 6},${y + 6} Z" ${st} stroke-linejoin="round"/>`;
+    case "analyse": return ring + `<path d="M${x},${y - 7} L${x + 7},${y} L${x},${y + 7} L${x - 7},${y} Z" ${st} stroke-linejoin="round"/>`;
+    case "access": return ring + `<rect x="${x - 5.5}" y="${y - 5.5}" width="11" height="11" rx="2" ${st}/>`;
+    default: return ring + `<circle cx="${x}" cy="${y}" r="6" ${st}/>`;
+  }
+}
+
+function renderLanes(caps, epochs, openEpoch, selected) {
+  if (!caps.length) { $("lanes").innerHTML = '<p class="muted">Nothing sealed yet</p>'; $("lanelabels").innerHTML = ""; $("lkey").innerHTML = ""; return; }
+  // Records in time order, each knowing its item.
+  const recs = [];
+  caps.forEach((c) => c.records.forEach((r) => recs.push({ci: c.index, r})));
+  recs.sort((a, b) => (a.r.epoch - b.r.epoch) || (a.r.ts - b.r.ts) || (a.ci - b.ci) || (a.r.index - b.r.index));
+  // Columns: records in the same second and epoch share one, unless the same item has two.
+  const cols = [];
+  for (const x of recs) {
+    const c = cols[cols.length - 1];
+    if (c && c.ts === x.r.ts && c.epoch === x.r.epoch && !c.items.has(x.ci)) { c.items.add(x.ci); x.col = cols.length - 1; }
+    else { cols.push({ts: x.r.ts, epoch: x.r.epoch, items: new Set([x.ci])}); x.col = cols.length - 1; }
+  }
+  const LW = 230, CW = 84, RH = 78, TOP = 44, PAD = 120;
+  const W = LW + cols.length * CW + PAD, H = TOP + caps.length * RH + 8;
+  const cx = (i) => LW + i * CW + CW / 2;
+  let svg = "", labels = "";
+  // Epoch bands.
+  const bands = [];
+  cols.forEach((c, i) => { const b = bands[bands.length - 1]; if (b && b.epoch === c.epoch) b.to = i; else bands.push({epoch: c.epoch, from: i, to: i}); });
+  bands.forEach((b, k) => {
+    const x0 = LW + b.from * CW, w = (b.to - b.from + 1) * CW;
+    const ep = epochs.find((e) => e.e === b.epoch);
+    const title = ep ? `Epoch ${b.epoch}, anchored in block ${ep.block}` : `Epoch ${b.epoch}, open: not on chain yet`;
+    svg += `<rect x="${x0}" y="0" width="${w}" height="${H}" fill="${k % 2 ? "var(--surface)" : "var(--inset)"}" opacity="${k % 2 ? 1 : .55}"/>`;
+    svg += `<line x1="${x0}" y1="0" x2="${x0}" y2="${H}" stroke="var(--line)"/>`;
+    svg += `<text x="${x0 + 10}" y="18" class="b">${esc(title.split(",")[0])}</text><text x="${x0 + 10}" y="34" class="m">${esc(title.split(",").slice(1).join(",").trim())}</text>`;
+  });
+  // Lanes.
+  caps.forEach((c, li) => {
+    const y0 = TOP + li * RH, y = y0 + RH / 2 + 4;
+    const mine = recs.filter((x) => x.ci === c.index);
+    const sel = String(c.index) === String(selected);
+    let lane = `<line x1="0" y1="${y0}" x2="${W}" y2="${y0}" stroke="var(--line)"/>`;
+    // The item's name lives in the pinned label column.
+    let lab = `<rect class="bg" x="0" y="${y0}" width="${LW}" height="${RH}" fill="${sel ? "var(--inset)" : "var(--surface)"}"/><line x1="0" y1="${y0}" x2="${LW}" y2="${y0}" stroke="var(--line)"/>`;
+    const name = c.file.length > 28 ? c.file.slice(0, 27) + "…" : c.file;
+    lab += `<text x="16" y="${y0 + 28}" class="b">${c.index}. ${esc(name)}<title>${esc(c.file)}</title></text>`;
+    const altered = c.integrity && !c.integrity.ok;
+    lab += `<text x="16" y="${y0 + 46}" class="m">${esc(c.kind)}, ${c.records.length} records</text>`;
+    if (altered) lab += `<text x="16" y="${y0 + 62}" style="fill:var(--bad);font-weight:600">ciphertext altered</text>`;
+    else if (c.in_transit && c.in_transit.length) lab += `<text x="16" y="${y0 + 62}" style="fill:var(--warn)">in transit</text>`;
+    else if (sel) lab += `<text x="16" y="${y0 + 62}" class="m">selected</text>`;
+    labels += `<g class="lane" data-ci="${c.index}">${lab}</g>`;
+    // Custody stretches from the transfer pairs.
+    const spans = []; let open = null, pending = null;
+    for (const x of mine) {
+      const r = x.r;
+      if (r.event === "COLLECT") { open = {who: r.actor, role: r.role, from: x.col}; x.kind = "collect"; }
+      else if (r.event === "TRANSFER") {
+        if (!pending) { if (open) { spans.push({...open, to: x.col}); open = null; } pending = {from: x.col, who: r.actor}; x.kind = "release"; }
+        else { spans.push({transit: true, from: pending.from, to: x.col, done: true}); open = {who: r.actor, role: r.role, from: x.col}; pending = null; x.kind = "receive"; }
+      } else x.kind = (EVENT_LABEL[r.event] || r.event.toLowerCase());
+    }
+    const lastX = W - PAD;
+    if (open) spans.push({...open, to: null});
+    if (pending) spans.push({transit: true, from: pending.from, to: null, done: false});
+    for (const sp of spans) {
+      const x0 = cx(sp.from), x1 = sp.to == null ? lastX : cx(sp.to);
+      if (sp.transit) {
+        if (sp.done) lane += `<path d="M${x0 + 8},${y} C${(x0 + x1) / 2},${y - 18} ${(x0 + x1) / 2},${y - 18} ${x1 - 9},${y}" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+        else {
+          const to = (state.corners && state.corners.chain && state.corners.chain.in_transit_to) || "";
+          lane += `<rect x="${x0}" y="${y - 12}" width="${Math.max(10, x1 - x0)}" height="24" rx="6" fill="none" stroke="var(--s4)" stroke-width="1.5" stroke-dasharray="6 4"/>`;
+          lane += `<text x="${x0 + 16}" y="${y + 4}" style="fill:var(--warn)">in transit${to ? " to " + esc(to) : ""}</text>`;
+        }
+        continue;
+      }
+      const col = roleColor(sp.role);
+      lane += `<rect x="${x0}" y="${y - 12}" width="${Math.max(10, x1 - x0)}" height="24" rx="6" fill="color-mix(in srgb, ${col} 16%, var(--surface))" stroke="color-mix(in srgb, ${col} 55%, var(--surface))"><title>${esc(sp.who)} (${esc(sp.role)}) holds it</title></rect>`;
+      const room = x1 - x0 - 24;
+      if (room > 40) lane += `<text x="${x0 + 14}" y="${y + 4}" class="b">${esc(sp.who.length * 7 > room ? sp.who.slice(0, Math.max(3, Math.floor(room / 7))) + "…" : sp.who)}</text>`;
+      if (sp.to == null) lane += `<text x="${lastX - 8}" y="${y + 4}" text-anchor="end" class="m">${x1 - x0 > 260 ? esc(sp.who) + ", now" : "now"}</text>`;
+    }
+    // Marks.
+    for (const x of mine) {
+      const r = x.r, X = cx(x.col);
+      const holderEvent = ["collect", "release", "receive"].includes(x.kind);
+      const bad = !r.badges.signature || !r.badges.h_prev || !r.badges.tier1;
+      const tip = `#${r.index} ${r.event}${x.kind === "release" || x.kind === "receive" ? " (" + x.kind + ")" : ""} by ${r.actor} (${r.role}) at ${clock(r.ts)}\nsignature ${r.badges.signature ? "ok" : "FAILED"}, link ${r.badges.h_prev ? "ok" : "FAILED"}, tier 1 ${r.badges.tier1 ? "ok" : "FAILED"}, tier 2 ${r.badges.tier2 ? "ok" : "pending"}, on chain ${r.badges.on_chain ? "yes" : "not yet"}`;
+      const my = holderEvent ? y : y - 26;
+      let g = "";
+      if (!holderEvent) g += `<line x1="${X}" y1="${my + 7}" x2="${X}" y2="${y - 12}" stroke="${roleColor(r.role)}" stroke-width="1.5"/>`;
+      g += markShape(x.kind, X, my, roleColor(r.role), r.badges.on_chain, bad);
+      if (!holderEvent) g += `<text x="${X + 11}" y="${my + 4}" class="m">${esc(r.actor)}</text>`;
+      g += `<text x="${X}" y="${y + 28}" text-anchor="middle" class="m">${esc(x.kind)}</text>`;
+      lane += `<g><title>${esc(tip)}</title>${g}</g>`;
+    }
+    svg += `<g class="lane" data-ci="${c.index}">${lane}</g>`;
+  });
+  // Keep the reader's scroll across refreshes; follow the newest end unless
+  // they have scrolled back.
+  const box = $("lanes");
+  const atEnd = box.dataset.seen !== "1" || box.scrollLeft + box.clientWidth >= box.scrollWidth - 8;
+  const keep = box.scrollLeft;
+  $("lanes").innerHTML = `<svg class="ln" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Custody lanes: who held each evidence item over time">${svg}</svg>`;
+  box.scrollLeft = atEnd ? box.scrollWidth : keep;
+  if (box.clientWidth > 0) box.dataset.seen = "1";
+  $("lanelabels").innerHTML = `<svg class="ln" width="${LW}" height="${H}" viewBox="0 0 ${LW} ${H}" aria-hidden="true"><text x="16" y="26" class="m">Evidence item</text>${labels}</svg>`;
+  for (const g of document.querySelectorAll("#lanes .lane, #lanelabels .lane")) g.onclick = () => { $("coc-cap").value = g.dataset.ci; render(); };
+  const k = (shape, label) => `<span><svg viewBox="-9 -7 18 14">${shape}</svg>${label}</span>`;
+  $("lkey").innerHTML = [
+    ...Object.entries(ROLE_COLOR).map(([r, c]) => `<span><i style="display:inline-block;width:12px;height:12px;border-radius:3px;background:color-mix(in srgb, var(${c}) 16%, var(--surface));border:1px solid var(${c})"></i>${r}</span>`),
+    k(markShape("collect", 0, 0, "var(--ink-2)", true), "collect"),
+    k(markShape("release", 0, 0, "var(--ink-2)", true), "release"),
+    k(markShape("receive", 0, 0, "var(--ink-2)", true), "receive"),
+    k(markShape("analyse", 0, 0, "var(--ink-2)", true), "analyse"),
+    k(markShape("access", 0, 0, "var(--ink-2)", true), "access"),
+    k(markShape("collect", 0, 0, "var(--ink-2)", false), "hollow: open epoch, not on chain yet"),
+    `<span class="muted">Click a row to select the item; hover a mark for its checks</span>`,
+  ].join("");
+}
+
+function renderChains(caps) {
+  if (!caps || caps.length === 0) { $("chains").innerHTML = '<p class="muted">Nothing sealed yet</p>'; return; }
+  $("chains").innerHTML = caps.map((c) => {
+    const integ = c.integrity ? (c.integrity.ok ? `<span class="pill">d_ev re-verified</span>` : `<span class="pill bad">d_ev mismatch: stored ciphertext altered</span>`) : "";
+    const rows = c.records.map((r) => `<tr><td class="r">${r.index}</td><td>${esc(r.event)}</td><td>${esc(r.actor)}</td>
+      <td><div class="checks">${ck(r.badges.signature, "signature")}${ck(r.badges.h_prev, "link")}${ck(r.badges.tier1, "tier 1")}${ck(r.badges.tier2, "tier 2")}${ck(r.badges.on_chain, "on chain")}</div></td></tr>`).join("");
+    return `<h3 style="margin:16px 0 4px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">${c.index}. ${esc(c.file)} <span class="small muted">held by ${esc(c.holder)}</span> ${c.in_transit && c.in_transit.length ? '<span class="pill warn">in transit</span>' : ""} ${integ}</h3>
+      <table><tr><th class="r">#</th><th>Event</th><th>Signer, opened here</th><th>Checks</th></tr>${rows}</table>`;
+  }).join("");
+}
+
+function renderEpochs(eps) {
+  if (!eps || eps.length === 0) { $("epochs").innerHTML = '<p class="muted">No epoch anchored yet</p>'; return; }
+  $("epochs").innerHTML = `<table><tr><th class="r">Epoch</th><th>R_e</th><th class="r">Leaves</th><th>Leaf types</th><th class="r">Block</th><th class="r">Gas</th><th>Chain equals client</th></tr>` +
+    eps.map((e) => `<tr><td class="r">${e.e}</td><td>${val(e.root)}</td><td class="r">${e.leaf_count}</td><td>${e.tags.map((t) => "0x0" + t).join(" ")}</td><td class="r">${e.block}</td><td class="r">${Number(e.gas).toLocaleString()}</td><td>${ck(e.on_chain_matches, e.on_chain_matches ? "yes" : "no")}</td></tr>`).join("") + "</table>";
+}
+
+const EXAMPLES = [
+  ["log:auth", "act:login-fail AND user:mallory"],
+  ["log:auth", "(act:login-fail OR act:sudo) AND NOT user:root"],
+  ["log:web", "bytes:1_000_000..1_999_999 AND NOT status:404"],
+  ["log:fw", "act:deny OR dur:600..3600"],
+  ["log:sys", "act:usb-insert AND ts:last:6h"],
+  ["log:auth", "ip:203.0.113.66"],
+  ["ext:jpg", "bytes:1_000_000..1_999_999 AND NOT state:deleted"],
+];
+
+let lastCap = null;
+function render() {
+  const st = state;
+  if (!st) return;
+  const c = st.corners || {};
+  const ch = c.chain || {};
+  const ready = !!st.warmed_up && !st.busy;
+
+  // Status strip
+  const dot = $("st-dot");
+  dot.className = "dot " + (st.warm_error ? "bad" : st.busy || !st.warmed_up ? "busy" : "live");
+  $("st-text").textContent = st.warm_error ? st.warm_error : st.busy ? `Working: ${st.busy}` : st.warmed_up ? "Ready" : "Warm-up running";
+  $("st-block").textContent = ch.height ?? "…";
+  $("st-epoch").textContent = ch.open_epoch ?? "…";
+  $("st-transit").innerHTML = ch.in_transit != null ? `<span class="pill warn">Item ${ch.in_transit} in transit to ${esc(ch.in_transit_to)}</span>` : "";
+  $("st-course").textContent = st.course ? "Course mode, no redaction step" : "";
+  for (const b of document.querySelectorAll(".act")) b.disabled = !ready;
+
+  // Guide
+  const log = st.log || [];
+  $("warm").innerHTML = log.filter((e) => e.mode === "pre-run").map((e) =>
+    `<details style="padding:8px 0;border-bottom:1px solid var(--line)"><summary>${esc(e.step.title)} <span class="small muted num" style="margin-left:auto">${esc(clock(e.ran_at))}, ${Number(e.took_s).toFixed(1)} s</span></summary><div style="margin-top:12px">${panelHtml(e, "")}</div></details>`).join("")
+    || '<p class="muted">Nothing was pre-run</p>';
+  const cust = c.custodians || [];
+  $("cast").innerHTML = cust.length ? `<table><tr><th>Person</th><th>Role</th><th>Where</th><th>May hold custody</th></tr>${cust.map((x) =>
+    `<tr><td>${esc(x.id)}</td><td>${esc(x.role)}</td><td class="muted">${esc(PLACE[x.id] || "")}</td><td>${ck(x.may.transfer, x.may.transfer ? "yes" : "no")}</td></tr>`).join("")}</table>` : '<p class="muted">Enrolled during the warm-up</p>';
+
+  // Ingestion
+  const ing = c.ingest || {};
+  $("ing-figs").innerHTML = [
+    fig("Bursts", ing.bursts ?? 0), fig("Lines", Number(ing.lines ?? 0).toLocaleString()),
+    fig("Documents", Number(ing.documents ?? 0).toLocaleString()), fig("Pending", Number(ing.pending ?? 0).toLocaleString(), "open epoch, not searchable yet"),
+    fig("Index entries", Number(ing.edb_entries ?? 0).toLocaleString()), fig("Cross-tags", Number(ing.xtags ?? 0).toLocaleString()),
+  ].join("");
+  const li = lastFor("ingestion");
+  $("ing-panel").innerHTML = li ? panelHtml(li, "Last burst") : '<h2>Last burst</h2><p class="muted">None yet. The two real artefacts were sealed during the warm-up</p>';
+
+  // Custody
+  $("coc-figs").innerHTML = [
+    fig("Block height", ch.height ?? "…"), fig("Open epoch", ch.open_epoch ?? "…"),
+    fig("Epochs anchored", ch.anchored ?? 0), fig("In transit", ch.in_transit == null ? "None" : `Item ${ch.in_transit}`, ch.in_transit == null ? "" : `to ${ch.in_transit_to}`),
+  ].join("");
+  const caps = st.capsules || [];
+  fillSelect($("coc-cap"), caps.map((x) => [x.index, `${x.index}. ${x.file}`]), true);
+  const capSel = caps.find((x) => String(x.index) === $("coc-cap").value);
+  $("coc-holder").textContent = capSel ? `Held by ${capSel.holder}` : "";
+  const opts = cust.map((x) => [x.i, actorLabel(x)]);
+  fillSelect($("coc-from"), opts, true);
+  fillSelect($("coc-to"), opts, true);
+  fillSelect($("coc-analyst"), opts, true);
+  fillSelect($("coc-reader"), opts, true);
+  // Follow the holder when the item changes, and keep sensible defaults.
+  if (capSel && lastCap !== `${capSel.index}:${capSel.holder}`) {
+    const h = cust.find((x) => x.id === capSel.holder);
+    if (h) $("coc-from").value = String(h.i);
+    const to = cust.find((x) => x.may.transfer && x.id !== capSel.holder && x.role !== "DEFR");
+    if (to) $("coc-to").value = String(to.i);
+    lastCap = `${capSel.index}:${capSel.holder}`;
+  }
+  if (!$("coc-analyst").dataset.set && cust.length) { const a = cust.find((x) => x.id === "analyst-1"); if (a) $("coc-analyst").value = String(a.i); $("coc-analyst").dataset.set = 1; }
+  if (!$("coc-reader").dataset.set && cust.length) { const a = cust.find((x) => x.id === "investigator-1"); if (a) $("coc-reader").value = String(a.i); $("coc-reader").dataset.set = 1; }
+  const lc = lastFor("coc");
+  $("coc-panel").innerHTML = lc ? panelHtml(lc, actionTitle(lc.action)) : '<h2>Last action</h2><p class="muted">None yet</p>';
+  renderGraph(st.graph);
+  renderLanes(caps, st.epochs || [], st.open_epoch, $("coc-cap").value);
+  renderChains(caps);
+  renderEpochs(st.epochs);
+
+  // Search
+  const ws = c.warrants || [];
+  $("warrant").innerHTML = ws.length ? `<table><tr><th>Warrant</th><th>Classes</th><th>Proof</th></tr>` +
+    ws.map((w) => `<tr><td>${esc(w.name)}</td><td class="num">${esc(w.scope[0])}–${esc(w.scope[1])}</td><td class="small muted">${esc(w.stark)}</td></tr>`).join("") + "</table>" +
+    `<div class="checks" style="margin-top:8px">${(c.classes || []).map(([n, r, inside]) => ck(inside, `${n} (${r})`)).join("")}</div>`
+    : '<p class="muted">Issued during the warm-up</p>';
+  fillSelect($("q-actor"), [["", "Anyone"], ...cust.map((x) => [x.id, actorLabel(x)])], true);
+  const lq = lastFor("search");
+  $("q-panel").innerHTML = lq ? panelHtml(lq, "Last search") : '<h2>Last search</h2><p class="muted">None yet</p>';
+
+  // Walkthrough
+  $("steps").innerHTML = (st.steps || []).map((s, i) => `<li class="${s.done ? "done" : ""} ${s.next ? "next" : ""}"><span class="n">${s.done ? ICON.ok : i + 1}</span><span><span>${esc(s.title)}</span><br><span class="ph">${esc(s.flow)}, Phases ${esc(s.phases)}</span></span></li>`).join("");
+  const next = (st.steps || []).find((s) => s.next);
+  $("run").disabled = !next || !!st.busy;
+  $("run").textContent = next ? `Run: ${next.title}` : "Walkthrough complete";
+  if (log.length) {
+    const last = log[log.length - 1];
+    $("panel").innerHTML = panelHtml(last, `${last.step.flow}, Phases ${last.step.phases}: ${last.step.title}`);
+    $("history").innerHTML = log.slice(0, -1).reverse().map((e) => `<div style="margin-top:16px">${panelHtml(e, `${e.step.flow}: ${e.step.title}`)}</div>`).join("");
+  }
+  renderStorage();
+}
+
+function actionTitle(a) {
+  return ({release: "Release", receive: "Receive", analyze: "Analysis", access: "Access", anchor: "Epoch anchored", verify: "History verified", tamper: "Tamper check"})[a] || a;
+}
+
+async function refresh() {
+  try {
+    const r = await fetch("/api/state");
+    state = await r.json();
+    render();
+  } catch (e) { $("st-dot").className = "dot bad"; $("st-text").textContent = "Server not reachable"; }
+}
+
+async function act(action, body, errId) {
+  $(errId).textContent = "";
+  for (const b of document.querySelectorAll(".act")) b.disabled = true;
+  $("st-dot").className = "dot busy"; $("st-text").textContent = `Working: ${action}`;
+  try {
+    const r = await fetch(`/api/act/${action}`, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body || {})});
+    const out = await r.json();
+    if (!out.ok) $(errId).textContent = out.error;
+  } catch (e) { $(errId).textContent = String(e); }
+  await refresh();
+}
+
+const cap = () => Number($("coc-cap").value);
+$("ing-go").onclick = () => act("ingest", {lines: Number($("ing-lines").value), mix: $("ing-mix").value}, "ing-err");
+$("coc-release").onclick = () => act("release", {capsule: cap(), from: Number($("coc-from").value), to: Number($("coc-to").value)}, "coc-err");
+$("coc-receive").onclick = () => act("receive", {}, "coc-err");
+$("coc-analyze").onclick = () => act("analyze", {actor: Number($("coc-analyst").value)}, "coc-err");
+$("coc-access").onclick = () => act("access", {capsule: cap(), actor: Number($("coc-reader").value)}, "coc-err");
+$("coc-anchor").onclick = () => act("anchor", {}, "coc-err");
+$("coc-verify").onclick = () => act("verify", {capsule: cap()}, "coc-err");
+$("coc-tamper").onclick = () => act("tamper", {capsule: cap()}, "coc-err");
+$("coc-cap").onchange = () => render();
+$("q-go").onclick = () => plane === "evidence"
+  ? act("search", {s: $("q-s").value, psi: $("q-psi").value}, "q-err")
+  : act("custody-search", {event: $("q-event").value, actor: $("q-actor").value}, "q-err");
+
+function setPlane(p) {
+  plane = p;
+  $("pl-ev").classList.toggle("on", p === "evidence");
+  $("pl-coc").classList.toggle("on", p === "custody");
+  $("form-ev").classList.toggle("hidden", p !== "evidence");
+  $("form-coc").classList.toggle("hidden", p !== "custody");
+}
+$("pl-ev").onclick = () => setPlane("evidence");
+$("pl-coc").onclick = () => setPlane("custody");
+$("examples").innerHTML = EXAMPLES.map(([s, f], i) => `<button data-i="${i}" title="${esc(s)} AND (${esc(f)})">${esc(f)}</button>`).join("");
+for (const b of $("examples").querySelectorAll("button")) b.onclick = () => { const [s, f] = EXAMPLES[Number(b.dataset.i)]; $("q-s").value = s; $("q-psi").value = f; };
+
+$("run").onclick = async () => {
+  const next = (state.steps || []).find((s) => s.next);
+  if (!next) return;
+  $("run").disabled = true; $("err").textContent = ""; $("run").textContent = `Running: ${next.title}`;
+  try {
+    const r = await fetch(`/api/step/${next.id}`, {method: "POST"});
+    const out = await r.json();
+    if (!out.ok) $("err").textContent = out.error;
+  } catch (e) { $("err").textContent = String(e); }
+  await refresh();
+};
+
+// ------------------------------------------------------------ chain explorer
+const cx = {data: null, tx: null, block: null, timer: null};
+const short = (h, n = 10) => h ? `<span class="tag" title="${esc(h)}">${esc(String(h).slice(0, n))}…${esc(String(h).slice(-4))}</span>` : "–";
+const ago = (ts) => { const s = Math.max(0, Math.round(Date.now() / 1000 - ts)); return s < 60 ? `${s} s ago` : s < 3600 ? `${Math.floor(s / 60)} min ago` : `${Math.floor(s / 3600)} h ago`; };
+
+// Values the client holds, so a word on chain can be named.
+function known() {
+  return new Map(((state && state.known) || []).map(([v, label]) => [v, label]));
+}
+const CALL_NOTE = {
+  registerCase: "Phase 1: the case's commitment and the digest of its keys and policy",
+  commitRoot: "Phase 7: one epoch anchored. The contract checks only that d_prev is the last checkpoint",
+  authoriseSearch: "Phase 8: a warrant's search registered; the nullifier can be spent once",
+  orderRedaction: "Phase 11: a court order's digest, before anything is erased",
+};
+
+function renderExplorer() {
+  const d = cx.data; if (!d) return;
+  $("cx-err").textContent = d.abi_error ? `ABI: ${d.abi_error}` : d.error ? `Node: ${d.error}` : "";
+  const blocks = d.blocks || [], txs = d.txs || [];
+  const times = blocks.slice(0, 21).map((b) => b.ts);
+  const bt = times.length > 1 ? (times[0] - times[times.length - 1]) / (times.length - 1) : null;
+  $("cx-figs").innerHTML = [
+    fig("Height", d.height ?? "…"),
+    fig("Chain id", d.chain_id ?? "…", "Besu, QBFT"),
+    fig("Validators", (d.validators || []).length, "one: no fault tolerance"),
+    fig("Block time", bt != null ? `${bt.toFixed(1)} s` : "…", "last 20 blocks"),
+    fig("Transactions", txs.length, `${txs.filter((t) => t.status).length} succeeded`),
+    fig("Gas used", txs.reduce((a, t) => a + t.gas_used, 0).toLocaleString(), "free here: zero base fee"),
+  ].join("") + `<div class="fig"><div class="k">Anchor contract</div><div class="v" style="font-size:14px;padding-top:6px">${(d.contracts || []).length ? short(d.contracts[d.contracts.length - 1], 12) : "…"}</div><div class="s">deployed in the warm-up</div></div>`;
+
+  const fit = Math.max(8, Math.floor(($("cx-blocks").clientWidth || 900) / 34));
+  const strip = blocks.slice(0, fit).reverse();
+  $("cx-blocks").innerHTML = strip.map((b) => `<div class="blk ${b.txs ? "tx" : ""} ${cx.block === b.number ? "on" : ""}" data-n="${b.number}" title="Block ${b.number}: ${b.txs} transaction${b.txs === 1 ? "" : "s"}, ${ago(b.ts)}">${b.txs || ""}</div>`).join("");
+  $("cx-axis").innerHTML = strip.length ? `<span>${strip[0].number}</span><span>newest ${strip[strip.length - 1].number}</span>` : "";
+  $("cx-blocknote").textContent = "Filled blocks carry transactions; most blocks are empty";
+  for (const el of $("cx-blocks").querySelectorAll(".blk")) el.onclick = () => { cx.block = Number(el.dataset.n); renderExplorer(); };
+  const blk = blocks.find((b) => b.number === cx.block);
+  $("cx-block").innerHTML = blk ? `<table><tr><th>Block</th><th>Hash</th><th>Parent</th><th>Time</th><th class="r">Transactions</th><th class="r">Gas used</th><th class="r">Size</th></tr>
+    <tr><td class="num">${blk.number}</td><td>${short(blk.hash)}</td><td>${short(blk.parent)}</td><td>${esc(clock(blk.ts))}</td><td class="r">${blk.txs}</td><td class="r">${blk.gas_used.toLocaleString()}</td><td class="r">${fmtBytes(blk.size)}</td></tr></table>`
+    : '<span class="muted">Click a block for its header</span>';
+
+  const shown = cx.block != null && blk && blk.txs ? txs.filter((t) => t.block === cx.block) : txs;
+  if (!cx.tx || !txs.some((t) => t.hash === cx.tx)) cx.tx = txs.length ? txs[0].hash : null;
+  $("cx-txs").innerHTML = shown.length ? `<table><tr><th class="r">Block</th><th>Call</th><th>Age</th><th class="r">Gas</th><th class="r">Calldata</th><th>Status</th></tr>${shown.map((t) =>
+    `<tr class="click ${t.hash === cx.tx ? "sel" : ""}" data-h="${esc(t.hash)}"><td class="r">${t.block}</td><td>${esc(t.method.split("(")[0])}${t.args.length && /warrant registry/.test(known().get(String(t.args[0][2])) || "") ? ' <span class="pill">warrants</span>' : ""}</td><td class="muted">${ago(t.ts)}</td><td class="r">${t.gas_used.toLocaleString()}</td><td class="r">${fmtBytes(t.input_bytes)}</td><td>${t.status ? ck(true, "ok") : '<span class="pill bad">reverted</span>'}</td></tr>`).join("")}</table>`
+    + (cx.block != null && blk && blk.txs ? `<p class="small"><a href="#chain" id="cx-all">Show all transactions</a></p>` : "")
+    : '<p class="muted">No transactions yet</p>';
+  for (const tr of $("cx-txs").querySelectorAll("tr.click")) tr.onclick = () => { cx.tx = tr.dataset.h; renderExplorer(); };
+  if ($("cx-all")) $("cx-all").onclick = (e) => { e.preventDefault(); cx.block = null; renderExplorer(); };
+
+  const t = txs.find((x) => x.hash === cx.tx);
+  if (!t) { $("cx-detail").innerHTML = '<h2>Transaction</h2><p class="muted">Select one</p>'; return; }
+  const K = known();
+  const fn = t.method.split("(")[0];
+  // The warrant registry uses the same calls under its own namespace.
+  const forWarrants = t.args.length && /warrant registry/.test(K.get(String(t.args[0][2])) || "");
+  const note = forWarrants
+    ? (fn === "commitRoot" ? "Phase 8: the court's warrant root ρ_W anchored, under the same checkpoint rule as an epoch" : "Phase 8: the warrant registry registered under the case's reg")
+    : CALL_NOTE[fn];
+  const argRow = ([name, ty, v, indexed]) => {
+    const hit = K.get(String(v));
+    return `<tr><td>${esc(name || "(unnamed)")}${indexed ? ' <span class="pill">indexed</span>' : ""}</td><td class="muted">${esc(ty)}</td><td>${/^[0-9a-f]{64}$/.test(v) ? short(v, 12) : esc(v)}${hit ? `<div class="match">${ICON.ok}${esc(hit)}</div>` : ""}</td></tr>`;
+  };
+  $("cx-detail").innerHTML = `<h2 style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><span>${esc(fn)}</span>${t.status ? ck(true, "succeeded") : '<span class="pill bad">reverted</span>'}</h2>
+    ${note ? `<p class="small muted" style="margin:-4px 0 12px">${esc(note)}</p>` : ""}
+    <table>
+      <tr><td class="muted">Hash</td><td>${short(t.hash, 14)}</td></tr>
+      <tr><td class="muted">Block</td><td class="num">${t.block}, ${esc(clock(t.ts))}</td></tr>
+      <tr><td class="muted">From</td><td>${short(t.from, 12)} <span class="small muted">the case's anchoring account</span></td></tr>
+      <tr><td class="muted">To</td><td>${t.to ? short(t.to, 12) : "(contract creation)"}${t.created ? ` → created ${short(t.created, 12)}` : ""}</td></tr>
+      <tr><td class="muted">Gas used</td><td class="num">${t.gas_used.toLocaleString()}</td></tr>
+      <tr><td class="muted">Calldata</td><td class="num">${fmtBytes(t.input_bytes)}${t.words.length ? `, ${t.words.length} words after the selector` : ""}</td></tr>
+    </table>
+    ${t.args.length ? `<h3 style="margin-top:16px">Arguments</h3><table><tr><th>Name</th><th>Type</th><th>Value on chain</th></tr>${t.args.map(argRow).join("")}</table>` : ""}
+    ${t.logs.length ? t.logs.map((l) => `<h3 style="margin-top:16px">Event: ${esc(l.event)}</h3><table><tr><th>Name</th><th>Type</th><th>Value</th></tr>${l.args.map(argRow).join("")}</table>`).join("") : ""}
+    ${t.words.length ? `<details style="margin-top:16px"><summary>Raw calldata</summary><div class="words" style="margin-top:8px"><div><span>selector</span>${esc(t.selector || "")}</div>${t.words.map((w, i) => `<div><span>${String(i).padStart(2, "0")}</span>${esc(w)}</div>`).join("")}</div></details>` : ""}`;
+}
+
+async function pollChain() {
+  cx.timer = null;
+  if (page !== "chain") return;
+  try { cx.data = await (await fetch("/api/chain")).json(); renderExplorer(); }
+  catch (e) { $("cx-err").textContent = "Server not reachable"; }
+  if (page === "chain") cx.timer = setTimeout(pollChain, 1500);
+}
+
+// ------------------------------------------------------------ pages
+const PAGES = ["guide", "ingest", "custody", "search", "chain", "perf", "walk"];
+let page = "guide";
+function route() {
+  const h = location.hash.replace("#", "");
+  page = PAGES.includes(h) ? h : "guide";
+  for (const p of PAGES) $(`page-${p}`).classList.toggle("on", p === page);
+  for (const a of document.querySelectorAll(".nav a")) a.classList.toggle("on", a.dataset.page === page);
+  window.scrollTo(0, 0);
+  if (page === "perf") { schedulePerf(0); resizeCharts(); }
+  if (page === "chain" && !cx.timer) pollChain();
+}
+window.addEventListener("hashchange", route);
+
+// ------------------------------------------------------------ performance
+const perf = {samples: [], seq: 0, every: 50, win: 60000, paused: false, last: null, timer: null, profileAt: 0, profile: null};
+const KEEP_MS = 65000;
+
+class TimeChart {
+  constructor(id, opts) {
+    this.box = $(id); this.cv = this.box.querySelector("canvas"); this.tip = this.box.querySelector(".tip");
+    this.o = opts; this.hx = null;
+    this.cv.addEventListener("mousemove", (e) => { const r = this.cv.getBoundingClientRect(); this.hx = e.clientX - r.left; this.draw(); });
+    this.cv.addEventListener("mouseleave", () => { this.hx = null; this.tip.style.display = "none"; this.draw(); });
+  }
+  resize() {
+    const dpr = window.devicePixelRatio || 1, w = this.box.clientWidth, h = Number(this.cv.getAttribute("height"));
+    this.dpr = dpr; this.w = w; this.h = h;
+    this.cv.width = Math.round(w * dpr); this.cv.height = Math.round(h * dpr);
+    this.cv.style.height = h + "px";
+  }
+  draw() {
+    if (!this.w) this.resize();
+    const {o} = this, ctx = this.cv.getContext("2d"), dpr = this.dpr, W = this.w, H = this.h;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const L = 72, R = 8, T = 6, B = 20, pw = W - L - R, ph = H - T - B;
+    const data = perf.samples;
+    const tEnd = data.length ? data[data.length - 1].t : 0, tStart = tEnd - perf.win;
+    const vis = data.filter((s) => s.t >= tStart);
+    const X = (t) => L + (t - tStart) / perf.win * pw;
+    // Scale
+    let max = o.max;
+    if (max == null) {
+      max = 0;
+      for (const s of vis) {
+        if (o.stacked) max = Math.max(max, o.series.reduce((a, se) => a + (se.get(s) || 0), 0));
+        else for (const se of o.series) max = Math.max(max, se.get(s) || 0);
+      }
+      max = nice(Math.max(max, o.floor || 1));
+    }
+    const Y = (v) => T + ph - Math.min(v, max) / max * ph;
+    // Grid
+    ctx.font = `11px ${css("--mono")}`; ctx.fillStyle = css("--muted"); ctx.strokeStyle = css("--grid"); ctx.lineWidth = 1;
+    ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    for (let i = 0; i <= 4; i++) {
+      const v = max * i / 4, y = Math.round(Y(v)) + .5;
+      ctx.beginPath(); ctx.moveTo(L, y); ctx.lineTo(W - R, y); ctx.stroke();
+      ctx.fillText(o.fmt(v), L - 6, y);
+    }
+    ctx.textAlign = "center"; ctx.textBaseline = "top";
+    const step = perf.win / 4;
+    for (let i = 0; i <= 4; i++) { const t = tStart + step * i; ctx.fillText(i === 4 ? "now" : `−${Math.round((perf.win - step * i) / 1000)} s`, X(t), T + ph + 5); }
+    if (vis.length < 2) return;
+    // Marks
+    if (o.stacked) {
+      const base = vis.map(() => 0);
+      o.series.forEach((se) => {
+        const top = vis.map((s, i) => base[i] + (se.get(s) || 0));
+        ctx.beginPath();
+        vis.forEach((s, i) => { const x = X(s.t), y = Y(top[i]); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+        for (let i = vis.length - 1; i >= 0; i--) ctx.lineTo(X(vis[i].t), Y(base[i]));
+        ctx.closePath(); ctx.fillStyle = css(se.color); ctx.globalAlpha = .88; ctx.fill(); ctx.globalAlpha = 1;
+        top.forEach((v, i) => base[i] = v);
+      });
+    } else {
+      for (const se of o.series) {
+        ctx.beginPath(); ctx.lineWidth = 2; ctx.lineJoin = "round"; ctx.strokeStyle = css(se.color);
+        let started = false;
+        for (const s of vis) { const v = se.get(s); if (v == null) { started = false; continue; } const x = X(s.t), y = Y(v); started ? ctx.lineTo(x, y) : ctx.moveTo(x, y); started = true; }
+        ctx.stroke();
+      }
+    }
+    // Hover
+    if (this.hx != null && this.hx >= L) {
+      const t = tStart + (this.hx - L) / pw * perf.win;
+      let best = vis[0];
+      for (const s of vis) if (Math.abs(s.t - t) < Math.abs(best.t - t)) best = s;
+      const x = Math.round(X(best.t)) + .5;
+      ctx.strokeStyle = css("--axis"); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x, T); ctx.lineTo(x, T + ph); ctx.stroke();
+      const ago = ((tEnd - best.t) / 1000).toFixed(2);
+      this.tip.innerHTML = `<div class="muted" style="margin-bottom:4px">${ago} s ago</div>` + o.series.map((se) =>
+        `<div class="r"><i style="background:${css(se.color)}"></i>${esc(se.label)}<b>${o.fmt(se.get(best), true)}</b></div>`).join("");
+      this.tip.style.display = "block";
+      const tw = this.tip.offsetWidth;
+      this.tip.style.left = `${Math.min(Math.max(x + 12, 0), W - tw - 4)}px`; this.tip.style.top = "8px";
+    }
+  }
+}
+function nice(v) { const p = Math.pow(10, Math.floor(Math.log10(v))); const m = v / p; return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p; }
+const pct = (v, full) => v == null ? "–" : `${v.toFixed(full ? 1 : 0)}%`;
+const mb = (v) => v == null ? "–" : `${(v / 1000).toFixed(v >= 100000 ? 0 : 1)} MB`;
+const bps = (v) => v == null ? "–" : `${fmtBytes(v)}/s`;
+
+const charts = {
+  sides: new TimeChart("ch-sides", {stacked: true, max: 100, fmt: pct, series: SIDES.map(([k, l, c], i) => ({label: l, color: c, get: (s) => s.sides ? s.sides[i] * 100 : 0}))}),
+  cpu: new TimeChart("ch-cpu", {fmt: pct, floor: 10, series: [
+    {label: "Dashboard process", color: "--s1", get: (s) => s.cpu},
+    {label: "Chain node (Besu)", color: "--s3", get: (s) => s.besu_cpu}]}),
+  mem: new TimeChart("ch-mem", {fmt: mb, floor: 1000, series: [
+    {label: "Dashboard resident", color: "--s1", get: (s) => s.rss},
+    {label: "Chain node", color: "--s3", get: (s) => s.besu_mem}]}),
+  net: new TimeChart("ch-net", {fmt: bps, floor: 1000, series: [
+    {label: "Client → store", color: "--s1", get: (s) => s.up},
+    {label: "Store → client", color: "--s2", get: (s) => s.down},
+    {label: "Chain RPC, both ways", color: "--s3", get: (s) => (s.rpc_up || 0) + (s.rpc_down || 0)}]}),
+};
+
+function drawHeat() {
+  const box = $("ch-heat"), cv = box.querySelector("canvas"), tip = box.querySelector(".tip");
+  const dpr = window.devicePixelRatio || 1, W = box.clientWidth, H = Number(cv.getAttribute("height"));
+  if (cv.width !== Math.round(W * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.height = H + "px"; }
+  const ctx = cv.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+  const data = perf.samples; if (!data.length) return;
+  const n = (data[data.length - 1].cpus || []).length; if (!n) return;
+  const L = 72, T = 6, B = 20, pw = W - L - 8, ph = H - T - B, rh = ph / n;
+  const tEnd = data[data.length - 1].t, tStart = tEnd - perf.win, X = (t) => L + (t - tStart) / perf.win * pw;
+  const rgb = css("--heat");
+  ctx.font = `11px ${css("--mono")}`; ctx.fillStyle = css("--muted"); ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  for (let c = 0; c < n; c++) ctx.fillText(`cpu${c}`, L - 6, T + rh * c + rh / 2);
+  const vis = data.filter((s) => s.t >= tStart);
+  for (let i = 0; i < vis.length; i++) {
+    const x0 = X(vis[i].t), x1 = i + 1 < vis.length ? X(vis[i + 1].t) : x0 + 2;
+    for (let c = 0; c < n; c++) {
+      const v = (vis[i].cpus || [])[c] || 0;
+      ctx.fillStyle = `rgba(${rgb}, ${Math.min(1, .04 + v / 100 * .96)})`;
+      ctx.fillRect(x0, T + rh * c + 1, Math.max(1, x1 - x0), rh - 2);
+    }
+  }
+  ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillStyle = css("--muted");
+  for (let i = 0; i <= 4; i++) { const t = tStart + perf.win / 4 * i; ctx.fillText(i === 4 ? "now" : `−${Math.round((perf.win - perf.win / 4 * i) / 1000)} s`, X(t), T + ph + 5); }
+  const last = data[data.length - 1].cpus;
+  const avg = last.reduce((a, b) => a + b, 0) / last.length;
+  $("key-heat").innerHTML = `<span>${n} cores, now <b>${avg.toFixed(0)}%</b> average, busiest <b>${Math.max(...last).toFixed(0)}%</b></span><span class="muted">Whole VM, all processes</span>`;
+  tip.style.display = "none";
+}
+
+function resizeCharts() { for (const c of Object.values(charts)) c.resize(); drawAll(); }
+window.addEventListener("resize", () => { if (page === "perf") resizeCharts(); });
+
+function keyRow(id, items) { $(id).innerHTML = items.map(([c, l, v]) => `<span><i style="background:${css(c)}"></i>${esc(l)} <b>${v}</b></span>`).join(""); }
+
+function drawAll() {
+  for (const c of Object.values(charts)) c.draw();
+  drawHeat();
+  const s = perf.samples[perf.samples.length - 1];
+  if (!s) return;
+  keyRow("key-sides", SIDES.map(([k, l, c], i) => [c, l, pct(s.sides[i] * 100)]));
+  keyRow("key-cpu", [["--s1", "Dashboard process", pct(s.cpu)], ["--s3", "Chain node", pct(s.besu_cpu)]]);
+  keyRow("key-mem", [["--s1", "Dashboard", mb(s.rss)], ["--s3", "Chain node", mb(s.besu_mem)]]);
+  keyRow("key-net", [["--s1", "Client → store", bps(s.up)], ["--s2", "Store → client", bps(s.down)], ["--s3", "Chain RPC", bps((s.rpc_up || 0) + (s.rpc_down || 0))]]);
+  const P = perf.last || {};
+  const ch = P.chain || {}, seam = P.seam || {};
+  $("pf-figs").innerHTML = [
+    fig("Process CPU", pct(s.cpu), "of one core"),
+    fig("Resident memory", mb(s.rss), `peak ${mb(s.hwm)}`),
+    fig("Threads", s.threads, `${(P.threads || []).filter((t) => t.state === "R").length} running`),
+    fig("Chain node", s.besu_mem != null ? mb(s.besu_mem) : "not found", s.besu_cpu != null ? `${pct(s.besu_cpu)} CPU` : "container pqcl-demo-besu"),
+    fig("Client → store", fmtBytes(seam.up), `${Number(seam.messages || 0).toLocaleString()} messages`),
+    fig("Store → client", fmtBytes(seam.down), "answers"),
+    fig("Chain RPC", fmtBytes((ch.rpc_up || 0) + (ch.rpc_down || 0)), `${Number(ch.rpc_calls || 0).toLocaleString()} calls, ${ch.txs || 0} transactions`),
+    fig("VM memory used", mb(s.sys_used), `of ${mb(s.sys_total)}`),
+  ].join("");
+}
+
+function renderStorage() {
+  const box = $("pf-storage"); if (!box) return;
+  const stg = ((state || {}).corners || {}).storage;
+  const P = perf.last || {};
+  if (!stg) { box.innerHTML = '<p class="muted">After the warm-up</p>'; return; }
+  const disk = (P.store_disk || {}).bytes || 0, files = (P.store_disk || {}).files || 0;
+  const store = [["evidence ciphertext files (disk)", disk], ...stg.store];
+  const part = (title, color, rows) => {
+    const total = rows.reduce((a, r) => a + r[1], 0);
+    const shades = [color, ...[85, 70, 55, 42, 30, 20].map((p) => `color-mix(in srgb, ${color} ${p}%, var(--surface))`)];
+    return `<h3 style="display:flex;justify-content:space-between;margin-top:8px"><span><i style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${color};margin-right:6px"></i>${title}</span><span class="num">${fmtBytes(total)}</span></h3>
+      <div class="stackbar">${rows.filter((r) => r[1] > 0).map((r, i) => `<i title="${esc(r[0])}: ${fmtBytes(r[1])}" style="flex:${r[1]};background:${shades[Math.min(i, shades.length - 1)]}"></i>`).join("")}</div>
+      <table>${rows.map((r, i) => `<tr><td><i style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:8px;background:${shades[Math.min(i, shades.length - 1)]}"></i>${esc(r[0])}</td><td class="r">${fmtBytes(r[1])}</td></tr>`).join("")}</table>`;
+  };
+  const ch = P.chain || {};
+  box.innerHTML = part("Evidence store", "var(--s2)", store) + `<p class="small muted">${files} ciphertext files on disk</p>` +
+    part("Investigator's client", "var(--s1)", stg.client) +
+    `<h3 style="display:flex;justify-content:space-between;margin-top:16px"><span>Chain</span><span class="num">${Number(ch.gas || 0).toLocaleString()} gas</span></h3><p class="small muted" style="margin:0">${ch.txs || 0} transactions, ${fmtBytes(ch.tx_bytes)} signed on the wire. Gas is free on this chain (zero base fee)</p>`;
+}
+
+function renderKinds() {
+  const k = ((perf.last || {}).seam || {}).kinds || [];
+  if (!k.length) { $("pf-kinds").innerHTML = '<p class="muted">Nothing crossed yet</p>'; return; }
+  const rows = [...k].sort((a, b) => (b.up + b.down) - (a.up + a.down));
+  const max = Math.max(...rows.map((r) => r.up + r.down), 1);
+  $("pf-kinds").innerHTML = `<table><tr><th>Message</th><th class="r">Count</th><th class="r">Up</th><th class="r">Down</th><th></th></tr>${rows.map((r) =>
+    `<tr><td>${esc(r.kind)}</td><td class="r">${Number(r.messages).toLocaleString()}</td><td class="r">${fmtBytes(r.up)}</td><td class="r">${fmtBytes(r.down)}</td><td style="width:22%"><div class="bar"><i style="width:${(r.up + r.down) / max * 100}%;background:${r.down > r.up ? "var(--s2)" : "var(--s1)"}"></i></div></td></tr>`).join("")}</table>
+    <p class="small muted">Counted where each message crosses the seam. Up is client to store</p>`;
+}
+
+function renderThreads() {
+  const th = (perf.last || {}).threads || [];
+  const names = {"demo-worker": "runs every action, both sides", "perf-sampler": "reads these counters", "http": "serves one request", "pqcl-dashboard": "accepts connections", "chain-explorer": "follows the node for the explorer"};
+  const max = Math.max(...th.map((t) => t.cpu), 1);
+  $("pf-threads").innerHTML = `<table><tr><th>Thread</th><th class="r">TID</th><th>State</th><th>What it does</th><th class="r">CPU, last second</th><th></th><th class="r">CPU total</th></tr>${th.map((t) =>
+    `<tr><td>${esc(t.name)}</td><td class="r">${t.tid}</td><td>${t.state === "R" ? '<span class="pill warn">running</span>' : `<span class="muted">${t.state === "S" ? "sleeping" : esc(t.state)}</span>`}</td><td class="muted">${esc(names[t.name] || "")}</td><td class="r">${t.cpu.toFixed(1)}%</td><td style="width:18%"><div class="bar"><i style="width:${t.cpu / Math.max(max, 100) * 100}%"></i></div></td><td class="r">${t.total_s.toFixed(2)} s</td></tr>`).join("")}</table>`;
+}
+
+const expanded = new Set();
+function renderProfile() {
+  const p = perf.profile; if (!p) return;
+  const root = {name: "", total: 0, calls: 0, side: "", kids: new Map()};
+  for (const n of p.tree) {
+    let cur = root;
+    for (const seg of n.path) { if (!cur.kids.has(seg)) cur.kids.set(seg, {name: seg, total: 0, calls: 0, side: "", kids: new Map()}); cur = cur.kids.get(seg); }
+    cur.total = n.total_us; cur.calls = n.calls; cur.side = n.side;
+  }
+  for (const k of root.kids.values()) root.total += k.total;
+  if (!root.kids.size) { $("pf-tree").innerHTML = '<p class="muted">No spans yet. Run any action</p>'; $("pf-timeline").innerHTML = '<p class="muted">No action yet</p>'; return; }
+  let html = `<div class="tr h"><span>Span</span><span class="r" style="text-align:right">Share</span><span style="text-align:right">Total</span><span style="text-align:right">Self</span><span style="text-align:right">Calls</span></div>`;
+  const walk = (node, depth, key) => {
+    const kids = [...node.kids.values()].sort((a, b) => b.total - a.total);
+    for (const k of kids) {
+      const id = key + "/" + k.name;
+      const childSum = [...k.kids.values()].reduce((a, c) => a + c.total, 0);
+      const self = Math.max(0, k.total - childSum);
+      const open = expanded.has(id) || depth === 0 && expanded.size === 0;
+      const share = root.total ? k.total / root.total * 100 : 0;
+      html += `<div class="tr"><span class="nm" style="padding-left:${depth * 16}px"><span class="tg" data-k="${esc(id)}">${k.kids.size ? (open ? "▾" : "▸") : ""}</span><i class="sd" style="background:${sideColor(k.side)}" title="${esc(k.side)}"></i><span class="t" title="${esc(k.name)}">${esc(k.name)}</span></span>
+        <span style="text-align:right" class="num">${share.toFixed(1)}%</span><span style="text-align:right" class="num">${fmtMs(k.total)}</span><span style="text-align:right" class="num muted">${fmtMs(self)}</span><span style="text-align:right" class="num muted">${k.calls}</span></div>`;
+      if (open && k.kids.size) walk(k, depth + 1, id);
+    }
+  };
+  walk(root, 0, "");
+  $("pf-tree").innerHTML = html + `<div class="ckey" style="margin:12px 0 0">${SIDES.map(([k, l, c]) => `<span><i style="background:${css(c)}"></i>${l}</span>`).join("")}</div>`;
+  for (const t of $("pf-tree").querySelectorAll(".tg[data-k]")) t.onclick = () => {
+    const k = t.dataset.k;
+    if (expanded.size === 0) for (const r of root.kids.keys()) expanded.add("/" + r);
+    expanded.has(k) ? expanded.delete(k) : expanded.add(k);
+    renderProfile();
+  };
+
+  // Timeline of the most recent top-level span.
+  const spans = p.spans;
+  const top = [...spans].reverse().find((s) => s.path.length === 1);
+  if (!top) { $("pf-timeline").innerHTML = '<p class="muted">No action yet</p>'; return; }
+  const inside = spans.filter((s) => s.start_us >= top.start_us && s.end_us <= top.end_us && s.path[0] === top.path[0]);
+  const dur = Math.max(1, top.end_us - top.start_us), depth = Math.max(...inside.map((s) => s.path.length));
+  const rows = inside.map((s) => {
+    const l = (s.start_us - top.start_us) / dur * 100, w = Math.max(.4, (s.end_us - s.start_us) / dur * 100);
+    const si = SIDES.findIndex((x) => x[0] === s.side);
+    return `<div class="sp ${si === 3 ? "s4" : ""}" style="left:${l}%;width:${w}%;top:${(s.path.length - 1) * 26 + 4}px;background:${sideColor(s.side)}" title="${esc(s.path[s.path.length - 1])}: ${fmtMs(s.end_us - s.start_us)}">${esc(s.path[s.path.length - 1])}</div>`;
+  }).join("");
+  const ago = ((p.now_us - top.end_us) / 1e6).toFixed(0);
+  $("pf-timeline").innerHTML = `<p class="small" style="margin:0 0 8px"><b>${esc(top.path[0])}</b>, ${fmtMs(dur)}, finished ${ago} s ago</p>
+    <div class="timeline" style="height:${depth * 26 + 8}px">${rows}</div>
+    <div class="checks" style="justify-content:space-between;margin-top:4px;color:var(--muted)"><span>0</span><span>${fmtMs(dur / 2)}</span><span>${fmtMs(dur)}</span></div>
+    <p class="small muted">Rows are named spans. Short evidence-store calls inside them are counted in the side chart above</p>`;
+}
+
+async function pollPerf() {
+  perf.timer = null;
+  if (page !== "perf" || perf.paused) return;
+  const t0 = performance.now();
+  try {
+    const r = await fetch(`/api/perf?since=${perf.seq}`);
+    const P = await r.json();
+    perf.last = P;
+    if (P.samples && P.samples.length) {
+      if (perf.samples.length && P.samples[0].t < perf.samples[perf.samples.length - 1].t) perf.samples = [];
+      perf.samples.push(...P.samples);
+      perf.seq = P.samples[P.samples.length - 1].seq;
+      const cut = perf.samples[perf.samples.length - 1].t - KEEP_MS;
+      while (perf.samples.length && perf.samples[0].t < cut) perf.samples.shift();
+    }
+    drawAll();
+    if (performance.now() - perf.profileAt > 1000) {
+      perf.profileAt = performance.now();
+      renderThreads(); renderKinds(); renderStorage();
+      const q = await fetch("/api/profile");
+      perf.profile = await q.json();
+      renderProfile();
+    }
+    $("pf-note").textContent = `Sampled every ${P.every_ms} ms by the server; drawn every ${perf.every} ms`;
+  } catch (e) { $("pf-note").textContent = "Server not reachable"; }
+  schedulePerf(Math.max(0, perf.every - (performance.now() - t0)));
+}
+function schedulePerf(ms) { if (!perf.timer) perf.timer = setTimeout(pollPerf, ms); }
+
+function segPick(id, on) {
+  for (const b of $(id).querySelectorAll("button")) b.onclick = () => {
+    for (const x of $(id).querySelectorAll("button")) x.classList.toggle("on", x === b);
+    on(Number(b.dataset.v));
+  };
+}
+segPick("pf-every", (v) => { perf.every = v; });
+segPick("pf-win", (v) => { perf.win = v; drawAll(); });
+$("pf-pause").onclick = () => { perf.paused = !perf.paused; $("pf-pause").textContent = perf.paused ? "Resume" : "Pause"; if (!perf.paused) schedulePerf(0); };
+$("pf-reset").onclick = async () => { await fetch("/api/profile/reset", {method: "POST"}); expanded.clear(); perf.profileAt = 0; };
+
+renderGuide();
+route();
+refresh();
+setInterval(refresh, 1500);
+</script>
+</body>
+</html>

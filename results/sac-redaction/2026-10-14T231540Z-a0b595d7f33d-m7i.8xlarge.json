@@ -1,0 +1,5215 @@
+{
+  "experiment": "sac-redaction",
+  "git_sha": "a0b595d7f33de5027001c7682b88d161bb2d6798",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.8xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "ML-DSA-65 via liboqs",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [
+    95158276,
+    201683159
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-14T23:15:40Z",
+  "secure_module": "nitro-enclave",
+  "measurements": {
+    "cases": [
+      {
+        "artefact_bytes": 4096,
+        "capsules": 117,
+        "evidence_keywords_per_capsule": 28,
+        "fa": {
+          "bdems": {
+            "gas_median": 129147,
+            "iterations": [
+              {
+                "deleted_ns": 1994794711,
+                "gas": 129123,
+                "gas_confirm": 51391,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 1994715266
+              },
+              {
+                "deleted_ns": 1974404280,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1974344865
+              },
+              {
+                "deleted_ns": 1993501596,
+                "gas": 129123,
+                "gas_confirm": 51391,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 1993424261
+              },
+              {
+                "deleted_ns": 1994260456,
+                "gas": 129123,
+                "gas_confirm": 51391,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 1994191994
+              },
+              {
+                "deleted_ns": 1993131792,
+                "gas": 129123,
+                "gas_confirm": 51391,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 1993066288
+              },
+              {
+                "deleted_ns": 1974542637,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1974475437
+              },
+              {
+                "deleted_ns": 2015581479,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2015494822
+              },
+              {
+                "deleted_ns": 1994243780,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994183192
+              },
+              {
+                "deleted_ns": 2014936640,
+                "gas": 129123,
+                "gas_confirm": 51391,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 2014873486
+              },
+              {
+                "deleted_ns": 1995660711,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995571297
+              }
+            ],
+            "latency_ns": {
+              "iqr_ns": 18715760,
+              "max_ns": 4011981356,
+              "mean_ns": 3995286837,
+              "median_ns": 3990749502,
+              "min_ns": 3968418423,
+              "n": 10,
+              "p25_ns": 3988977248,
+              "p75_ns": 4007693008,
+              "p95_ns": 4010914015
+            }
+          },
+          "ours": {
+            "full": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 320145,
+                  "cosign_ns": 2433405851,
+                  "disposed_ns": 1998383809,
+                  "erased_ns": 1997320470,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994972618,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 307803,
+                  "cosign_ns": 2431515397,
+                  "disposed_ns": 1998537939,
+                  "erased_ns": 1997324172,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994802303,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 328088,
+                  "cosign_ns": 2421963018,
+                  "disposed_ns": 2018396341,
+                  "erased_ns": 2017066419,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014337929,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 281237,
+                  "cosign_ns": 2424041795,
+                  "disposed_ns": 2017848577,
+                  "erased_ns": 2016817042,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014169037,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 216515,
+                  "cosign_ns": 2424127616,
+                  "disposed_ns": 1999496328,
+                  "erased_ns": 1998402224,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1996237646,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 396292,
+                  "cosign_ns": 2432178515,
+                  "disposed_ns": 1998759286,
+                  "erased_ns": 1997647617,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995412570,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 238286,
+                  "cosign_ns": 2428592831,
+                  "disposed_ns": 1997891386,
+                  "erased_ns": 1996545072,
+                  "gas": 102872,
+                  "gas_anchor": 51304,
+                  "gas_order": 51568,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994268086,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 178146,
+                  "cosign_ns": 2419693629,
+                  "disposed_ns": 1978499043,
+                  "erased_ns": 1977362419,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1975292297,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 142425,
+                  "cosign_ns": 2418406882,
+                  "disposed_ns": 2018890920,
+                  "erased_ns": 2017710186,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015516037,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 164803,
+                  "cosign_ns": 2418402338,
+                  "disposed_ns": 2018546792,
+                  "erased_ns": 2017114325,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014703210,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 10026063,
+                "max_ns": 6012241583,
+                "mean_ns": 6000707840,
+                "median_ns": 6004087171,
+                "min_ns": 5974293176,
+                "n": 10,
+                "p25_ns": 5996384898,
+                "p75_ns": 6006410961,
+                "p95_ns": 6011494299
+              }
+            },
+            "payload": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 142251,
+                  "cosign_ns": 2419660835,
+                  "disposed_ns": 1997634435,
+                  "erased_ns": 1996769339,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994472680,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 349093,
+                  "cosign_ns": 2429869469,
+                  "disposed_ns": 1999854647,
+                  "erased_ns": 1998487999,
+                  "gas": 102860,
+                  "gas_anchor": 51268,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1996008067,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 364945,
+                  "cosign_ns": 2445070648,
+                  "disposed_ns": 1998026692,
+                  "erased_ns": 1996687149,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994735361,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 279574,
+                  "cosign_ns": 2428093037,
+                  "disposed_ns": 1998917265,
+                  "erased_ns": 1997595320,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994852829,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 127538,
+                  "cosign_ns": 2427616691,
+                  "disposed_ns": 1997433161,
+                  "erased_ns": 1996131774,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993847469,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 147282,
+                  "cosign_ns": 2421504169,
+                  "disposed_ns": 2018818587,
+                  "erased_ns": 2017267049,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014762045,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 132164,
+                  "cosign_ns": 2427409252,
+                  "disposed_ns": 1978775016,
+                  "erased_ns": 1977762902,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1975584587,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 317604,
+                  "cosign_ns": 2432557910,
+                  "disposed_ns": 2016966701,
+                  "erased_ns": 2016117902,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013741797,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 314336,
+                  "cosign_ns": 2439382423,
+                  "disposed_ns": 1980718760,
+                  "erased_ns": 1976166201,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1973504587,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 535605,
+                  "cosign_ns": 2424881714,
+                  "disposed_ns": 2018136687,
+                  "erased_ns": 2016690761,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014484382,
+                  "pairs_deleted": 0
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 29740920,
+                "max_ns": 6036297665,
+                "mean_ns": 5997677239,
+                "median_ns": 5998831124,
+                "min_ns": 5960905078,
+                "n": 10,
+                "p25_ns": 5980859407,
+                "p75_ns": 6010600327,
+                "p95_ns": 6031318898
+              }
+            },
+            "payload_index": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 168993,
+                  "cosign_ns": 2417650266,
+                  "disposed_ns": 1996443452,
+                  "erased_ns": 1995577336,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1992896095,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 190902,
+                  "cosign_ns": 2415756040,
+                  "disposed_ns": 2017864290,
+                  "erased_ns": 2016518620,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014139929,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 145953,
+                  "cosign_ns": 2418594109,
+                  "disposed_ns": 2019689155,
+                  "erased_ns": 2018343978,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2016109445,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 132130,
+                  "cosign_ns": 2420654172,
+                  "disposed_ns": 1998078706,
+                  "erased_ns": 1996689914,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994558025,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 158196,
+                  "cosign_ns": 2434614230,
+                  "disposed_ns": 1996346827,
+                  "erased_ns": 1995107096,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1992909796,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 150423,
+                  "cosign_ns": 2419900157,
+                  "disposed_ns": 2018725648,
+                  "erased_ns": 2017452236,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015212899,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 129039,
+                  "cosign_ns": 2417874340,
+                  "disposed_ns": 1997300372,
+                  "erased_ns": 1995937607,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993613188,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 313348,
+                  "cosign_ns": 2417362474,
+                  "disposed_ns": 1998948323,
+                  "erased_ns": 1997647697,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995227545,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 331063,
+                  "cosign_ns": 2418345967,
+                  "disposed_ns": 1999079964,
+                  "erased_ns": 1997879564,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995174782,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 144046,
+                  "cosign_ns": 2433759652,
+                  "disposed_ns": 1998124509,
+                  "erased_ns": 1996737263,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994748306,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 20454326,
+                "max_ns": 6013945919,
+                "mean_ns": 5998282527,
+                "median_ns": 5993526665,
+                "min_ns": 5985703309,
+                "n": 10,
+                "p25_ns": 5988905403,
+                "p75_ns": 6009359729,
+                "p95_ns": 6013603243
+              }
+            }
+          }
+        },
+        "fb": {
+          "bdems": {
+            "chain_read": "eth_call destructionOf(EID)",
+            "chain_read_ns": {
+              "iqr_ns": 492877,
+              "max_ns": 2796509,
+              "mean_ns": 1768629,
+              "median_ns": 1715235,
+              "min_ns": 1236088,
+              "n": 10,
+              "p25_ns": 1442689,
+              "p75_ns": 1935566,
+              "p95_ns": 2432652
+            },
+            "verify_ns": {
+              "iqr_ns": 740,
+              "max_ns": 2540,
+              "mean_ns": 1739,
+              "median_ns": 1968,
+              "min_ns": 931,
+              "n": 10,
+              "p25_ns": 1270,
+              "p75_ns": 2010,
+              "p95_ns": 2315
+            }
+          },
+          "ours": {
+            "chain_read": "eth_getLogs for the case's RootCommitted events (R_e and R_e')",
+            "chain_read_ns": {
+              "iqr_ns": 1430919,
+              "max_ns": 22539091,
+              "mean_ns": 5453511,
+              "median_ns": 3462665,
+              "min_ns": 2730743,
+              "n": 10,
+              "p25_ns": 2984190,
+              "p75_ns": 4415109,
+              "p95_ns": 14724208
+            },
+            "verify_ns": {
+              "iqr_ns": 3162,
+              "max_ns": 74161,
+              "mean_ns": 71328,
+              "median_ns": 71462,
+              "min_ns": 67445,
+              "n": 10,
+              "p25_ns": 69764,
+              "p75_ns": 72926,
+              "p95_ns": 74037
+            },
+            "verify_with_disclosure_ns": {
+              "iqr_ns": 206571,
+              "max_ns": 1194373,
+              "mean_ns": 984409,
+              "median_ns": 1073410,
+              "min_ns": 557262,
+              "n": 10,
+              "p25_ns": 936202,
+              "p75_ns": 1142773,
+              "p95_ns": 1186569
+            }
+          }
+        },
+        "record_build_total_ns": 616401220,
+        "records": 1018,
+        "stream": {
+          "counts": {
+            "Access": 161,
+            "Analyze": 153,
+            "Collect": 117,
+            "Export": 138,
+            "Seal": 117,
+            "Transfer": 332
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 117,
+            "dispose_pct": 0,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        }
+      },
+      {
+        "artefact_bytes": 4096,
+        "capsules": 349,
+        "evidence_keywords_per_capsule": 28,
+        "fa": {
+          "bdems": {
+            "gas_median": 129147,
+            "iterations": [
+              {
+                "deleted_ns": 2015953608,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2015872090
+              },
+              {
+                "deleted_ns": 2014951587,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2014871007
+              },
+              {
+                "deleted_ns": 2015647222,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2015564877
+              },
+              {
+                "deleted_ns": 1996019598,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995929697
+              },
+              {
+                "deleted_ns": 1995228741,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995146615
+              },
+              {
+                "deleted_ns": 1995141764,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995073738
+              },
+              {
+                "deleted_ns": 1995885818,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995790034
+              },
+              {
+                "deleted_ns": 1995631606,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995547711
+              },
+              {
+                "deleted_ns": 2013354114,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2013262878
+              },
+              {
+                "deleted_ns": 1995768098,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995682671
+              }
+            ],
+            "latency_ns": {
+              "iqr_ns": 13192707,
+              "max_ns": 4011584951,
+              "mean_ns": 3996404907,
+              "median_ns": 3990750796,
+              "min_ns": 3989026820,
+              "n": 10,
+              "p25_ns": 3990431654,
+              "p75_ns": 4003624361,
+              "p95_ns": 4011555656
+            }
+          },
+          "ours": {
+            "full": {
+              "gas_median": 102860,
+              "iterations": [
+                {
+                  "approve_ns": 189661,
+                  "cosign_ns": 2417907057,
+                  "disposed_ns": 1997154243,
+                  "erased_ns": 1996158832,
+                  "gas": 102848,
+                  "gas_anchor": 51268,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994023809,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 239170,
+                  "cosign_ns": 2428622241,
+                  "disposed_ns": 2016801940,
+                  "erased_ns": 2015268119,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013148916,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 180834,
+                  "cosign_ns": 2424323222,
+                  "disposed_ns": 1998199000,
+                  "erased_ns": 1996993419,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994926441,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 483730,
+                  "cosign_ns": 2421127313,
+                  "disposed_ns": 1998810846,
+                  "erased_ns": 1997787592,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995540554,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 420810,
+                  "cosign_ns": 2422778463,
+                  "disposed_ns": 2017220099,
+                  "erased_ns": 2016067000,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013975148,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 259698,
+                  "cosign_ns": 2419552255,
+                  "disposed_ns": 1997701004,
+                  "erased_ns": 1996328757,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994028223,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 221573,
+                  "cosign_ns": 2417445438,
+                  "disposed_ns": 2017763588,
+                  "erased_ns": 2016359100,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013625156,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 216647,
+                  "cosign_ns": 2418287595,
+                  "disposed_ns": 1997695441,
+                  "erased_ns": 1996539111,
+                  "gas": 102848,
+                  "gas_anchor": 51280,
+                  "gas_order": 51568,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994251249,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 152838,
+                  "cosign_ns": 2427919075,
+                  "disposed_ns": 1998762709,
+                  "erased_ns": 1997290134,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995285740,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 427897,
+                  "cosign_ns": 2422589107,
+                  "disposed_ns": 1998691698,
+                  "erased_ns": 1997305486,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995142342,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 18532794,
+                "max_ns": 6019310747,
+                "mean_ns": 5998321925,
+                "median_ns": 5994986953,
+                "min_ns": 5977972448,
+                "n": 10,
+                "p25_ns": 5989672875,
+                "p75_ns": 6008205669,
+                "p95_ns": 6017247946
+              }
+            },
+            "payload": {
+              "gas_median": 102860,
+              "iterations": [
+                {
+                  "approve_ns": 185941,
+                  "cosign_ns": 2422024741,
+                  "disposed_ns": 1997290643,
+                  "erased_ns": 1996417352,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994425846,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 393852,
+                  "cosign_ns": 2416766422,
+                  "disposed_ns": 2017375886,
+                  "erased_ns": 2016028057,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013970227,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 299666,
+                  "cosign_ns": 2414348748,
+                  "disposed_ns": 1999395113,
+                  "erased_ns": 1997695612,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995870250,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 213244,
+                  "cosign_ns": 2415988053,
+                  "disposed_ns": 2018092775,
+                  "erased_ns": 2016642261,
+                  "gas": 102860,
+                  "gas_anchor": 51292,
+                  "gas_order": 51568,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014367794,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 213818,
+                  "cosign_ns": 2418298921,
+                  "disposed_ns": 2015894316,
+                  "erased_ns": 2014655517,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2012723784,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 170197,
+                  "cosign_ns": 2419661258,
+                  "disposed_ns": 1976588098,
+                  "erased_ns": 1975121510,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1972878852,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 293297,
+                  "cosign_ns": 2420700552,
+                  "disposed_ns": 1977785887,
+                  "erased_ns": 1976691192,
+                  "gas": 102836,
+                  "gas_anchor": 51256,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1974781731,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 241865,
+                  "cosign_ns": 2417621237,
+                  "disposed_ns": 1997171175,
+                  "erased_ns": 1995830070,
+                  "gas": 102860,
+                  "gas_anchor": 51292,
+                  "gas_order": 51568,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994012128,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 392060,
+                  "cosign_ns": 2418919155,
+                  "disposed_ns": 1978426930,
+                  "erased_ns": 1977085091,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1975366730,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 185314,
+                  "cosign_ns": 2422362798,
+                  "disposed_ns": 1999162130,
+                  "erased_ns": 1997467889,
+                  "gas": 102836,
+                  "gas_anchor": 51268,
+                  "gas_order": 51568,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995303731,
+                  "pairs_deleted": 0
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 15092997,
+                "max_ns": 6028642570,
+                "mean_ns": 5999121003,
+                "median_ns": 5993560015,
+                "min_ns": 5987097322,
+                "n": 10,
+                "p25_ns": 5991258577,
+                "p75_ns": 6006351574,
+                "p95_ns": 6020819853
+              }
+            },
+            "payload_index": {
+              "gas_median": 102860,
+              "iterations": [
+                {
+                  "approve_ns": 276757,
+                  "cosign_ns": 2417495329,
+                  "disposed_ns": 1996343797,
+                  "erased_ns": 1995271469,
+                  "gas": 102860,
+                  "gas_anchor": 51292,
+                  "gas_order": 51568,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993060285,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 303759,
+                  "cosign_ns": 2424866772,
+                  "disposed_ns": 1998013552,
+                  "erased_ns": 1996806703,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994367015,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 115581,
+                  "cosign_ns": 2420963633,
+                  "disposed_ns": 2016820813,
+                  "erased_ns": 2015476302,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013138766,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 208704,
+                  "cosign_ns": 2418260528,
+                  "disposed_ns": 1997676873,
+                  "erased_ns": 1996874012,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994676108,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 395246,
+                  "cosign_ns": 2416255492,
+                  "disposed_ns": 2018686306,
+                  "erased_ns": 2017547321,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015097936,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 186678,
+                  "cosign_ns": 2421269061,
+                  "disposed_ns": 1976924124,
+                  "erased_ns": 1975747675,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1973698568,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 167416,
+                  "cosign_ns": 2413063085,
+                  "disposed_ns": 1998900231,
+                  "erased_ns": 1997789586,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995518740,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 262312,
+                  "cosign_ns": 2423248950,
+                  "disposed_ns": 2018077838,
+                  "erased_ns": 2016697319,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014593955,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 311373,
+                  "cosign_ns": 2420537660,
+                  "disposed_ns": 1998814675,
+                  "erased_ns": 1997421550,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994878468,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 153714,
+                  "cosign_ns": 2421666279,
+                  "disposed_ns": 2018049657,
+                  "erased_ns": 2016908020,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014791304,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 23723517,
+                "max_ns": 6016606580,
+                "mean_ns": 5998135034,
+                "median_ns": 6001194806,
+                "min_ns": 5972471330,
+                "n": 10,
+                "p25_ns": 5987594111,
+                "p75_ns": 6011317628,
+                "p95_ns": 6015407872
+              }
+            }
+          }
+        },
+        "fb": {
+          "bdems": {
+            "chain_read": "eth_call destructionOf(EID)",
+            "chain_read_ns": {
+              "iqr_ns": 443059,
+              "max_ns": 1893695,
+              "mean_ns": 1389133,
+              "median_ns": 1228554,
+              "min_ns": 1087668,
+              "n": 10,
+              "p25_ns": 1158694,
+              "p75_ns": 1601753,
+              "p95_ns": 1850257
+            },
+            "verify_ns": {
+              "iqr_ns": 185,
+              "max_ns": 2634,
+              "mean_ns": 1914,
+              "median_ns": 2085,
+              "min_ns": 941,
+              "n": 10,
+              "p25_ns": 1956,
+              "p75_ns": 2141,
+              "p95_ns": 2422
+            }
+          },
+          "ours": {
+            "chain_read": "eth_getLogs for the case's RootCommitted events (R_e and R_e')",
+            "chain_read_ns": {
+              "iqr_ns": 486256,
+              "max_ns": 3117706,
+              "mean_ns": 2704716,
+              "median_ns": 2677331,
+              "min_ns": 1941033,
+              "n": 10,
+              "p25_ns": 2527529,
+              "p75_ns": 3013785,
+              "p95_ns": 3113412
+            },
+            "verify_ns": {
+              "iqr_ns": 4767,
+              "max_ns": 80097,
+              "mean_ns": 74681,
+              "median_ns": 74606,
+              "min_ns": 70457,
+              "n": 10,
+              "p25_ns": 72147,
+              "p75_ns": 76914,
+              "p95_ns": 78877
+            },
+            "verify_with_disclosure_ns": {
+              "iqr_ns": 345505,
+              "max_ns": 1267073,
+              "mean_ns": 979699,
+              "median_ns": 911673,
+              "min_ns": 670487,
+              "n": 10,
+              "p25_ns": 859593,
+              "p75_ns": 1205098,
+              "p95_ns": 1250404
+            }
+          }
+        },
+        "record_build_total_ns": 1569438864,
+        "records": 2904,
+        "stream": {
+          "counts": {
+            "Access": 467,
+            "Analyze": 425,
+            "Collect": 349,
+            "Export": 440,
+            "Seal": 349,
+            "Transfer": 874
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 349,
+            "dispose_pct": 0,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        }
+      },
+      {
+        "artefact_bytes": 4096,
+        "capsules": 1163,
+        "evidence_keywords_per_capsule": 28,
+        "fa": {
+          "bdems": {
+            "gas_median": 129147,
+            "iterations": [
+              {
+                "deleted_ns": 1995263287,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995197713
+              },
+              {
+                "deleted_ns": 1995031879,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994955734
+              },
+              {
+                "deleted_ns": 1994671045,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994589131
+              },
+              {
+                "deleted_ns": 1993453028,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1993368091
+              },
+              {
+                "deleted_ns": 2015630409,
+                "gas": 129123,
+                "gas_confirm": 51391,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 2015552154
+              },
+              {
+                "deleted_ns": 2014915314,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2014834954
+              },
+              {
+                "deleted_ns": 1994096515,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1993991735
+              },
+              {
+                "deleted_ns": 2015861650,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2015783209
+              },
+              {
+                "deleted_ns": 1994563938,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994490327
+              },
+              {
+                "deleted_ns": 1994907725,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994828702
+              }
+            ],
+            "latency_ns": {
+              "iqr_ns": 21533253,
+              "max_ns": 4011248859,
+              "mean_ns": 3996131638,
+              "median_ns": 3999904892,
+              "min_ns": 3968687565,
+              "n": 10,
+              "p25_ns": 3989298522,
+              "p75_ns": 4010831775,
+              "p95_ns": 4011228207
+            }
+          },
+          "ours": {
+            "full": {
+              "gas_median": 102884,
+              "iterations": [
+                {
+                  "approve_ns": 256878,
+                  "cosign_ns": 2422382821,
+                  "disposed_ns": 1998924306,
+                  "erased_ns": 1997609699,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995151108,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 255139,
+                  "cosign_ns": 2421306173,
+                  "disposed_ns": 1997542571,
+                  "erased_ns": 1996006084,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993928925,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 181126,
+                  "cosign_ns": 2438488249,
+                  "disposed_ns": 2017806572,
+                  "erased_ns": 2016573358,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014609956,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 195761,
+                  "cosign_ns": 2419788325,
+                  "disposed_ns": 1995955660,
+                  "erased_ns": 1994492260,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1992733986,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 335072,
+                  "cosign_ns": 2418448168,
+                  "disposed_ns": 1997598603,
+                  "erased_ns": 1995858947,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993859336,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 214587,
+                  "cosign_ns": 2422840836,
+                  "disposed_ns": 1995763308,
+                  "erased_ns": 1994326111,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1992413742,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 125261,
+                  "cosign_ns": 2424661483,
+                  "disposed_ns": 2019060441,
+                  "erased_ns": 2017708863,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015050786,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 234718,
+                  "cosign_ns": 2423929856,
+                  "disposed_ns": 1997651186,
+                  "erased_ns": 1996381730,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994762521,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 168574,
+                  "cosign_ns": 2429368328,
+                  "disposed_ns": 1998006004,
+                  "erased_ns": 1996743072,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994577971,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 142209,
+                  "cosign_ns": 2426279375,
+                  "disposed_ns": 2018344174,
+                  "erased_ns": 2016983832,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014612010,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 24082688,
+                "max_ns": 6019907747,
+                "mean_ns": 6000257206,
+                "median_ns": 6003215862,
+                "min_ns": 5972660902,
+                "n": 10,
+                "p25_ns": 5989840610,
+                "p75_ns": 6013923298,
+                "p95_ns": 6018171615
+              }
+            },
+            "payload": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 305979,
+                  "cosign_ns": 2420004119,
+                  "disposed_ns": 1997119206,
+                  "erased_ns": 1996010856,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994140494,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 255091,
+                  "cosign_ns": 2423676708,
+                  "disposed_ns": 1998485789,
+                  "erased_ns": 1997093324,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994786424,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 225044,
+                  "cosign_ns": 2422002284,
+                  "disposed_ns": 2018263585,
+                  "erased_ns": 2016776803,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014829128,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 330617,
+                  "cosign_ns": 2423401607,
+                  "disposed_ns": 2017172014,
+                  "erased_ns": 2015918434,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014053560,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 233375,
+                  "cosign_ns": 2420393398,
+                  "disposed_ns": 2019263563,
+                  "erased_ns": 2017894667,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015464621,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 311538,
+                  "cosign_ns": 2419324167,
+                  "disposed_ns": 2017491141,
+                  "erased_ns": 2015914142,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013723853,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 240713,
+                  "cosign_ns": 2415655178,
+                  "disposed_ns": 2016963989,
+                  "erased_ns": 2015753699,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013771348,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 184936,
+                  "cosign_ns": 2424727571,
+                  "disposed_ns": 1996981371,
+                  "erased_ns": 1995612052,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993518676,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 264721,
+                  "cosign_ns": 2423941256,
+                  "disposed_ns": 1976928675,
+                  "erased_ns": 1975942647,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1974055290,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 253313,
+                  "cosign_ns": 2421053660,
+                  "disposed_ns": 1997844885,
+                  "erased_ns": 1996626368,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994977430,
+                  "pairs_deleted": 0
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 9871830,
+                "max_ns": 6016047182,
+                "mean_ns": 5999495912,
+                "median_ns": 5995246490,
+                "min_ns": 5990501500,
+                "n": 10,
+                "p25_ns": 5994382156,
+                "p75_ns": 6004253986,
+                "p95_ns": 6014144115
+              }
+            },
+            "payload_index": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 272916,
+                  "cosign_ns": 2422166395,
+                  "disposed_ns": 1996589706,
+                  "erased_ns": 1995400411,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993223654,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 156231,
+                  "cosign_ns": 2417453070,
+                  "disposed_ns": 2016341391,
+                  "erased_ns": 2015426677,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013415714,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 166507,
+                  "cosign_ns": 2417999299,
+                  "disposed_ns": 1977742995,
+                  "erased_ns": 1976345674,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1974405557,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 187749,
+                  "cosign_ns": 2424347798,
+                  "disposed_ns": 1996105566,
+                  "erased_ns": 1994767456,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993046092,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 174808,
+                  "cosign_ns": 2419029579,
+                  "disposed_ns": 2017828858,
+                  "erased_ns": 2016748972,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014567755,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 327469,
+                  "cosign_ns": 2425820260,
+                  "disposed_ns": 2017973932,
+                  "erased_ns": 2016638316,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014570571,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 155668,
+                  "cosign_ns": 2421917247,
+                  "disposed_ns": 1997611065,
+                  "erased_ns": 1996540312,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994423487,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 356885,
+                  "cosign_ns": 2415873024,
+                  "disposed_ns": 1997432163,
+                  "erased_ns": 1996175802,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994167482,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 167486,
+                  "cosign_ns": 2419938026,
+                  "disposed_ns": 2018506287,
+                  "erased_ns": 2017313891,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014988247,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 119157,
+                  "cosign_ns": 2436508881,
+                  "disposed_ns": 1998170063,
+                  "erased_ns": 1996621725,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994201972,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 14387463,
+                "max_ns": 6017347517,
+                "mean_ns": 5997407937,
+                "median_ns": 5993035222,
+                "min_ns": 5987470387,
+                "n": 10,
+                "p25_ns": 5990387519,
+                "p75_ns": 6004774982,
+                "p95_ns": 6014798024
+              }
+            }
+          }
+        },
+        "fb": {
+          "bdems": {
+            "chain_read": "eth_call destructionOf(EID)",
+            "chain_read_ns": {
+              "iqr_ns": 614936,
+              "max_ns": 2111348,
+              "mean_ns": 1469869,
+              "median_ns": 1541599,
+              "min_ns": 732433,
+              "n": 10,
+              "p25_ns": 1159511,
+              "p75_ns": 1774447,
+              "p95_ns": 2002911
+            },
+            "verify_ns": {
+              "iqr_ns": 217,
+              "max_ns": 2265,
+              "mean_ns": 1921,
+              "median_ns": 2002,
+              "min_ns": 1080,
+              "n": 10,
+              "p25_ns": 1952,
+              "p75_ns": 2169,
+              "p95_ns": 2254
+            }
+          },
+          "ours": {
+            "chain_read": "eth_getLogs for the case's RootCommitted events (R_e and R_e')",
+            "chain_read_ns": {
+              "iqr_ns": 493724,
+              "max_ns": 3145263,
+              "mean_ns": 2788093,
+              "median_ns": 2789956,
+              "min_ns": 2326977,
+              "n": 10,
+              "p25_ns": 2560973,
+              "p75_ns": 3054697,
+              "p95_ns": 3138058
+            },
+            "verify_ns": {
+              "iqr_ns": 5626,
+              "max_ns": 84670,
+              "mean_ns": 75966,
+              "median_ns": 74921,
+              "min_ns": 71455,
+              "n": 10,
+              "p25_ns": 71969,
+              "p75_ns": 77595,
+              "p95_ns": 83715
+            },
+            "verify_with_disclosure_ns": {
+              "iqr_ns": 285572,
+              "max_ns": 1170914,
+              "mean_ns": 941640,
+              "median_ns": 965172,
+              "min_ns": 543581,
+              "n": 10,
+              "p25_ns": 855698,
+              "p75_ns": 1141270,
+              "p95_ns": 1167666
+            }
+          }
+        },
+        "record_build_total_ns": 5772472750,
+        "records": 9609,
+        "stream": {
+          "counts": {
+            "Access": 1495,
+            "Analyze": 1426,
+            "Collect": 1163,
+            "Export": 1450,
+            "Seal": 1163,
+            "Transfer": 2912
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 1163,
+            "dispose_pct": 0,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        }
+      },
+      {
+        "artefact_bytes": 4096,
+        "capsules": 3489,
+        "evidence_keywords_per_capsule": 28,
+        "fa": {
+          "bdems": {
+            "gas_median": 129135,
+            "iterations": [
+              {
+                "deleted_ns": 1974438836,
+                "gas": 129135,
+                "gas_confirm": 51403,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 1974365605
+              },
+              {
+                "deleted_ns": 1995734770,
+                "gas": 129135,
+                "gas_confirm": 51403,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 1995660843
+              },
+              {
+                "deleted_ns": 1973087778,
+                "gas": 129111,
+                "gas_confirm": 51391,
+                "gas_txe": 77720,
+                "transactions": 2,
+                "txe_included_ns": 1973015598
+              },
+              {
+                "deleted_ns": 2013709713,
+                "gas": 129123,
+                "gas_confirm": 51391,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 2013607229
+              },
+              {
+                "deleted_ns": 1993361236,
+                "gas": 129135,
+                "gas_confirm": 51403,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 1993281162
+              },
+              {
+                "deleted_ns": 1994249167,
+                "gas": 129135,
+                "gas_confirm": 51403,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 1994143327
+              },
+              {
+                "deleted_ns": 1994358582,
+                "gas": 129111,
+                "gas_confirm": 51391,
+                "gas_txe": 77720,
+                "transactions": 2,
+                "txe_included_ns": 1994293427
+              },
+              {
+                "deleted_ns": 1995100680,
+                "gas": 129135,
+                "gas_confirm": 51403,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 1995018376
+              },
+              {
+                "deleted_ns": 2015374841,
+                "gas": 129135,
+                "gas_confirm": 51403,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 2015286104
+              },
+              {
+                "deleted_ns": 1994342464,
+                "gas": 129111,
+                "gas_confirm": 51391,
+                "gas_txe": 77720,
+                "transactions": 2,
+                "txe_included_ns": 1994249240
+              }
+            ],
+            "latency_ns": {
+              "iqr_ns": 18766545,
+              "max_ns": 4010749373,
+              "mean_ns": 3995350447,
+              "median_ns": 3990225046,
+              "min_ns": 3968201402,
+              "n": 10,
+              "p25_ns": 3989386360,
+              "p75_ns": 4008152905,
+              "p95_ns": 4010548022
+            }
+          },
+          "ours": {
+            "full": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 244323,
+                  "cosign_ns": 2428706818,
+                  "disposed_ns": 1997933549,
+                  "erased_ns": 1996495618,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994447018,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 169389,
+                  "cosign_ns": 2427921343,
+                  "disposed_ns": 1996334794,
+                  "erased_ns": 1994764740,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993027322,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 315331,
+                  "cosign_ns": 2428916696,
+                  "disposed_ns": 1997314030,
+                  "erased_ns": 1995991447,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994377988,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 194596,
+                  "cosign_ns": 2429316175,
+                  "disposed_ns": 2018890417,
+                  "erased_ns": 2017547780,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015158686,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 167261,
+                  "cosign_ns": 2423349015,
+                  "disposed_ns": 1977981928,
+                  "erased_ns": 1977064466,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1975008302,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 251648,
+                  "cosign_ns": 2421187507,
+                  "disposed_ns": 1996439053,
+                  "erased_ns": 1995149114,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1992943317,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 193385,
+                  "cosign_ns": 2426724855,
+                  "disposed_ns": 1997371044,
+                  "erased_ns": 1996436877,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994410294,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 155249,
+                  "cosign_ns": 2431797008,
+                  "disposed_ns": 1997483769,
+                  "erased_ns": 1996182926,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994328613,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 160008,
+                  "cosign_ns": 2431653574,
+                  "disposed_ns": 1997712973,
+                  "erased_ns": 1996515004,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994318136,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 203504,
+                  "cosign_ns": 2427878747,
+                  "disposed_ns": 2017722531,
+                  "erased_ns": 2016378665,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014281970,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 6733667,
+                "max_ns": 6021249379,
+                "mean_ns": 6000104699,
+                "median_ns": 6000009718,
+                "min_ns": 5983440392,
+                "n": 10,
+                "p25_ns": 5996399954,
+                "p75_ns": 6003133621,
+                "p95_ns": 6013468539
+              }
+            },
+            "payload": {
+              "gas_median": 102884,
+              "iterations": [
+                {
+                  "approve_ns": 153156,
+                  "cosign_ns": 2415778232,
+                  "disposed_ns": 2016135404,
+                  "erased_ns": 2015285372,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013509484,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 142621,
+                  "cosign_ns": 2418241451,
+                  "disposed_ns": 1997223551,
+                  "erased_ns": 1995965571,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994368121,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 190318,
+                  "cosign_ns": 2418307678,
+                  "disposed_ns": 1997845701,
+                  "erased_ns": 1996682481,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995003566,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 318366,
+                  "cosign_ns": 2422118886,
+                  "disposed_ns": 1996590872,
+                  "erased_ns": 1995575980,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993565934,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 230075,
+                  "cosign_ns": 2430509528,
+                  "disposed_ns": 1998163738,
+                  "erased_ns": 1996850119,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994730463,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 320994,
+                  "cosign_ns": 2421437046,
+                  "disposed_ns": 1997923605,
+                  "erased_ns": 1996581289,
+                  "gas": 102860,
+                  "gas_anchor": 51268,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994633167,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 198587,
+                  "cosign_ns": 2421819174,
+                  "disposed_ns": 2017688234,
+                  "erased_ns": 2016352666,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014427749,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 369524,
+                  "cosign_ns": 2424360151,
+                  "disposed_ns": 1997315307,
+                  "erased_ns": 1995849549,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994004957,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 310217,
+                  "cosign_ns": 2420203216,
+                  "disposed_ns": 1998456939,
+                  "erased_ns": 1997291947,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995192491,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 473955,
+                  "cosign_ns": 2421856592,
+                  "disposed_ns": 1997648825,
+                  "erased_ns": 1996368045,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994270020,
+                  "pairs_deleted": 0
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 12349224,
+                "max_ns": 6016268913,
+                "mean_ns": 5998921762,
+                "median_ns": 5993487977,
+                "min_ns": 5989022480,
+                "n": 10,
+                "p25_ns": 5992583958,
+                "p75_ns": 6004933182,
+                "p95_ns": 6014083305
+              }
+            },
+            "payload_index": {
+              "gas_median": 102884,
+              "iterations": [
+                {
+                  "approve_ns": 113484,
+                  "cosign_ns": 2421495366,
+                  "disposed_ns": 1998083949,
+                  "erased_ns": 1996706932,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994665005,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 194684,
+                  "cosign_ns": 2424567275,
+                  "disposed_ns": 1998147232,
+                  "erased_ns": 1997142802,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995173247,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 282842,
+                  "cosign_ns": 2418957434,
+                  "disposed_ns": 1996716368,
+                  "erased_ns": 1995590980,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993410547,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 141262,
+                  "cosign_ns": 2429313051,
+                  "disposed_ns": 1997064321,
+                  "erased_ns": 1995900680,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993892915,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 177765,
+                  "cosign_ns": 2427934602,
+                  "disposed_ns": 1997503516,
+                  "erased_ns": 1996605536,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994415219,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 249960,
+                  "cosign_ns": 2427871572,
+                  "disposed_ns": 1998489635,
+                  "erased_ns": 1997284588,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995562093,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 174575,
+                  "cosign_ns": 2423523353,
+                  "disposed_ns": 2017622169,
+                  "erased_ns": 2016225580,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014147563,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 313923,
+                  "cosign_ns": 2417114112,
+                  "disposed_ns": 1996919194,
+                  "erased_ns": 1995690188,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993444239,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 342013,
+                  "cosign_ns": 2433455043,
+                  "disposed_ns": 1998405464,
+                  "erased_ns": 1997030451,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995019456,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 254226,
+                  "cosign_ns": 2419400459,
+                  "disposed_ns": 1997276887,
+                  "erased_ns": 1995841098,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993813470,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 15288138,
+                "max_ns": 6020473679,
+                "mean_ns": 5997744445,
+                "median_ns": 5994481165,
+                "min_ns": 5979309229,
+                "n": 10,
+                "p25_ns": 5989476910,
+                "p75_ns": 6004765048,
+                "p95_ns": 6017842115
+              }
+            }
+          }
+        },
+        "fb": {
+          "bdems": {
+            "chain_read": "eth_call destructionOf(EID)",
+            "chain_read_ns": {
+              "iqr_ns": 426593,
+              "max_ns": 1980508,
+              "mean_ns": 1578945,
+              "median_ns": 1597941,
+              "min_ns": 1004920,
+              "n": 10,
+              "p25_ns": 1382280,
+              "p75_ns": 1808873,
+              "p95_ns": 1945645
+            },
+            "verify_ns": {
+              "iqr_ns": 51,
+              "max_ns": 2682,
+              "mean_ns": 2025,
+              "median_ns": 2013,
+              "min_ns": 1429,
+              "n": 10,
+              "p25_ns": 1995,
+              "p75_ns": 2046,
+              "p95_ns": 2399
+            }
+          },
+          "ours": {
+            "chain_read": "eth_getLogs for the case's RootCommitted events (R_e and R_e')",
+            "chain_read_ns": {
+              "iqr_ns": 294483,
+              "max_ns": 3191443,
+              "mean_ns": 2709612,
+              "median_ns": 2638834,
+              "min_ns": 2418060,
+              "n": 10,
+              "p25_ns": 2563643,
+              "p75_ns": 2858126,
+              "p95_ns": 3072018
+            },
+            "verify_ns": {
+              "iqr_ns": 1868,
+              "max_ns": 77706,
+              "mean_ns": 74945,
+              "median_ns": 74761,
+              "min_ns": 73535,
+              "n": 10,
+              "p25_ns": 73826,
+              "p75_ns": 75694,
+              "p95_ns": 77033
+            },
+            "verify_with_disclosure_ns": {
+              "iqr_ns": 315413,
+              "max_ns": 930085,
+              "mean_ns": 743710,
+              "median_ns": 753593,
+              "min_ns": 491917,
+              "n": 10,
+              "p25_ns": 599046,
+              "p75_ns": 914459,
+              "p95_ns": 928689
+            }
+          }
+        },
+        "record_build_total_ns": 17940412564,
+        "records": 28735,
+        "stream": {
+          "counts": {
+            "Access": 4439,
+            "Analyze": 4301,
+            "Collect": 3489,
+            "Export": 4357,
+            "Seal": 3489,
+            "Transfer": 8660
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 3489,
+            "dispose_pct": 0,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        }
+      },
+      {
+        "artefact_bytes": 4096,
+        "capsules": 11628,
+        "evidence_keywords_per_capsule": 28,
+        "fa": {
+          "bdems": {
+            "gas_median": 129147,
+            "iterations": [
+              {
+                "deleted_ns": 2015572114,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2015497190
+              },
+              {
+                "deleted_ns": 2015394502,
+                "gas": 129123,
+                "gas_confirm": 51391,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 2015317264
+              },
+              {
+                "deleted_ns": 1994085083,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994015937
+              },
+              {
+                "deleted_ns": 2013598780,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2013515909
+              },
+              {
+                "deleted_ns": 2014852690,
+                "gas": 129135,
+                "gas_confirm": 51391,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2014784878
+              },
+              {
+                "deleted_ns": 2015136727,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2015032318
+              },
+              {
+                "deleted_ns": 1995178219,
+                "gas": 129123,
+                "gas_confirm": 51391,
+                "gas_txe": 77732,
+                "transactions": 2,
+                "txe_included_ns": 1995094171
+              },
+              {
+                "deleted_ns": 1994067122,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1993965948
+              },
+              {
+                "deleted_ns": 1973023716,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1972947412
+              },
+              {
+                "deleted_ns": 2013593689,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2013505309
+              }
+            ],
+            "latency_ns": {
+              "iqr_ns": 20206609,
+              "max_ns": 4009898686,
+              "mean_ns": 3996945967,
+              "median_ns": 3999597744,
+              "min_ns": 3967287698,
+              "n": 10,
+              "p25_ns": 3988937731,
+              "p75_ns": 4009144340,
+              "p95_ns": 4009790363
+            }
+          },
+          "ours": {
+            "full": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 125333,
+                  "cosign_ns": 2422654250,
+                  "disposed_ns": 1997218603,
+                  "erased_ns": 1995873657,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993901366,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 146711,
+                  "cosign_ns": 2421911291,
+                  "disposed_ns": 1975242306,
+                  "erased_ns": 1974295516,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1972528995,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 129964,
+                  "cosign_ns": 2425274565,
+                  "disposed_ns": 1997987451,
+                  "erased_ns": 1996654877,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994482628,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 498964,
+                  "cosign_ns": 2428242304,
+                  "disposed_ns": 1999034579,
+                  "erased_ns": 1997261519,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994995116,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 182348,
+                  "cosign_ns": 2419906042,
+                  "disposed_ns": 1999086603,
+                  "erased_ns": 1997963131,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995698542,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 382306,
+                  "cosign_ns": 2423301713,
+                  "disposed_ns": 2018642685,
+                  "erased_ns": 2017209084,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014756022,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 279929,
+                  "cosign_ns": 2418060960,
+                  "disposed_ns": 1997297817,
+                  "erased_ns": 1996229802,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994038080,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 148616,
+                  "cosign_ns": 2421711864,
+                  "disposed_ns": 2019087676,
+                  "erased_ns": 2017699508,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015701629,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 323229,
+                  "cosign_ns": 2420126144,
+                  "disposed_ns": 2019537802,
+                  "erased_ns": 2017975978,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015424169,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 146626,
+                  "cosign_ns": 2426858943,
+                  "disposed_ns": 1998485166,
+                  "erased_ns": 1997251417,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995275722,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 19502541,
+                "max_ns": 6018721262,
+                "mean_ns": 5997932760,
+                "median_ns": 5995054151,
+                "min_ns": 5971978053,
+                "n": 10,
+                "p25_ns": 5990848827,
+                "p75_ns": 6010351368,
+                "p95_ns": 6018574009
+              }
+            },
+            "payload": {
+              "gas_median": 102872,
+              "iterations": [
+                {
+                  "approve_ns": 120555,
+                  "cosign_ns": 2422753316,
+                  "disposed_ns": 1996961143,
+                  "erased_ns": 1995922111,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994014506,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 151484,
+                  "cosign_ns": 2423920608,
+                  "disposed_ns": 2017555117,
+                  "erased_ns": 2016368660,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013987487,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 139764,
+                  "cosign_ns": 2418913337,
+                  "disposed_ns": 1997749739,
+                  "erased_ns": 1996515243,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994783098,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 339338,
+                  "cosign_ns": 2423641448,
+                  "disposed_ns": 1997550163,
+                  "erased_ns": 1996076471,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994045795,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 252962,
+                  "cosign_ns": 2421863451,
+                  "disposed_ns": 1997266954,
+                  "erased_ns": 1995824314,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994240776,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 247263,
+                  "cosign_ns": 2420141652,
+                  "disposed_ns": 2017258887,
+                  "erased_ns": 2016303575,
+                  "gas": 102860,
+                  "gas_anchor": 51268,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014415795,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 286361,
+                  "cosign_ns": 2419989565,
+                  "disposed_ns": 1999504181,
+                  "erased_ns": 1997982927,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995613602,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 152831,
+                  "cosign_ns": 2419298148,
+                  "disposed_ns": 2018758954,
+                  "erased_ns": 2017391663,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015424914,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 279842,
+                  "cosign_ns": 2420656491,
+                  "disposed_ns": 1997172949,
+                  "erased_ns": 1995952500,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994005881,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 192036,
+                  "cosign_ns": 2418009003,
+                  "disposed_ns": 1996326597,
+                  "erased_ns": 1994989739,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1992923094,
+                  "pairs_deleted": 0
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 17269481,
+                "max_ns": 6012948318,
+                "mean_ns": 5998986668,
+                "median_ns": 5995825186,
+                "min_ns": 5972531976,
+                "n": 10,
+                "p25_ns": 5994380390,
+                "p75_ns": 6011649871,
+                "p95_ns": 6012610980
+              }
+            },
+            "payload_index": {
+              "gas_median": 102884,
+              "iterations": [
+                {
+                  "approve_ns": 312845,
+                  "cosign_ns": 2437174574,
+                  "disposed_ns": 1998887130,
+                  "erased_ns": 1997571712,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995261167,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 185809,
+                  "cosign_ns": 2438022639,
+                  "disposed_ns": 1999268186,
+                  "erased_ns": 1997937624,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995968737,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 334087,
+                  "cosign_ns": 2422027304,
+                  "disposed_ns": 1978479655,
+                  "erased_ns": 1977100814,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1975586309,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 164558,
+                  "cosign_ns": 2419098079,
+                  "disposed_ns": 1998000723,
+                  "erased_ns": 1996739653,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994385134,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 210776,
+                  "cosign_ns": 2423020871,
+                  "disposed_ns": 1998415921,
+                  "erased_ns": 1996940000,
+                  "gas": 102860,
+                  "gas_anchor": 51268,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994708200,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 247098,
+                  "cosign_ns": 2422754147,
+                  "disposed_ns": 1976998421,
+                  "erased_ns": 1975998375,
+                  "gas": 102848,
+                  "gas_anchor": 51256,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1973880156,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 223475,
+                  "cosign_ns": 2420510858,
+                  "disposed_ns": 1998340666,
+                  "erased_ns": 1997223980,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995043812,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 306115,
+                  "cosign_ns": 2422744718,
+                  "disposed_ns": 1999210986,
+                  "erased_ns": 1997831985,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995791114,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 512852,
+                  "cosign_ns": 2419858273,
+                  "disposed_ns": 1998788484,
+                  "erased_ns": 1997332126,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994961072,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 475741,
+                  "cosign_ns": 2425412199,
+                  "disposed_ns": 2016873507,
+                  "erased_ns": 2015529278,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013458057,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 15152783,
+                "max_ns": 6017062920,
+                "mean_ns": 5998448289,
+                "median_ns": 5995337579,
+                "min_ns": 5974383090,
+                "n": 10,
+                "p25_ns": 5992881112,
+                "p75_ns": 6008033895,
+                "p95_ns": 6016769357
+              }
+            }
+          }
+        },
+        "fb": {
+          "bdems": {
+            "chain_read": "eth_call destructionOf(EID)",
+            "chain_read_ns": {
+              "iqr_ns": 552667,
+              "max_ns": 1722017,
+              "mean_ns": 1290947,
+              "median_ns": 1421336,
+              "min_ns": 668684,
+              "n": 10,
+              "p25_ns": 1045129,
+              "p75_ns": 1597796,
+              "p95_ns": 1673905
+            },
+            "verify_ns": {
+              "iqr_ns": 842,
+              "max_ns": 2747,
+              "mean_ns": 1788,
+              "median_ns": 2057,
+              "min_ns": 948,
+              "n": 10,
+              "p25_ns": 1249,
+              "p75_ns": 2091,
+              "p95_ns": 2479
+            }
+          },
+          "ours": {
+            "chain_read": "eth_getLogs for the case's RootCommitted events (R_e and R_e')",
+            "chain_read_ns": {
+              "iqr_ns": 198366,
+              "max_ns": 3100011,
+              "mean_ns": 2868939,
+              "median_ns": 2843438,
+              "min_ns": 2660523,
+              "n": 10,
+              "p25_ns": 2776574,
+              "p75_ns": 2974940,
+              "p95_ns": 3077790
+            },
+            "verify_ns": {
+              "iqr_ns": 571,
+              "max_ns": 80585,
+              "mean_ns": 79375,
+              "median_ns": 79360,
+              "min_ns": 78605,
+              "n": 10,
+              "p25_ns": 79035,
+              "p75_ns": 79606,
+              "p95_ns": 80266
+            },
+            "verify_with_disclosure_ns": {
+              "iqr_ns": 381439,
+              "max_ns": 2206605,
+              "mean_ns": 1123037,
+              "median_ns": 1038110,
+              "min_ns": 657334,
+              "n": 10,
+              "p25_ns": 855350,
+              "p75_ns": 1236789,
+              "p95_ns": 1802145
+            }
+          }
+        },
+        "record_build_total_ns": 58275940660,
+        "records": 95156,
+        "stream": {
+          "counts": {
+            "Access": 14596,
+            "Analyze": 14383,
+            "Collect": 11628,
+            "Export": 14415,
+            "Seal": 11628,
+            "Transfer": 28506
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 11628,
+            "dispose_pct": 0,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        }
+      },
+      {
+        "artefact_bytes": 4096,
+        "capsules": 34884,
+        "evidence_keywords_per_capsule": 28,
+        "fa": {
+          "bdems": {
+            "gas_median": 129147,
+            "iterations": [
+              {
+                "deleted_ns": 1993955185,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1993894063
+              },
+              {
+                "deleted_ns": 1973992089,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1973911784
+              },
+              {
+                "deleted_ns": 1994827731,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994754332
+              },
+              {
+                "deleted_ns": 2014103103,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2014017826
+              },
+              {
+                "deleted_ns": 1995623817,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995529732
+              },
+              {
+                "deleted_ns": 2014791127,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 2014712679
+              },
+              {
+                "deleted_ns": 1994566784,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994485743
+              },
+              {
+                "deleted_ns": 1993379866,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1993284359
+              },
+              {
+                "deleted_ns": 1974201165,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1974119750
+              },
+              {
+                "deleted_ns": 1995234813,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995153954
+              }
+            ],
+            "latency_ns": {
+              "iqr_ns": 19362955,
+              "max_ns": 4008689384,
+              "mean_ns": 3996874241,
+              "median_ns": 3990544517,
+              "min_ns": 3987862888,
+              "n": 10,
+              "p25_ns": 3988875623,
+              "p75_ns": 4008238578,
+              "p95_ns": 4008682388
+            }
+          },
+          "ours": {
+            "full": {
+              "gas_median": 102884,
+              "iterations": [
+                {
+                  "approve_ns": 289220,
+                  "cosign_ns": 2422851478,
+                  "disposed_ns": 1996441384,
+                  "erased_ns": 1995255209,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993312043,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 273220,
+                  "cosign_ns": 2422824535,
+                  "disposed_ns": 1998773489,
+                  "erased_ns": 1996920970,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995208701,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 304577,
+                  "cosign_ns": 2431622949,
+                  "disposed_ns": 2018407408,
+                  "erased_ns": 2017149826,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015228822,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 265629,
+                  "cosign_ns": 2429704896,
+                  "disposed_ns": 1977517951,
+                  "erased_ns": 1976165549,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1974445523,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 440128,
+                  "cosign_ns": 2417910406,
+                  "disposed_ns": 1997284399,
+                  "erased_ns": 1995781581,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993982906,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 232870,
+                  "cosign_ns": 2422374839,
+                  "disposed_ns": 1998584553,
+                  "erased_ns": 1997081306,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995285748,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 130095,
+                  "cosign_ns": 2427998273,
+                  "disposed_ns": 1997276875,
+                  "erased_ns": 1995907638,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993808331,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 194472,
+                  "cosign_ns": 2433938404,
+                  "disposed_ns": 1997533862,
+                  "erased_ns": 1996091345,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994056501,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 230789,
+                  "cosign_ns": 2429142620,
+                  "disposed_ns": 1998195337,
+                  "erased_ns": 1996860581,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995074411,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 172846,
+                  "cosign_ns": 2421797159,
+                  "disposed_ns": 1998941791,
+                  "erased_ns": 1997387877,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995418967,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 7426938,
+                "max_ns": 6005009639,
+                "mean_ns": 5998365127,
+                "median_ns": 5998290658,
+                "min_ns": 5989217915,
+                "n": 10,
+                "p25_ns": 5994700777,
+                "p75_ns": 6002127715,
+                "p95_ns": 6004969294
+              }
+            },
+            "payload": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 380828,
+                  "cosign_ns": 2423813501,
+                  "disposed_ns": 1997426277,
+                  "erased_ns": 1995908559,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993769708,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 290309,
+                  "cosign_ns": 2473103502,
+                  "disposed_ns": 2015559228,
+                  "erased_ns": 2014593621,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2012557085,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 224563,
+                  "cosign_ns": 2470677928,
+                  "disposed_ns": 1997080954,
+                  "erased_ns": 1995896674,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994138616,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 570256,
+                  "cosign_ns": 2431832756,
+                  "disposed_ns": 2016097078,
+                  "erased_ns": 2014748276,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2012870366,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 398587,
+                  "cosign_ns": 2471096750,
+                  "disposed_ns": 1996529118,
+                  "erased_ns": 1995329329,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993350291,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 323825,
+                  "cosign_ns": 2420938315,
+                  "disposed_ns": 1998065163,
+                  "erased_ns": 1996554123,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994342364,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 117315,
+                  "cosign_ns": 2425719166,
+                  "disposed_ns": 1996035601,
+                  "erased_ns": 1994883556,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1992940190,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 223915,
+                  "cosign_ns": 2433425586,
+                  "disposed_ns": 2016455881,
+                  "erased_ns": 2015178286,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013236651,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 258921,
+                  "cosign_ns": 2431202738,
+                  "disposed_ns": 1975970913,
+                  "erased_ns": 1974474942,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1973036267,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 217215,
+                  "cosign_ns": 2431702776,
+                  "disposed_ns": 1996830209,
+                  "erased_ns": 1995595043,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993807834,
+                  "pairs_deleted": 0
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 6834995,
+                "max_ns": 6023134737,
+                "mean_ns": 5999476342,
+                "median_ns": 6001211141,
+                "min_ns": 5981621611,
+                "n": 10,
+                "p25_ns": 5994823456,
+                "p75_ns": 6001658451,
+                "p95_ns": 6013589215
+              }
+            },
+            "payload_index": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 779150,
+                  "cosign_ns": 2442843532,
+                  "disposed_ns": 1997871006,
+                  "erased_ns": 1996890448,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994845256,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 323341,
+                  "cosign_ns": 2429121076,
+                  "disposed_ns": 1996331383,
+                  "erased_ns": 1995082400,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1992995416,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 205494,
+                  "cosign_ns": 2422114855,
+                  "disposed_ns": 1998129398,
+                  "erased_ns": 1996552742,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994392629,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 328328,
+                  "cosign_ns": 2420846854,
+                  "disposed_ns": 2017828633,
+                  "erased_ns": 2016574405,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014284319,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 298915,
+                  "cosign_ns": 2449553748,
+                  "disposed_ns": 2018785284,
+                  "erased_ns": 2017477851,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2015262954,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 221920,
+                  "cosign_ns": 2423769000,
+                  "disposed_ns": 1998258717,
+                  "erased_ns": 1996824472,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994510965,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 206616,
+                  "cosign_ns": 2422760203,
+                  "disposed_ns": 1999429115,
+                  "erased_ns": 1997971470,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995883546,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 316062,
+                  "cosign_ns": 2442405278,
+                  "disposed_ns": 2018033200,
+                  "erased_ns": 2017048531,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014679946,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 379867,
+                  "cosign_ns": 2430054297,
+                  "disposed_ns": 1997784842,
+                  "erased_ns": 1996713082,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994596864,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 132520,
+                  "cosign_ns": 2415758772,
+                  "disposed_ns": 2017875030,
+                  "erased_ns": 2016289069,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013938524,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 7120241,
+                "max_ns": 6016782159,
+                "mean_ns": 5998387004,
+                "median_ns": 5997804603,
+                "min_ns": 5976365342,
+                "n": 10,
+                "p25_ns": 5994860536,
+                "p75_ns": 6001980777,
+                "p95_ns": 6013025634
+              }
+            }
+          }
+        },
+        "fb": {
+          "bdems": {
+            "chain_read": "eth_call destructionOf(EID)",
+            "chain_read_ns": {
+              "iqr_ns": 317333,
+              "max_ns": 1715278,
+              "mean_ns": 1310773,
+              "median_ns": 1254770,
+              "min_ns": 985855,
+              "n": 10,
+              "p25_ns": 1135873,
+              "p75_ns": 1453206,
+              "p95_ns": 1704324
+            },
+            "verify_ns": {
+              "iqr_ns": 901,
+              "max_ns": 2387,
+              "mean_ns": 1696,
+              "median_ns": 1955,
+              "min_ns": 966,
+              "n": 10,
+              "p25_ns": 1139,
+              "p75_ns": 2040,
+              "p95_ns": 2248
+            }
+          },
+          "ours": {
+            "chain_read": "eth_getLogs for the case's RootCommitted events (R_e and R_e')",
+            "chain_read_ns": {
+              "iqr_ns": 284112,
+              "max_ns": 3475342,
+              "mean_ns": 3123391,
+              "median_ns": 3182106,
+              "min_ns": 2567557,
+              "n": 10,
+              "p25_ns": 2994343,
+              "p75_ns": 3278455,
+              "p95_ns": 3417855
+            },
+            "verify_ns": {
+              "iqr_ns": 9499,
+              "max_ns": 96327,
+              "mean_ns": 78193,
+              "median_ns": 74335,
+              "min_ns": 72388,
+              "n": 10,
+              "p25_ns": 72757,
+              "p75_ns": 82256,
+              "p95_ns": 90769
+            },
+            "verify_with_disclosure_ns": {
+              "iqr_ns": 169341,
+              "max_ns": 1101967,
+              "mean_ns": 916806,
+              "median_ns": 938572,
+              "min_ns": 664146,
+              "n": 10,
+              "p25_ns": 823096,
+              "p75_ns": 992437,
+              "p95_ns": 1091926
+            }
+          }
+        },
+        "record_build_total_ns": 177124443422,
+        "records": 286847,
+        "stream": {
+          "counts": {
+            "Access": 43567,
+            "Analyze": 43540,
+            "Collect": 34884,
+            "Export": 43486,
+            "Seal": 34884,
+            "Transfer": 86486
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 34884,
+            "dispose_pct": 0,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        }
+      },
+      {
+        "artefact_bytes": 4096,
+        "capsules": 116280,
+        "evidence_keywords_per_capsule": 28,
+        "fa": {
+          "bdems": {
+            "gas_median": 129147,
+            "iterations": [
+              {
+                "deleted_ns": 1994686703,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994616261
+              },
+              {
+                "deleted_ns": 1994737824,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994665366
+              },
+              {
+                "deleted_ns": 1994318093,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994246896
+              },
+              {
+                "deleted_ns": 1996001108,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995918288
+              },
+              {
+                "deleted_ns": 1994929574,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994835328
+              },
+              {
+                "deleted_ns": 1995837878,
+                "gas": 129135,
+                "gas_confirm": 51391,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995744009
+              },
+              {
+                "deleted_ns": 1994814313,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994720872
+              },
+              {
+                "deleted_ns": 1994901503,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1994822760
+              },
+              {
+                "deleted_ns": 1995535087,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995442504
+              },
+              {
+                "deleted_ns": 1995547288,
+                "gas": 129147,
+                "gas_confirm": 51403,
+                "gas_txe": 77744,
+                "transactions": 2,
+                "txe_included_ns": 1995473133
+              }
+            ],
+            "latency_ns": {
+              "iqr_ns": 14112597,
+              "max_ns": 4010378275,
+              "mean_ns": 3995944345,
+              "median_ns": 3990363657,
+              "min_ns": 3989851107,
+              "n": 10,
+              "p25_ns": 3990063764,
+              "p75_ns": 4004176361,
+              "p95_ns": 4009786133
+            }
+          },
+          "ours": {
+            "full": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 174831,
+                  "cosign_ns": 2418900359,
+                  "disposed_ns": 1999152405,
+                  "erased_ns": 1997678705,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995088172,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 175176,
+                  "cosign_ns": 2425713993,
+                  "disposed_ns": 1995851449,
+                  "erased_ns": 1994812742,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993536658,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 399509,
+                  "cosign_ns": 2426550370,
+                  "disposed_ns": 1997734281,
+                  "erased_ns": 1996710007,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995019754,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 366369,
+                  "cosign_ns": 2465744070,
+                  "disposed_ns": 1997799259,
+                  "erased_ns": 1996582053,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994572971,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 319557,
+                  "cosign_ns": 2420649077,
+                  "disposed_ns": 1998281366,
+                  "erased_ns": 1996926776,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994722857,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 321981,
+                  "cosign_ns": 2431381942,
+                  "disposed_ns": 1997180401,
+                  "erased_ns": 1995841859,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993383480,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 474527,
+                  "cosign_ns": 2438713371,
+                  "disposed_ns": 2015792949,
+                  "erased_ns": 2014301586,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2012111166,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 230030,
+                  "cosign_ns": 2443564172,
+                  "disposed_ns": 1999821277,
+                  "erased_ns": 1998168473,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995520598,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 178020,
+                  "cosign_ns": 2420823775,
+                  "disposed_ns": 1997317866,
+                  "erased_ns": 1996258122,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994080304,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 246189,
+                  "cosign_ns": 2431260569,
+                  "disposed_ns": 1999196658,
+                  "erased_ns": 1997619118,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995442904,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 11134846,
+                "max_ns": 6016286039,
+                "mean_ns": 5996811427,
+                "median_ns": 5997624613,
+                "min_ns": 5972951928,
+                "n": 10,
+                "p25_ns": 5993035588,
+                "p75_ns": 6004170434,
+                "p95_ns": 6013542203
+              }
+            },
+            "payload": {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 163012,
+                  "cosign_ns": 2423140856,
+                  "disposed_ns": 1998459645,
+                  "erased_ns": 1997071194,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994831602,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 321338,
+                  "cosign_ns": 2412760035,
+                  "disposed_ns": 2015724024,
+                  "erased_ns": 2014454135,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2012609410,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 129028,
+                  "cosign_ns": 2457784966,
+                  "disposed_ns": 1998503172,
+                  "erased_ns": 1997117835,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994514759,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 367621,
+                  "cosign_ns": 2424371535,
+                  "disposed_ns": 1996580124,
+                  "erased_ns": 1995375877,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1992775608,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 250413,
+                  "cosign_ns": 2422847761,
+                  "disposed_ns": 2016632833,
+                  "erased_ns": 2015302465,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013684349,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 172474,
+                  "cosign_ns": 2418126466,
+                  "disposed_ns": 2016768681,
+                  "erased_ns": 2015430165,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013545803,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 242962,
+                  "cosign_ns": 2446939803,
+                  "disposed_ns": 1996204649,
+                  "erased_ns": 1994940082,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1992885895,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 211703,
+                  "cosign_ns": 2426165546,
+                  "disposed_ns": 1975930039,
+                  "erased_ns": 1974953988,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1973030107,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 376994,
+                  "cosign_ns": 2445068014,
+                  "disposed_ns": 1996731553,
+                  "erased_ns": 1995420687,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993208968,
+                  "pairs_deleted": 0
+                },
+                {
+                  "approve_ns": 166246,
+                  "cosign_ns": 2431513848,
+                  "disposed_ns": 1996206300,
+                  "erased_ns": 1994986717,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993093794,
+                  "pairs_deleted": 0
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 7109480,
+                "max_ns": 6013123718,
+                "mean_ns": 5996925124,
+                "median_ns": 5995472477,
+                "min_ns": 5980464057,
+                "n": 10,
+                "p25_ns": 5993958613,
+                "p75_ns": 6001068093,
+                "p95_ns": 6010715947
+              }
+            },
+            "payload_index": {
+              "gas_median": 102884,
+              "iterations": [
+                {
+                  "approve_ns": 206483,
+                  "cosign_ns": 2421900420,
+                  "disposed_ns": 2017595687,
+                  "erased_ns": 2016113107,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013985427,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 184928,
+                  "cosign_ns": 2422675954,
+                  "disposed_ns": 1996250992,
+                  "erased_ns": 1995201275,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1993545149,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 332968,
+                  "cosign_ns": 2432658577,
+                  "disposed_ns": 1975661740,
+                  "erased_ns": 1974556342,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1972495785,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 267683,
+                  "cosign_ns": 2424626849,
+                  "disposed_ns": 2016891636,
+                  "erased_ns": 2015854045,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2013441746,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 484647,
+                  "cosign_ns": 2449069482,
+                  "disposed_ns": 1997579852,
+                  "erased_ns": 1996399291,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994288688,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 340152,
+                  "cosign_ns": 2422073238,
+                  "disposed_ns": 1998150974,
+                  "erased_ns": 1996889791,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994820462,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 497612,
+                  "cosign_ns": 2424925502,
+                  "disposed_ns": 2002229005,
+                  "erased_ns": 2001143455,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994287739,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 215799,
+                  "cosign_ns": 2423718694,
+                  "disposed_ns": 1976714967,
+                  "erased_ns": 1975391613,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1973607425,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 337031,
+                  "cosign_ns": 2444769360,
+                  "disposed_ns": 1997963971,
+                  "erased_ns": 1996759979,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994669506,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 458180,
+                  "cosign_ns": 2448160505,
+                  "disposed_ns": 1980002981,
+                  "erased_ns": 1976844629,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1975023824,
+                  "pairs_deleted": 28
+                }
+              ],
+              "latency_ns": {
+                "iqr_ns": 19179500,
+                "max_ns": 6021362226,
+                "mean_ns": 6001728279,
+                "median_ns": 6002503744,
+                "min_ns": 5975250969,
+                "n": 10,
+                "p25_ns": 5994813898,
+                "p75_ns": 6013993398,
+                "p95_ns": 6019141687
+              }
+            }
+          }
+        },
+        "fb": {
+          "bdems": {
+            "chain_read": "eth_call destructionOf(EID)",
+            "chain_read_ns": {
+              "iqr_ns": 562132,
+              "max_ns": 1757889,
+              "mean_ns": 1284731,
+              "median_ns": 1382118,
+              "min_ns": 579475,
+              "n": 10,
+              "p25_ns": 985962,
+              "p75_ns": 1548094,
+              "p95_ns": 1735280
+            },
+            "verify_ns": {
+              "iqr_ns": 174,
+              "max_ns": 2303,
+              "mean_ns": 1970,
+              "median_ns": 2006,
+              "min_ns": 1147,
+              "n": 10,
+              "p25_ns": 1955,
+              "p75_ns": 2129,
+              "p95_ns": 2294
+            }
+          },
+          "ours": {
+            "chain_read": "eth_getLogs for the case's RootCommitted events (R_e and R_e')",
+            "chain_read_ns": {
+              "iqr_ns": 2385276,
+              "max_ns": 14781133,
+              "mean_ns": 5524941,
+              "median_ns": 3885067,
+              "min_ns": 3524524,
+              "n": 10,
+              "p25_ns": 3670249,
+              "p75_ns": 6055525,
+              "p95_ns": 10885846
+            },
+            "verify_ns": {
+              "iqr_ns": 4415,
+              "max_ns": 82808,
+              "mean_ns": 78677,
+              "median_ns": 79555,
+              "min_ns": 73965,
+              "n": 10,
+              "p25_ns": 76263,
+              "p75_ns": 80678,
+              "p95_ns": 81944
+            },
+            "verify_with_disclosure_ns": {
+              "iqr_ns": 362286,
+              "max_ns": 2963153,
+              "mean_ns": 1163129,
+              "median_ns": 976525,
+              "min_ns": 672616,
+              "n": 10,
+              "p25_ns": 833624,
+              "p75_ns": 1195910,
+              "p95_ns": 2199987
+            }
+          }
+        },
+        "record_build_total_ns": 594588741396,
+        "records": 957795,
+        "stream": {
+          "counts": {
+            "Access": 144941,
+            "Analyze": 145441,
+            "Collect": 116280,
+            "Export": 145609,
+            "Seal": 116280,
+            "Transfer": 289244
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 116280,
+            "dispose_pct": 0,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        },
+        "t1": {
+          "bdems": [
+            {
+              "gas_median": 129147,
+              "iterations": [
+                {
+                  "deleted_ns": 1993802605,
+                  "gas": 129147,
+                  "gas_confirm": 51403,
+                  "gas_txe": 77744,
+                  "transactions": 2,
+                  "txe_included_ns": 1993727269
+                },
+                {
+                  "deleted_ns": 1993510337,
+                  "gas": 129147,
+                  "gas_confirm": 51403,
+                  "gas_txe": 77744,
+                  "transactions": 2,
+                  "txe_included_ns": 1993442169
+                },
+                {
+                  "deleted_ns": 2013872731,
+                  "gas": 129147,
+                  "gas_confirm": 51403,
+                  "gas_txe": 77744,
+                  "transactions": 2,
+                  "txe_included_ns": 2013778022
+                },
+                {
+                  "deleted_ns": 2013853763,
+                  "gas": 129147,
+                  "gas_confirm": 51403,
+                  "gas_txe": 77744,
+                  "transactions": 2,
+                  "txe_included_ns": 2013764637
+                },
+                {
+                  "deleted_ns": 1993877538,
+                  "gas": 129147,
+                  "gas_confirm": 51403,
+                  "gas_txe": 77744,
+                  "transactions": 2,
+                  "txe_included_ns": 1993810881
+                },
+                {
+                  "deleted_ns": 1995711126,
+                  "gas": 129123,
+                  "gas_confirm": 51391,
+                  "gas_txe": 77732,
+                  "transactions": 2,
+                  "txe_included_ns": 1995618205
+                },
+                {
+                  "deleted_ns": 1994073251,
+                  "gas": 129147,
+                  "gas_confirm": 51403,
+                  "gas_txe": 77744,
+                  "transactions": 2,
+                  "txe_included_ns": 1993986936
+                },
+                {
+                  "deleted_ns": 1993833401,
+                  "gas": 129147,
+                  "gas_confirm": 51403,
+                  "gas_txe": 77744,
+                  "transactions": 2,
+                  "txe_included_ns": 1993750489
+                },
+                {
+                  "deleted_ns": 1973110738,
+                  "gas": 129135,
+                  "gas_confirm": 51391,
+                  "gas_txe": 77744,
+                  "transactions": 2,
+                  "txe_included_ns": 1973039353
+                },
+                {
+                  "deleted_ns": 1993617039,
+                  "gas": 129123,
+                  "gas_confirm": 51379,
+                  "gas_txe": 77744,
+                  "transactions": 2,
+                  "txe_included_ns": 1993535834
+                }
+              ],
+              "k": 1,
+              "latency_ns": {
+                "iqr_ns": 19795548,
+                "max_ns": 4028161749,
+                "mean_ns": 3998507340,
+                "median_ns": 3989901343,
+                "min_ns": 3987140759,
+                "n": 10,
+                "p25_ns": 3988373774,
+                "p75_ns": 4008169322,
+                "p95_ns": 4019641495
+              }
+            },
+            {
+              "gas_median": 1291422,
+              "iterations": [
+                {
+                  "deleted_ns": 2015276321,
+                  "gas": 1291410,
+                  "gas_confirm": 513994,
+                  "gas_txe": 777416,
+                  "transactions": 20,
+                  "txe_included_ns": 2015071989
+                },
+                {
+                  "deleted_ns": 1976421408,
+                  "gas": 1291458,
+                  "gas_confirm": 514018,
+                  "gas_txe": 777440,
+                  "transactions": 20,
+                  "txe_included_ns": 1976224688
+                },
+                {
+                  "deleted_ns": 1995984284,
+                  "gas": 1291446,
+                  "gas_confirm": 514006,
+                  "gas_txe": 777440,
+                  "transactions": 20,
+                  "txe_included_ns": 1995797118
+                },
+                {
+                  "deleted_ns": 1995203075,
+                  "gas": 1291398,
+                  "gas_confirm": 513982,
+                  "gas_txe": 777416,
+                  "transactions": 20,
+                  "txe_included_ns": 1995011111
+                },
+                {
+                  "deleted_ns": 1994462684,
+                  "gas": 1291422,
+                  "gas_confirm": 514006,
+                  "gas_txe": 777416,
+                  "transactions": 20,
+                  "txe_included_ns": 1994293891
+                },
+                {
+                  "deleted_ns": 1995406453,
+                  "gas": 1291422,
+                  "gas_confirm": 514006,
+                  "gas_txe": 777416,
+                  "transactions": 20,
+                  "txe_included_ns": 1995201338
+                },
+                {
+                  "deleted_ns": 1995924249,
+                  "gas": 1291422,
+                  "gas_confirm": 514006,
+                  "gas_txe": 777416,
+                  "transactions": 20,
+                  "txe_included_ns": 1995691915
+                },
+                {
+                  "deleted_ns": 2017774930,
+                  "gas": 1291410,
+                  "gas_confirm": 513994,
+                  "gas_txe": 777416,
+                  "transactions": 20,
+                  "txe_included_ns": 2017570484
+                },
+                {
+                  "deleted_ns": 1997022517,
+                  "gas": 1291422,
+                  "gas_confirm": 513994,
+                  "gas_txe": 777428,
+                  "transactions": 20,
+                  "txe_included_ns": 1996813258
+                },
+                {
+                  "deleted_ns": 2015398398,
+                  "gas": 1291422,
+                  "gas_confirm": 513994,
+                  "gas_txe": 777428,
+                  "transactions": 20,
+                  "txe_included_ns": 2015211840
+                }
+              ],
+              "k": 10,
+              "latency_ns": {
+                "iqr_ns": 19875221,
+                "max_ns": 4012324100,
+                "mean_ns": 4001160846,
+                "median_ns": 4001044335,
+                "min_ns": 3990087029,
+                "n": 10,
+                "p25_ns": 3991197193,
+                "p75_ns": 4011072414,
+                "p95_ns": 4011892223
+              }
+            },
+            {
+              "gas_median": 12914208,
+              "iterations": [
+                {
+                  "deleted_ns": 2035035190,
+                  "gas": 12914148,
+                  "gas_confirm": 5139952,
+                  "gas_txe": 7774196,
+                  "transactions": 200,
+                  "txe_included_ns": 2033799625
+                },
+                {
+                  "deleted_ns": 2014543122,
+                  "gas": 12914112,
+                  "gas_confirm": 5139904,
+                  "gas_txe": 7774208,
+                  "transactions": 200,
+                  "txe_included_ns": 2013297493
+                },
+                {
+                  "deleted_ns": 2033406057,
+                  "gas": 12914208,
+                  "gas_confirm": 5139976,
+                  "gas_txe": 7774232,
+                  "transactions": 200,
+                  "txe_included_ns": 2032184378
+                },
+                {
+                  "deleted_ns": 2034573145,
+                  "gas": 12914184,
+                  "gas_confirm": 5139940,
+                  "gas_txe": 7774244,
+                  "transactions": 200,
+                  "txe_included_ns": 2033241746
+                },
+                {
+                  "deleted_ns": 2033444489,
+                  "gas": 12914388,
+                  "gas_confirm": 5140060,
+                  "gas_txe": 7774328,
+                  "transactions": 200,
+                  "txe_included_ns": 2032213290
+                },
+                {
+                  "deleted_ns": 2035048053,
+                  "gas": 12914316,
+                  "gas_confirm": 5140072,
+                  "gas_txe": 7774244,
+                  "transactions": 200,
+                  "txe_included_ns": 2033454917
+                },
+                {
+                  "deleted_ns": 2055264110,
+                  "gas": 12914256,
+                  "gas_confirm": 5139976,
+                  "gas_txe": 7774280,
+                  "transactions": 200,
+                  "txe_included_ns": 2054025766
+                },
+                {
+                  "deleted_ns": 2054591272,
+                  "gas": 12914016,
+                  "gas_confirm": 5139880,
+                  "gas_txe": 7774136,
+                  "transactions": 200,
+                  "txe_included_ns": 2053301942
+                },
+                {
+                  "deleted_ns": 2033593600,
+                  "gas": 12914256,
+                  "gas_confirm": 5140000,
+                  "gas_txe": 7774256,
+                  "transactions": 200,
+                  "txe_included_ns": 2032297212
+                },
+                {
+                  "deleted_ns": 2055551547,
+                  "gas": 12914148,
+                  "gas_confirm": 5139964,
+                  "gas_txe": 7774184,
+                  "transactions": 200,
+                  "txe_included_ns": 2054334341
+                }
+              ],
+              "k": 100,
+              "latency_ns": {
+                "iqr_ns": 16632528,
+                "max_ns": 4029817867,
+                "mean_ns": 4011734616,
+                "median_ns": 4007549289,
+                "min_ns": 3987547300,
+                "n": 10,
+                "p25_ns": 4006511665,
+                "p75_ns": 4023144193,
+                "p95_ns": 4029462325
+              }
+            },
+            {
+              "gas_median": 129142404,
+              "iterations": [
+                {
+                  "deleted_ns": 6032238326,
+                  "gas": 129142404,
+                  "gas_confirm": 51399952,
+                  "gas_txe": 77742452,
+                  "transactions": 2000,
+                  "txe_included_ns": 6020627597
+                },
+                {
+                  "deleted_ns": 6050348168,
+                  "gas": 129142536,
+                  "gas_confirm": 51400012,
+                  "gas_txe": 77742524,
+                  "transactions": 2000,
+                  "txe_included_ns": 6039053605
+                },
+                {
+                  "deleted_ns": 6047158465,
+                  "gas": 129142272,
+                  "gas_confirm": 51399736,
+                  "gas_txe": 77742536,
+                  "transactions": 2000,
+                  "txe_included_ns": 6035605969
+                },
+                {
+                  "deleted_ns": 6030205903,
+                  "gas": 129142464,
+                  "gas_confirm": 51400000,
+                  "gas_txe": 77742464,
+                  "transactions": 2000,
+                  "txe_included_ns": 6018856919
+                },
+                {
+                  "deleted_ns": 6032238385,
+                  "gas": 129142728,
+                  "gas_confirm": 51400132,
+                  "gas_txe": 77742596,
+                  "transactions": 2000,
+                  "txe_included_ns": 6020689302
+                },
+                {
+                  "deleted_ns": 6054647788,
+                  "gas": 129142020,
+                  "gas_confirm": 51399796,
+                  "gas_txe": 77742224,
+                  "transactions": 2000,
+                  "txe_included_ns": 6043106576
+                },
+                {
+                  "deleted_ns": 6050855154,
+                  "gas": 129142080,
+                  "gas_confirm": 51399688,
+                  "gas_txe": 77742392,
+                  "transactions": 2000,
+                  "txe_included_ns": 6039152135
+                },
+                {
+                  "deleted_ns": 6026458412,
+                  "gas": 129142332,
+                  "gas_confirm": 51399988,
+                  "gas_txe": 77742344,
+                  "transactions": 2000,
+                  "txe_included_ns": 6012865094
+                },
+                {
+                  "deleted_ns": 6034195138,
+                  "gas": 129142464,
+                  "gas_confirm": 51399892,
+                  "gas_txe": 77742572,
+                  "transactions": 2000,
+                  "txe_included_ns": 6022325012
+                },
+                {
+                  "deleted_ns": 6044499784,
+                  "gas": 129141984,
+                  "gas_confirm": 51399760,
+                  "gas_txe": 77742224,
+                  "transactions": 2000,
+                  "txe_included_ns": 6032938390
+                }
+              ],
+              "k": 1000,
+              "latency_ns": {
+                "iqr_ns": 29302996,
+                "max_ns": 10081019745,
+                "mean_ns": 10061955034,
+                "median_ns": 10059988971,
+                "min_ns": 10038903258,
+                "n": 10,
+                "p25_ns": 10048446965,
+                "p75_ns": 10077749961,
+                "p95_ns": 10080944023
+              }
+            }
+          ],
+          "mode": "ERASED",
+          "ours": [
+            {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 467700,
+                  "cosign_ns": 2421666947,
+                  "disposed_ns": 1896947737,
+                  "erased_ns": 1895858100,
+                  "gas": 102872,
+                  "gas_anchor": 51280,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1893874361,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 160330,
+                  "cosign_ns": 2419910572,
+                  "disposed_ns": 1997617363,
+                  "erased_ns": 1996293292,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994029171,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 184115,
+                  "cosign_ns": 2421111580,
+                  "disposed_ns": 1997938765,
+                  "erased_ns": 1996925096,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994715580,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 113253,
+                  "cosign_ns": 2416396152,
+                  "disposed_ns": 1976249720,
+                  "erased_ns": 1975289717,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1973251374,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 213250,
+                  "cosign_ns": 2416509242,
+                  "disposed_ns": 2016537572,
+                  "erased_ns": 2015166945,
+                  "gas": 102860,
+                  "gas_anchor": 51304,
+                  "gas_order": 51556,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2012978051,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 234485,
+                  "cosign_ns": 2454788536,
+                  "disposed_ns": 1998009848,
+                  "erased_ns": 1996720084,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1994572021,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 410583,
+                  "cosign_ns": 2413846502,
+                  "disposed_ns": 2018112970,
+                  "erased_ns": 2016883147,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014983182,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 291755,
+                  "cosign_ns": 2416735065,
+                  "disposed_ns": 1976424480,
+                  "erased_ns": 1975231633,
+                  "gas": 102860,
+                  "gas_anchor": 51280,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1973362055,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 421369,
+                  "cosign_ns": 2419318809,
+                  "disposed_ns": 2017937963,
+                  "erased_ns": 2016937973,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 2014459969,
+                  "pairs_deleted": 28
+                },
+                {
+                  "approve_ns": 321230,
+                  "cosign_ns": 2423296828,
+                  "disposed_ns": 1998440468,
+                  "erased_ns": 1997444794,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1,
+                  "order_included_ns": 1995119827,
+                  "pairs_deleted": 28
+                }
+              ],
+              "k": 1,
+              "latency_ns": {
+                "iqr_ns": 19939176,
+                "max_ns": 6012071409,
+                "mean_ns": 5986160375,
+                "median_ns": 5992220555,
+                "min_ns": 5893823097,
+                "n": 10,
+                "p25_ns": 5986944821,
+                "p75_ns": 6006883997,
+                "p95_ns": 6011720680
+              }
+            },
+            {
+              "gas_median": 102896,
+              "iterations": [
+                {
+                  "approve_ns": 235875,
+                  "cosign_ns": 2424419205,
+                  "disposed_ns": 1985025652,
+                  "erased_ns": 1977090422,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 10,
+                  "order_included_ns": 1974817109,
+                  "pairs_deleted": 280
+                },
+                {
+                  "approve_ns": 485603,
+                  "cosign_ns": 2420592726,
+                  "disposed_ns": 1983806552,
+                  "erased_ns": 1976350453,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 10,
+                  "order_included_ns": 1973351960,
+                  "pairs_deleted": 280
+                },
+                {
+                  "approve_ns": 187243,
+                  "cosign_ns": 2424451670,
+                  "disposed_ns": 2005134290,
+                  "erased_ns": 1995365809,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 10,
+                  "order_included_ns": 1992853458,
+                  "pairs_deleted": 280
+                },
+                {
+                  "approve_ns": 344293,
+                  "cosign_ns": 2430575485,
+                  "disposed_ns": 2004358658,
+                  "erased_ns": 1997814718,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 10,
+                  "order_included_ns": 1995164885,
+                  "pairs_deleted": 280
+                },
+                {
+                  "approve_ns": 383190,
+                  "cosign_ns": 2424141838,
+                  "disposed_ns": 2008929080,
+                  "erased_ns": 1998448054,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 10,
+                  "order_included_ns": 1995711233,
+                  "pairs_deleted": 280
+                },
+                {
+                  "approve_ns": 230068,
+                  "cosign_ns": 2424834027,
+                  "disposed_ns": 1985683114,
+                  "erased_ns": 1976190489,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 10,
+                  "order_included_ns": 1973389422,
+                  "pairs_deleted": 280
+                },
+                {
+                  "approve_ns": 356417,
+                  "cosign_ns": 2425579741,
+                  "disposed_ns": 2004435290,
+                  "erased_ns": 1996499467,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 10,
+                  "order_included_ns": 1993690010,
+                  "pairs_deleted": 280
+                },
+                {
+                  "approve_ns": 200064,
+                  "cosign_ns": 2424432487,
+                  "disposed_ns": 2007688533,
+                  "erased_ns": 1997778362,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 10,
+                  "order_included_ns": 1994900992,
+                  "pairs_deleted": 280
+                },
+                {
+                  "approve_ns": 136287,
+                  "cosign_ns": 2418728375,
+                  "disposed_ns": 2024332713,
+                  "erased_ns": 2017067535,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 10,
+                  "order_included_ns": 2014320680,
+                  "pairs_deleted": 280
+                },
+                {
+                  "approve_ns": 191429,
+                  "cosign_ns": 2426120683,
+                  "disposed_ns": 2006073236,
+                  "erased_ns": 1996213349,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 10,
+                  "order_included_ns": 1993795846,
+                  "pairs_deleted": 280
+                }
+              ],
+              "k": 10,
+              "latency_ns": {
+                "iqr_ns": 12264623,
+                "max_ns": 6017328817,
+                "mean_ns": 5992190761,
+                "median_ns": 5985932097,
+                "min_ns": 5982607583,
+                "n": 10,
+                "p25_ns": 5984747917,
+                "p75_ns": 5997012540,
+                "p95_ns": 6012970485
+              }
+            },
+            {
+              "gas_median": 102884,
+              "iterations": [
+                {
+                  "approve_ns": 373492,
+                  "cosign_ns": 2418390790,
+                  "disposed_ns": 2027388042,
+                  "erased_ns": 1981399113,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 100,
+                  "order_included_ns": 1974208164,
+                  "pairs_deleted": 2800
+                },
+                {
+                  "approve_ns": 205480,
+                  "cosign_ns": 2417944430,
+                  "disposed_ns": 1907778975,
+                  "erased_ns": 1859952660,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 100,
+                  "order_included_ns": 1852281249,
+                  "pairs_deleted": 2800
+                },
+                {
+                  "approve_ns": 525204,
+                  "cosign_ns": 2421257440,
+                  "disposed_ns": 1954138100,
+                  "erased_ns": 1900228292,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 100,
+                  "order_included_ns": 1892485402,
+                  "pairs_deleted": 2800
+                },
+                {
+                  "approve_ns": 295155,
+                  "cosign_ns": 2415547712,
+                  "disposed_ns": 1955256712,
+                  "erased_ns": 1900890738,
+                  "gas": 102860,
+                  "gas_anchor": 51292,
+                  "gas_order": 51568,
+                  "openings_destroyed": 100,
+                  "order_included_ns": 1893054827,
+                  "pairs_deleted": 2800
+                },
+                {
+                  "approve_ns": 416420,
+                  "cosign_ns": 2420881284,
+                  "disposed_ns": 1937894290,
+                  "erased_ns": 1880881953,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 100,
+                  "order_included_ns": 1873174918,
+                  "pairs_deleted": 2800
+                },
+                {
+                  "approve_ns": 268154,
+                  "cosign_ns": 2418070270,
+                  "disposed_ns": 1954724007,
+                  "erased_ns": 1901380293,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 100,
+                  "order_included_ns": 1893446638,
+                  "pairs_deleted": 2800
+                },
+                {
+                  "approve_ns": 326840,
+                  "cosign_ns": 2414339016,
+                  "disposed_ns": 1938190974,
+                  "erased_ns": 1880677358,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 100,
+                  "order_included_ns": 1873111648,
+                  "pairs_deleted": 2800
+                },
+                {
+                  "approve_ns": 436643,
+                  "cosign_ns": 2418968447,
+                  "disposed_ns": 1947786361,
+                  "erased_ns": 1898888370,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 100,
+                  "order_included_ns": 1891085114,
+                  "pairs_deleted": 2800
+                },
+                {
+                  "approve_ns": 248083,
+                  "cosign_ns": 2420931805,
+                  "disposed_ns": 1935099438,
+                  "erased_ns": 1882634918,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 100,
+                  "order_included_ns": 1874992379,
+                  "pairs_deleted": 2800
+                },
+                {
+                  "approve_ns": 391634,
+                  "cosign_ns": 2418905400,
+                  "disposed_ns": 1956555440,
+                  "erased_ns": 1899769538,
+                  "gas": 102848,
+                  "gas_anchor": 51268,
+                  "gas_order": 51580,
+                  "openings_destroyed": 100,
+                  "order_included_ns": 1892277187,
+                  "pairs_deleted": 2800
+                }
+              ],
+              "k": 100,
+              "latency_ns": {
+                "iqr_ns": 12841536,
+                "max_ns": 6000317108,
+                "mean_ns": 5900467119,
+                "median_ns": 5889944957,
+                "min_ns": 5860093315,
+                "n": 10,
+                "p25_ns": 5886785542,
+                "p75_ns": 5899627078,
+                "p95_ns": 5959934400
+              }
+            },
+            {
+              "gas_median": 102884,
+              "iterations": [
+                {
+                  "approve_ns": 891858,
+                  "cosign_ns": 2417454083,
+                  "disposed_ns": 2467530583,
+                  "erased_ns": 1931480016,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1000,
+                  "order_included_ns": 1874342289,
+                  "pairs_deleted": 28000
+                },
+                {
+                  "approve_ns": 1240293,
+                  "cosign_ns": 2424985788,
+                  "disposed_ns": 2453848103,
+                  "erased_ns": 1869327608,
+                  "gas": 102884,
+                  "gas_anchor": 51304,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1000,
+                  "order_included_ns": 1812038225,
+                  "pairs_deleted": 28000
+                },
+                {
+                  "approve_ns": 940662,
+                  "cosign_ns": 2422277052,
+                  "disposed_ns": 2467096103,
+                  "erased_ns": 1970553003,
+                  "gas": 102872,
+                  "gas_anchor": 51292,
+                  "gas_order": 51580,
+                  "openings_destroyed": 1000,
+                  "order_included_ns": 1914292862,
+                  "pairs_deleted": 28000
+                },
+                {
+                  "approve_ns": 1113401,
+                  "cosign_ns": 2433869013,
+                  "disposed_ns": 2505913028,
+                  "erased_ns": 1990601441,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1000,
+                  "order_included_ns": 1933913739,
+                  "pairs_deleted": 28000
+                },
+                {
+                  "approve_ns": 945109,
+                  "cosign_ns": 2462725458,
+                  "disposed_ns": 2544016232,
+                  "erased_ns": 2012519134,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1000,
+                  "order_included_ns": 1954523550,
+                  "pairs_deleted": 28000
+                },
+                {
+                  "approve_ns": 990590,
+                  "cosign_ns": 2423233157,
+                  "disposed_ns": 2547026680,
+                  "erased_ns": 2012864439,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1000,
+                  "order_included_ns": 1954336256,
+                  "pairs_deleted": 28000
+                },
+                {
+                  "approve_ns": 872578,
+                  "cosign_ns": 2423500499,
+                  "disposed_ns": 2528376942,
+                  "erased_ns": 1992185865,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1000,
+                  "order_included_ns": 1933295176,
+                  "pairs_deleted": 28000
+                },
+                {
+                  "approve_ns": 848451,
+                  "cosign_ns": 2424261483,
+                  "disposed_ns": 2580313745,
+                  "erased_ns": 2033662369,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1000,
+                  "order_included_ns": 1975616119,
+                  "pairs_deleted": 28000
+                },
+                {
+                  "approve_ns": 1055017,
+                  "cosign_ns": 2427161119,
+                  "disposed_ns": 2583951992,
+                  "erased_ns": 2073305715,
+                  "gas": 102896,
+                  "gas_anchor": 51304,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1000,
+                  "order_included_ns": 2015454886,
+                  "pairs_deleted": 28000
+                },
+                {
+                  "approve_ns": 895302,
+                  "cosign_ns": 2421047612,
+                  "disposed_ns": 646404001,
+                  "erased_ns": 119878997,
+                  "gas": 102884,
+                  "gas_anchor": 51292,
+                  "gas_order": 51592,
+                  "openings_destroyed": 1000,
+                  "order_included_ns": 62085197,
+                  "pairs_deleted": 28000
+                }
+              ],
+              "k": 1000,
+              "latency_ns": {
+                "iqr_ns": 58468034,
+                "max_ns": 6011085686,
+                "mean_ns": 5743186260,
+                "median_ns": 5936894419,
+                "min_ns": 4067821059,
+                "n": 10,
+                "p25_ns": 5891721679,
+                "p75_ns": 5950189713,
+                "p95_ns": 5999576797
+              }
+            }
+          ],
+          "scope": "FULL"
+        },
+        "t2": {
+          "bdems": {
+            "insider": 100,
+            "insider_is_by_design": "B-DEMS authorises destruction by the Sender's enrolled role and carries no court signature, so a Sender destroying on its own TxE is indistinguishable from a court-ordered destruction",
+            "modified": 0,
+            "no_record": 0,
+            "replay": 0,
+            "valid": 100,
+            "verifier": "Algorithm 3 Step 3 / §3.4.2: destructionOf(EID) read from the chain, a TxE exists, status destroyed, and SHA-256(keccak256(TxE as presented) ‖ H(E′)) equals the recorded confirmation"
+          },
+          "ours": {
+            "insider": 0,
+            "modified": 0,
+            "no_record": 0,
+            "replay": 0,
+            "valid": 100,
+            "verifier": "verify_redaction (eq:validredact) for valid, insider, modified and replay; the auditor's account() for no_record"
+          },
+          "trials": 100
+        }
+      }
+    ],
+    "enclave": [
+      {
+        "CPUIDs": [
+          1,
+          17
+        ],
+        "EnclaveCID": 16,
+        "EnclaveID": "i-0774af7b7a7586c90-enc1a13c7670ee6959",
+        "EnclaveName": "A",
+        "Flags": "NONE",
+        "Measurements": {
+          "HashAlgorithm": "Sha512_48 { .. }",
+          "PCR0": "6f3b049d023d50d65c8b4da4a390310e2eab91dbcdee6d8a15f0c6d11b3f4ea1e44199e96c2881a72ffb0c35d3a16b07",
+          "PCR1": "4b4d5b3661b3efc12920900c80e126e4ce783c522de6c02a2a5bf7af3a2b9327b86776f188e4be1c1c404a129dbda493",
+          "PCR2": "1722c502fa9f8c9ea3a469ed3dd8a981436619b71f02c91812325bb30c2fc67237f2791a6de32e9f862a6425da1f1855"
+        },
+        "MemoryMiB": 2048,
+        "NumberOfCPUs": 2,
+        "ProcessID": 194755,
+        "State": "RUNNING"
+      }
+    ],
+    "method": {
+      "bdems": "Algorithm 3 per evidence item: TxE, overwrite-and-unlink, confirmation hash SHA-256(keccak256(TxE) || H(E')) by the TxE's Sender; one Sender, every transaction of a batch submitted at once",
+      "evidence_keywords": "type, device, collector, and the 25 range ancestors of the acquisition hour",
+      "gas": "receipt gasUsed: ours orderRedaction + commitRoot of the redaction epoch; B-DEMS every TxE and confirmation",
+      "latency": "first transaction submitted to the last one included, erasure done in between; ours excludes the epoch wait (up to Delta) and the court's signing of the order",
+      "ours": "SAC Phase 5 over Pi_core: orderRedaction included, the gate reading the recorded digest, execute_core, one DISPOSE per capsule from the Secure Module, the order leaf and the DISPOSE segments anchored in their own epoch with M = 2 of N = 3 ML-DSA approvals and the SLH-DSA co-signature",
+      "t1_t2_case": "the largest case",
+      "warm_up": "one redaction per system per case size, discarded"
+    },
+    "network": {
+      "block_gas_limit": 36000000,
+      "client": "besu/v26.8.1/linux-x86_64/openjdk-java-25",
+      "observed_block_period_ms": 2000,
+      "validators": 4
+    },
+    "sync_retries": 1,
+    "watcher_errors": 42
+  }
+}

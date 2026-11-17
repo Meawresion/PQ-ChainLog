@@ -1,0 +1,88 @@
+[package]
+name = "pqcl-primitives"
+description = "The only crate in the workspace permitted to import a cryptographic library. ML-KEM-768, ML-DSA-65, SLH-DSA, AES-256-GCM, SHAKE256, plus the KAT harness that proves them."
+version.workspace = true
+edition.workspace = true
+# ⚠️ Overrides the workspace's 1.97. This crate is reachable from the SP1
+# guest, whose pinned toolchain is older than the host's, and a `rust-version`
+# above it makes `cargo prove build` refuse the package outright. The MSRV is a
+# floor for consumers, not the version we build with — `rust-toolchain.toml`
+# still pins 1.97.1 for every host build, and `cargo prove build` is what
+# verifies this floor is real.
+rust-version = "1.85"
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[features]
+default = ["full"]
+# Everything except the XOF and its tag registry.
+#
+# ⚠️ Off for the SP1 guest, which compiles to `riscv32im-succinct-zkvm-elf`
+# where liboqs (C) will not build and there is no OS entropy source. The guest
+# still depends on THIS crate rather than reimplementing SHAKE256, because
+# draft6 requires the hash and the Merkle rule to hold *identically in the
+# circuit and in the verifier* — and a divergence there does not fail loudly,
+# it produces proofs that verify against the wrong root.
+full = ["dep:aes-gcm", "dep:oqs", "dep:fips205", "dep:getrandom", "dep:subtle"]
+
+[dependencies]
+# XOF. Every domain-separated hash and PRF derivation in the system goes through
+# this crate, so it is the hottest primitive we have. M12 R1 (2026-09-27): switched
+# from `sha3` after campaign 03 measured the per-call cost as the range-ingest
+# loss; `sha3` stays as a dev-dependency, the independent cross-check.
+tiny-keccak = { version = "2.0.2", features = ["shake"] }
+
+# The GGM step G (M12 R3, src/prg.rs). Not optional: pqcl-ggm uses it without
+# `full`. Runtime AES-NI detection via cpufeatures; never a build-baked ISA.
+aes = "0.8"
+
+# AEAD. Runtime backend selection via `cpufeatures`; the AES-NI assertion test
+# exists because a software-fallback throughput number looks entirely normal.
+aes-gcm = { optional = true, version = "0.10", features = ["aes"] }
+
+# Constant-time comparison for digests and tags.
+subtle = { version = "2.6", optional = true }
+
+# OS entropy. Lives here rather than in the crate that wants it, because this
+# crate is the only one permitted a cryptographic dependency — and "where did
+# this key's randomness come from?" is exactly the question that rule exists to
+# keep answerable in one place. Thin wrapper over getrandom(2) / BCryptGenRandom.
+getrandom = { version = "0.3", optional = true }
+
+# Zeroize key material on drop. Not a security claim on its own — the enclave
+# backend at M5 is what actually protects keys — but there is no reason to leave
+# copies of a record key in freed heap.
+zeroize = { version = "1.8", features = ["derive"] }
+
+# ML-KEM-768 and ML-DSA-65, via liboqs 0.13.0 built from source by the default
+# `vendored` feature. Do NOT enable `non_portable`: it disables runtime CPU
+# feature detection and bakes in the build machine's ISA, which would silently
+# make a local run and an AWS run incomparable.
+#
+# Verified 2026-09-09: this liboqs ships FIPS 204 **final**, not the ipd draft —
+# 15 external/pure ACVP sigVer vectors pass. See tests/kat.rs.
+oqs = { optional = true, version = "0.11.0", default-features = false, features = [
+    "ml_kem",
+    "ml_dsa",
+    "std",
+] }
+
+# SLH-DSA-SHAKE-192s, the epoch co-signature. NOT from liboqs: its SPHINCS+ is
+# not FIPS 205, and reaching for it is the project's most likely silent spec
+# mismatch. Chosen over RustCrypto `slh-dsa` by running both against the ACVP
+# vectors — both passed, so the tie-break was stability and build behaviour.
+# See src/slh.rs and tests/slh_dsa_bakeoff.rs.
+fips205 = { optional = true, version = "0.4.1", features = ["slh_dsa_shake_192s"] }
+
+[dev-dependencies]
+# ACVP vector files are JSON.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+hex = "0.4"
+slh-dsa = "=0.2.0-rc.5"
+# The independent SHAKE256 the backend is checked against (tests/xof_backend.rs).
+sha3 = "0.10"
+
+[lints]
+workspace = true

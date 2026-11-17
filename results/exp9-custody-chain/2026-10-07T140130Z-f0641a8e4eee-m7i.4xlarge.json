@@ -1,0 +1,115 @@
+{
+  "experiment": "exp9-custody-chain",
+  "git_sha": "f0641a8e4eeef91ba552dcae3dbddf774343b24c",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.4xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "n/a: hash and AEAD only on these paths",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [
+    129
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-07T14:01:30Z",
+  "measurements": {
+    "committee_signing_excluded": true,
+    "committee_signing_excluded_reason": "The available threshold ML-DSA implementation is Go, capped at six parties, and its authors describe it as an academic proof of concept. Plan §5 forbids a cross-language wall-clock comparison, so it is reported separately or not at all -- never inside this table.",
+    "rows": [
+      {
+        "chain_length": 8,
+        "court_verify_ns": {
+          "iqr_ns": 25,
+          "max_ns": 1757,
+          "median_ns": 1560,
+          "min_ns": 1518,
+          "n": 10,
+          "p25_ns": 1545,
+          "p75_ns": 1570
+        },
+        "proof_bytes": 99,
+        "tree_build_ns": {
+          "iqr_ns": 247,
+          "max_ns": 7453,
+          "median_ns": 6139,
+          "min_ns": 6044,
+          "n": 10,
+          "p25_ns": 6094,
+          "p75_ns": 6341
+        }
+      },
+      {
+        "chain_length": 32,
+        "court_verify_ns": {
+          "iqr_ns": 22,
+          "max_ns": 2372,
+          "median_ns": 2344,
+          "min_ns": 2313,
+          "n": 10,
+          "p25_ns": 2334,
+          "p75_ns": 2356
+        },
+        "proof_bytes": 165,
+        "tree_build_ns": {
+          "iqr_ns": 115,
+          "max_ns": 25432,
+          "median_ns": 25285,
+          "min_ns": 25031,
+          "n": 10,
+          "p25_ns": 25238,
+          "p75_ns": 25353
+        }
+      },
+      {
+        "chain_length": 128,
+        "court_verify_ns": {
+          "iqr_ns": 69,
+          "max_ns": 3096,
+          "median_ns": 2918,
+          "min_ns": 2858,
+          "n": 10,
+          "p25_ns": 2885,
+          "p75_ns": 2954
+        },
+        "proof_bytes": 231,
+        "tree_build_ns": {
+          "iqr_ns": 4392,
+          "max_ns": 133117,
+          "median_ns": 95225,
+          "min_ns": 93743,
+          "n": 10,
+          "p25_ns": 94526,
+          "p75_ns": 98918
+        }
+      },
+      {
+        "chain_length": 512,
+        "court_verify_ns": {
+          "iqr_ns": 246,
+          "max_ns": 4077,
+          "median_ns": 3710,
+          "min_ns": 3590,
+          "n": 10,
+          "p25_ns": 3638,
+          "p75_ns": 3884
+        },
+        "proof_bytes": 297,
+        "tree_build_ns": {
+          "iqr_ns": 20488,
+          "max_ns": 416710,
+          "median_ns": 390405,
+          "min_ns": 376813,
+          "n": 10,
+          "p25_ns": 381527,
+          "p75_ns": 402015
+        }
+      }
+    ],
+    "why_tier1_exists": "A flat MMR cannot hand a court one capsule's complete history without revealing case size and activity shape. Tier 1 is per-capsule precisely so selective disclosure costs nothing extra."
+  }
+}

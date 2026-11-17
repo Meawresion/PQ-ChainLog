@@ -1,0 +1,16 @@
+[package]
+name = "pqcl-capsule"
+description = "Evidence Capsule, Custody Record, their canonical deterministic codec, and the court-disclosure bundle."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-primitives = { path = "../pqcl-primitives" }
+pqcl-forest = { path = "../pqcl-forest" }
+
+[lints]
+workspace = true

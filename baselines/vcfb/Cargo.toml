@@ -1,0 +1,25 @@
+[package]
+name = "baseline-vcfb"
+description = "Faithful reimplementation of VCFB's search path (Ge et al., IEEE Trans. Big Data 11(3), 2025), Algorithm 1. A baseline, never part of the system under test."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-dsse = { path = "../../crates/pqcl-dsse" }
+pqcl-primitives = { path = "../../crates/pqcl-primitives" }
+
+# `F` and `F_p`, keyed AES-256, are ODXT's: VCFB "improved ODXT" (its §V-A) and
+# evaluates against it, and SDSSE-CQ's port uses the same two, so one PRF keeps
+# the comparison about the schemes.
+baseline-odxt = { path = "../odxt" }
+
+# The cross-tags need a prime-order group; the same one as our ODXT and SDSSE-CQ
+# ports. The authors used GmSSL's elliptic-curve library (their §VIII-A).
+curve25519-dalek = { version = "4.1", default-features = false, features = ["alloc", "precomputed-tables", "zeroize"] }
+
+[lints]
+workspace = true

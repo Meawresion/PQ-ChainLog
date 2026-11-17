@@ -1,0 +1,1597 @@
+{
+  "experiment": "exp1-ingestion-throughput",
+  "git_sha": "77adfac504aec1f59ea152969ad26f24451d194f",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "r7i.4xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "ML-DSA-65 via liboqs",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {
+    "enron-selection": "f332c03cdcc25ff543287abe7c45f0fa6dab771dc77e4697f0b9455e9b214860"
+  },
+  "rng_seeds": [
+    17,
+    18
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-12T21:13:49Z",
+  "measurements": {
+    "ablation_parallel_ingest": [
+      {
+        "events": 2000,
+        "query_class": "keyword+range",
+        "signing_batch_size": 1024,
+        "threads": 1,
+        "total_ns": {
+          "iqr_ns": 13600816,
+          "max_ns": 1011199744,
+          "mean_ns": 999507960,
+          "median_ns": 998665699,
+          "min_ns": 990447811,
+          "n": 10,
+          "p25_ns": 992225732,
+          "p75_ns": 1005826548,
+          "p95_ns": 1010159591
+        }
+      },
+      {
+        "events": 2000,
+        "query_class": "keyword+range",
+        "signing_batch_size": 1024,
+        "threads": 2,
+        "total_ns": {
+          "iqr_ns": 5304563,
+          "max_ns": 547746264,
+          "mean_ns": 536834615,
+          "median_ns": 535295191,
+          "min_ns": 531607921,
+          "n": 10,
+          "p25_ns": 534029535,
+          "p75_ns": 539334098,
+          "p95_ns": 545119609
+        }
+      },
+      {
+        "events": 2000,
+        "query_class": "keyword+range",
+        "signing_batch_size": 1024,
+        "threads": 4,
+        "total_ns": {
+          "iqr_ns": 2295546,
+          "max_ns": 326881555,
+          "mean_ns": 318290709,
+          "median_ns": 317481147,
+          "min_ns": 315698040,
+          "n": 10,
+          "p25_ns": 316387918,
+          "p75_ns": 318683464,
+          "p95_ns": 323558006
+        }
+      },
+      {
+        "events": 2000,
+        "query_class": "keyword+range",
+        "signing_batch_size": 1024,
+        "threads": 8,
+        "total_ns": {
+          "iqr_ns": 1510429,
+          "max_ns": 195855988,
+          "mean_ns": 192689404,
+          "median_ns": 192382831,
+          "min_ns": 191153091,
+          "n": 10,
+          "p25_ns": 191777952,
+          "p75_ns": 193288381,
+          "p95_ns": 194791423
+        }
+      },
+      {
+        "events": 2000,
+        "query_class": "keyword+range",
+        "signing_batch_size": 1024,
+        "threads": 16,
+        "total_ns": {
+          "iqr_ns": 1826977,
+          "max_ns": 156836671,
+          "mean_ns": 151064214,
+          "median_ns": 150085731,
+          "min_ns": 148799776,
+          "n": 10,
+          "p25_ns": 149927181,
+          "p75_ns": 151754158,
+          "p95_ns": 154826472
+        }
+      }
+    ],
+    "ablation_path_cache": [
+      {
+        "capacity": 19025,
+        "config": "sized to the stream (no evictions)",
+        "counts": {
+          "cache_bytes_floor": 41486378,
+          "distinct_keywords": 19025,
+          "evictions": 0,
+          "hits": 439727,
+          "misses": 19025,
+          "tokens": 458752
+        },
+        "tokens": 458752,
+        "total_ns": {
+          "iqr_ns": 17462896,
+          "max_ns": 1539215912,
+          "mean_ns": 1516156189,
+          "median_ns": 1516665612,
+          "min_ns": 1485724589,
+          "n": 10,
+          "p25_ns": 1507672353,
+          "p75_ns": 1525135249,
+          "p95_ns": 1536857501
+        }
+      },
+      {
+        "capacity": 4096,
+        "config": "fixed 4 096 (campaign 03)",
+        "counts": {
+          "cache_bytes_floor": 8930176,
+          "distinct_keywords": 19025,
+          "evictions": 57576,
+          "hits": 382151,
+          "misses": 76601,
+          "tokens": 458752
+        },
+        "tokens": 458752,
+        "total_ns": {
+          "iqr_ns": 27504366,
+          "max_ns": 2959362826,
+          "mean_ns": 2931035067,
+          "median_ns": 2927559400,
+          "min_ns": 2911167091,
+          "n": 10,
+          "p25_ns": 2915438105,
+          "p75_ns": 2942942471,
+          "p95_ns": 2957052320
+        }
+      },
+      {
+        "capacity": 0,
+        "config": "no cache (every token a full walk)",
+        "counts": {
+          "distinct_keywords": 19025,
+          "tokens": 458752,
+          "uncached": "every token walks all 64 GGM levels; no hit or miss is counted"
+        },
+        "tokens": 458752,
+        "total_ns": {
+          "iqr_ns": 20990056,
+          "max_ns": 5875993049,
+          "mean_ns": 5839244512,
+          "median_ns": 5840096195,
+          "min_ns": 5810568467,
+          "n": 10,
+          "p25_ns": 5829712178,
+          "p75_ns": 5850702234,
+          "p95_ns": 5864905205
+        }
+      }
+    ],
+    "events": 2000,
+    "finding": {
+      "index_path_dominates": "~99% of ingest time is the k*t_PRF term -- one sealed index token per keyword and per range prefix. This is the Exp. 1 optimisation lead the plan anticipated, and it is stated here because a decision about it belongs against this end-to-end number rather than a microbenchmark table.",
+      "signing_is_not_the_bottleneck": "Total cost is flat across every batch size: at B=1 one ML-DSA signature per event is ~1% of ingest, and at B=512 it is ~0%. t_sign/B is therefore negligible and the batching design is validated rather than merely assumed."
+    },
+    "head_to_head": {
+      "events": 4096,
+      "keyword_pairs": 81920,
+      "note": "Ours seals each payload (AEAD), commits it to the MMR and signs every B events with ML-DSA-65; the baselines index only. The comparison is therefore conservative for us. ODXT+Zuo22 answers keyword and range queries separately and cannot answer a keyword AND range conjunction.",
+      "numeric_attributes": 4,
+      "oracle_validation": {
+        "composed": "both halves re-validated on the composed build",
+        "odxt_queries": 1050,
+        "zuo_ranges_answered": 8
+      },
+      "path_cache": {
+        "keyword": {
+          "cache_bytes_floor": 13565158,
+          "cache_capacity": 6237,
+          "distinct_keywords": 6237,
+          "evictions": 0,
+          "ggm_prg_calls": 545137,
+          "hits": 75683,
+          "misses": 6237,
+          "sizing": "capacity = the stream's distinct keywords (M12 R2): the cache never evicts"
+        },
+        "range": {
+          "cache_bytes_floor": 41486378,
+          "cache_capacity": 19025,
+          "distinct_keywords": 19025,
+          "evictions": 0,
+          "ggm_prg_calls": 2072141,
+          "hits": 439727,
+          "misses": 19025,
+          "sizing": "capacity = the stream's distinct keywords (M12 R2): the cache never evicts"
+        }
+      },
+      "range_depths": [
+        24,
+        20,
+        32,
+        32
+      ],
+      "range_token_breakdown": {
+        "derived": "counts from this pass's cache profile; per-call ns timed in-process; remainder = measured - sum",
+        "ggm_prg_calls_per_token": 4.516908918108259,
+        "per_call_ns": {
+          "F": 370.178025,
+          "G": 102.40816,
+          "H1_addr": 364.269905,
+          "H_X": 378.08792,
+          "aead_seal_9B": 272.83118
+        },
+        "per_token_ns": {
+          "addr_record_key_seal_xtag_cms": 1755.545055,
+          "ggm_walks": 462.56833119105744,
+          "measured": 3362.07201058524,
+          "new_path_keys": 30.703460369110108,
+          "remainder": 1113.2551640250726
+        },
+        "remainder_is": "maps and allocation, plus the per-event payload seal, MMR append and signature amortised over the event's tokens",
+        "tokens": 458752
+      },
+      "rows": [
+        {
+          "entries": 98304,
+          "query_class": "keyword+range-ordered",
+          "scheme": "Plaintext",
+          "total_ns": {
+            "iqr_ns": 254093,
+            "max_ns": 13393244,
+            "mean_ns": 13074285,
+            "median_ns": 13040300,
+            "min_ns": 12844524,
+            "n": 10,
+            "p25_ns": 12920044,
+            "p75_ns": 13174137,
+            "p95_ns": 13391273
+          }
+        },
+        {
+          "entries": 81920,
+          "query_class": "keyword",
+          "scheme": "ODXT",
+          "total_ns": {
+            "iqr_ns": 13934944,
+            "max_ns": 2449842687,
+            "mean_ns": 2437897051,
+            "median_ns": 2436325361,
+            "min_ns": 2427866978,
+            "n": 10,
+            "p25_ns": 2431471463,
+            "p75_ns": 2445406407,
+            "p95_ns": 2448310129
+          }
+        },
+        {
+          "entries": 458752,
+          "query_class": "range",
+          "scheme": "Zuo22",
+          "total_ns": {
+            "iqr_ns": 21189101,
+            "max_ns": 1689258466,
+            "mean_ns": 1668555277,
+            "median_ns": 1665204257,
+            "min_ns": 1644673596,
+            "n": 10,
+            "p25_ns": 1659915736,
+            "p75_ns": 1681104837,
+            "p95_ns": 1688759233
+          }
+        },
+        {
+          "entries": 540672,
+          "query_class": "keyword+range",
+          "scheme": "ODXT+Zuo22",
+          "total_ns": {
+            "iqr_ns": 20411877,
+            "max_ns": 4186230573,
+            "mean_ns": 4160511826,
+            "median_ns": 4165701395,
+            "min_ns": 4123639174,
+            "n": 10,
+            "p25_ns": 4152683155,
+            "p75_ns": 4173095032,
+            "p95_ns": 4181872323
+          }
+        },
+        {
+          "entries": 81920,
+          "query_class": "keyword",
+          "scheme": "PQ-ChainLog",
+          "total_ns": {
+            "iqr_ns": 3139007,
+            "max_ns": 311309200,
+            "mean_ns": 306863408,
+            "median_ns": 306300585,
+            "min_ns": 302896874,
+            "n": 10,
+            "p25_ns": 305515476,
+            "p75_ns": 308654483,
+            "p95_ns": 310235749
+          }
+        },
+        {
+          "entries": 458752,
+          "query_class": "range",
+          "scheme": "PQ-ChainLog",
+          "total_ns": {
+            "iqr_ns": 16765680,
+            "max_ns": 1572468425,
+            "mean_ns": 1546738724,
+            "median_ns": 1542357259,
+            "min_ns": 1525346262,
+            "n": 10,
+            "p25_ns": 1537957991,
+            "p75_ns": 1554723671,
+            "p95_ns": 1569788098
+          }
+        },
+        {
+          "entries": 540672,
+          "query_class": "keyword+range",
+          "scheme": "PQ-ChainLog",
+          "total_ns": {
+            "iqr_ns": 12392388,
+            "max_ns": 1894770868,
+            "mean_ns": 1878691807,
+            "median_ns": 1875396287,
+            "min_ns": 1864957657,
+            "n": 10,
+            "p25_ns": 1872369020,
+            "p75_ns": 1884761408,
+            "p95_ns": 1894637802
+          }
+        }
+      ],
+      "signing_batch_size": 1024,
+      "stream_is": "the operating collection y = pqcl_exp::collection_median(): every tab:exp-ingest row, the ceiling included, reads this one stream",
+      "threads": 1,
+      "zuo_bitmap_width": 4096
+    },
+    "index_growth": {
+      "depths": [
+        24,
+        20,
+        32,
+        32
+      ],
+      "design_reference": "design §6b′ derives 5.6x from 134/24 using the 1s timestamp and log D levels; this uses the committed 1-min default and depth+1 keywords, which nearly cancel",
+      "indexed_entries_per_event": 132,
+      "plaintext_entries_per_event": 24,
+      "profile": [
+        "Timestamp",
+        "Duration",
+        "Bytes",
+        "Amount"
+      ],
+      "ratio_pct": 550
+    },
+    "keywords_per_event": 20,
+    "method": {
+      "baseline_omits": [
+        "aead-sealing",
+        "prf-index-tokens",
+        "merkle-hashing",
+        "ml-dsa-signing"
+      ],
+      "end_to_end": true,
+      "end_to_end_reason": "Both pipelines run in one process over identical events. Summing primitive microbenchmarks would overstate achievable throughput by crediting an ideal pipeline nobody implemented (Nitro, CCS'25).",
+      "range_indexing": "Measured as an increment. pqc_total_ns, classical_total_ns and plaintext_total_ns answer keyword queries only. pqc_with_range_total_ns answers keyword+range via prefix expansion; its plaintext counterpart is plaintext_ordered_total_ns, an ordered map with one entry per numeric attribute, because a plaintext system answers ranges natively and prefix expansion is a cost encryption imposes. plaintext_with_range_total_ns is a diagnostic that isolates per-token crypto cost; no ratio divides by it. Every pass records its entries, and query_class names what each timing answers."
+    },
+    "numeric_attributes": 4,
+    "payload_bytes": 2305873,
+    "plaintext_indexed_tokens": 40000,
+    "plaintext_ordered_indexed_entries": 48000,
+    "plaintext_ordered_total_ns": {
+      "iqr_ns": 70195,
+      "max_ns": 6414629,
+      "mean_ns": 6330289,
+      "median_ns": 6329884,
+      "min_ns": 6265653,
+      "n": 10,
+      "p25_ns": 6287735,
+      "p75_ns": 6357930,
+      "p95_ns": 6406619
+    },
+    "plaintext_total_ns": {
+      "iqr_ns": 70157,
+      "max_ns": 5827112,
+      "mean_ns": 5678778,
+      "median_ns": 5690140,
+      "min_ns": 5518614,
+      "n": 10,
+      "p25_ns": 5644592,
+      "p75_ns": 5714749,
+      "p95_ns": 5779124
+    },
+    "plaintext_with_range_indexed_tokens": 264000,
+    "plaintext_with_range_total_ns": {
+      "iqr_ns": 302512,
+      "max_ns": 57343404,
+      "mean_ns": 56900898,
+      "median_ns": 56850900,
+      "min_ns": 56617716,
+      "n": 10,
+      "p25_ns": 56747172,
+      "p75_ns": 57049684,
+      "p95_ns": 57225660
+    },
+    "query_class": {
+      "classical_total_ns": "keyword",
+      "plaintext_ordered_total_ns": "keyword+range",
+      "plaintext_total_ns": "keyword",
+      "plaintext_with_range_total_ns": "keyword+range (prefix-expanded, diagnostic)",
+      "pqc_total_ns": "keyword",
+      "pqc_with_range_total_ns": "keyword+range"
+    },
+    "range_ingest_across_y": {
+      "axis": [
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        6144,
+        8192,
+        12288,
+        16384,
+        24576,
+        32768,
+        49152,
+        65536
+      ],
+      "largest_y_measured": 65536,
+      "note": "y = the collection size, as Zuo'22 fixes it at setup; the same axis as exp7",
+      "operating_y": 4096,
+      "range_depths": [
+        24,
+        20,
+        32,
+        32
+      ],
+      "rows": [
+        {
+          "events": 256,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 1634304,
+              "total": 2551808,
+              "xset_exact": 917504
+            },
+            "zuo22": 2620960
+          },
+          "keyword_pairs": 5120,
+          "odxt_zuo22": {
+            "entries": 33792,
+            "total_ns": {
+              "iqr_ns": 654742,
+              "max_ns": 205056953,
+              "mean_ns": 203856110,
+              "median_ns": 203768193,
+              "min_ns": 202605737,
+              "n": 10,
+              "p25_ns": 203563945,
+              "p75_ns": 204218687,
+              "p95_ns": 204910327
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 33792,
+            "total_ns": {
+              "iqr_ns": 396874,
+              "max_ns": 146776819,
+              "mean_ns": 145999306,
+              "median_ns": 146031642,
+              "min_ns": 144713200,
+              "n": 10,
+              "p25_ns": 145888298,
+              "p75_ns": 146285172,
+              "p95_ns": 146575746
+            }
+          },
+          "ours_range": {
+            "entries": 28672,
+            "total_ns": {
+              "iqr_ns": 1505038,
+              "max_ns": 131171437,
+              "mean_ns": 123876052,
+              "median_ns": 123062812,
+              "min_ns": 121929454,
+              "n": 10,
+              "p25_ns": 122482709,
+              "p75_ns": 123987747,
+              "p95_ns": 128213695
+            }
+          },
+          "y": 256,
+          "zuo22": {
+            "entries": 28672,
+            "total_ns": {
+              "iqr_ns": 192035,
+              "max_ns": 49879201,
+              "mean_ns": 49398107,
+              "median_ns": 49350250,
+              "min_ns": 49071370,
+              "n": 10,
+              "p25_ns": 49295027,
+              "p75_ns": 49487062,
+              "p95_ns": 49737072
+            }
+          }
+        },
+        {
+          "events": 512,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 3268608,
+              "total": 5103616,
+              "xset_exact": 1835008
+            },
+            "zuo22": 7128832
+          },
+          "keyword_pairs": 10240,
+          "odxt_zuo22": {
+            "entries": 67584,
+            "total_ns": {
+              "iqr_ns": 1477074,
+              "max_ns": 417029318,
+              "mean_ns": 415641442,
+              "median_ns": 415520154,
+              "min_ns": 414560970,
+              "n": 10,
+              "p25_ns": 414906160,
+              "p75_ns": 416383234,
+              "p95_ns": 416861817
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 67584,
+            "total_ns": {
+              "iqr_ns": 1252609,
+              "max_ns": 282854135,
+              "mean_ns": 281285867,
+              "median_ns": 281656463,
+              "min_ns": 278126423,
+              "n": 10,
+              "p25_ns": 280913947,
+              "p75_ns": 282166556,
+              "p95_ns": 282673973
+            }
+          },
+          "ours_range": {
+            "entries": 57344,
+            "total_ns": {
+              "iqr_ns": 518147,
+              "max_ns": 228930482,
+              "mean_ns": 227811468,
+              "median_ns": 227716469,
+              "min_ns": 227202633,
+              "n": 10,
+              "p25_ns": 227479483,
+              "p75_ns": 227997630,
+              "p95_ns": 228590682
+            }
+          },
+          "y": 512,
+          "zuo22": {
+            "entries": 57344,
+            "total_ns": {
+              "iqr_ns": 119619,
+              "max_ns": 105631398,
+              "mean_ns": 105268239,
+              "median_ns": 105414827,
+              "min_ns": 104269389,
+              "n": 10,
+              "p25_ns": 105326770,
+              "p75_ns": 105446389,
+              "p95_ns": 105565980
+            }
+          }
+        },
+        {
+          "events": 1024,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 6537216,
+              "total": 10207232,
+              "xset_exact": 3670016
+            },
+            "zuo22": 21742848
+          },
+          "keyword_pairs": 20480,
+          "odxt_zuo22": {
+            "entries": 135168,
+            "total_ns": {
+              "iqr_ns": 8329253,
+              "max_ns": 851477135,
+              "mean_ns": 845073923,
+              "median_ns": 846767602,
+              "min_ns": 838209431,
+              "n": 10,
+              "p25_ns": 840074559,
+              "p75_ns": 848403812,
+              "p95_ns": 850970957
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 135168,
+            "total_ns": {
+              "iqr_ns": 6433934,
+              "max_ns": 500581289,
+              "mean_ns": 493854140,
+              "median_ns": 492070992,
+              "min_ns": 488375096,
+              "n": 10,
+              "p25_ns": 491174826,
+              "p75_ns": 497608760,
+              "p95_ns": 499627003
+            }
+          },
+          "ours_range": {
+            "entries": 114688,
+            "total_ns": {
+              "iqr_ns": 8630532,
+              "max_ns": 426228156,
+              "mean_ns": 415122912,
+              "median_ns": 414607917,
+              "min_ns": 408389388,
+              "n": 10,
+              "p25_ns": 409604695,
+              "p75_ns": 418235227,
+              "p95_ns": 424708152
+            }
+          },
+          "y": 1024,
+          "zuo22": {
+            "entries": 114688,
+            "total_ns": {
+              "iqr_ns": 2377483,
+              "max_ns": 229426547,
+              "mean_ns": 225720959,
+              "median_ns": 225805534,
+              "min_ns": 222046571,
+              "n": 10,
+              "p25_ns": 224687488,
+              "p75_ns": 227064971,
+              "p95_ns": 228594157
+            }
+          }
+        },
+        {
+          "events": 2048,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 13074432,
+              "total": 20414464,
+              "xset_exact": 7340032
+            },
+            "zuo22": 73022784
+          },
+          "keyword_pairs": 40960,
+          "odxt_zuo22": {
+            "entries": 270336,
+            "total_ns": {
+              "iqr_ns": 11864812,
+              "max_ns": 1828554061,
+              "mean_ns": 1820028837,
+              "median_ns": 1822440801,
+              "min_ns": 1807956764,
+              "n": 10,
+              "p25_ns": 1813744577,
+              "p75_ns": 1825609389,
+              "p95_ns": 1828487062
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 270336,
+            "total_ns": {
+              "iqr_ns": 10827581,
+              "max_ns": 984950685,
+              "mean_ns": 961828635,
+              "median_ns": 959515717,
+              "min_ns": 942552127,
+              "n": 10,
+              "p25_ns": 956032555,
+              "p75_ns": 966860136,
+              "p95_ns": 980344647
+            }
+          },
+          "ours_range": {
+            "entries": 229376,
+            "total_ns": {
+              "iqr_ns": 10962251,
+              "max_ns": 772207838,
+              "mean_ns": 762103457,
+              "median_ns": 765512702,
+              "min_ns": 751079525,
+              "n": 10,
+              "p25_ns": 755970137,
+              "p75_ns": 766932388,
+              "p95_ns": 769992100
+            }
+          },
+          "y": 2048,
+          "zuo22": {
+            "entries": 229376,
+            "total_ns": {
+              "iqr_ns": 5714268,
+              "max_ns": 591016657,
+              "mean_ns": 581983310,
+              "median_ns": 579608410,
+              "min_ns": 578347950,
+              "n": 10,
+              "p25_ns": 578942457,
+              "p75_ns": 584656725,
+              "p95_ns": 588864740
+            }
+          }
+        },
+        {
+          "events": 4096,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 26148864,
+              "total": 40828928,
+              "xset_exact": 14680064
+            },
+            "zuo22": 263671136
+          },
+          "keyword_pairs": 81920,
+          "odxt_zuo22": {
+            "entries": 540672,
+            "total_ns": {
+              "iqr_ns": 8103968,
+              "max_ns": 4148155037,
+              "mean_ns": 4129395804,
+              "median_ns": 4132010380,
+              "min_ns": 4103326792,
+              "n": 10,
+              "p25_ns": 4127999573,
+              "p75_ns": 4136103541,
+              "p95_ns": 4145963557
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 540672,
+            "total_ns": {
+              "iqr_ns": 56614678,
+              "max_ns": 1911210185,
+              "mean_ns": 1860650802,
+              "median_ns": 1858385216,
+              "min_ns": 1799981326,
+              "n": 10,
+              "p25_ns": 1835890063,
+              "p75_ns": 1892504741,
+              "p95_ns": 1904281625
+            }
+          },
+          "ours_range": {
+            "entries": 458752,
+            "total_ns": {
+              "iqr_ns": 12691572,
+              "max_ns": 1518212415,
+              "mean_ns": 1497264138,
+              "median_ns": 1496408007,
+              "min_ns": 1474633147,
+              "n": 10,
+              "p25_ns": 1491664590,
+              "p75_ns": 1504356162,
+              "p95_ns": 1513898780
+            }
+          },
+          "y": 4096,
+          "zuo22": {
+            "entries": 458752,
+            "total_ns": {
+              "iqr_ns": 3912894,
+              "max_ns": 1669981183,
+              "mean_ns": 1661190964,
+              "median_ns": 1660638698,
+              "min_ns": 1654898645,
+              "n": 10,
+              "p25_ns": 1658151842,
+              "p75_ns": 1662064736,
+              "p95_ns": 1668859932
+            }
+          }
+        },
+        {
+          "events": 6144,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 39223296,
+              "total": 61243392,
+              "xset_exact": 22020096
+            },
+            "zuo22": 571870496
+          },
+          "keyword_pairs": 122880,
+          "odxt_zuo22": {
+            "entries": 811008,
+            "total_ns": {
+              "iqr_ns": 34349597,
+              "max_ns": 7027563007,
+              "mean_ns": 6973409905,
+              "median_ns": 6972180930,
+              "min_ns": 6943261933,
+              "n": 10,
+              "p25_ns": 6951945641,
+              "p75_ns": 6986295238,
+              "p95_ns": 7011472115
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 811008,
+            "total_ns": {
+              "iqr_ns": 65945714,
+              "max_ns": 2786608846,
+              "mean_ns": 2652954500,
+              "median_ns": 2639744686,
+              "min_ns": 2584986615,
+              "n": 10,
+              "p25_ns": 2613208312,
+              "p75_ns": 2679154026,
+              "p95_ns": 2741591440
+            }
+          },
+          "ours_range": {
+            "entries": 688128,
+            "total_ns": {
+              "iqr_ns": 41839158,
+              "max_ns": 2310515012,
+              "mean_ns": 2228977243,
+              "median_ns": 2220375817,
+              "min_ns": 2174204915,
+              "n": 10,
+              "p25_ns": 2208274213,
+              "p75_ns": 2250113371,
+              "p95_ns": 2286546626
+            }
+          },
+          "y": 6144,
+          "zuo22": {
+            "entries": 688128,
+            "total_ns": {
+              "iqr_ns": 22705744,
+              "max_ns": 3266066591,
+              "mean_ns": 3244474081,
+              "median_ns": 3243022123,
+              "min_ns": 3222294475,
+              "n": 10,
+              "p25_ns": 3234568366,
+              "p75_ns": 3257274110,
+              "p95_ns": 3264081532
+            }
+          }
+        },
+        {
+          "events": 8192,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 52297728,
+              "total": 81657856,
+              "xset_exact": 29360128
+            },
+            "zuo22": 997567264
+          },
+          "keyword_pairs": 163840,
+          "odxt_zuo22": {
+            "entries": 1081344,
+            "total_ns": {
+              "iqr_ns": 31945093,
+              "max_ns": 10502653060,
+              "mean_ns": 10456026210,
+              "median_ns": 10450835161,
+              "min_ns": 10423219337,
+              "n": 10,
+              "p25_ns": 10438473816,
+              "p75_ns": 10470418909,
+              "p95_ns": 10496989692
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 1081344,
+            "total_ns": {
+              "iqr_ns": 38620313,
+              "max_ns": 3768522209,
+              "mean_ns": 3658631819,
+              "median_ns": 3649011157,
+              "min_ns": 3572794156,
+              "n": 10,
+              "p25_ns": 3638262672,
+              "p75_ns": 3676882985,
+              "p95_ns": 3736262592
+            }
+          },
+          "ours_range": {
+            "entries": 917504,
+            "total_ns": {
+              "iqr_ns": 38745150,
+              "max_ns": 2973639303,
+              "mean_ns": 2943868007,
+              "median_ns": 2938818378,
+              "min_ns": 2902129663,
+              "n": 10,
+              "p25_ns": 2929090016,
+              "p75_ns": 2967835166,
+              "p95_ns": 2973058888
+            }
+          },
+          "y": 8192,
+          "zuo22": {
+            "entries": 917504,
+            "total_ns": {
+              "iqr_ns": 25858235,
+              "max_ns": 5383291876,
+              "mean_ns": 5361614244,
+              "median_ns": 5356097011,
+              "min_ns": 5339762679,
+              "n": 10,
+              "p25_ns": 5351632649,
+              "p75_ns": 5377490884,
+              "p95_ns": 5382256384
+            }
+          }
+        },
+        {
+          "events": 12288,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 78446592,
+              "total": 122486784,
+              "xset_exact": 44040192
+            },
+            "zuo22": 2201256064
+          },
+          "keyword_pairs": 245760,
+          "odxt_zuo22": {
+            "entries": 1622016,
+            "total_ns": {
+              "iqr_ns": 53885098,
+              "max_ns": 18683451628,
+              "mean_ns": 18636859457,
+              "median_ns": 18651389232,
+              "min_ns": 18566888150,
+              "n": 10,
+              "p25_ns": 18610125731,
+              "p75_ns": 18664010829,
+              "p95_ns": 18679923956
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 1622016,
+            "total_ns": {
+              "iqr_ns": 166001942,
+              "max_ns": 5307013911,
+              "mean_ns": 5183665100,
+              "median_ns": 5186512205,
+              "min_ns": 5063867017,
+              "n": 10,
+              "p25_ns": 5096194858,
+              "p75_ns": 5262196800,
+              "p95_ns": 5304039226
+            }
+          },
+          "ours_range": {
+            "entries": 1376256,
+            "total_ns": {
+              "iqr_ns": 46023648,
+              "max_ns": 4474197777,
+              "mean_ns": 4340319786,
+              "median_ns": 4331456994,
+              "min_ns": 4222423183,
+              "n": 10,
+              "p25_ns": 4310669799,
+              "p75_ns": 4356693447,
+              "p95_ns": 4457087225
+            }
+          },
+          "y": 12288,
+          "zuo22": {
+            "entries": 1376256,
+            "total_ns": {
+              "iqr_ns": 60869126,
+              "max_ns": 11214103466,
+              "mean_ns": 11169389283,
+              "median_ns": 11170758325,
+              "min_ns": 11096970444,
+              "n": 10,
+              "p25_ns": 11146664090,
+              "p75_ns": 11207533216,
+              "p95_ns": 11212802816
+            }
+          }
+        },
+        {
+          "events": 16384,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 104595456,
+              "total": 163315712,
+              "xset_exact": 58720256
+            },
+            "zuo22": 3874579616
+          },
+          "keyword_pairs": 327680,
+          "odxt_zuo22": {
+            "entries": 2162688,
+            "total_ns": {
+              "iqr_ns": 83408838,
+              "max_ns": 26825234753,
+              "mean_ns": 26718695642,
+              "median_ns": 26715252615,
+              "min_ns": 26612176565,
+              "n": 10,
+              "p25_ns": 26672033171,
+              "p75_ns": 26755442009,
+              "p95_ns": 26821045550
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 2162688,
+            "total_ns": {
+              "iqr_ns": 60595556,
+              "max_ns": 6670748966,
+              "mean_ns": 6567211272,
+              "median_ns": 6583210670,
+              "min_ns": 6452832489,
+              "n": 10,
+              "p25_ns": 6541677144,
+              "p75_ns": 6602272700,
+              "p95_ns": 6643714370
+            }
+          },
+          "ours_range": {
+            "entries": 1835008,
+            "total_ns": {
+              "iqr_ns": 178187190,
+              "max_ns": 5540236385,
+              "mean_ns": 5412558703,
+              "median_ns": 5422840982,
+              "min_ns": 5308860654,
+              "n": 10,
+              "p25_ns": 5316016215,
+              "p75_ns": 5494203405,
+              "p95_ns": 5539486866
+            }
+          },
+          "y": 16384,
+          "zuo22": {
+            "entries": 1835008,
+            "total_ns": {
+              "iqr_ns": 53008987,
+              "max_ns": 18023482878,
+              "mean_ns": 17563883170,
+              "median_ns": 17508312715,
+              "min_ns": 17483695633,
+              "n": 10,
+              "p25_ns": 17488270835,
+              "p75_ns": 17541279822,
+              "p95_ns": 17821339183
+            }
+          }
+        },
+        {
+          "events": 24576,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 156893184,
+              "total": 244973568,
+              "xset_exact": 88080384
+            },
+            "zuo22": 8630694816
+          },
+          "keyword_pairs": 491520,
+          "odxt_zuo22": {
+            "entries": 3244032,
+            "total_ns": {
+              "iqr_ns": 151209586,
+              "max_ns": 50402877549,
+              "mean_ns": 50233205672,
+              "median_ns": 50256093839,
+              "min_ns": 49956520830,
+              "n": 10,
+              "p25_ns": 50166807378,
+              "p75_ns": 50318016964,
+              "p95_ns": 50397354077
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 3244032,
+            "total_ns": {
+              "iqr_ns": 193924009,
+              "max_ns": 9989612042,
+              "mean_ns": 9816967766,
+              "median_ns": 9825413960,
+              "min_ns": 9621567518,
+              "n": 10,
+              "p25_ns": 9719676374,
+              "p75_ns": 9913600383,
+              "p95_ns": 9962476087
+            }
+          },
+          "ours_range": {
+            "entries": 2752512,
+            "total_ns": {
+              "iqr_ns": 174910296,
+              "max_ns": 8372030467,
+              "mean_ns": 8254681420,
+              "median_ns": 8275986140,
+              "min_ns": 8093541179,
+              "n": 10,
+              "p25_ns": 8170701026,
+              "p75_ns": 8345611322,
+              "p95_ns": 8366500431
+            }
+          },
+          "y": 24576,
+          "zuo22": {
+            "entries": 2752512,
+            "total_ns": {
+              "iqr_ns": 372280099,
+              "max_ns": 39330993192,
+              "mean_ns": 38749098972,
+              "median_ns": 38960389957,
+              "min_ns": 37194392155,
+              "n": 10,
+              "p25_ns": 38811127929,
+              "p75_ns": 39183408028,
+              "p95_ns": 39293041352
+            }
+          }
+        },
+        {
+          "events": 32768,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 209190912,
+              "total": 326631424,
+              "xset_exact": 117440512
+            },
+            "zuo22": 15266068480
+          },
+          "keyword_pairs": 655360,
+          "odxt_zuo22": {
+            "entries": 4325376,
+            "total_ns": {
+              "iqr_ns": 301484479,
+              "max_ns": 81538778291,
+              "mean_ns": 81140547227,
+              "median_ns": 81089119659,
+              "min_ns": 80838513668,
+              "n": 10,
+              "p25_ns": 80993924696,
+              "p75_ns": 81295409175,
+              "p95_ns": 81459935649
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 4325376,
+            "total_ns": {
+              "iqr_ns": 123066296,
+              "max_ns": 13587953231,
+              "mean_ns": 13347500613,
+              "median_ns": 13352358283,
+              "min_ns": 13213267685,
+              "n": 10,
+              "p25_ns": 13249512337,
+              "p75_ns": 13372578633,
+              "p95_ns": 13544366673
+            }
+          },
+          "ours_range": {
+            "entries": 3670016,
+            "total_ns": {
+              "iqr_ns": 160063543,
+              "max_ns": 11355265178,
+              "mean_ns": 11125316316,
+              "median_ns": 11099512418,
+              "min_ns": 11015035840,
+              "n": 10,
+              "p25_ns": 11034015560,
+              "p75_ns": 11194079103,
+              "p95_ns": 11292865030
+            }
+          },
+          "y": 32768,
+          "zuo22": {
+            "entries": 3670016,
+            "total_ns": {
+              "iqr_ns": 213499935,
+              "max_ns": 62729967470,
+              "mean_ns": 62464792125,
+              "median_ns": 62412227882,
+              "min_ns": 62278022151,
+              "n": 10,
+              "p25_ns": 62349939490,
+              "p75_ns": 62563439425,
+              "p95_ns": 62714014469
+            }
+          }
+        },
+        {
+          "events": 49152,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 313786368,
+              "total": 489947136,
+              "xset_exact": 176160768
+            },
+            "zuo22": 34173918240
+          },
+          "keyword_pairs": 983040,
+          "odxt_zuo22": {
+            "entries": 6488064,
+            "total_ns": {
+              "iqr_ns": 446473857,
+              "max_ns": 168135084270,
+              "mean_ns": 163466851681,
+              "median_ns": 162761709899,
+              "min_ns": 162482137582,
+              "n": 10,
+              "p25_ns": 162693866535,
+              "p75_ns": 163140340392,
+              "p95_ns": 166446453738
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 6488064,
+            "total_ns": {
+              "iqr_ns": 125958142,
+              "max_ns": 20862420467,
+              "mean_ns": 20197525495,
+              "median_ns": 20149550803,
+              "min_ns": 19887983806,
+              "n": 10,
+              "p25_ns": 20068610674,
+              "p75_ns": 20194568816,
+              "p95_ns": 20625335092
+            }
+          },
+          "ours_range": {
+            "entries": 5505024,
+            "total_ns": {
+              "iqr_ns": 744524246,
+              "max_ns": 18607388681,
+              "mean_ns": 17601606804,
+              "median_ns": 17457910239,
+              "min_ns": 16916408984,
+              "n": 10,
+              "p25_ns": 17142063192,
+              "p75_ns": 17886587438,
+              "p95_ns": 18564482700
+            }
+          },
+          "y": 49152,
+          "zuo22": {
+            "entries": 5505024,
+            "total_ns": {
+              "iqr_ns": 1840556426,
+              "max_ns": 144017044364,
+              "mean_ns": 136317842360,
+              "median_ns": 135077467443,
+              "min_ns": 134601130331,
+              "n": 10,
+              "p25_ns": 134738423938,
+              "p75_ns": 136578980364,
+              "p95_ns": 141270460148
+            }
+          }
+        },
+        {
+          "events": 65536,
+          "index_bytes": {
+            "convention": "stored label + value per entry, as the size harness (H4); ours' XSet exact at 32 B per tag",
+            "ours_range": {
+              "edb": 418381824,
+              "total": 653262848,
+              "xset_exact": 234881024
+            },
+            "zuo22": 60597894400
+          },
+          "keyword_pairs": 1310720,
+          "odxt_zuo22": {
+            "entries": 8650752,
+            "total_ns": {
+              "iqr_ns": 2069006867,
+              "max_ns": 295952951371,
+              "mean_ns": 291758758807,
+              "median_ns": 294689704965,
+              "min_ns": 279242119565,
+              "n": 10,
+              "p25_ns": 292924030353,
+              "p75_ns": 294993037220,
+              "p95_ns": 295564709281
+            }
+          },
+          "ours_keyword_range": {
+            "entries": 8650752,
+            "total_ns": {
+              "iqr_ns": 336436977,
+              "max_ns": 30024517017,
+              "mean_ns": 29690397874,
+              "median_ns": 29640069114,
+              "min_ns": 29287503859,
+              "n": 10,
+              "p25_ns": 29564056483,
+              "p75_ns": 29900493460,
+              "p95_ns": 30008019728
+            }
+          },
+          "ours_range": {
+            "entries": 7340032,
+            "total_ns": {
+              "iqr_ns": 202529127,
+              "max_ns": 25138552718,
+              "mean_ns": 24676421811,
+              "median_ns": 24630241133,
+              "min_ns": 24290065896,
+              "n": 10,
+              "p25_ns": 24569028624,
+              "p75_ns": 24771557751,
+              "p95_ns": 25028801812
+            }
+          },
+          "y": 65536,
+          "zuo22": {
+            "entries": 7340032,
+            "total_ns": {
+              "iqr_ns": 14373324216,
+              "max_ns": 254563439174,
+              "mean_ns": 243160477115,
+              "median_ns": 240914527163,
+              "min_ns": 235385411256,
+              "n": 10,
+              "p25_ns": 236057177927,
+              "p75_ns": 250430502143,
+              "p95_ns": 254302485450
+            }
+          }
+        }
+      ],
+      "signing_batch_size": 1024
+    },
+    "rows": [
+      {
+        "classical_indexed_tokens": 40000,
+        "classical_note": "ECDSA-P256 over the same events at the same batch size; the only difference from pqc_total_ns is the signature scheme",
+        "classical_total_ns": {
+          "iqr_ns": 2622772,
+          "max_ns": 439089936,
+          "mean_ns": 437204301,
+          "median_ns": 437845962,
+          "min_ns": 434058928,
+          "n": 10,
+          "p25_ns": 436139461,
+          "p75_ns": 438762233,
+          "p95_ns": 438983299
+        },
+        "indexed_tokens": 40000,
+        "pqc_total_ns": {
+          "iqr_ns": 3436854,
+          "max_ns": 411426567,
+          "mean_ns": 405245112,
+          "median_ns": 405333418,
+          "min_ns": 400499968,
+          "n": 10,
+          "p25_ns": 403307926,
+          "p75_ns": 406744780,
+          "p95_ns": 409703952
+        },
+        "pqc_with_range_total_ns": {
+          "iqr_ns": 11884609,
+          "max_ns": 1299910846,
+          "mean_ns": 1286758678,
+          "median_ns": 1288186073,
+          "min_ns": 1272426870,
+          "n": 10,
+          "p25_ns": 1280238811,
+          "p75_ns": 1292123420,
+          "p95_ns": 1299566994
+        },
+        "range_indexing_note": "pqc_total_ns and classical_total_ns EXCLUDE range indexing, as does the top-level plaintext_total_ns they are divided by; pqc_with_range_total_ns includes it. tab:exp1's `+ range indexing` row is incremental, so the rows above it must exclude the mechanism it names.",
+        "signatures_produced": 2000,
+        "signing_batch_size": 1,
+        "tokens_per_event": 20,
+        "with_range_indexed_tokens": 264000
+      },
+      {
+        "classical_indexed_tokens": 40000,
+        "classical_note": "ECDSA-P256 over the same events at the same batch size; the only difference from pqc_total_ns is the signature scheme",
+        "classical_total_ns": {
+          "iqr_ns": 1573211,
+          "max_ns": 194235691,
+          "mean_ns": 192937708,
+          "median_ns": 193034069,
+          "min_ns": 191632654,
+          "n": 10,
+          "p25_ns": 192051256,
+          "p75_ns": 193624467,
+          "p95_ns": 194199268
+        },
+        "indexed_tokens": 40000,
+        "pqc_total_ns": {
+          "iqr_ns": 2146211,
+          "max_ns": 199467103,
+          "mean_ns": 195967229,
+          "median_ns": 195626938,
+          "min_ns": 191382145,
+          "n": 10,
+          "p25_ns": 194885875,
+          "p75_ns": 197032086,
+          "p95_ns": 199367044
+        },
+        "pqc_with_range_total_ns": {
+          "iqr_ns": 9688595,
+          "max_ns": 1077187317,
+          "mean_ns": 1061612488,
+          "median_ns": 1063096292,
+          "min_ns": 1043084065,
+          "n": 10,
+          "p25_ns": 1058572290,
+          "p75_ns": 1068260885,
+          "p95_ns": 1073254341
+        },
+        "range_indexing_note": "pqc_total_ns and classical_total_ns EXCLUDE range indexing, as does the top-level plaintext_total_ns they are divided by; pqc_with_range_total_ns includes it. tab:exp1's `+ range indexing` row is incremental, so the rows above it must exclude the mechanism it names.",
+        "signatures_produced": 250,
+        "signing_batch_size": 8,
+        "tokens_per_event": 20,
+        "with_range_indexed_tokens": 264000
+      },
+      {
+        "classical_indexed_tokens": 40000,
+        "classical_note": "ECDSA-P256 over the same events at the same batch size; the only difference from pqc_total_ns is the signature scheme",
+        "classical_total_ns": {
+          "iqr_ns": 2084829,
+          "max_ns": 167770502,
+          "mean_ns": 165514566,
+          "median_ns": 166082486,
+          "min_ns": 160791379,
+          "n": 10,
+          "p25_ns": 164906520,
+          "p75_ns": 166991349,
+          "p95_ns": 167684483
+        },
+        "indexed_tokens": 40000,
+        "pqc_total_ns": {
+          "iqr_ns": 2175731,
+          "max_ns": 170513676,
+          "mean_ns": 167810667,
+          "median_ns": 167995173,
+          "min_ns": 165150708,
+          "n": 10,
+          "p25_ns": 166618557,
+          "p75_ns": 168794288,
+          "p95_ns": 169960630
+        },
+        "pqc_with_range_total_ns": {
+          "iqr_ns": 19606684,
+          "max_ns": 1051344902,
+          "mean_ns": 1032986494,
+          "median_ns": 1033373823,
+          "min_ns": 1008605668,
+          "n": 10,
+          "p25_ns": 1024225359,
+          "p75_ns": 1043832043,
+          "p95_ns": 1049161692
+        },
+        "range_indexing_note": "pqc_total_ns and classical_total_ns EXCLUDE range indexing, as does the top-level plaintext_total_ns they are divided by; pqc_with_range_total_ns includes it. tab:exp1's `+ range indexing` row is incremental, so the rows above it must exclude the mechanism it names.",
+        "signatures_produced": 31,
+        "signing_batch_size": 64,
+        "tokens_per_event": 20,
+        "with_range_indexed_tokens": 264000
+      },
+      {
+        "classical_indexed_tokens": 40000,
+        "classical_note": "ECDSA-P256 over the same events at the same batch size; the only difference from pqc_total_ns is the signature scheme",
+        "classical_total_ns": {
+          "iqr_ns": 1990197,
+          "max_ns": 162630104,
+          "mean_ns": 160598204,
+          "median_ns": 160469923,
+          "min_ns": 158342335,
+          "n": 10,
+          "p25_ns": 159697767,
+          "p75_ns": 161687964,
+          "p95_ns": 162271884
+        },
+        "indexed_tokens": 40000,
+        "pqc_total_ns": {
+          "iqr_ns": 1837213,
+          "max_ns": 167281431,
+          "mean_ns": 163417277,
+          "median_ns": 163058135,
+          "min_ns": 161740846,
+          "n": 10,
+          "p25_ns": 162235422,
+          "p75_ns": 164072635,
+          "p95_ns": 166090832
+        },
+        "pqc_with_range_total_ns": {
+          "iqr_ns": 7032217,
+          "max_ns": 1016152635,
+          "mean_ns": 1007273408,
+          "median_ns": 1008642548,
+          "min_ns": 987166675,
+          "n": 10,
+          "p25_ns": 1005975425,
+          "p75_ns": 1013007642,
+          "p95_ns": 1015892023
+        },
+        "range_indexing_note": "pqc_total_ns and classical_total_ns EXCLUDE range indexing, as does the top-level plaintext_total_ns they are divided by; pqc_with_range_total_ns includes it. tab:exp1's `+ range indexing` row is incremental, so the rows above it must exclude the mechanism it names.",
+        "signatures_produced": 3,
+        "signing_batch_size": 512,
+        "tokens_per_event": 20,
+        "with_range_indexed_tokens": 264000
+      },
+      {
+        "classical_indexed_tokens": 40000,
+        "classical_note": "ECDSA-P256 over the same events at the same batch size; the only difference from pqc_total_ns is the signature scheme",
+        "classical_total_ns": {
+          "iqr_ns": 2906092,
+          "max_ns": 162709978,
+          "mean_ns": 160842908,
+          "median_ns": 161637821,
+          "min_ns": 158126977,
+          "n": 10,
+          "p25_ns": 159117818,
+          "p75_ns": 162023910,
+          "p95_ns": 162577330
+        },
+        "indexed_tokens": 40000,
+        "pqc_total_ns": {
+          "iqr_ns": 2847496,
+          "max_ns": 167039893,
+          "mean_ns": 162427300,
+          "median_ns": 162992383,
+          "min_ns": 158884160,
+          "n": 10,
+          "p25_ns": 160628235,
+          "p75_ns": 163475731,
+          "p95_ns": 165458453
+        },
+        "pqc_with_range_total_ns": {
+          "iqr_ns": 15048543,
+          "max_ns": 1031006622,
+          "mean_ns": 1017267203,
+          "median_ns": 1016629139,
+          "min_ns": 999570813,
+          "n": 10,
+          "p25_ns": 1011931365,
+          "p75_ns": 1026979908,
+          "p95_ns": 1029485097
+        },
+        "range_indexing_note": "pqc_total_ns and classical_total_ns EXCLUDE range indexing, as does the top-level plaintext_total_ns they are divided by; pqc_with_range_total_ns includes it. tab:exp1's `+ range indexing` row is incremental, so the rows above it must exclude the mechanism it names.",
+        "signatures_produced": 1,
+        "signing_batch_size": 1024,
+        "tokens_per_event": 20,
+        "with_range_indexed_tokens": 264000
+      }
+    ]
+  }
+}

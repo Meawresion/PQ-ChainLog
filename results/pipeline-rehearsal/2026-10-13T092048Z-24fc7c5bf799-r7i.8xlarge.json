@@ -1,0 +1,21 @@
+{
+  "experiment": "pipeline-rehearsal",
+  "git_sha": "24fc7c5bf79957710e565740cba387527c87a43c",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "r7i.8xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "pipeline-rehearsal",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [],
+  "iterations": 10,
+  "started_utc": "2026-10-13T09:20:48Z",
+  "measurements": {
+    "note": "No measurement. This record exists to check that the producer and mkfigs.py agree on the schema and the rules."
+  }
+}

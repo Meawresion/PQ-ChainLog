@@ -1,0 +1,46 @@
+[package]
+name = "pqcl-warrant"
+description = "Warrants, scope, the warrant Merkle tree and one-time nullifiers. The authorization relation of draft6 eq. (eq:relauth), minus the SP1 proof."
+version.workspace = true
+edition.workspace = true
+# ⚠️ Overrides the workspace's 1.97. This crate is reachable from the SP1
+# guest, whose pinned toolchain is older than the host's, and a `rust-version`
+# above it makes `cargo prove build` refuse the package outright. The MSRV is a
+# floor for consumers, not the version we build with — `rust-toolchain.toml`
+# still pins 1.97.1 for every host build, and `cargo prove build` is what
+# verifies this floor is real.
+rust-version = "1.85"
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[features]
+default = ["host"]
+# Everything the SP1 guest does NOT need: Case Authority signing and key
+# delegation. draft6 discharges the single ML-DSA clause "by the CA at issuance
+# rather than inside the circuit, leaving a statement over hashes alone", so the
+# guest compiles without any of it.
+host = ["dep:pqcl-ggm", "pqcl-primitives/full"]
+
+[dependencies]
+pqcl-primitives = { path = "../pqcl-primitives", default-features = false }
+pqcl-ggm = { path = "../pqcl-ggm", optional = true }
+# For `Plane`, so the two crates cannot disagree about what a plane is. The
+# dependency runs warrant -> sm, never the reverse: `InvestigatorModule` takes
+# its warrant as an associated type precisely so `pqcl-sm` stays free of it.
+#
+# NOT optional: `Scope` carries a `Plane`, and the guest checks scope. With
+# `default-features = false` this is `custody.rs` + `secure.rs` only — pure Rust
+# with no cryptoki and no liboqs, so it crosses to RISC-V unchanged.
+pqcl-sm = { path = "../pqcl-sm", default-features = false }
+
+# The witness and statement cross into the SP1 guest as serialized input.
+serde = { version = "1", features = ["derive"] }
+
+[dev-dependencies]
+# Only for the test asserting the warrant tree's node tag differs from the
+# forest's. Not a runtime dependency — the guest must not pull it in.
+pqcl-forest = { path = "../pqcl-forest" }
+
+[lints]
+workspace = true

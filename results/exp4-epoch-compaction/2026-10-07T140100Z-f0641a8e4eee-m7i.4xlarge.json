@@ -1,0 +1,942 @@
+{
+  "experiment": "exp4-epoch-compaction",
+  "git_sha": "f0641a8e4eeef91ba552dcae3dbddf774343b24c",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.4xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "n/a: symmetric-only index path",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {
+    "enron-selection": "f332c03cdcc25ff543287abe7c45f0fa6dab771dc77e4697f0b9455e9b214860"
+  },
+  "rng_seeds": [
+    49,
+    50,
+    51
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-07T14:01:00Z",
+  "measurements": {
+    "probe_formula": "2*|Cand|*(n-1)*E",
+    "rows": [
+      {
+        "closed_epochs": 1,
+        "compaction": {
+          "elapsed_ns": 38101584,
+          "note": "Compaction rebuilds XSet from live pairs only, so it shrinks the set rather than merely re-keying it. The shrinkage is the benefit; elapsed_ns is the cost it has to be weighed against.",
+          "xtags_after": 72000,
+          "xtags_before": 80000
+        },
+        "probe_count_median": 44,
+        "queries": 120,
+        "search_ns": {
+          "iqr_ns": 184685,
+          "max_ns": 982767,
+          "median_ns": 72513,
+          "min_ns": 13243,
+          "n": 120,
+          "p25_ns": 26149,
+          "p75_ns": 210834
+        },
+        "search_ns_is": "summary over per-query medians, each of MIN_ITERATIONS repetitions",
+        "strata": [
+          {
+            "probe_count_median": 2,
+            "queries": 24,
+            "s_term_volume_range": [
+              1,
+              3
+            ],
+            "search_ns": {
+              "iqr_ns": 3935,
+              "max_ns": 18556,
+              "median_ns": 14801,
+              "min_ns": 13243,
+              "n": 24,
+              "p25_ns": 13324,
+              "p75_ns": 17259
+            },
+            "stratum": 0
+          },
+          {
+            "probe_count_median": 14,
+            "queries": 24,
+            "s_term_volume_range": [
+              4,
+              15
+            ],
+            "search_ns": {
+              "iqr_ns": 13682,
+              "max_ns": 49703,
+              "median_ns": 31490,
+              "min_ns": 21167,
+              "n": 24,
+              "p25_ns": 26149,
+              "p75_ns": 39831
+            },
+            "stratum": 1
+          },
+          {
+            "probe_count_median": 44,
+            "queries": 24,
+            "s_term_volume_range": [
+              16,
+              37
+            ],
+            "search_ns": {
+              "iqr_ns": 28288,
+              "max_ns": 112198,
+              "median_ns": 72513,
+              "min_ns": 50848,
+              "n": 24,
+              "p25_ns": 64696,
+              "p75_ns": 92984
+            },
+            "stratum": 2
+          },
+          {
+            "probe_count_median": 124,
+            "queries": 24,
+            "s_term_volume_range": [
+              42,
+              95
+            ],
+            "search_ns": {
+              "iqr_ns": 67877,
+              "max_ns": 264539,
+              "median_ns": 170637,
+              "min_ns": 123582,
+              "n": 24,
+              "p25_ns": 142957,
+              "p75_ns": 210834
+            },
+            "stratum": 3
+          },
+          {
+            "probe_count_median": 292,
+            "queries": 24,
+            "s_term_volume_range": [
+              97,
+              369
+            ],
+            "search_ns": {
+              "iqr_ns": 338393,
+              "max_ns": 982767,
+              "median_ns": 414933,
+              "min_ns": 268825,
+              "n": 24,
+              "p25_ns": 301700,
+              "p75_ns": 640093
+            },
+            "stratum": 4
+          }
+        ],
+        "wire_bytes_up_median": 1408
+      },
+      {
+        "closed_epochs": 2,
+        "compaction": {
+          "elapsed_ns": 37555476,
+          "note": "Compaction rebuilds XSet from live pairs only, so it shrinks the set rather than merely re-keying it. The shrinkage is the benefit; elapsed_ns is the cost it has to be weighed against.",
+          "xtags_after": 72000,
+          "xtags_before": 80000
+        },
+        "probe_count_median": 44,
+        "queries": 120,
+        "search_ns": {
+          "iqr_ns": 187903,
+          "max_ns": 943342,
+          "median_ns": 77749,
+          "min_ns": 13285,
+          "n": 120,
+          "p25_ns": 26198,
+          "p75_ns": 214101
+        },
+        "search_ns_is": "summary over per-query medians, each of MIN_ITERATIONS repetitions",
+        "strata": [
+          {
+            "probe_count_median": 2,
+            "queries": 24,
+            "s_term_volume_range": [
+              1,
+              3
+            ],
+            "search_ns": {
+              "iqr_ns": 2640,
+              "max_ns": 19796,
+              "median_ns": 14416,
+              "min_ns": 13285,
+              "n": 24,
+              "p25_ns": 14089,
+              "p75_ns": 16729
+            },
+            "stratum": 0
+          },
+          {
+            "probe_count_median": 14,
+            "queries": 24,
+            "s_term_volume_range": [
+              4,
+              15
+            ],
+            "search_ns": {
+              "iqr_ns": 16516,
+              "max_ns": 49220,
+              "median_ns": 33667,
+              "min_ns": 23548,
+              "n": 24,
+              "p25_ns": 26198,
+              "p75_ns": 42714
+            },
+            "stratum": 1
+          },
+          {
+            "probe_count_median": 44,
+            "queries": 24,
+            "s_term_volume_range": [
+              16,
+              37
+            ],
+            "search_ns": {
+              "iqr_ns": 29789,
+              "max_ns": 107053,
+              "median_ns": 77749,
+              "min_ns": 50634,
+              "n": 24,
+              "p25_ns": 65078,
+              "p75_ns": 94867
+            },
+            "stratum": 2
+          },
+          {
+            "probe_count_median": 124,
+            "queries": 24,
+            "s_term_volume_range": [
+              42,
+              95
+            ],
+            "search_ns": {
+              "iqr_ns": 71710,
+              "max_ns": 251964,
+              "median_ns": 182017,
+              "min_ns": 119082,
+              "n": 24,
+              "p25_ns": 142391,
+              "p75_ns": 214101
+            },
+            "stratum": 3
+          },
+          {
+            "probe_count_median": 292,
+            "queries": 24,
+            "s_term_volume_range": [
+              97,
+              369
+            ],
+            "search_ns": {
+              "iqr_ns": 322724,
+              "max_ns": 943342,
+              "median_ns": 416241,
+              "min_ns": 254952,
+              "n": 24,
+              "p25_ns": 301525,
+              "p75_ns": 624249
+            },
+            "stratum": 4
+          }
+        ],
+        "wire_bytes_up_median": 1408
+      },
+      {
+        "closed_epochs": 4,
+        "compaction": {
+          "elapsed_ns": 37997178,
+          "note": "Compaction rebuilds XSet from live pairs only, so it shrinks the set rather than merely re-keying it. The shrinkage is the benefit; elapsed_ns is the cost it has to be weighed against.",
+          "xtags_after": 72000,
+          "xtags_before": 80000
+        },
+        "probe_count_median": 44,
+        "queries": 120,
+        "search_ns": {
+          "iqr_ns": 185158,
+          "max_ns": 950604,
+          "median_ns": 74879,
+          "min_ns": 14021,
+          "n": 120,
+          "p25_ns": 24736,
+          "p75_ns": 209894
+        },
+        "search_ns_is": "summary over per-query medians, each of MIN_ITERATIONS repetitions",
+        "strata": [
+          {
+            "probe_count_median": 2,
+            "queries": 24,
+            "s_term_volume_range": [
+              1,
+              3
+            ],
+            "search_ns": {
+              "iqr_ns": 2492,
+              "max_ns": 18585,
+              "median_ns": 14422,
+              "min_ns": 14021,
+              "n": 24,
+              "p25_ns": 14102,
+              "p75_ns": 16594
+            },
+            "stratum": 0
+          },
+          {
+            "probe_count_median": 14,
+            "queries": 24,
+            "s_term_volume_range": [
+              4,
+              15
+            ],
+            "search_ns": {
+              "iqr_ns": 14684,
+              "max_ns": 49682,
+              "median_ns": 33054,
+              "min_ns": 21124,
+              "n": 24,
+              "p25_ns": 24736,
+              "p75_ns": 39420
+            },
+            "stratum": 1
+          },
+          {
+            "probe_count_median": 44,
+            "queries": 24,
+            "s_term_volume_range": [
+              16,
+              37
+            ],
+            "search_ns": {
+              "iqr_ns": 35067,
+              "max_ns": 111903,
+              "median_ns": 74879,
+              "min_ns": 50753,
+              "n": 24,
+              "p25_ns": 62178,
+              "p75_ns": 97245
+            },
+            "stratum": 2
+          },
+          {
+            "probe_count_median": 124,
+            "queries": 24,
+            "s_term_volume_range": [
+              42,
+              95
+            ],
+            "search_ns": {
+              "iqr_ns": 69129,
+              "max_ns": 256719,
+              "median_ns": 175015,
+              "min_ns": 117925,
+              "n": 24,
+              "p25_ns": 140765,
+              "p75_ns": 209894
+            },
+            "stratum": 3
+          },
+          {
+            "probe_count_median": 292,
+            "queries": 24,
+            "s_term_volume_range": [
+              97,
+              369
+            ],
+            "search_ns": {
+              "iqr_ns": 317795,
+              "max_ns": 950604,
+              "median_ns": 423421,
+              "min_ns": 268949,
+              "n": 24,
+              "p25_ns": 304570,
+              "p75_ns": 622365
+            },
+            "stratum": 4
+          }
+        ],
+        "wire_bytes_up_median": 1408
+      },
+      {
+        "closed_epochs": 8,
+        "compaction": {
+          "elapsed_ns": 37687176,
+          "note": "Compaction rebuilds XSet from live pairs only, so it shrinks the set rather than merely re-keying it. The shrinkage is the benefit; elapsed_ns is the cost it has to be weighed against.",
+          "xtags_after": 72000,
+          "xtags_before": 80000
+        },
+        "probe_count_median": 44,
+        "queries": 120,
+        "search_ns": {
+          "iqr_ns": 189453,
+          "max_ns": 969069,
+          "median_ns": 75807,
+          "min_ns": 13241,
+          "n": 120,
+          "p25_ns": 25306,
+          "p75_ns": 214759
+        },
+        "search_ns_is": "summary over per-query medians, each of MIN_ITERATIONS repetitions",
+        "strata": [
+          {
+            "probe_count_median": 2,
+            "queries": 24,
+            "s_term_volume_range": [
+              1,
+              3
+            ],
+            "search_ns": {
+              "iqr_ns": 2058,
+              "max_ns": 19396,
+              "median_ns": 14239,
+              "min_ns": 13241,
+              "n": 24,
+              "p25_ns": 13610,
+              "p75_ns": 15668
+            },
+            "stratum": 0
+          },
+          {
+            "probe_count_median": 14,
+            "queries": 24,
+            "s_term_volume_range": [
+              4,
+              15
+            ],
+            "search_ns": {
+              "iqr_ns": 13779,
+              "max_ns": 53513,
+              "median_ns": 31615,
+              "min_ns": 21226,
+              "n": 24,
+              "p25_ns": 25306,
+              "p75_ns": 39085
+            },
+            "stratum": 1
+          },
+          {
+            "probe_count_median": 44,
+            "queries": 24,
+            "s_term_volume_range": [
+              16,
+              37
+            ],
+            "search_ns": {
+              "iqr_ns": 26672,
+              "max_ns": 112889,
+              "median_ns": 75807,
+              "min_ns": 53752,
+              "n": 24,
+              "p25_ns": 66831,
+              "p75_ns": 93503
+            },
+            "stratum": 2
+          },
+          {
+            "probe_count_median": 124,
+            "queries": 24,
+            "s_term_volume_range": [
+              42,
+              95
+            ],
+            "search_ns": {
+              "iqr_ns": 71933,
+              "max_ns": 252722,
+              "median_ns": 183546,
+              "min_ns": 126144,
+              "n": 24,
+              "p25_ns": 142826,
+              "p75_ns": 214759
+            },
+            "stratum": 3
+          },
+          {
+            "probe_count_median": 292,
+            "queries": 24,
+            "s_term_volume_range": [
+              97,
+              369
+            ],
+            "search_ns": {
+              "iqr_ns": 347844,
+              "max_ns": 969069,
+              "median_ns": 415437,
+              "min_ns": 258603,
+              "n": 24,
+              "p25_ns": 305070,
+              "p75_ns": 652914
+            },
+            "stratum": 4
+          }
+        ],
+        "wire_bytes_up_median": 1408
+      },
+      {
+        "closed_epochs": 12,
+        "compaction": {
+          "elapsed_ns": 37196608,
+          "note": "Compaction rebuilds XSet from live pairs only, so it shrinks the set rather than merely re-keying it. The shrinkage is the benefit; elapsed_ns is the cost it has to be weighed against.",
+          "xtags_after": 72000,
+          "xtags_before": 80000
+        },
+        "probe_count_median": 44,
+        "queries": 120,
+        "search_ns": {
+          "iqr_ns": 185863,
+          "max_ns": 988148,
+          "median_ns": 73265,
+          "min_ns": 13230,
+          "n": 120,
+          "p25_ns": 25983,
+          "p75_ns": 211846
+        },
+        "search_ns_is": "summary over per-query medians, each of MIN_ITERATIONS repetitions",
+        "strata": [
+          {
+            "probe_count_median": 2,
+            "queries": 24,
+            "s_term_volume_range": [
+              1,
+              3
+            ],
+            "search_ns": {
+              "iqr_ns": 2377,
+              "max_ns": 19786,
+              "median_ns": 14314,
+              "min_ns": 13230,
+              "n": 24,
+              "p25_ns": 14023,
+              "p75_ns": 16400
+            },
+            "stratum": 0
+          },
+          {
+            "probe_count_median": 14,
+            "queries": 24,
+            "s_term_volume_range": [
+              4,
+              15
+            ],
+            "search_ns": {
+              "iqr_ns": 13573,
+              "max_ns": 49698,
+              "median_ns": 32694,
+              "min_ns": 21254,
+              "n": 24,
+              "p25_ns": 25983,
+              "p75_ns": 39556
+            },
+            "stratum": 1
+          },
+          {
+            "probe_count_median": 44,
+            "queries": 24,
+            "s_term_volume_range": [
+              16,
+              37
+            ],
+            "search_ns": {
+              "iqr_ns": 26352,
+              "max_ns": 106760,
+              "median_ns": 73265,
+              "min_ns": 50631,
+              "n": 24,
+              "p25_ns": 61780,
+              "p75_ns": 88132
+            },
+            "stratum": 2
+          },
+          {
+            "probe_count_median": 124,
+            "queries": 24,
+            "s_term_volume_range": [
+              42,
+              95
+            ],
+            "search_ns": {
+              "iqr_ns": 68341,
+              "max_ns": 248476,
+              "median_ns": 177615,
+              "min_ns": 119055,
+              "n": 24,
+              "p25_ns": 143505,
+              "p75_ns": 211846
+            },
+            "stratum": 3
+          },
+          {
+            "probe_count_median": 292,
+            "queries": 24,
+            "s_term_volume_range": [
+              97,
+              369
+            ],
+            "search_ns": {
+              "iqr_ns": 323598,
+              "max_ns": 988148,
+              "median_ns": 425363,
+              "min_ns": 265809,
+              "n": 24,
+              "p25_ns": 304533,
+              "p75_ns": 628131
+            },
+            "stratum": 4
+          }
+        ],
+        "wire_bytes_up_median": 1408
+      },
+      {
+        "closed_epochs": 16,
+        "compaction": {
+          "elapsed_ns": 37076601,
+          "note": "Compaction rebuilds XSet from live pairs only, so it shrinks the set rather than merely re-keying it. The shrinkage is the benefit; elapsed_ns is the cost it has to be weighed against.",
+          "xtags_after": 72000,
+          "xtags_before": 80000
+        },
+        "probe_count_median": 44,
+        "queries": 120,
+        "search_ns": {
+          "iqr_ns": 192906,
+          "max_ns": 1003767,
+          "median_ns": 75041,
+          "min_ns": 14070,
+          "n": 120,
+          "p25_ns": 26723,
+          "p75_ns": 219629
+        },
+        "search_ns_is": "summary over per-query medians, each of MIN_ITERATIONS repetitions",
+        "strata": [
+          {
+            "probe_count_median": 2,
+            "queries": 24,
+            "s_term_volume_range": [
+              1,
+              3
+            ],
+            "search_ns": {
+              "iqr_ns": 2462,
+              "max_ns": 19754,
+              "median_ns": 14435,
+              "min_ns": 14070,
+              "n": 24,
+              "p25_ns": 14126,
+              "p75_ns": 16588
+            },
+            "stratum": 0
+          },
+          {
+            "probe_count_median": 14,
+            "queries": 24,
+            "s_term_volume_range": [
+              4,
+              15
+            ],
+            "search_ns": {
+              "iqr_ns": 15777,
+              "max_ns": 52607,
+              "median_ns": 33655,
+              "min_ns": 22440,
+              "n": 24,
+              "p25_ns": 26723,
+              "p75_ns": 42500
+            },
+            "stratum": 1
+          },
+          {
+            "probe_count_median": 44,
+            "queries": 24,
+            "s_term_volume_range": [
+              16,
+              37
+            ],
+            "search_ns": {
+              "iqr_ns": 29587,
+              "max_ns": 112474,
+              "median_ns": 75041,
+              "min_ns": 53756,
+              "n": 24,
+              "p25_ns": 65448,
+              "p75_ns": 95035
+            },
+            "stratum": 2
+          },
+          {
+            "probe_count_median": 124,
+            "queries": 24,
+            "s_term_volume_range": [
+              42,
+              95
+            ],
+            "search_ns": {
+              "iqr_ns": 77274,
+              "max_ns": 265888,
+              "median_ns": 184241,
+              "min_ns": 116283,
+              "n": 24,
+              "p25_ns": 142355,
+              "p75_ns": 219629
+            },
+            "stratum": 3
+          },
+          {
+            "probe_count_median": 292,
+            "queries": 24,
+            "s_term_volume_range": [
+              97,
+              369
+            ],
+            "search_ns": {
+              "iqr_ns": 315069,
+              "max_ns": 1003767,
+              "median_ns": 422749,
+              "min_ns": 270514,
+              "n": 24,
+              "p25_ns": 303196,
+              "p75_ns": 618265
+            },
+            "stratum": 4
+          }
+        ],
+        "wire_bytes_up_median": 1408
+      },
+      {
+        "closed_epochs": 20,
+        "compaction": {
+          "elapsed_ns": 37343836,
+          "note": "Compaction rebuilds XSet from live pairs only, so it shrinks the set rather than merely re-keying it. The shrinkage is the benefit; elapsed_ns is the cost it has to be weighed against.",
+          "xtags_after": 72000,
+          "xtags_before": 80000
+        },
+        "probe_count_median": 44,
+        "queries": 120,
+        "search_ns": {
+          "iqr_ns": 186773,
+          "max_ns": 961068,
+          "median_ns": 75625,
+          "min_ns": 13294,
+          "n": 120,
+          "p25_ns": 24597,
+          "p75_ns": 211370
+        },
+        "search_ns_is": "summary over per-query medians, each of MIN_ITERATIONS repetitions",
+        "strata": [
+          {
+            "probe_count_median": 2,
+            "queries": 24,
+            "s_term_volume_range": [
+              1,
+              3
+            ],
+            "search_ns": {
+              "iqr_ns": 2296,
+              "max_ns": 19693,
+              "median_ns": 14463,
+              "min_ns": 13294,
+              "n": 24,
+              "p25_ns": 14088,
+              "p75_ns": 16384
+            },
+            "stratum": 0
+          },
+          {
+            "probe_count_median": 14,
+            "queries": 24,
+            "s_term_volume_range": [
+              4,
+              15
+            ],
+            "search_ns": {
+              "iqr_ns": 15249,
+              "max_ns": 49242,
+              "median_ns": 32601,
+              "min_ns": 21129,
+              "n": 24,
+              "p25_ns": 24597,
+              "p75_ns": 39846
+            },
+            "stratum": 1
+          },
+          {
+            "probe_count_median": 44,
+            "queries": 24,
+            "s_term_volume_range": [
+              16,
+              37
+            ],
+            "search_ns": {
+              "iqr_ns": 35352,
+              "max_ns": 116688,
+              "median_ns": 75625,
+              "min_ns": 50639,
+              "n": 24,
+              "p25_ns": 62514,
+              "p75_ns": 97866
+            },
+            "stratum": 2
+          },
+          {
+            "probe_count_median": 124,
+            "queries": 24,
+            "s_term_volume_range": [
+              42,
+              95
+            ],
+            "search_ns": {
+              "iqr_ns": 64297,
+              "max_ns": 266449,
+              "median_ns": 180732,
+              "min_ns": 123667,
+              "n": 24,
+              "p25_ns": 147073,
+              "p75_ns": 211370
+            },
+            "stratum": 3
+          },
+          {
+            "probe_count_median": 292,
+            "queries": 24,
+            "s_term_volume_range": [
+              97,
+              369
+            ],
+            "search_ns": {
+              "iqr_ns": 340160,
+              "max_ns": 961068,
+              "median_ns": 423970,
+              "min_ns": 257103,
+              "n": 24,
+              "p25_ns": 304320,
+              "p75_ns": 644480
+            },
+            "stratum": 4
+          }
+        ],
+        "wire_bytes_up_median": 1408
+      },
+      {
+        "closed_epochs": 24,
+        "compaction": {
+          "elapsed_ns": 38123583,
+          "note": "Compaction rebuilds XSet from live pairs only, so it shrinks the set rather than merely re-keying it. The shrinkage is the benefit; elapsed_ns is the cost it has to be weighed against.",
+          "xtags_after": 72000,
+          "xtags_before": 80000
+        },
+        "probe_count_median": 44,
+        "queries": 120,
+        "search_ns": {
+          "iqr_ns": 189236,
+          "max_ns": 994857,
+          "median_ns": 77775,
+          "min_ns": 13940,
+          "n": 120,
+          "p25_ns": 26319,
+          "p75_ns": 215555
+        },
+        "search_ns_is": "summary over per-query medians, each of MIN_ITERATIONS repetitions",
+        "strata": [
+          {
+            "probe_count_median": 2,
+            "queries": 24,
+            "s_term_volume_range": [
+              1,
+              3
+            ],
+            "search_ns": {
+              "iqr_ns": 2710,
+              "max_ns": 18565,
+              "median_ns": 14390,
+              "min_ns": 13940,
+              "n": 24,
+              "p25_ns": 14134,
+              "p75_ns": 16844
+            },
+            "stratum": 0
+          },
+          {
+            "probe_count_median": 14,
+            "queries": 24,
+            "s_term_volume_range": [
+              4,
+              15
+            ],
+            "search_ns": {
+              "iqr_ns": 15677,
+              "max_ns": 52492,
+              "median_ns": 34664,
+              "min_ns": 22463,
+              "n": 24,
+              "p25_ns": 26319,
+              "p75_ns": 41996
+            },
+            "stratum": 1
+          },
+          {
+            "probe_count_median": 44,
+            "queries": 24,
+            "s_term_volume_range": [
+              16,
+              37
+            ],
+            "search_ns": {
+              "iqr_ns": 30771,
+              "max_ns": 116511,
+              "median_ns": 77775,
+              "min_ns": 53638,
+              "n": 24,
+              "p25_ns": 65954,
+              "p75_ns": 96725
+            },
+            "stratum": 2
+          },
+          {
+            "probe_count_median": 124,
+            "queries": 24,
+            "s_term_volume_range": [
+              42,
+              95
+            ],
+            "search_ns": {
+              "iqr_ns": 75799,
+              "max_ns": 252252,
+              "median_ns": 180163,
+              "min_ns": 117705,
+              "n": 24,
+              "p25_ns": 139756,
+              "p75_ns": 215555
+            },
+            "stratum": 3
+          },
+          {
+            "probe_count_median": 292,
+            "queries": 24,
+            "s_term_volume_range": [
+              97,
+              369
+            ],
+            "search_ns": {
+              "iqr_ns": 351971,
+              "max_ns": 994857,
+              "median_ns": 425892,
+              "min_ns": 266756,
+              "n": 24,
+              "p25_ns": 309493,
+              "p75_ns": 661464
+            },
+            "stratum": 4
+          }
+        ],
+        "wire_bytes_up_median": 1408
+      }
+    ],
+    "why_E_matters": "E multiplies the round-two probe list directly, so epoch length trades forward privacy against server work and transcript size. That trade is the operating point tab:params recommends."
+  }
+}

@@ -1,0 +1,15 @@
+[package]
+name = "xtask"
+description = "Repository automation: correctness gates for PQ-ChainLog. Never a source of a measurement."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+# Intentionally dependency-free. xtask must build before anything else does,
+# including before the system has liboqs, so it cannot depend on the workspace.
+
+[lints]
+workspace = true

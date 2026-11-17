@@ -1,0 +1,15 @@
+[package]
+name = "pqcl-forest"
+description = "The three-tier Merkle forest: per-capsule custody tree (Tier 1), per-epoch MMR (Tier 2), and the inclusion proofs a court disclosure rests on."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-primitives = { path = "../pqcl-primitives" }
+
+[lints]
+workspace = true

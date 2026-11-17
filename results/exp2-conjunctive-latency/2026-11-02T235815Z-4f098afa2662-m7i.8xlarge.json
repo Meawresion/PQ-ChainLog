@@ -1,0 +1,7295 @@
+{
+  "experiment": "exp2-conjunctive-latency",
+  "git_sha": "4f098afa2662faa1f1ec73cf8223d939506ad4db",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.8xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "n/a: symmetric-only search path",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {
+    "enron-selection-1000": "7c1040989e299bc6af8b189868f959c8092ab9efe617e0d421a8f467732b0c31",
+    "enron-selection-10000": "f261d527a726794b27ac54310d2bae50375eac2a335eb0681afe952b07b9be08",
+    "enron-selection-100000": "2e25240bc5559629ceac1d40a9084d690b8fc52a1e67c8872c7e448d2de9a47b",
+    "enron-selection-2000": "e72bf327939320ced5d2dbfc6949883dc8a58c02785285c82babf44572b55886",
+    "enron-selection-20000": "72f3c6bf607c128feb3dc09f6c89d1e960d2879775a450126a1a0edf81188236",
+    "enron-selection-250000": "8410e0506b0809600918056c489424b39b2f4622314765a0b64071f2eaae557c",
+    "enron-selection-5000": "1efecfc0456433e48031366b2b1f9118e198b40b5024490229ece16c45b34be1",
+    "enron-selection-50000": "fd1290a1f6c5942f1438eb494229ac3594708b42514e7c3293651d17980216d6"
+  },
+  "rng_seeds": [
+    33,
+    34,
+    51,
+    1592590338,
+    1592590356
+  ],
+  "iterations": 10,
+  "started_utc": "2026-11-02T23:58:15Z",
+  "measurements": {
+    "caveat": "We lose asymptotically to fp-GA-ODXT and win on the constant factor. No wall-clock result here may be written up as an asymptotic win.",
+    "rows": [
+      {
+        "closed_epochs": 2,
+        "conjunction_width": 2,
+        "documents": 1000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 48621,
+            "max_ns": 677068,
+            "mean_ns": 122784,
+            "median_ns": 58219,
+            "min_ns": 51418,
+            "n": 12,
+            "p25_ns": 54176,
+            "p75_ns": 102797,
+            "p95_ns": 361809
+          },
+          "total_hits_first_iteration": 12,
+          "tset_len": 165070,
+          "xset_len": 165070
+        },
+        "pairs": 150035,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 5164,
+            "max_ns": 69938,
+            "mean_ns": 30736,
+            "median_ns": 26749,
+            "min_ns": 23895,
+            "n": 12,
+            "p25_ns": 24028,
+            "p75_ns": 29192,
+            "p95_ns": 52166
+          },
+          "total_hits_first_iteration": 12
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2402,
+            "max_ns": 42026,
+            "mean_ns": 16938,
+            "median_ns": 14608,
+            "min_ns": 13343,
+            "n": 12,
+            "p25_ns": 13485,
+            "p75_ns": 15887,
+            "p95_ns": 28338
+          },
+          "total_hits_first_iteration": 12,
+          "xtag_count": 150035
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 5729946,
+          "first_search_ns": {
+            "iqr_ns": 44355,
+            "max_ns": 561106,
+            "mean_ns": 121933,
+            "median_ns": 72123,
+            "min_ns": 47004,
+            "n": 12,
+            "p25_ns": 70333,
+            "p75_ns": 114688,
+            "p95_ns": 320784
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 42923,
+            "max_ns": 512060,
+            "mean_ns": 114524,
+            "median_ns": 68992,
+            "min_ns": 50677,
+            "n": 12,
+            "p25_ns": 66939,
+            "p75_ns": 109862,
+            "p95_ns": 293763
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              13,
+              15
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              8
+            ]
+          ],
+          "total_hits_first_iteration": 12,
+          "tset_entries": 150035,
+          "tset_stored_bytes": 71309440,
+          "wire_bytes_up_per_query": [
+            3982,
+            2542,
+            2762,
+            2938,
+            3070,
+            2586,
+            2366,
+            2806,
+            2706,
+            2574,
+            2794,
+            2310
+          ],
+          "xset_entries": 150035,
+          "xset_stored_bytes": 47303840
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 5729946,
+          "first_search_ns": {
+            "iqr_ns": 91301,
+            "max_ns": 887133,
+            "mean_ns": 205912,
+            "median_ns": 111529,
+            "min_ns": 49673,
+            "n": 12,
+            "p25_ns": 108698,
+            "p75_ns": 199999,
+            "p95_ns": 587116
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 87625,
+            "max_ns": 833896,
+            "mean_ns": 196922,
+            "median_ns": 108102,
+            "min_ns": 48425,
+            "n": 12,
+            "p25_ns": 105463,
+            "p75_ns": 193088,
+            "p95_ns": 555822
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              13,
+              15
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              8
+            ]
+          ],
+          "total_hits_first_iteration": 12,
+          "tset_entries": 150035,
+          "tset_stored_bytes": 71309440,
+          "wire_bytes_up_per_query": [
+            4462,
+            2574,
+            2794,
+            2970,
+            3102,
+            2618,
+            2398,
+            2838,
+            2770,
+            2734,
+            2858,
+            2566
+          ],
+          "xset_entries": 150035,
+          "xset_stored_bytes": 53305240
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 2,
+        "conjunction_width": 3,
+        "documents": 1000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 100123,
+            "max_ns": 1295921,
+            "mean_ns": 235121,
+            "median_ns": 105570,
+            "min_ns": 100867,
+            "n": 12,
+            "p25_ns": 101728,
+            "p75_ns": 201851,
+            "p95_ns": 694523
+          },
+          "total_hits_first_iteration": 12,
+          "tset_len": 165070,
+          "xset_len": 165070
+        },
+        "pairs": 150035,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 13229,
+            "max_ns": 132532,
+            "mean_ns": 50011,
+            "median_ns": 40629,
+            "min_ns": 35802,
+            "n": 12,
+            "p25_ns": 35860,
+            "p75_ns": 49089,
+            "p95_ns": 94488
+          },
+          "total_hits_first_iteration": 12
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2541,
+            "max_ns": 46817,
+            "mean_ns": 18253,
+            "median_ns": 14804,
+            "min_ns": 14619,
+            "n": 12,
+            "p25_ns": 14741,
+            "p75_ns": 17282,
+            "p95_ns": 30857
+          },
+          "total_hits_first_iteration": 12,
+          "xtag_count": 150035
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 5729946,
+          "first_search_ns": {
+            "iqr_ns": 66433,
+            "max_ns": 783517,
+            "mean_ns": 197348,
+            "median_ns": 128391,
+            "min_ns": 74990,
+            "n": 12,
+            "p25_ns": 125849,
+            "p75_ns": 192282,
+            "p95_ns": 471466
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 52705,
+            "max_ns": 656576,
+            "mean_ns": 177428,
+            "median_ns": 122844,
+            "min_ns": 76478,
+            "n": 12,
+            "p25_ns": 119900,
+            "p75_ns": 172605,
+            "p95_ns": 403415
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              13,
+              15,
+              30
+            ],
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              8
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              2,
+              2,
+              3
+            ],
+            [
+              2,
+              5,
+              5
+            ],
+            [
+              2,
+              2,
+              2
+            ],
+            [
+              2,
+              8,
+              9
+            ]
+          ],
+          "total_hits_first_iteration": 12,
+          "tset_entries": 150035,
+          "tset_stored_bytes": 71309440,
+          "wire_bytes_up_per_query": [
+            7127,
+            4027,
+            4203,
+            4511,
+            4247,
+            4027,
+            3895,
+            4027,
+            3827,
+            4135,
+            4135,
+            3695
+          ],
+          "xset_entries": 150035,
+          "xset_stored_bytes": 47303840
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 5729946,
+          "first_search_ns": {
+            "iqr_ns": 218354,
+            "max_ns": 2033288,
+            "mean_ns": 442311,
+            "median_ns": 221517,
+            "min_ns": 79565,
+            "n": 12,
+            "p25_ns": 201570,
+            "p75_ns": 419924,
+            "p95_ns": 1284715
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 203940,
+            "max_ns": 1918859,
+            "mean_ns": 424236,
+            "median_ns": 217281,
+            "min_ns": 80954,
+            "n": 12,
+            "p25_ns": 197777,
+            "p75_ns": 401717,
+            "p95_ns": 1219393
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              13,
+              15,
+              30
+            ],
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              8
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              2,
+              2,
+              3
+            ],
+            [
+              2,
+              5,
+              5
+            ],
+            [
+              2,
+              2,
+              2
+            ],
+            [
+              2,
+              8,
+              9
+            ]
+          ],
+          "total_hits_first_iteration": 12,
+          "tset_entries": 150035,
+          "tset_stored_bytes": 71309440,
+          "wire_bytes_up_per_query": [
+            8567,
+            4123,
+            4267,
+            4575,
+            4311,
+            4091,
+            4183,
+            4091,
+            3987,
+            4455,
+            4263,
+            4239
+          ],
+          "xset_entries": 150035,
+          "xset_stored_bytes": 53305240
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 2,
+        "conjunction_width": 6,
+        "documents": 1000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 246172,
+            "max_ns": 3212154,
+            "mean_ns": 575904,
+            "median_ns": 248351,
+            "min_ns": 243268,
+            "n": 12,
+            "p25_ns": 247098,
+            "p75_ns": 493270,
+            "p95_ns": 1717114
+          },
+          "total_hits_first_iteration": 11,
+          "tset_len": 165070,
+          "xset_len": 165070
+        },
+        "pairs": 150035,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 51603,
+            "max_ns": 412808,
+            "mean_ns": 136372,
+            "median_ns": 88894,
+            "min_ns": 71399,
+            "n": 12,
+            "p25_ns": 71852,
+            "p75_ns": 123455,
+            "p95_ns": 355067
+          },
+          "total_hits_first_iteration": 11
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 4426,
+            "max_ns": 66192,
+            "mean_ns": 22698,
+            "median_ns": 17610,
+            "min_ns": 17000,
+            "n": 12,
+            "p25_ns": 17522,
+            "p75_ns": 21948,
+            "p95_ns": 41993
+          },
+          "total_hits_first_iteration": 11,
+          "xtag_count": 150035
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 5729946,
+          "first_search_ns": {
+            "iqr_ns": 150129,
+            "max_ns": 1537100,
+            "mean_ns": 457510,
+            "median_ns": 294483,
+            "min_ns": 211611,
+            "n": 12,
+            "p25_ns": 291144,
+            "p75_ns": 441273,
+            "p95_ns": 1055400
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 97126,
+            "max_ns": 1170423,
+            "mean_ns": 383974,
+            "median_ns": 286270,
+            "min_ns": 176446,
+            "n": 12,
+            "p25_ns": 282182,
+            "p75_ns": 379308,
+            "p95_ns": 795339
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              13,
+              15,
+              30,
+              48,
+              51,
+              52
+            ],
+            [
+              1,
+              1,
+              2,
+              2,
+              2,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              2,
+              5
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              8,
+              14,
+              16,
+              18
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              2,
+              2,
+              3,
+              3,
+              5,
+              5
+            ],
+            [
+              2,
+              5,
+              5,
+              5,
+              5,
+              7
+            ],
+            [
+              2,
+              2,
+              2,
+              3,
+              4,
+              8
+            ],
+            [
+              2,
+              8,
+              9,
+              35,
+              39,
+              49
+            ]
+          ],
+          "total_hits_first_iteration": 11,
+          "tset_entries": 150035,
+          "tset_stored_bytes": 71309440,
+          "wire_bytes_up_per_query": [
+            17618,
+            8438,
+            8658,
+            8702,
+            8174,
+            8174,
+            9582,
+            8086,
+            7586,
+            9302,
+            9918,
+            11942
+          ],
+          "xset_entries": 150035,
+          "xset_stored_bytes": 47303840
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 5729946,
+          "first_search_ns": {
+            "iqr_ns": 947299,
+            "max_ns": 7337417,
+            "mean_ns": 1684671,
+            "median_ns": 608512,
+            "min_ns": 392824,
+            "n": 12,
+            "p25_ns": 475441,
+            "p75_ns": 1422740,
+            "p95_ns": 6010040
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 890845,
+            "max_ns": 6948274,
+            "mean_ns": 1597956,
+            "median_ns": 595189,
+            "min_ns": 365868,
+            "n": 12,
+            "p25_ns": 461229,
+            "p75_ns": 1352074,
+            "p95_ns": 5664045
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              13,
+              15,
+              30,
+              48,
+              51,
+              52
+            ],
+            [
+              1,
+              1,
+              2,
+              2,
+              2,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              2,
+              5
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              8,
+              14,
+              16,
+              18
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              2,
+              2,
+              3,
+              3,
+              5,
+              5
+            ],
+            [
+              2,
+              5,
+              5,
+              5,
+              5,
+              7
+            ],
+            [
+              2,
+              2,
+              2,
+              3,
+              4,
+              8
+            ],
+            [
+              2,
+              8,
+              9,
+              35,
+              39,
+              49
+            ]
+          ],
+          "total_hits_first_iteration": 11,
+          "tset_entries": 150035,
+          "tset_stored_bytes": 71309440,
+          "wire_bytes_up_per_query": [
+            23890,
+            8726,
+            8818,
+            9022,
+            8334,
+            8334,
+            11406,
+            8246,
+            8162,
+            10166,
+            10526,
+            16422
+          ],
+          "xset_entries": 150035,
+          "xset_stored_bytes": 53305240
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 3,
+        "conjunction_width": 2,
+        "documents": 2000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 48353,
+            "max_ns": 856668,
+            "mean_ns": 136552,
+            "median_ns": 53864,
+            "min_ns": 51246,
+            "n": 12,
+            "p25_ns": 52600,
+            "p75_ns": 100953,
+            "p95_ns": 468089
+          },
+          "total_hits_first_iteration": 13,
+          "tset_len": 333272,
+          "xset_len": 333272
+        },
+        "pairs": 300764,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 10107,
+            "max_ns": 102206,
+            "mean_ns": 36187,
+            "median_ns": 26998,
+            "min_ns": 23920,
+            "n": 12,
+            "p25_ns": 23995,
+            "p75_ns": 34102,
+            "p95_ns": 77429
+          },
+          "total_hits_first_iteration": 13
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2445,
+            "max_ns": 49978,
+            "mean_ns": 17565,
+            "median_ns": 14007,
+            "min_ns": 13443,
+            "n": 12,
+            "p25_ns": 13480,
+            "p75_ns": 15925,
+            "p95_ns": 32255
+          },
+          "total_hits_first_iteration": 13,
+          "xtag_count": 300764
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 8760636,
+          "first_search_ns": {
+            "iqr_ns": 54316,
+            "max_ns": 777760,
+            "mean_ns": 152315,
+            "median_ns": 75190,
+            "min_ns": 69983,
+            "n": 12,
+            "p25_ns": 72753,
+            "p75_ns": 127069,
+            "p95_ns": 457897
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 44305,
+            "max_ns": 675218,
+            "mean_ns": 134478,
+            "median_ns": 70598,
+            "min_ns": 65966,
+            "n": 12,
+            "p25_ns": 69126,
+            "p75_ns": 113431,
+            "p95_ns": 390317
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              17,
+              30
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              3,
+              19
+            ]
+          ],
+          "total_hits_first_iteration": 13,
+          "tset_entries": 300764,
+          "tset_stored_bytes": 143289920,
+          "wire_bytes_up_per_query": [
+            3802,
+            2542,
+            2586,
+            2938,
+            3070,
+            2586,
+            2366,
+            2762,
+            2926,
+            3146,
+            2674,
+            3310
+          ],
+          "xset_entries": 300764,
+          "xset_stored_bytes": 95167680
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 8760636,
+          "first_search_ns": {
+            "iqr_ns": 189410,
+            "max_ns": 1723089,
+            "mean_ns": 337586,
+            "median_ns": 143917,
+            "min_ns": 104454,
+            "n": 12,
+            "p25_ns": 107956,
+            "p75_ns": 297366,
+            "p95_ns": 1173738
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 185184,
+            "max_ns": 1620002,
+            "mean_ns": 321905,
+            "median_ns": 135979,
+            "min_ns": 102982,
+            "n": 12,
+            "p25_ns": 105296,
+            "p75_ns": 290480,
+            "p95_ns": 1102030
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              17,
+              30
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              3,
+              19
+            ]
+          ],
+          "total_hits_first_iteration": 13,
+          "tset_entries": 300764,
+          "tset_stored_bytes": 143289920,
+          "wire_bytes_up_per_query": [
+            4762,
+            2606,
+            2650,
+            2970,
+            3102,
+            2618,
+            2398,
+            2858,
+            3086,
+            3434,
+            2706,
+            3918
+          ],
+          "xset_entries": 300764,
+          "xset_stored_bytes": 107198240
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 3,
+        "conjunction_width": 3,
+        "documents": 2000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 100256,
+            "max_ns": 1690955,
+            "mean_ns": 265962,
+            "median_ns": 101624,
+            "min_ns": 97915,
+            "n": 12,
+            "p25_ns": 99885,
+            "p75_ns": 200141,
+            "p95_ns": 923363
+          },
+          "total_hits_first_iteration": 13,
+          "tset_len": 333272,
+          "xset_len": 333272
+        },
+        "pairs": 300764,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 17057,
+            "max_ns": 213639,
+            "mean_ns": 62137,
+            "median_ns": 40991,
+            "min_ns": 35844,
+            "n": 12,
+            "p25_ns": 38985,
+            "p75_ns": 56042,
+            "p95_ns": 146635
+          },
+          "total_hits_first_iteration": 13
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2618,
+            "max_ns": 58720,
+            "mean_ns": 19259,
+            "median_ns": 14961,
+            "min_ns": 14276,
+            "n": 12,
+            "p25_ns": 14653,
+            "p75_ns": 17271,
+            "p95_ns": 37438
+          },
+          "total_hits_first_iteration": 13,
+          "xtag_count": 300764
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 8760636,
+          "first_search_ns": {
+            "iqr_ns": 89568,
+            "max_ns": 1115438,
+            "mean_ns": 250277,
+            "median_ns": 138475,
+            "min_ns": 130098,
+            "n": 12,
+            "p25_ns": 131815,
+            "p75_ns": 221383,
+            "p95_ns": 697933
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 63549,
+            "max_ns": 918215,
+            "mean_ns": 216633,
+            "median_ns": 126996,
+            "min_ns": 121818,
+            "n": 12,
+            "p25_ns": 123879,
+            "p75_ns": 187428,
+            "p95_ns": 574545
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              17,
+              30,
+              62
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              4
+            ],
+            [
+              1,
+              1,
+              3
+            ],
+            [
+              1,
+              1,
+              11
+            ],
+            [
+              1,
+              1,
+              3
+            ],
+            [
+              2,
+              3,
+              5
+            ],
+            [
+              2,
+              9,
+              9
+            ],
+            [
+              1,
+              1,
+              3
+            ],
+            [
+              3,
+              14,
+              19
+            ]
+          ],
+          "total_hits_first_iteration": 13,
+          "tset_entries": 300764,
+          "tset_stored_bytes": 143289920,
+          "wire_bytes_up_per_query": [
+            8087,
+            4027,
+            4027,
+            4511,
+            4247,
+            4027,
+            3675,
+            3983,
+            4047,
+            4707,
+            4203,
+            4639
+          ],
+          "xset_entries": 300764,
+          "xset_stored_bytes": 95167680
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 8760636,
+          "first_search_ns": {
+            "iqr_ns": 339593,
+            "max_ns": 3934828,
+            "mean_ns": 752196,
+            "median_ns": 315869,
+            "min_ns": 206019,
+            "n": 12,
+            "p25_ns": 276556,
+            "p75_ns": 616149,
+            "p95_ns": 2523380
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 320182,
+            "max_ns": 3730430,
+            "mean_ns": 715521,
+            "median_ns": 305835,
+            "min_ns": 200715,
+            "n": 12,
+            "p25_ns": 265619,
+            "p75_ns": 585801,
+            "p95_ns": 2385093
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              17,
+              30,
+              62
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              4
+            ],
+            [
+              1,
+              1,
+              3
+            ],
+            [
+              1,
+              1,
+              11
+            ],
+            [
+              1,
+              1,
+              3
+            ],
+            [
+              2,
+              3,
+              5
+            ],
+            [
+              2,
+              9,
+              9
+            ],
+            [
+              1,
+              1,
+              3
+            ],
+            [
+              3,
+              14,
+              19
+            ]
+          ],
+          "total_hits_first_iteration": 13,
+          "tset_entries": 300764,
+          "tset_stored_bytes": 143289920,
+          "wire_bytes_up_per_query": [
+            11031,
+            4187,
+            4123,
+            4575,
+            4407,
+            4155,
+            4059,
+            4111,
+            4303,
+            5283,
+            4331,
+            5695
+          ],
+          "xset_entries": 300764,
+          "xset_stored_bytes": 107198240
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 3,
+        "conjunction_width": 6,
+        "documents": 2000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 244687,
+            "max_ns": 4186003,
+            "mean_ns": 658378,
+            "median_ns": 249065,
+            "min_ns": 246517,
+            "n": 12,
+            "p25_ns": 248282,
+            "p75_ns": 492969,
+            "p95_ns": 2290642
+          },
+          "total_hits_first_iteration": 12,
+          "tset_len": 333272,
+          "xset_len": 333272
+        },
+        "pairs": 300764,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 92492,
+            "max_ns": 775132,
+            "mean_ns": 201675,
+            "median_ns": 99145,
+            "min_ns": 75207,
+            "n": 12,
+            "p25_ns": 79650,
+            "p75_ns": 172142,
+            "p95_ns": 642321
+          },
+          "total_hits_first_iteration": 12
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 4302,
+            "max_ns": 84641,
+            "mean_ns": 24963,
+            "median_ns": 17966,
+            "min_ns": 17448,
+            "n": 12,
+            "p25_ns": 17680,
+            "p75_ns": 21982,
+            "p95_ns": 53435
+          },
+          "total_hits_first_iteration": 12,
+          "xtag_count": 300764
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 8760636,
+          "first_search_ns": {
+            "iqr_ns": 222761,
+            "max_ns": 2309269,
+            "mean_ns": 589342,
+            "median_ns": 332029,
+            "min_ns": 299752,
+            "n": 12,
+            "p25_ns": 301398,
+            "p75_ns": 524159,
+            "p95_ns": 1615420
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 117360,
+            "max_ns": 1576264,
+            "mean_ns": 446472,
+            "median_ns": 289309,
+            "min_ns": 283427,
+            "n": 12,
+            "p25_ns": 288101,
+            "p75_ns": 405461,
+            "p95_ns": 1032261
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              17,
+              30,
+              62,
+              93,
+              108,
+              116
+            ],
+            [
+              1,
+              2,
+              2,
+              2,
+              3,
+              3
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              2,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              1,
+              11,
+              23,
+              35,
+              38
+            ],
+            [
+              1,
+              1,
+              1,
+              2,
+              2,
+              3
+            ],
+            [
+              2,
+              3,
+              4,
+              4,
+              5,
+              7
+            ],
+            [
+              2,
+              9,
+              9,
+              9,
+              9,
+              10
+            ],
+            [
+              1,
+              1,
+              3,
+              4,
+              5,
+              18
+            ],
+            [
+              3,
+              14,
+              19,
+              64,
+              76,
+              95
+            ]
+          ],
+          "total_hits_first_iteration": 12,
+          "tset_entries": 300764,
+          "tset_stored_bytes": 143289920,
+          "wire_bytes_up_per_query": [
+            21866,
+            8438,
+            8482,
+            9362,
+            8174,
+            8174,
+            12354,
+            8042,
+            8158,
+            9742,
+            10022,
+            18845
+          ],
+          "xset_entries": 300764,
+          "xset_stored_bytes": 95167680
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 8760636,
+          "first_search_ns": {
+            "iqr_ns": 1719748,
+            "max_ns": 14880029,
+            "mean_ns": 2935772,
+            "median_ns": 919556,
+            "min_ns": 557647,
+            "n": 12,
+            "p25_ns": 634109,
+            "p75_ns": 2353857,
+            "p95_ns": 11326239
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 1573185,
+            "max_ns": 14097587,
+            "mean_ns": 2783722,
+            "median_ns": 866462,
+            "min_ns": 539927,
+            "n": 12,
+            "p25_ns": 613869,
+            "p75_ns": 2187054,
+            "p95_ns": 10730612
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              17,
+              30,
+              62,
+              93,
+              108,
+              116
+            ],
+            [
+              1,
+              2,
+              2,
+              2,
+              3,
+              3
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              2,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              1,
+              11,
+              23,
+              35,
+              38
+            ],
+            [
+              1,
+              1,
+              1,
+              2,
+              2,
+              3
+            ],
+            [
+              2,
+              3,
+              4,
+              4,
+              5,
+              7
+            ],
+            [
+              2,
+              9,
+              9,
+              9,
+              9,
+              10
+            ],
+            [
+              1,
+              1,
+              3,
+              4,
+              5,
+              18
+            ],
+            [
+              3,
+              14,
+              19,
+              64,
+              76,
+              95
+            ]
+          ],
+          "total_hits_first_iteration": 12,
+          "tset_entries": 300764,
+          "tset_stored_bytes": 143289920,
+          "wire_bytes_up_per_query": [
+            34954,
+            8822,
+            8706,
+            9842,
+            8462,
+            8430,
+            15810,
+            8330,
+            8894,
+            11214,
+            11014,
+            27421
+          ],
+          "xset_entries": 300764,
+          "xset_stored_bytes": 107198240
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 5,
+        "conjunction_width": 2,
+        "documents": 5000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 100882,
+            "max_ns": 2281075,
+            "mean_ns": 293376,
+            "median_ns": 103582,
+            "min_ns": 51291,
+            "n": 12,
+            "p25_ns": 53514,
+            "p75_ns": 154396,
+            "p95_ns": 1194381
+          },
+          "total_hits_first_iteration": 11,
+          "tset_len": 801292,
+          "xset_len": 801292
+        },
+        "pairs": 728203,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 25003,
+            "max_ns": 209902,
+            "mean_ns": 55960,
+            "median_ns": 34831,
+            "min_ns": 23946,
+            "n": 12,
+            "p25_ns": 26888,
+            "p75_ns": 51891,
+            "p95_ns": 156308
+          },
+          "total_hits_first_iteration": 11
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 4114,
+            "max_ns": 107430,
+            "mean_ns": 23672,
+            "median_ns": 15170,
+            "min_ns": 13357,
+            "n": 12,
+            "p25_ns": 13987,
+            "p75_ns": 18101,
+            "p95_ns": 61788
+          },
+          "total_hits_first_iteration": 11,
+          "xtag_count": 728203
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 13127994,
+          "first_search_ns": {
+            "iqr_ns": 96016,
+            "max_ns": 1784322,
+            "mean_ns": 263281,
+            "median_ns": 108009,
+            "min_ns": 56367,
+            "n": 12,
+            "p25_ns": 74632,
+            "p75_ns": 170648,
+            "p95_ns": 978868
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 84462,
+            "max_ns": 1558120,
+            "mean_ns": 226384,
+            "median_ns": 89639,
+            "min_ns": 45357,
+            "n": 12,
+            "p25_ns": 70452,
+            "p75_ns": 154914,
+            "p95_ns": 826705
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              44,
+              67
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              15
+            ],
+            [
+              3,
+              16
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              6,
+              47
+            ]
+          ],
+          "total_hits_first_iteration": 11,
+          "tset_entries": 728203,
+          "tset_stored_bytes": 347940960,
+          "wire_bytes_up_per_query": [
+            8450,
+            2542,
+            2618,
+            2938,
+            3070,
+            2586,
+            2706,
+            2870,
+            4586,
+            2782,
+            2674,
+            5210
+          ],
+          "xset_entries": 728203,
+          "xset_stored_bytes": 231428480
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 13127994,
+          "first_search_ns": {
+            "iqr_ns": 293772,
+            "max_ns": 3633833,
+            "mean_ns": 661015,
+            "median_ns": 292120,
+            "min_ns": 107375,
+            "n": 12,
+            "p25_ns": 164413,
+            "p75_ns": 458185,
+            "p95_ns": 2470857
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 272127,
+            "max_ns": 3383766,
+            "mean_ns": 620452,
+            "median_ns": 271238,
+            "min_ns": 105060,
+            "n": 12,
+            "p25_ns": 162120,
+            "p75_ns": 434247,
+            "p95_ns": 2305628
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              44,
+              67
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              3,
+              15
+            ],
+            [
+              3,
+              16
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              6,
+              47
+            ]
+          ],
+          "total_hits_first_iteration": 11,
+          "tset_entries": 728203,
+          "tset_stored_bytes": 347940960,
+          "wire_bytes_up_per_query": [
+            10594,
+            2734,
+            2906,
+            2970,
+            3102,
+            2682,
+            2930,
+            3030,
+            5066,
+            3294,
+            2706,
+            6714
+          ],
+          "xset_entries": 728203,
+          "xset_stored_bytes": 260556600
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 5,
+        "conjunction_width": 3,
+        "documents": 5000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 197726,
+            "max_ns": 4515090,
+            "mean_ns": 554222,
+            "median_ns": 112942,
+            "min_ns": 101189,
+            "n": 12,
+            "p25_ns": 102218,
+            "p75_ns": 299944,
+            "p95_ns": 2359187
+          },
+          "total_hits_first_iteration": 11,
+          "tset_len": 801292,
+          "xset_len": 801292
+        },
+        "pairs": 728203,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 54596,
+            "max_ns": 468860,
+            "mean_ns": 108043,
+            "median_ns": 64190,
+            "min_ns": 38107,
+            "n": 12,
+            "p25_ns": 50306,
+            "p75_ns": 104902,
+            "p95_ns": 309047
+          },
+          "total_hits_first_iteration": 11
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 3883,
+            "max_ns": 127659,
+            "mean_ns": 26532,
+            "median_ns": 16379,
+            "min_ns": 14740,
+            "n": 12,
+            "p25_ns": 14902,
+            "p75_ns": 18785,
+            "p95_ns": 72458
+          },
+          "total_hits_first_iteration": 11,
+          "xtag_count": 728203
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 13127994,
+          "first_search_ns": {
+            "iqr_ns": 94966,
+            "max_ns": 2536220,
+            "mean_ns": 399770,
+            "median_ns": 165800,
+            "min_ns": 130026,
+            "n": 12,
+            "p25_ns": 141163,
+            "p75_ns": 236129,
+            "p95_ns": 1443539
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 60502,
+            "max_ns": 2102052,
+            "mean_ns": 323449,
+            "median_ns": 129317,
+            "min_ns": 84653,
+            "n": 12,
+            "p25_ns": 125513,
+            "p75_ns": 186015,
+            "p95_ns": 1162968
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              44,
+              67,
+              145
+            ],
+            [
+              1,
+              6,
+              8
+            ],
+            [
+              1,
+              2,
+              9
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              19
+            ],
+            [
+              1,
+              3,
+              7
+            ],
+            [
+              2,
+              7,
+              39
+            ],
+            [
+              1,
+              3,
+              5
+            ],
+            [
+              3,
+              7,
+              15
+            ],
+            [
+              3,
+              16,
+              22
+            ],
+            [
+              1,
+              1,
+              3
+            ],
+            [
+              6,
+              31,
+              47
+            ]
+          ],
+          "total_hits_first_iteration": 11,
+          "tset_entries": 728203,
+          "tset_stored_bytes": 347940960,
+          "wire_bytes_up_per_query": [
+            15278,
+            4027,
+            4027,
+            4511,
+            4511,
+            4467,
+            6819,
+            4115,
+            5695,
+            4199,
+            4203,
+            8307
+          ],
+          "xset_entries": 728203,
+          "xset_stored_bytes": 231428480
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 13127994,
+          "first_search_ns": {
+            "iqr_ns": 871156,
+            "max_ns": 8803458,
+            "mean_ns": 1488852,
+            "median_ns": 650534,
+            "min_ns": 203468,
+            "n": 12,
+            "p25_ns": 357416,
+            "p75_ns": 1228572,
+            "p95_ns": 5405946
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 809713,
+            "max_ns": 8379392,
+            "mean_ns": 1415301,
+            "median_ns": 612858,
+            "min_ns": 197696,
+            "n": 12,
+            "p25_ns": 340761,
+            "p75_ns": 1150474,
+            "p95_ns": 5142591
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              44,
+              67,
+              145
+            ],
+            [
+              1,
+              6,
+              8
+            ],
+            [
+              1,
+              2,
+              9
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              19
+            ],
+            [
+              1,
+              3,
+              7
+            ],
+            [
+              2,
+              7,
+              39
+            ],
+            [
+              1,
+              3,
+              5
+            ],
+            [
+              3,
+              7,
+              15
+            ],
+            [
+              3,
+              16,
+              22
+            ],
+            [
+              1,
+              1,
+              3
+            ],
+            [
+              6,
+              31,
+              47
+            ]
+          ],
+          "total_hits_first_iteration": 11,
+          "tset_entries": 728203,
+          "tset_stored_bytes": 347940960,
+          "wire_bytes_up_per_query": [
+            22062,
+            4475,
+            4379,
+            4575,
+            5151,
+            4787,
+            8291,
+            4371,
+            6399,
+            5415,
+            4331,
+            10803
+          ],
+          "xset_entries": 728203,
+          "xset_stored_bytes": 260556600
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 5,
+        "conjunction_width": 6,
+        "documents": 5000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 493480,
+            "max_ns": 11142229,
+            "mean_ns": 1367340,
+            "median_ns": 249254,
+            "min_ns": 248542,
+            "n": 12,
+            "p25_ns": 248787,
+            "p75_ns": 742267,
+            "p95_ns": 5861773
+          },
+          "total_hits_first_iteration": 10,
+          "tset_len": 801292,
+          "xset_len": 801292
+        },
+        "pairs": 728203,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 201927,
+            "max_ns": 1780952,
+            "mean_ns": 390278,
+            "median_ns": 151986,
+            "min_ns": 89991,
+            "n": 12,
+            "p25_ns": 109185,
+            "p75_ns": 311112,
+            "p95_ns": 1420376
+          },
+          "total_hits_first_iteration": 10
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 5003,
+            "max_ns": 189803,
+            "mean_ns": 34739,
+            "median_ns": 17938,
+            "min_ns": 16427,
+            "n": 12,
+            "p25_ns": 17796,
+            "p75_ns": 22799,
+            "p95_ns": 105972
+          },
+          "total_hits_first_iteration": 10,
+          "xtag_count": 728203
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 13127994,
+          "first_search_ns": {
+            "iqr_ns": 330030,
+            "max_ns": 5293305,
+            "mean_ns": 959893,
+            "median_ns": 388604,
+            "min_ns": 312141,
+            "n": 12,
+            "p25_ns": 336811,
+            "p75_ns": 666841,
+            "p95_ns": 3439989
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 128556,
+            "max_ns": 3738880,
+            "mean_ns": 650041,
+            "median_ns": 295603,
+            "min_ns": 242879,
+            "n": 12,
+            "p25_ns": 287934,
+            "p75_ns": 416490,
+            "p95_ns": 2174607
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              44,
+              67,
+              145,
+              229,
+              255,
+              269
+            ],
+            [
+              1,
+              2,
+              3,
+              6,
+              6,
+              8
+            ],
+            [
+              1,
+              1,
+              1,
+              2,
+              2,
+              9
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              7,
+              26
+            ],
+            [
+              1,
+              1,
+              1,
+              4,
+              7,
+              19
+            ],
+            [
+              1,
+              1,
+              3,
+              3,
+              7,
+              13
+            ],
+            [
+              2,
+              7,
+              36,
+              39,
+              89,
+              97
+            ],
+            [
+              1,
+              1,
+              3,
+              3,
+              5,
+              9
+            ],
+            [
+              3,
+              7,
+              14,
+              14,
+              14,
+              15
+            ],
+            [
+              3,
+              16,
+              18,
+              21,
+              21,
+              22
+            ],
+            [
+              1,
+              1,
+              3,
+              8,
+              13,
+              43
+            ],
+            [
+              6,
+              31,
+              47,
+              136,
+              167,
+              230
+            ]
+          ],
+          "total_hits_first_iteration": 10,
+          "tset_entries": 728203,
+          "tset_stored_bytes": 347940960,
+          "wire_bytes_up_per_query": [
+            47223,
+            8570,
+            8482,
+            9274,
+            8438,
+            9142,
+            17046,
+            8438,
+            13114,
+            8670,
+            10374,
+            29194
+          ],
+          "xset_entries": 728203,
+          "xset_stored_bytes": 231428480
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 13127994,
+          "first_search_ns": {
+            "iqr_ns": 3921973,
+            "max_ns": 34349134,
+            "mean_ns": 6489939,
+            "median_ns": 1723756,
+            "min_ns": 783727,
+            "n": 12,
+            "p25_ns": 1109101,
+            "p75_ns": 5031074,
+            "p95_ns": 26430350
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 3764610,
+            "max_ns": 32715130,
+            "mean_ns": 6184037,
+            "median_ns": 1617858,
+            "min_ns": 758591,
+            "n": 12,
+            "p25_ns": 1051032,
+            "p75_ns": 4815642,
+            "p95_ns": 25207970
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              44,
+              67,
+              145,
+              229,
+              255,
+              269
+            ],
+            [
+              1,
+              2,
+              3,
+              6,
+              6,
+              8
+            ],
+            [
+              1,
+              1,
+              1,
+              2,
+              2,
+              9
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              7,
+              26
+            ],
+            [
+              1,
+              1,
+              1,
+              4,
+              7,
+              19
+            ],
+            [
+              1,
+              1,
+              3,
+              3,
+              7,
+              13
+            ],
+            [
+              2,
+              7,
+              36,
+              39,
+              89,
+              97
+            ],
+            [
+              1,
+              1,
+              3,
+              3,
+              5,
+              9
+            ],
+            [
+              3,
+              7,
+              14,
+              14,
+              14,
+              15
+            ],
+            [
+              3,
+              16,
+              18,
+              21,
+              21,
+              22
+            ],
+            [
+              1,
+              1,
+              3,
+              8,
+              13,
+              43
+            ],
+            [
+              6,
+              31,
+              47,
+              136,
+              167,
+              230
+            ]
+          ],
+          "total_hits_first_iteration": 10,
+          "tset_entries": 728203,
+          "tset_stored_bytes": 347940960,
+          "wire_bytes_up_per_query": [
+            78103,
+            9370,
+            8962,
+            10426,
+            9462,
+            10006,
+            25622,
+            9110,
+            15162,
+            11806,
+            12550,
+            48746
+          ],
+          "xset_entries": 728203,
+          "xset_stored_bytes": 260556600
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 10,
+        "conjunction_width": 2,
+        "documents": 10000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 202184,
+            "max_ns": 5059872,
+            "mean_ns": 610143,
+            "median_ns": 155129,
+            "min_ns": 51370,
+            "n": 12,
+            "p25_ns": 103064,
+            "p75_ns": 305248,
+            "p95_ns": 2672928
+          },
+          "total_hits_first_iteration": 24,
+          "tset_len": 1626281,
+          "xset_len": 1626281
+        },
+        "pairs": 1481970,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 46528,
+            "max_ns": 420751,
+            "mean_ns": 92761,
+            "median_ns": 49133,
+            "min_ns": 23938,
+            "n": 12,
+            "p25_ns": 32360,
+            "p75_ns": 78888,
+            "p95_ns": 314401
+          },
+          "total_hits_first_iteration": 24
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 8597,
+            "max_ns": 225859,
+            "mean_ns": 38085,
+            "median_ns": 19386,
+            "min_ns": 13440,
+            "n": 12,
+            "p25_ns": 16087,
+            "p75_ns": 24684,
+            "p95_ns": 126827
+          },
+          "total_hits_first_iteration": 24,
+          "xtag_count": 1481970
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 21054152,
+          "first_search_ns": {
+            "iqr_ns": 164216,
+            "max_ns": 3941284,
+            "mean_ns": 546582,
+            "median_ns": 184012,
+            "min_ns": 74182,
+            "n": 12,
+            "p25_ns": 136297,
+            "p75_ns": 300513,
+            "p95_ns": 2240578
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 127300,
+            "max_ns": 3563910,
+            "mean_ns": 475769,
+            "median_ns": 156011,
+            "min_ns": 71504,
+            "n": 12,
+            "p25_ns": 113959,
+            "p75_ns": 241259,
+            "p95_ns": 1953887
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              97,
+              136
+            ],
+            [
+              2,
+              18
+            ],
+            [
+              2,
+              16
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              2,
+              13
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              6,
+              27
+            ],
+            [
+              6,
+              29
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              14,
+              107
+            ]
+          ],
+          "total_hits_first_iteration": 24,
+          "tset_entries": 1481970,
+          "tset_stored_bytes": 708810112,
+          "wire_bytes_up_per_query": [
+            13904,
+            3322,
+            2706,
+            2938,
+            3070,
+            2682,
+            2398,
+            2990,
+            2746,
+            2834,
+            2706,
+            6969
+          ],
+          "xset_entries": 1481970,
+          "xset_stored_bytes": 471694912
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 21054152,
+          "first_search_ns": {
+            "iqr_ns": 945091,
+            "max_ns": 7843667,
+            "mean_ns": 1443267,
+            "median_ns": 621016,
+            "min_ns": 109865,
+            "n": 12,
+            "p25_ns": 312815,
+            "p75_ns": 1257906,
+            "p95_ns": 5673530
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 916332,
+            "max_ns": 7425108,
+            "mean_ns": 1373364,
+            "median_ns": 591424,
+            "min_ns": 105790,
+            "n": 12,
+            "p25_ns": 296196,
+            "p75_ns": 1212528,
+            "p95_ns": 5390954
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              97,
+              136
+            ],
+            [
+              2,
+              18
+            ],
+            [
+              2,
+              16
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              2,
+              13
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              6,
+              27
+            ],
+            [
+              6,
+              29
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              14,
+              107
+            ]
+          ],
+          "total_hits_first_iteration": 24,
+          "tset_entries": 1481970,
+          "tset_stored_bytes": 708810112,
+          "wire_bytes_up_per_query": [
+            18256,
+            3898,
+            3218,
+            2970,
+            3102,
+            2810,
+            2814,
+            3214,
+            3610,
+            3762,
+            2770,
+            10393
+          ],
+          "xset_entries": 1481970,
+          "xset_stored_bytes": 530973712
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 10,
+        "conjunction_width": 3,
+        "documents": 10000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 494895,
+            "max_ns": 9886376,
+            "mean_ns": 1160721,
+            "median_ns": 202653,
+            "min_ns": 101770,
+            "n": 12,
+            "p25_ns": 102372,
+            "p75_ns": 597267,
+            "p95_ns": 5232161
+          },
+          "total_hits_first_iteration": 21,
+          "tset_len": 1626281,
+          "xset_len": 1626281
+        },
+        "pairs": 1481970,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 120263,
+            "max_ns": 922886,
+            "mean_ns": 181694,
+            "median_ns": 102536,
+            "min_ns": 35885,
+            "n": 12,
+            "p25_ns": 59071,
+            "p75_ns": 179334,
+            "p95_ns": 592688
+          },
+          "total_hits_first_iteration": 21
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 13135,
+            "max_ns": 271519,
+            "mean_ns": 43584,
+            "median_ns": 18288,
+            "min_ns": 14826,
+            "n": 12,
+            "p25_ns": 15053,
+            "p75_ns": 28188,
+            "p95_ns": 153110
+          },
+          "total_hits_first_iteration": 21,
+          "xtag_count": 1481970
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 21054152,
+          "first_search_ns": {
+            "iqr_ns": 312896,
+            "max_ns": 5439981,
+            "mean_ns": 807660,
+            "median_ns": 287879,
+            "min_ns": 133336,
+            "n": 12,
+            "p25_ns": 203561,
+            "p75_ns": 516457,
+            "p95_ns": 3200213
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 244909,
+            "max_ns": 4665001,
+            "mean_ns": 665345,
+            "median_ns": 204181,
+            "min_ns": 124455,
+            "n": 12,
+            "p25_ns": 135104,
+            "p75_ns": 380013,
+            "p95_ns": 2705397
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              97,
+              136,
+              287
+            ],
+            [
+              2,
+              18,
+              19
+            ],
+            [
+              1,
+              2,
+              16
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              40
+            ],
+            [
+              4,
+              4,
+              9
+            ],
+            [
+              2,
+              13,
+              74
+            ],
+            [
+              1,
+              4,
+              7
+            ],
+            [
+              6,
+              13,
+              27
+            ],
+            [
+              6,
+              29,
+              50
+            ],
+            [
+              2,
+              2,
+              4
+            ],
+            [
+              14,
+              49,
+              107
+            ]
+          ],
+          "total_hits_first_iteration": 21,
+          "tset_entries": 1481970,
+          "tset_stored_bytes": 708810112,
+          "wire_bytes_up_per_query": [
+            28243,
+            4311,
+            4115,
+            4511,
+            5831,
+            4219,
+            6115,
+            4159,
+            4303,
+            6195,
+            4267,
+            9794
+          ],
+          "xset_entries": 1481970,
+          "xset_stored_bytes": 471694912
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 21054152,
+          "first_search_ns": {
+            "iqr_ns": 2345851,
+            "max_ns": 18002227,
+            "mean_ns": 3128012,
+            "median_ns": 1423576,
+            "min_ns": 208200,
+            "n": 12,
+            "p25_ns": 669823,
+            "p75_ns": 3015674,
+            "p95_ns": 11405249
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 2242814,
+            "max_ns": 17149467,
+            "mean_ns": 2972810,
+            "median_ns": 1341948,
+            "min_ns": 198290,
+            "n": 12,
+            "p25_ns": 633111,
+            "p75_ns": 2875925,
+            "p95_ns": 10851169
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              97,
+              136,
+              287
+            ],
+            [
+              2,
+              18,
+              19
+            ],
+            [
+              1,
+              2,
+              16
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              40
+            ],
+            [
+              4,
+              4,
+              9
+            ],
+            [
+              2,
+              13,
+              74
+            ],
+            [
+              1,
+              4,
+              7
+            ],
+            [
+              6,
+              13,
+              27
+            ],
+            [
+              6,
+              29,
+              50
+            ],
+            [
+              2,
+              2,
+              4
+            ],
+            [
+              14,
+              49,
+              107
+            ]
+          ],
+          "total_hits_first_iteration": 21,
+          "tset_entries": 1481970,
+          "tset_stored_bytes": 708810112,
+          "wire_bytes_up_per_query": [
+            41779,
+            5495,
+            4691,
+            4575,
+            7143,
+            4635,
+            8899,
+            4511,
+            5583,
+            8723,
+            4459,
+            14786
+          ],
+          "xset_entries": 1481970,
+          "xset_stored_bytes": 530973712
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 10,
+        "conjunction_width": 6,
+        "documents": 10000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1257549,
+            "max_ns": 24401882,
+            "mean_ns": 2811603,
+            "median_ns": 495250,
+            "min_ns": 247818,
+            "n": 12,
+            "p25_ns": 251108,
+            "p75_ns": 1508657,
+            "p95_ns": 12941019
+          },
+          "total_hits_first_iteration": 17,
+          "tset_len": 1626281,
+          "xset_len": 1626281
+        },
+        "pairs": 1481970,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 429831,
+            "max_ns": 3498183,
+            "mean_ns": 718863,
+            "median_ns": 236805,
+            "min_ns": 107490,
+            "n": 12,
+            "p25_ns": 154225,
+            "p75_ns": 584056,
+            "p95_ns": 2781961
+          },
+          "total_hits_first_iteration": 17
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 23269,
+            "max_ns": 442299,
+            "mean_ns": 64592,
+            "median_ns": 23278,
+            "min_ns": 17564,
+            "n": 12,
+            "p25_ns": 18482,
+            "p75_ns": 41751,
+            "p95_ns": 246460
+          },
+          "total_hits_first_iteration": 17,
+          "xtag_count": 1481970
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 21054152,
+          "first_search_ns": {
+            "iqr_ns": 981450,
+            "max_ns": 11248402,
+            "mean_ns": 1896375,
+            "median_ns": 593732,
+            "min_ns": 333149,
+            "n": 12,
+            "p25_ns": 414530,
+            "p75_ns": 1395980,
+            "p95_ns": 7523452
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 496254,
+            "max_ns": 8057404,
+            "mean_ns": 1271400,
+            "median_ns": 425831,
+            "min_ns": 290759,
+            "n": 12,
+            "p25_ns": 304400,
+            "p75_ns": 800654,
+            "p95_ns": 5005312
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              97,
+              136,
+              287,
+              426,
+              504,
+              546
+            ],
+            [
+              2,
+              2,
+              6,
+              7,
+              18,
+              19
+            ],
+            [
+              1,
+              2,
+              2,
+              2,
+              4,
+              16
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              11,
+              52
+            ],
+            [
+              1,
+              1,
+              3,
+              7,
+              21,
+              40
+            ],
+            [
+              1,
+              4,
+              4,
+              7,
+              9,
+              19
+            ],
+            [
+              2,
+              13,
+              74,
+              98,
+              163,
+              191
+            ],
+            [
+              1,
+              1,
+              4,
+              6,
+              7,
+              16
+            ],
+            [
+              6,
+              13,
+              19,
+              27,
+              27,
+              35
+            ],
+            [
+              6,
+              29,
+              41,
+              47,
+              47,
+              50
+            ],
+            [
+              2,
+              2,
+              4,
+              19,
+              25,
+              83
+            ],
+            [
+              14,
+              49,
+              107,
+              288,
+              301,
+              494
+            ]
+          ],
+          "total_hits_first_iteration": 17,
+          "tset_entries": 1481970,
+          "tset_stored_bytes": 708810112,
+          "wire_bytes_up_per_query": [
+            95240,
+            8862,
+            8394,
+            10550,
+            10770,
+            9186,
+            24705,
+            9274,
+            10206,
+            15706,
+            11282,
+            47281
+          ],
+          "xset_entries": 1481970,
+          "xset_stored_bytes": 471694912
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 21054152,
+          "first_search_ns": {
+            "iqr_ns": 8060686,
+            "max_ns": 67822561,
+            "mean_ns": 13139065,
+            "median_ns": 3830926,
+            "min_ns": 1145467,
+            "n": 12,
+            "p25_ns": 2021900,
+            "p75_ns": 10082586,
+            "p95_ns": 54067388
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 7677616,
+            "max_ns": 64437179,
+            "mean_ns": 12488390,
+            "median_ns": 3643756,
+            "min_ns": 1092470,
+            "n": 12,
+            "p25_ns": 1918531,
+            "p75_ns": 9596147,
+            "p95_ns": 51326348
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              97,
+              136,
+              287,
+              426,
+              504,
+              546
+            ],
+            [
+              2,
+              2,
+              6,
+              7,
+              18,
+              19
+            ],
+            [
+              1,
+              2,
+              2,
+              2,
+              4,
+              16
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              11,
+              52
+            ],
+            [
+              1,
+              1,
+              3,
+              7,
+              21,
+              40
+            ],
+            [
+              1,
+              4,
+              4,
+              7,
+              9,
+              19
+            ],
+            [
+              2,
+              13,
+              74,
+              98,
+              163,
+              191
+            ],
+            [
+              1,
+              1,
+              4,
+              6,
+              7,
+              16
+            ],
+            [
+              6,
+              13,
+              19,
+              27,
+              27,
+              35
+            ],
+            [
+              6,
+              29,
+              41,
+              47,
+              47,
+              50
+            ],
+            [
+              2,
+              2,
+              4,
+              19,
+              25,
+              83
+            ],
+            [
+              14,
+              49,
+              107,
+              288,
+              301,
+              494
+            ]
+          ],
+          "total_hits_first_iteration": 17,
+          "tset_entries": 1481970,
+          "tset_stored_bytes": 708810112,
+          "wire_bytes_up_per_query": [
+            156008,
+            10526,
+            9226,
+            12662,
+            13074,
+            10562,
+            41953,
+            10362,
+            14078,
+            22554,
+            15538,
+            86929
+          ],
+          "xset_entries": 1481970,
+          "xset_stored_bytes": 530973712
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 20,
+        "conjunction_width": 2,
+        "documents": 20000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 438795,
+            "max_ns": 9998950,
+            "mean_ns": 1273349,
+            "median_ns": 303975,
+            "min_ns": 51244,
+            "n": 12,
+            "p25_ns": 103976,
+            "p75_ns": 542771,
+            "p95_ns": 5893602
+          },
+          "total_hits_first_iteration": 37,
+          "tset_len": 3265177,
+          "xset_len": 3265177
+        },
+        "pairs": 2971428,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 112268,
+            "max_ns": 774872,
+            "mean_ns": 168390,
+            "median_ns": 78684,
+            "min_ns": 25643,
+            "n": 12,
+            "p25_ns": 51190,
+            "p75_ns": 163458,
+            "p95_ns": 602704
+          },
+          "total_hits_first_iteration": 37
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 20997,
+            "max_ns": 459030,
+            "mean_ns": 69913,
+            "median_ns": 26285,
+            "min_ns": 13509,
+            "n": 12,
+            "p25_ns": 16973,
+            "p75_ns": 37970,
+            "p95_ns": 279487
+          },
+          "total_hits_first_iteration": 37,
+          "xtag_count": 2971428
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 29212442,
+          "first_search_ns": {
+            "iqr_ns": 353155,
+            "max_ns": 8107809,
+            "mean_ns": 1124417,
+            "median_ns": 342355,
+            "min_ns": 76590,
+            "n": 12,
+            "p25_ns": 176275,
+            "p75_ns": 529430,
+            "p95_ns": 4960254
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 357683,
+            "max_ns": 7462724,
+            "mean_ns": 986537,
+            "median_ns": 281513,
+            "min_ns": 71646,
+            "n": 12,
+            "p25_ns": 118144,
+            "p75_ns": 475827,
+            "p95_ns": 4424370
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              194,
+              250
+            ],
+            [
+              2,
+              36
+            ],
+            [
+              6,
+              34
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              10,
+              11
+            ],
+            [
+              3,
+              26
+            ],
+            [
+              6,
+              19
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              10,
+              73
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              49,
+              210
+            ]
+          ],
+          "total_hits_first_iteration": 37,
+          "tset_entries": 2971428,
+          "tset_stored_bytes": 1422839264,
+          "wire_bytes_up_per_query": [
+            25704,
+            4378,
+            5034,
+            2938,
+            3070,
+            3710,
+            3706,
+            4242,
+            4686,
+            6042,
+            2706,
+            15389
+          ],
+          "xset_entries": 2971428,
+          "xset_stored_bytes": 947410784
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 29212442,
+          "first_search_ns": {
+            "iqr_ns": 2005486,
+            "max_ns": 14982512,
+            "mean_ns": 2848308,
+            "median_ns": 1042862,
+            "min_ns": 110596,
+            "n": 12,
+            "p25_ns": 617545,
+            "p75_ns": 2623031,
+            "p95_ns": 11348960
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 1897381,
+            "max_ns": 14299639,
+            "mean_ns": 2707575,
+            "median_ns": 990448,
+            "min_ns": 112942,
+            "n": 12,
+            "p25_ns": 588193,
+            "p75_ns": 2485574,
+            "p95_ns": 10803957
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              194,
+              250
+            ],
+            [
+              2,
+              36
+            ],
+            [
+              6,
+              34
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              10,
+              11
+            ],
+            [
+              3,
+              26
+            ],
+            [
+              6,
+              19
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              10,
+              73
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              49,
+              210
+            ]
+          ],
+          "total_hits_first_iteration": 37,
+          "tset_entries": 2971428,
+          "tset_stored_bytes": 1422839264,
+          "wire_bytes_up_per_query": [
+            33704,
+            5530,
+            6122,
+            2970,
+            3134,
+            4062,
+            4538,
+            4850,
+            6958,
+            8378,
+            2834,
+            22109
+          ],
+          "xset_entries": 2971428,
+          "xset_stored_bytes": 1066267904
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 20,
+        "conjunction_width": 3,
+        "documents": 20000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 902068,
+            "max_ns": 19678498,
+            "mean_ns": 2435403,
+            "median_ns": 255110,
+            "min_ns": 101847,
+            "n": 12,
+            "p25_ns": 178515,
+            "p75_ns": 1080583,
+            "p95_ns": 11614699
+          },
+          "total_hits_first_iteration": 31,
+          "tset_len": 3265177,
+          "xset_len": 3265177
+        },
+        "pairs": 2971428,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 233625,
+            "max_ns": 1772881,
+            "mean_ns": 341346,
+            "median_ns": 185075,
+            "min_ns": 35872,
+            "n": 12,
+            "p25_ns": 100401,
+            "p75_ns": 334026,
+            "p95_ns": 1163748
+          },
+          "total_hits_first_iteration": 31
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 26922,
+            "max_ns": 601592,
+            "mean_ns": 85161,
+            "median_ns": 21030,
+            "min_ns": 14892,
+            "n": 12,
+            "p25_ns": 17655,
+            "p75_ns": 44577,
+            "p95_ns": 358938
+          },
+          "total_hits_first_iteration": 31,
+          "xtag_count": 2971428
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 29212442,
+          "first_search_ns": {
+            "iqr_ns": 612449,
+            "max_ns": 11193299,
+            "mean_ns": 1642747,
+            "median_ns": 463954,
+            "min_ns": 130477,
+            "n": 12,
+            "p25_ns": 257693,
+            "p75_ns": 870142,
+            "p95_ns": 7204872
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 479586,
+            "max_ns": 9663155,
+            "mean_ns": 1351496,
+            "median_ns": 245109,
+            "min_ns": 125971,
+            "n": 12,
+            "p25_ns": 180888,
+            "p75_ns": 660474,
+            "p95_ns": 6173722
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              194,
+              250,
+              558
+            ],
+            [
+              2,
+              36,
+              46
+            ],
+            [
+              2,
+              6,
+              34
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              91
+            ],
+            [
+              10,
+              11,
+              22
+            ],
+            [
+              3,
+              26,
+              145
+            ],
+            [
+              1,
+              6,
+              19
+            ],
+            [
+              13,
+              25,
+              71
+            ],
+            [
+              10,
+              73,
+              100
+            ],
+            [
+              2,
+              4,
+              10
+            ],
+            [
+              49,
+              109,
+              210
+            ]
+          ],
+          "total_hits_first_iteration": 31,
+          "tset_entries": 2971428,
+          "tset_stored_bytes": 1422839264,
+          "wire_bytes_up_per_query": [
+            53354,
+            8007,
+            6379,
+            4511,
+            7459,
+            5439,
+            7983,
+            5347,
+            6995,
+            11118,
+            4795,
+            21446
+          ],
+          "xset_entries": 2971428,
+          "xset_stored_bytes": 947410784
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 29212442,
+          "first_search_ns": {
+            "iqr_ns": 4588954,
+            "max_ns": 35114536,
+            "mean_ns": 6210502,
+            "median_ns": 2823265,
+            "min_ns": 202750,
+            "n": 12,
+            "p25_ns": 1180575,
+            "p75_ns": 5769529,
+            "p95_ns": 23118674
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 4375772,
+            "max_ns": 33440927,
+            "mean_ns": 5901774,
+            "median_ns": 2655461,
+            "min_ns": 198129,
+            "n": 12,
+            "p25_ns": 1094249,
+            "p75_ns": 5470021,
+            "p95_ns": 22003705
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              194,
+              250,
+              558
+            ],
+            [
+              2,
+              36,
+              46
+            ],
+            [
+              2,
+              6,
+              34
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              91
+            ],
+            [
+              10,
+              11,
+              22
+            ],
+            [
+              3,
+              26,
+              145
+            ],
+            [
+              1,
+              6,
+              19
+            ],
+            [
+              13,
+              25,
+              71
+            ],
+            [
+              10,
+              73,
+              100
+            ],
+            [
+              2,
+              4,
+              10
+            ],
+            [
+              49,
+              109,
+              210
+            ]
+          ],
+          "total_hits_first_iteration": 31,
+          "tset_entries": 2971428,
+          "tset_stored_bytes": 1422839264,
+          "wire_bytes_up_per_query": [
+            79210,
+            10631,
+            7659,
+            4575,
+            10435,
+            6495,
+            13455,
+            6147,
+            10067,
+            16654,
+            5243,
+            31654
+          ],
+          "xset_entries": 2971428,
+          "xset_stored_bytes": 1066267904
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 20,
+        "conjunction_width": 6,
+        "documents": 20000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2457979,
+            "max_ns": 48876375,
+            "mean_ns": 5857585,
+            "median_ns": 494526,
+            "min_ns": 248163,
+            "n": 12,
+            "p25_ns": 250442,
+            "p75_ns": 2708421,
+            "p95_ns": 28795278
+          },
+          "total_hits_first_iteration": 20,
+          "tset_len": 3265177,
+          "xset_len": 3265177
+        },
+        "pairs": 2971428,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 826368,
+            "max_ns": 8377621,
+            "mean_ns": 1509316,
+            "median_ns": 427331,
+            "min_ns": 170157,
+            "n": 12,
+            "p25_ns": 244587,
+            "p75_ns": 1070955,
+            "p95_ns": 6259190
+          },
+          "total_hits_first_iteration": 20
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 43894,
+            "max_ns": 1473091,
+            "mean_ns": 172907,
+            "median_ns": 24374,
+            "min_ns": 18198,
+            "n": 12,
+            "p25_ns": 18711,
+            "p75_ns": 62605,
+            "p95_ns": 821395
+          },
+          "total_hits_first_iteration": 20,
+          "xtag_count": 2971428
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 29212442,
+          "first_search_ns": {
+            "iqr_ns": 1829661,
+            "max_ns": 22811605,
+            "mean_ns": 3706520,
+            "median_ns": 808150,
+            "min_ns": 423924,
+            "n": 12,
+            "p25_ns": 555003,
+            "p75_ns": 2384664,
+            "p95_ns": 16330766
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 798522,
+            "max_ns": 16292004,
+            "mean_ns": 2437752,
+            "median_ns": 458496,
+            "min_ns": 303775,
+            "n": 12,
+            "p25_ns": 337954,
+            "p75_ns": 1136476,
+            "p95_ns": 11073370
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              194,
+              250,
+              558,
+              813,
+              1000,
+              1042
+            ],
+            [
+              2,
+              3,
+              10,
+              14,
+              36,
+              46
+            ],
+            [
+              2,
+              3,
+              3,
+              6,
+              13,
+              34
+            ],
+            [
+              1,
+              1,
+              1,
+              3,
+              21,
+              117
+            ],
+            [
+              1,
+              2,
+              4,
+              15,
+              47,
+              91
+            ],
+            [
+              1,
+              10,
+              11,
+              16,
+              22,
+              28
+            ],
+            [
+              3,
+              26,
+              145,
+              188,
+              317,
+              364
+            ],
+            [
+              1,
+              1,
+              6,
+              12,
+              19,
+              25
+            ],
+            [
+              13,
+              25,
+              46,
+              53,
+              58,
+              71
+            ],
+            [
+              10,
+              73,
+              78,
+              88,
+              88,
+              100
+            ],
+            [
+              2,
+              4,
+              10,
+              34,
+              56,
+              185
+            ],
+            [
+              49,
+              109,
+              210,
+              585,
+              596,
+              1003
+            ]
+          ],
+          "total_hits_first_iteration": 20,
+          "tset_entries": 2971428,
+          "tset_stored_bytes": 1422839264,
+          "wire_bytes_up_per_query": [
+            180705,
+            12294,
+            10754,
+            14788,
+            14510,
+            9714,
+            35012,
+            9670,
+            18850,
+            23829,
+            20591,
+            113378
+          ],
+          "xset_entries": 2971428,
+          "xset_stored_bytes": 947410784
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 29212442,
+          "first_search_ns": {
+            "iqr_ns": 15778249,
+            "max_ns": 133583561,
+            "mean_ns": 25757038,
+            "median_ns": 7201843,
+            "min_ns": 2206517,
+            "n": 12,
+            "p25_ns": 3622898,
+            "p75_ns": 19401147,
+            "p95_ns": 107407859
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 14988535,
+            "max_ns": 125587270,
+            "mean_ns": 24316695,
+            "median_ns": 6830270,
+            "min_ns": 2054293,
+            "n": 12,
+            "p25_ns": 3426596,
+            "p75_ns": 18415131,
+            "p95_ns": 101164857
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              194,
+              250,
+              558,
+              813,
+              1000,
+              1042
+            ],
+            [
+              2,
+              3,
+              10,
+              14,
+              36,
+              46
+            ],
+            [
+              2,
+              3,
+              3,
+              6,
+              13,
+              34
+            ],
+            [
+              1,
+              1,
+              1,
+              3,
+              21,
+              117
+            ],
+            [
+              1,
+              2,
+              4,
+              15,
+              47,
+              91
+            ],
+            [
+              1,
+              10,
+              11,
+              16,
+              22,
+              28
+            ],
+            [
+              3,
+              26,
+              145,
+              188,
+              317,
+              364
+            ],
+            [
+              1,
+              1,
+              6,
+              12,
+              19,
+              25
+            ],
+            [
+              13,
+              25,
+              46,
+              53,
+              58,
+              71
+            ],
+            [
+              10,
+              73,
+              78,
+              88,
+              88,
+              100
+            ],
+            [
+              2,
+              4,
+              10,
+              34,
+              56,
+              185
+            ],
+            [
+              49,
+              109,
+              210,
+              585,
+              596,
+              1003
+            ]
+          ],
+          "total_hits_first_iteration": 20,
+          "tset_entries": 2971428,
+          "tset_stored_bytes": 1422839264,
+          "wire_bytes_up_per_query": [
+            297921,
+            15782,
+            12642,
+            19364,
+            19598,
+            12498,
+            68292,
+            11686,
+            26946,
+            37493,
+            29839,
+            193474
+          ],
+          "xset_entries": 2971428,
+          "xset_stored_bytes": 1066267904
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 50,
+        "conjunction_width": 2,
+        "documents": 50000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1103889,
+            "max_ns": 24490594,
+            "mean_ns": 3268226,
+            "median_ns": 969386,
+            "min_ns": 51548,
+            "n": 12,
+            "p25_ns": 338364,
+            "p75_ns": 1442253,
+            "p95_ns": 14935471
+          },
+          "total_hits_first_iteration": 89,
+          "tset_len": 8350070,
+          "xset_len": 8350070
+        },
+        "pairs": 7579064,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 247286,
+            "max_ns": 2412613,
+            "mean_ns": 425967,
+            "median_ns": 163517,
+            "min_ns": 32414,
+            "n": 12,
+            "p25_ns": 87059,
+            "p75_ns": 334345,
+            "p95_ns": 1719439
+          },
+          "total_hits_first_iteration": 89
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 75041,
+            "max_ns": 1972896,
+            "mean_ns": 243575,
+            "median_ns": 68661,
+            "min_ns": 13634,
+            "n": 12,
+            "p25_ns": 26190,
+            "p75_ns": 101231,
+            "p95_ns": 1111482
+          },
+          "total_hits_first_iteration": 89,
+          "xtag_count": 7579064
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 58100016,
+          "first_search_ns": {
+            "iqr_ns": 980575,
+            "max_ns": 19240562,
+            "mean_ns": 2706074,
+            "median_ns": 827554,
+            "min_ns": 85021,
+            "n": 12,
+            "p25_ns": 317257,
+            "p75_ns": 1297832,
+            "p95_ns": 12183642
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 850056,
+            "max_ns": 17635525,
+            "mean_ns": 2378575,
+            "median_ns": 704849,
+            "min_ns": 73320,
+            "n": 12,
+            "p25_ns": 213453,
+            "p75_ns": 1063509,
+            "p95_ns": 10873650
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              473,
+              598
+            ],
+            [
+              7,
+              75
+            ],
+            [
+              18,
+              71
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              20,
+              28
+            ],
+            [
+              8,
+              57
+            ],
+            [
+              25,
+              59
+            ],
+            [
+              38,
+              175
+            ],
+            [
+              23,
+              149
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              137,
+              529
+            ]
+          ],
+          "total_hits_first_iteration": 89,
+          "tset_entries": 7579064,
+          "tset_stored_bytes": 3631282592,
+          "wire_bytes_up_per_query": [
+            56512,
+            5154,
+            6254,
+            2978,
+            3070,
+            3590,
+            4746,
+            6962,
+            11675,
+            8401,
+            3618,
+            32397
+          ],
+          "xset_entries": 7579064,
+          "xset_stored_bytes": 2418632352
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 58100016,
+          "first_search_ns": {
+            "iqr_ns": 4528354,
+            "max_ns": 37069652,
+            "mean_ns": 7076486,
+            "median_ns": 2765244,
+            "min_ns": 181151,
+            "n": 12,
+            "p25_ns": 1490018,
+            "p75_ns": 6018372,
+            "p95_ns": 28645058
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 4326718,
+            "max_ns": 35376425,
+            "mean_ns": 6734788,
+            "median_ns": 2621070,
+            "min_ns": 164353,
+            "n": 12,
+            "p25_ns": 1385824,
+            "p75_ns": 5712542,
+            "p95_ns": 27322893
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              473,
+              598
+            ],
+            [
+              7,
+              75
+            ],
+            [
+              18,
+              71
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              20,
+              28
+            ],
+            [
+              8,
+              57
+            ],
+            [
+              25,
+              59
+            ],
+            [
+              38,
+              175
+            ],
+            [
+              23,
+              149
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              137,
+              529
+            ]
+          ],
+          "total_hits_first_iteration": 89,
+          "tset_entries": 7579064,
+          "tset_stored_bytes": 3631282592,
+          "wire_bytes_up_per_query": [
+            75648,
+            7554,
+            8526,
+            3138,
+            3262,
+            4486,
+            6570,
+            8850,
+            17275,
+            13169,
+            3810,
+            49325
+          ],
+          "xset_entries": 7579064,
+          "xset_stored_bytes": 2721794912
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 50,
+        "conjunction_width": 3,
+        "documents": 50000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2442145,
+            "max_ns": 48189488,
+            "mean_ns": 6101024,
+            "median_ns": 764563,
+            "min_ns": 102205,
+            "n": 12,
+            "p25_ns": 300545,
+            "p75_ns": 2742690,
+            "p95_ns": 29327258
+          },
+          "total_hits_first_iteration": 71,
+          "tset_len": 8350070,
+          "xset_len": 8350070
+        },
+        "pairs": 7579064,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 538296,
+            "max_ns": 5835051,
+            "mean_ns": 930893,
+            "median_ns": 445724,
+            "min_ns": 56247,
+            "n": 12,
+            "p25_ns": 187562,
+            "p75_ns": 725858,
+            "p95_ns": 3553901
+          },
+          "total_hits_first_iteration": 71
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 117935,
+            "max_ns": 3912773,
+            "mean_ns": 426733,
+            "median_ns": 37610,
+            "min_ns": 15737,
+            "n": 12,
+            "p25_ns": 22585,
+            "p75_ns": 140520,
+            "p95_ns": 2110613
+          },
+          "total_hits_first_iteration": 71,
+          "xtag_count": 7579064
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 58100016,
+          "first_search_ns": {
+            "iqr_ns": 1653713,
+            "max_ns": 26945850,
+            "mean_ns": 3931421,
+            "median_ns": 969434,
+            "min_ns": 206102,
+            "n": 12,
+            "p25_ns": 411878,
+            "p75_ns": 2065591,
+            "p95_ns": 17875850
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 1217143,
+            "max_ns": 23019348,
+            "mean_ns": 3219744,
+            "median_ns": 462350,
+            "min_ns": 175404,
+            "n": 12,
+            "p25_ns": 241319,
+            "p75_ns": 1458462,
+            "p95_ns": 15380241
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              473,
+              598,
+              1438
+            ],
+            [
+              7,
+              75,
+              128
+            ],
+            [
+              3,
+              18,
+              71
+            ],
+            [
+              4,
+              5,
+              5
+            ],
+            [
+              1,
+              6,
+              269
+            ],
+            [
+              20,
+              28,
+              68
+            ],
+            [
+              8,
+              57,
+              367
+            ],
+            [
+              2,
+              25,
+              59
+            ],
+            [
+              38,
+              79,
+              175
+            ],
+            [
+              23,
+              149,
+              222
+            ],
+            [
+              3,
+              6,
+              15
+            ],
+            [
+              137,
+              239,
+              529
+            ]
+          ],
+          "total_hits_first_iteration": 71,
+          "tset_entries": 7579064,
+          "tset_stored_bytes": 3631282592,
+          "wire_bytes_up_per_query": [
+            121723,
+            11513,
+            7103,
+            4483,
+            13845,
+            7751,
+            21340,
+            7655,
+            17380,
+            17087,
+            5519,
+            44331
+          ],
+          "xset_entries": 7579064,
+          "xset_stored_bytes": 2418632352
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 58100016,
+          "first_search_ns": {
+            "iqr_ns": 10101831,
+            "max_ns": 88883724,
+            "mean_ns": 15382778,
+            "median_ns": 7785945,
+            "min_ns": 475938,
+            "n": 12,
+            "p25_ns": 2948942,
+            "p75_ns": 13050773,
+            "p95_ns": 57952695
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 9634603,
+            "max_ns": 83480647,
+            "mean_ns": 14595811,
+            "median_ns": 7365536,
+            "min_ns": 458100,
+            "n": 12,
+            "p25_ns": 2845147,
+            "p75_ns": 12479750,
+            "p95_ns": 54949582
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              473,
+              598,
+              1438
+            ],
+            [
+              7,
+              75,
+              128
+            ],
+            [
+              3,
+              18,
+              71
+            ],
+            [
+              4,
+              5,
+              5
+            ],
+            [
+              1,
+              6,
+              269
+            ],
+            [
+              20,
+              28,
+              68
+            ],
+            [
+              8,
+              57,
+              367
+            ],
+            [
+              2,
+              25,
+              59
+            ],
+            [
+              38,
+              79,
+              175
+            ],
+            [
+              23,
+              149,
+              222
+            ],
+            [
+              3,
+              6,
+              15
+            ],
+            [
+              137,
+              239,
+              529
+            ]
+          ],
+          "total_hits_first_iteration": 71,
+          "tset_entries": 7579064,
+          "tset_stored_bytes": 3631282592,
+          "wire_bytes_up_per_query": [
+            186875,
+            18009,
+            9951,
+            4803,
+            22645,
+            10823,
+            34908,
+            10343,
+            25508,
+            28959,
+            6191,
+            68907
+          ],
+          "xset_entries": 7579064,
+          "xset_stored_bytes": 2721794912
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 50,
+        "conjunction_width": 6,
+        "documents": 50000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 6029510,
+            "max_ns": 119219606,
+            "mean_ns": 14655545,
+            "median_ns": 1123274,
+            "min_ns": 249149,
+            "n": 12,
+            "p25_ns": 681648,
+            "p75_ns": 6711158,
+            "p95_ns": 72629666
+          },
+          "total_hits_first_iteration": 39,
+          "tset_len": 8350070,
+          "xset_len": 8350070
+        },
+        "pairs": 7579064,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1989806,
+            "max_ns": 22137360,
+            "mean_ns": 4051070,
+            "median_ns": 1033636,
+            "min_ns": 318433,
+            "n": 12,
+            "p25_ns": 539379,
+            "p75_ns": 2529185,
+            "p95_ns": 17698626
+          },
+          "total_hits_first_iteration": 39
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 170371,
+            "max_ns": 9015467,
+            "mean_ns": 1027202,
+            "median_ns": 39492,
+            "min_ns": 19485,
+            "n": 12,
+            "p25_ns": 26988,
+            "p75_ns": 197359,
+            "p95_ns": 5474713
+          },
+          "total_hits_first_iteration": 39,
+          "xtag_count": 7579064
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 58100016,
+          "first_search_ns": {
+            "iqr_ns": 4824587,
+            "max_ns": 58586892,
+            "mean_ns": 9330302,
+            "median_ns": 1562019,
+            "min_ns": 754143,
+            "n": 12,
+            "p25_ns": 1071057,
+            "p75_ns": 5895644,
+            "p95_ns": 42689075
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 2288166,
+            "max_ns": 39397742,
+            "mean_ns": 5894897,
+            "median_ns": 661824,
+            "min_ns": 363056,
+            "n": 12,
+            "p25_ns": 532476,
+            "p75_ns": 2820642,
+            "p95_ns": 28177226
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              473,
+              598,
+              1438,
+              2050,
+              2617,
+              2646
+            ],
+            [
+              5,
+              7,
+              37,
+              38,
+              75,
+              128
+            ],
+            [
+              3,
+              5,
+              12,
+              18,
+              38,
+              71
+            ],
+            [
+              4,
+              5,
+              5,
+              12,
+              57,
+              292
+            ],
+            [
+              1,
+              6,
+              11,
+              40,
+              122,
+              269
+            ],
+            [
+              1,
+              20,
+              28,
+              38,
+              68,
+              73
+            ],
+            [
+              8,
+              57,
+              367,
+              498,
+              786,
+              970
+            ],
+            [
+              2,
+              2,
+              25,
+              35,
+              55,
+              59
+            ],
+            [
+              38,
+              79,
+              92,
+              126,
+              158,
+              175
+            ],
+            [
+              23,
+              149,
+              188,
+              203,
+              204,
+              222
+            ],
+            [
+              3,
+              6,
+              15,
+              89,
+              139,
+              483
+            ],
+            [
+              137,
+              239,
+              529,
+              1439,
+              1447,
+              2498
+            ]
+          ],
+          "total_hits_first_iteration": 39,
+          "tset_entries": 7579064,
+          "tset_stored_bytes": 3631282592,
+          "wire_bytes_up_per_query": [
+            455227,
+            20932,
+            12190,
+            23507,
+            24243,
+            15126,
+            115723,
+            14758,
+            40225,
+            39547,
+            36186,
+            261402
+          ],
+          "xset_entries": 7579064,
+          "xset_stored_bytes": 2418632352
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 58100016,
+          "first_search_ns": {
+            "iqr_ns": 36864038,
+            "max_ns": 332410437,
+            "mean_ns": 63492184,
+            "median_ns": 18607446,
+            "min_ns": 5036323,
+            "n": 12,
+            "p25_ns": 8670455,
+            "p75_ns": 45534493,
+            "p95_ns": 266708679
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 34874164,
+            "max_ns": 311764033,
+            "mean_ns": 59706804,
+            "median_ns": 17611788,
+            "min_ns": 4837900,
+            "n": 12,
+            "p25_ns": 8262434,
+            "p75_ns": 43136598,
+            "p95_ns": 250239000
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              473,
+              598,
+              1438,
+              2050,
+              2617,
+              2646
+            ],
+            [
+              5,
+              7,
+              37,
+              38,
+              75,
+              128
+            ],
+            [
+              3,
+              5,
+              12,
+              18,
+              38,
+              71
+            ],
+            [
+              4,
+              5,
+              5,
+              12,
+              57,
+              292
+            ],
+            [
+              1,
+              6,
+              11,
+              40,
+              122,
+              269
+            ],
+            [
+              1,
+              20,
+              28,
+              38,
+              68,
+              73
+            ],
+            [
+              8,
+              57,
+              367,
+              498,
+              786,
+              970
+            ],
+            [
+              2,
+              2,
+              25,
+              35,
+              55,
+              59
+            ],
+            [
+              38,
+              79,
+              92,
+              126,
+              158,
+              175
+            ],
+            [
+              23,
+              149,
+              188,
+              203,
+              204,
+              222
+            ],
+            [
+              3,
+              6,
+              15,
+              89,
+              139,
+              483
+            ],
+            [
+              137,
+              239,
+              529,
+              1439,
+              1447,
+              2498
+            ]
+          ],
+          "total_hits_first_iteration": 39,
+          "tset_entries": 7579064,
+          "tset_stored_bytes": 3631282592,
+          "wire_bytes_up_per_query": [
+            754395,
+            30052,
+            16798,
+            35379,
+            38579,
+            22390,
+            201419,
+            20390,
+            60385,
+            70459,
+            59610,
+            458266
+          ],
+          "xset_entries": 7579064,
+          "xset_stored_bytes": 2721794912
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 100,
+        "conjunction_width": 2,
+        "documents": 100000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2115930,
+            "max_ns": 49302680,
+            "mean_ns": 6337892,
+            "median_ns": 1705420,
+            "min_ns": 158049,
+            "n": 12,
+            "p25_ns": 391761,
+            "p75_ns": 2507691,
+            "p95_ns": 29778062
+          },
+          "total_hits_first_iteration": 164,
+          "tset_len": 16789065,
+          "xset_len": 16789065
+        },
+        "pairs": 15255073,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 491688,
+            "max_ns": 4676421,
+            "mean_ns": 843482,
+            "median_ns": 299495,
+            "min_ns": 34500,
+            "n": 12,
+            "p25_ns": 152002,
+            "p75_ns": 643690,
+            "p95_ns": 3527945
+          },
+          "total_hits_first_iteration": 164
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 138775,
+            "max_ns": 7028203,
+            "mean_ns": 784619,
+            "median_ns": 141582,
+            "min_ns": 21511,
+            "n": 12,
+            "p25_ns": 46974,
+            "p75_ns": 185749,
+            "p95_ns": 3882801
+          },
+          "total_hits_first_iteration": 164,
+          "xtag_count": 15255073
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 80793300,
+          "first_search_ns": {
+            "iqr_ns": 1840893,
+            "max_ns": 38605376,
+            "mean_ns": 5330461,
+            "median_ns": 1594680,
+            "min_ns": 193979,
+            "n": 12,
+            "p25_ns": 560499,
+            "p75_ns": 2401392,
+            "p95_ns": 24232192
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 1547310,
+            "max_ns": 34939859,
+            "mean_ns": 4625351,
+            "median_ns": 1384847,
+            "min_ns": 154719,
+            "n": 12,
+            "p25_ns": 342354,
+            "p75_ns": 1889664,
+            "p95_ns": 21366334
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              970,
+              1178
+            ],
+            [
+              8,
+              162
+            ],
+            [
+              37,
+              117
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              7,
+              13
+            ],
+            [
+              31,
+              64
+            ],
+            [
+              18,
+              118
+            ],
+            [
+              43,
+              137
+            ],
+            [
+              67,
+              360
+            ],
+            [
+              37,
+              302
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              272,
+              1128
+            ]
+          ],
+          "total_hits_first_iteration": 164,
+          "tset_entries": 15255073,
+          "tset_stored_bytes": 7313559840,
+          "wire_bytes_up_per_query": [
+            116001,
+            9171,
+            7434,
+            3034,
+            3262,
+            5086,
+            7046,
+            13070,
+            19077,
+            15063,
+            2782,
+            66898
+          ],
+          "xset_entries": 15255073,
+          "xset_stored_bytes": 4872748160
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 80793300,
+          "first_search_ns": {
+            "iqr_ns": 9064469,
+            "max_ns": 74708957,
+            "mean_ns": 14318216,
+            "median_ns": 5372662,
+            "min_ns": 354757,
+            "n": 12,
+            "p25_ns": 2839848,
+            "p75_ns": 11904317,
+            "p95_ns": 58801755
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 8625579,
+            "max_ns": 70767466,
+            "mean_ns": 13598119,
+            "median_ns": 5096852,
+            "min_ns": 338970,
+            "n": 12,
+            "p25_ns": 2718343,
+            "p75_ns": 11343922,
+            "p95_ns": 55797132
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              970,
+              1178
+            ],
+            [
+              8,
+              162
+            ],
+            [
+              37,
+              117
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              7,
+              13
+            ],
+            [
+              31,
+              64
+            ],
+            [
+              18,
+              118
+            ],
+            [
+              43,
+              137
+            ],
+            [
+              67,
+              360
+            ],
+            [
+              37,
+              302
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              272,
+              1128
+            ]
+          ],
+          "total_hits_first_iteration": 164,
+          "tset_entries": 15255073,
+          "tset_stored_bytes": 7313559840,
+          "wire_bytes_up_per_query": [
+            153697,
+            14355,
+            11178,
+            3162,
+            3678,
+            7134,
+            10822,
+            17454,
+            30597,
+            24727,
+            3134,
+            102994
+          ],
+          "xset_entries": 15255073,
+          "xset_stored_bytes": 5482951080
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 100,
+        "conjunction_width": 3,
+        "documents": 100000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 4019285,
+            "max_ns": 97235295,
+            "mean_ns": 11903983,
+            "median_ns": 1300661,
+            "min_ns": 200942,
+            "n": 12,
+            "p25_ns": 475772,
+            "p75_ns": 4495057,
+            "p95_ns": 58732004
+          },
+          "total_hits_first_iteration": 124,
+          "tset_len": 16789065,
+          "xset_len": 16789065
+        },
+        "pairs": 15255073,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1081776,
+            "max_ns": 11733846,
+            "mean_ns": 1860982,
+            "median_ns": 864015,
+            "min_ns": 52526,
+            "n": 12,
+            "p25_ns": 333840,
+            "p75_ns": 1415616,
+            "p95_ns": 7319891
+          },
+          "total_hits_first_iteration": 124
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 242029,
+            "max_ns": 14855669,
+            "mean_ns": 1552854,
+            "median_ns": 91240,
+            "min_ns": 21943,
+            "n": 12,
+            "p25_ns": 48699,
+            "p75_ns": 290728,
+            "p95_ns": 8082769
+          },
+          "total_hits_first_iteration": 124,
+          "xtag_count": 15255073
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 80793300,
+          "first_search_ns": {
+            "iqr_ns": 3123969,
+            "max_ns": 56139955,
+            "mean_ns": 7868060,
+            "median_ns": 1752189,
+            "min_ns": 371491,
+            "n": 12,
+            "p25_ns": 655298,
+            "p75_ns": 3779267,
+            "p95_ns": 36527145
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 2234926,
+            "max_ns": 46058140,
+            "mean_ns": 6261089,
+            "median_ns": 863039,
+            "min_ns": 260609,
+            "n": 12,
+            "p25_ns": 398437,
+            "p75_ns": 2633363,
+            "p95_ns": 30350203
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              970,
+              1178,
+              3022
+            ],
+            [
+              8,
+              162,
+              257
+            ],
+            [
+              5,
+              37,
+              117
+            ],
+            [
+              4,
+              4,
+              4
+            ],
+            [
+              7,
+              13,
+              515
+            ],
+            [
+              31,
+              64,
+              131
+            ],
+            [
+              18,
+              118,
+              735
+            ],
+            [
+              2,
+              43,
+              137
+            ],
+            [
+              67,
+              157,
+              360
+            ],
+            [
+              37,
+              302,
+              441
+            ],
+            [
+              3,
+              11,
+              27
+            ],
+            [
+              272,
+              505,
+              1128
+            ]
+          ],
+          "total_hits_first_iteration": 124,
+          "tset_entries": 15255073,
+          "tset_stored_bytes": 7313559840,
+          "wire_bytes_up_per_query": [
+            261995,
+            21549,
+            7759,
+            4703,
+            24708,
+            11007,
+            37276,
+            13319,
+            26469,
+            32142,
+            4551,
+            93275
+          ],
+          "xset_entries": 15255073,
+          "xset_stored_bytes": 4872748160
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 80793300,
+          "first_search_ns": {
+            "iqr_ns": 20885136,
+            "max_ns": 183913183,
+            "mean_ns": 31648307,
+            "median_ns": 15258607,
+            "min_ns": 687654,
+            "n": 12,
+            "p25_ns": 5517335,
+            "p75_ns": 26402471,
+            "p95_ns": 120896720
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 19861687,
+            "max_ns": 172658593,
+            "mean_ns": 29928959,
+            "median_ns": 14471433,
+            "min_ns": 655221,
+            "n": 12,
+            "p25_ns": 5218777,
+            "p75_ns": 25080464,
+            "p95_ns": 114143322
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              970,
+              1178,
+              3022
+            ],
+            [
+              8,
+              162,
+              257
+            ],
+            [
+              5,
+              37,
+              117
+            ],
+            [
+              4,
+              4,
+              4
+            ],
+            [
+              7,
+              13,
+              515
+            ],
+            [
+              31,
+              64,
+              131
+            ],
+            [
+              18,
+              118,
+              735
+            ],
+            [
+              2,
+              43,
+              137
+            ],
+            [
+              67,
+              157,
+              360
+            ],
+            [
+              37,
+              302,
+              441
+            ],
+            [
+              3,
+              11,
+              27
+            ],
+            [
+              272,
+              505,
+              1128
+            ]
+          ],
+          "total_hits_first_iteration": 124,
+          "tset_entries": 15255073,
+          "tset_stored_bytes": 7313559840,
+          "wire_bytes_up_per_query": [
+            396395,
+            34957,
+            12687,
+            4959,
+            41604,
+            17247,
+            64572,
+            19079,
+            43013,
+            55918,
+            5767,
+            145531
+          ],
+          "xset_entries": 15255073,
+          "xset_stored_bytes": 5482951080
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 100,
+        "conjunction_width": 6,
+        "documents": 100000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 10124035,
+            "max_ns": 239990621,
+            "mean_ns": 28782538,
+            "median_ns": 1738872,
+            "min_ns": 493427,
+            "n": 12,
+            "p25_ns": 938423,
+            "p75_ns": 11062458,
+            "p95_ns": 145162722
+          },
+          "total_hits_first_iteration": 68,
+          "tset_len": 16789065,
+          "xset_len": 16789065
+        },
+        "pairs": 15255073,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 4083185,
+            "max_ns": 44687882,
+            "mean_ns": 8119892,
+            "median_ns": 2099918,
+            "min_ns": 526059,
+            "n": 12,
+            "p25_ns": 977136,
+            "p75_ns": 5060321,
+            "p95_ns": 35636635
+          },
+          "total_hits_first_iteration": 68
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 726139,
+            "max_ns": 32155360,
+            "mean_ns": 3717132,
+            "median_ns": 135763,
+            "min_ns": 32365,
+            "n": 12,
+            "p25_ns": 64328,
+            "p75_ns": 790467,
+            "p95_ns": 19870648
+          },
+          "total_hits_first_iteration": 68,
+          "xtag_count": 15255073
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 80793300,
+          "first_search_ns": {
+            "iqr_ns": 9711559,
+            "max_ns": 122224906,
+            "mean_ns": 19180559,
+            "median_ns": 3017900,
+            "min_ns": 1252975,
+            "n": 12,
+            "p25_ns": 1768385,
+            "p75_ns": 11479944,
+            "p95_ns": 89626364
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 4066129,
+            "max_ns": 79344916,
+            "mean_ns": 11431812,
+            "median_ns": 1057463,
+            "min_ns": 519249,
+            "n": 12,
+            "p25_ns": 924715,
+            "p75_ns": 4990844,
+            "p95_ns": 55504025
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              970,
+              1178,
+              3022,
+              4184,
+              5188,
+              5441
+            ],
+            [
+              7,
+              8,
+              61,
+              79,
+              162,
+              257
+            ],
+            [
+              5,
+              10,
+              26,
+              37,
+              72,
+              117
+            ],
+            [
+              4,
+              4,
+              4,
+              16,
+              120,
+              591
+            ],
+            [
+              7,
+              13,
+              24,
+              79,
+              229,
+              515
+            ],
+            [
+              2,
+              31,
+              59,
+              64,
+              131,
+              159
+            ],
+            [
+              18,
+              118,
+              735,
+              916,
+              1610,
+              1913
+            ],
+            [
+              2,
+              2,
+              43,
+              69,
+              113,
+              137
+            ],
+            [
+              67,
+              157,
+              190,
+              259,
+              345,
+              360
+            ],
+            [
+              37,
+              302,
+              383,
+              399,
+              403,
+              441
+            ],
+            [
+              3,
+              11,
+              27,
+              193,
+              257,
+              992
+            ],
+            [
+              272,
+              505,
+              1128,
+              2894,
+              2901,
+              5042
+            ]
+          ],
+          "total_hits_first_iteration": 68,
+          "tset_entries": 15255073,
+          "tset_stored_bytes": 7313559840,
+          "wire_bytes_up_per_query": [
+            912312,
+            29684,
+            15898,
+            35593,
+            38689,
+            22318,
+            214164,
+            23293,
+            65765,
+            80588,
+            63928,
+            540825
+          ],
+          "xset_entries": 15255073,
+          "xset_stored_bytes": 4872748160
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 80793300,
+          "first_search_ns": {
+            "iqr_ns": 74581888,
+            "max_ns": 695139900,
+            "mean_ns": 131126230,
+            "median_ns": 37879585,
+            "min_ns": 9285743,
+            "n": 12,
+            "p25_ns": 17548752,
+            "p75_ns": 92130640,
+            "p95_ns": 552756462
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 69955106,
+            "max_ns": 651557221,
+            "mean_ns": 123012603,
+            "median_ns": 35919125,
+            "min_ns": 8888503,
+            "n": 12,
+            "p25_ns": 16633447,
+            "p75_ns": 86588553,
+            "p95_ns": 517635675
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              970,
+              1178,
+              3022,
+              4184,
+              5188,
+              5441
+            ],
+            [
+              7,
+              8,
+              61,
+              79,
+              162,
+              257
+            ],
+            [
+              5,
+              10,
+              26,
+              37,
+              72,
+              117
+            ],
+            [
+              4,
+              4,
+              4,
+              16,
+              120,
+              591
+            ],
+            [
+              7,
+              13,
+              24,
+              79,
+              229,
+              515
+            ],
+            [
+              2,
+              31,
+              59,
+              64,
+              131,
+              159
+            ],
+            [
+              18,
+              118,
+              735,
+              916,
+              1610,
+              1913
+            ],
+            [
+              2,
+              2,
+              43,
+              69,
+              113,
+              137
+            ],
+            [
+              67,
+              157,
+              190,
+              259,
+              345,
+              360
+            ],
+            [
+              37,
+              302,
+              383,
+              399,
+              403,
+              441
+            ],
+            [
+              3,
+              11,
+              27,
+              193,
+              257,
+              992
+            ],
+            [
+              272,
+              505,
+              1128,
+              2894,
+              2901,
+              5042
+            ]
+          ],
+          "total_hits_first_iteration": 68,
+          "tset_entries": 15255073,
+          "tset_stored_bytes": 7313559840,
+          "wire_bytes_up_per_query": [
+            1520728,
+            47828,
+            24282,
+            59113,
+            66209,
+            36526,
+            383508,
+            34941,
+            107717,
+            142284,
+            111288,
+            939865
+          ],
+          "xset_entries": 15255073,
+          "xset_stored_bytes": 5482951080
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 250,
+        "conjunction_width": 2,
+        "documents": 250000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 4352674,
+            "max_ns": 120723522,
+            "mean_ns": 15898825,
+            "median_ns": 4538754,
+            "min_ns": 404637,
+            "n": 12,
+            "p25_ns": 1409178,
+            "p75_ns": 5761852,
+            "p95_ns": 74821419
+          },
+          "total_hits_first_iteration": 397,
+          "tset_len": 42047254,
+          "xset_len": 42047254
+        },
+        "pairs": 38208979,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1261656,
+            "max_ns": 12113066,
+            "mean_ns": 2340482,
+            "median_ns": 778063,
+            "min_ns": 51667,
+            "n": 12,
+            "p25_ns": 426838,
+            "p75_ns": 1688494,
+            "p95_ns": 10139753
+          },
+          "total_hits_first_iteration": 397
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 938026,
+            "max_ns": 52864850,
+            "mean_ns": 6200685,
+            "median_ns": 818519,
+            "min_ns": 37000,
+            "n": 12,
+            "p25_ns": 205195,
+            "p75_ns": 1143221,
+            "p95_ns": 32386533
+          },
+          "total_hits_first_iteration": 397,
+          "xtag_count": 38208979
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 137476444,
+          "first_search_ns": {
+            "iqr_ns": 3825284,
+            "max_ns": 94356371,
+            "mean_ns": 13038429,
+            "median_ns": 3678801,
+            "min_ns": 341614,
+            "n": 12,
+            "p25_ns": 1641211,
+            "p75_ns": 5466495,
+            "p95_ns": 60105567
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 3184883,
+            "max_ns": 85435433,
+            "mean_ns": 11292392,
+            "median_ns": 3169924,
+            "min_ns": 300478,
+            "n": 12,
+            "p25_ns": 1096219,
+            "p75_ns": 4281102,
+            "p95_ns": 52851745
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              2338,
+              2843
+            ],
+            [
+              29,
+              394
+            ],
+            [
+              87,
+              317
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              22,
+              49
+            ],
+            [
+              88,
+              181
+            ],
+            [
+              43,
+              285
+            ],
+            [
+              96,
+              341
+            ],
+            [
+              158,
+              898
+            ],
+            [
+              94,
+              738
+            ],
+            [
+              9,
+              28
+            ],
+            [
+              718,
+              2913
+            ]
+          ],
+          "total_hits_first_iteration": 397,
+          "tset_entries": 38208979,
+          "tset_stored_bytes": 18326293632,
+          "wire_bytes_up_per_query": [
+            277223,
+            19874,
+            19754,
+            3030,
+            5150,
+            16721,
+            16359,
+            16852,
+            48431,
+            37191,
+            2930,
+            172756
+          ],
+          "xset_entries": 38208979,
+          "xset_stored_bytes": 12212856992
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 137476444,
+          "first_search_ns": {
+            "iqr_ns": 21155033,
+            "max_ns": 176189169,
+            "mean_ns": 34648104,
+            "median_ns": 12901053,
+            "min_ns": 562941,
+            "n": 12,
+            "p25_ns": 6916332,
+            "p75_ns": 28071365,
+            "p95_ns": 143110841
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 20054213,
+            "max_ns": 165820452,
+            "mean_ns": 32720888,
+            "median_ns": 12258922,
+            "min_ns": 535336,
+            "n": 12,
+            "p25_ns": 6652449,
+            "p75_ns": 26706662,
+            "p95_ns": 134625742
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              2338,
+              2843
+            ],
+            [
+              29,
+              394
+            ],
+            [
+              87,
+              317
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              22,
+              49
+            ],
+            [
+              88,
+              181
+            ],
+            [
+              43,
+              285
+            ],
+            [
+              96,
+              341
+            ],
+            [
+              158,
+              898
+            ],
+            [
+              94,
+              738
+            ],
+            [
+              9,
+              28
+            ],
+            [
+              718,
+              2913
+            ]
+          ],
+          "total_hits_first_iteration": 397,
+          "tset_entries": 38208979,
+          "tset_stored_bytes": 18326293632,
+          "wire_bytes_up_per_query": [
+            368199,
+            32482,
+            29898,
+            3318,
+            6718,
+            22513,
+            25479,
+            27764,
+            77167,
+            60807,
+            3826,
+            265972
+          ],
+          "xset_entries": 38208979,
+          "xset_stored_bytes": 13741216152
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 250,
+        "conjunction_width": 3,
+        "documents": 250000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 9810530,
+            "max_ns": 237738104,
+            "mean_ns": 29897445,
+            "median_ns": 3709815,
+            "min_ns": 199442,
+            "n": 12,
+            "p25_ns": 1388981,
+            "p75_ns": 11199511,
+            "p95_ns": 147282209
+          },
+          "total_hits_first_iteration": 298,
+          "tset_len": 42047254,
+          "xset_len": 42047254
+        },
+        "pairs": 38208979,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 3227951,
+            "max_ns": 28964082,
+            "mean_ns": 4967623,
+            "median_ns": 2340603,
+            "min_ns": 76497,
+            "n": 12,
+            "p25_ns": 789877,
+            "p75_ns": 4017828,
+            "p95_ns": 19368484
+          },
+          "total_hits_first_iteration": 298
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2480215,
+            "max_ns": 100444349,
+            "mean_ns": 11686680,
+            "median_ns": 678013,
+            "min_ns": 31611,
+            "n": 12,
+            "p25_ns": 172360,
+            "p75_ns": 2652575,
+            "p95_ns": 61624461
+          },
+          "total_hits_first_iteration": 298,
+          "xtag_count": 38208979
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 137476444,
+          "first_search_ns": {
+            "iqr_ns": 7315735,
+            "max_ns": 136815946,
+            "mean_ns": 19251281,
+            "median_ns": 4505302,
+            "min_ns": 543485,
+            "n": 12,
+            "p25_ns": 1417510,
+            "p75_ns": 8733245,
+            "p95_ns": 90403868
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 4919506,
+            "max_ns": 108549745,
+            "mean_ns": 14892141,
+            "median_ns": 2202649,
+            "min_ns": 345425,
+            "n": 12,
+            "p25_ns": 869277,
+            "p75_ns": 5788783,
+            "p95_ns": 73023394
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              2338,
+              2843,
+              7384
+            ],
+            [
+              29,
+              394,
+              629
+            ],
+            [
+              15,
+              87,
+              317
+            ],
+            [
+              8,
+              8,
+              9
+            ],
+            [
+              22,
+              49,
+              1336
+            ],
+            [
+              88,
+              181,
+              389
+            ],
+            [
+              43,
+              285,
+              1824
+            ],
+            [
+              2,
+              96,
+              341
+            ],
+            [
+              158,
+              390,
+              898
+            ],
+            [
+              94,
+              738,
+              1153
+            ],
+            [
+              9,
+              28,
+              61
+            ],
+            [
+              718,
+              1287,
+              2913
+            ]
+          ],
+          "total_hits_first_iteration": 298,
+          "tset_entries": 38208979,
+          "tset_stored_bytes": 18326293632,
+          "wire_bytes_up_per_query": [
+            638710,
+            44781,
+            19295,
+            4827,
+            62763,
+            35564,
+            86087,
+            15713,
+            68762,
+            83789,
+            5991,
+            243937
+          ],
+          "xset_entries": 38208979,
+          "xset_stored_bytes": 12212856992
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 137476444,
+          "first_search_ns": {
+            "iqr_ns": 50621858,
+            "max_ns": 434691422,
+            "mean_ns": 76673717,
+            "median_ns": 38264691,
+            "min_ns": 1070021,
+            "n": 12,
+            "p25_ns": 14107581,
+            "p75_ns": 64729439,
+            "p95_ns": 291541090
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 47770924,
+            "max_ns": 405748436,
+            "mean_ns": 72105002,
+            "median_ns": 36152085,
+            "min_ns": 1023176,
+            "n": 12,
+            "p25_ns": 13475823,
+            "p75_ns": 61246747,
+            "p95_ns": 273288465
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              2338,
+              2843,
+              7384
+            ],
+            [
+              29,
+              394,
+              629
+            ],
+            [
+              15,
+              87,
+              317
+            ],
+            [
+              8,
+              8,
+              9
+            ],
+            [
+              22,
+              49,
+              1336
+            ],
+            [
+              88,
+              181,
+              389
+            ],
+            [
+              43,
+              285,
+              1824
+            ],
+            [
+              2,
+              96,
+              341
+            ],
+            [
+              158,
+              390,
+              898
+            ],
+            [
+              94,
+              738,
+              1153
+            ],
+            [
+              9,
+              28,
+              61
+            ],
+            [
+              718,
+              1287,
+              2913
+            ]
+          ],
+          "total_hits_first_iteration": 298,
+          "tset_entries": 38208979,
+          "tset_stored_bytes": 18326293632,
+          "wire_bytes_up_per_query": [
+            965974,
+            77517,
+            32223,
+            5371,
+            107083,
+            53804,
+            153575,
+            29697,
+            109978,
+            144301,
+            8839,
+            378337
+          ],
+          "xset_entries": 38208979,
+          "xset_stored_bytes": 13741216152
+        },
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 250,
+        "conjunction_width": 6,
+        "documents": 250000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 25509239,
+            "max_ns": 588032678,
+            "mean_ns": 72060611,
+            "median_ns": 5071132,
+            "min_ns": 514157,
+            "n": 12,
+            "p25_ns": 2305190,
+            "p75_ns": 27814429,
+            "p95_ns": 364141602
+          },
+          "total_hits_first_iteration": 166,
+          "tset_len": 42047254,
+          "xset_len": 42047254
+        },
+        "pairs": 38208979,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 13893144,
+            "max_ns": 112959301,
+            "mean_ns": 21635870,
+            "median_ns": 5883218,
+            "min_ns": 1320376,
+            "n": 12,
+            "p25_ns": 2682177,
+            "p75_ns": 16575321,
+            "p95_ns": 90755743
+          },
+          "total_hits_first_iteration": 166
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 9580139,
+            "max_ns": 239200851,
+            "mean_ns": 28381430,
+            "median_ns": 1208872,
+            "min_ns": 57061,
+            "n": 12,
+            "p25_ns": 459185,
+            "p75_ns": 10039324,
+            "p95_ns": 146744132
+          },
+          "total_hits_first_iteration": 166,
+          "xtag_count": 38208979
+        },
+        "queries": 12,
+        "sdsse_cq": {
+          "client_bytes": 137476444,
+          "first_search_ns": {
+            "iqr_ns": 22420653,
+            "max_ns": 298568635,
+            "mean_ns": 47403042,
+            "median_ns": 7889606,
+            "min_ns": 2314807,
+            "n": 12,
+            "p25_ns": 4314038,
+            "p75_ns": 26734691,
+            "p95_ns": 223233623
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 9725750,
+            "max_ns": 192532839,
+            "mean_ns": 27983952,
+            "median_ns": 2872061,
+            "min_ns": 829033,
+            "n": 12,
+            "p25_ns": 1805803,
+            "p75_ns": 11531553,
+            "p95_ns": 137749314
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              2338,
+              2843,
+              7384,
+              10350,
+              12984,
+              13452
+            ],
+            [
+              18,
+              29,
+              174,
+              182,
+              394,
+              629
+            ],
+            [
+              15,
+              21,
+              60,
+              87,
+              176,
+              317
+            ],
+            [
+              8,
+              8,
+              9,
+              44,
+              316,
+              1456
+            ],
+            [
+              22,
+              49,
+              61,
+              210,
+              586,
+              1336
+            ],
+            [
+              9,
+              88,
+              181,
+              189,
+              389,
+              406
+            ],
+            [
+              43,
+              285,
+              1824,
+              2317,
+              4158,
+              4779
+            ],
+            [
+              2,
+              2,
+              96,
+              191,
+              312,
+              341
+            ],
+            [
+              158,
+              390,
+              452,
+              603,
+              826,
+              898
+            ],
+            [
+              94,
+              738,
+              991,
+              1053,
+              1067,
+              1153
+            ],
+            [
+              9,
+              28,
+              61,
+              454,
+              595,
+              2467
+            ],
+            [
+              718,
+              1287,
+              2913,
+              7132,
+              7169,
+              12725
+            ]
+          ],
+          "total_hits_first_iteration": 166,
+          "tset_entries": 38208979,
+          "tset_stored_bytes": 18326293632,
+          "wire_bytes_up_per_query": [
+            2266832,
+            58318,
+            33069,
+            75841,
+            98712,
+            53824,
+            540216,
+            35208,
+            154795,
+            206870,
+            132296,
+            1343243
+          ],
+          "xset_entries": 38208979,
+          "xset_stored_bytes": 12212856992
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 137476444,
+          "first_search_ns": {
+            "iqr_ns": 185005612,
+            "max_ns": 1668216010,
+            "mean_ns": 319607630,
+            "median_ns": 94156583,
+            "min_ns": 22016112,
+            "n": 12,
+            "p25_ns": 44312329,
+            "p75_ns": 229317941,
+            "p95_ns": 1342526126
+          },
+          "oracle_shortfall_bloom_false_positives": 0,
+          "repeat_search_ns": {
+            "iqr_ns": 173367869,
+            "max_ns": 1556067599,
+            "mean_ns": 298654972,
+            "median_ns": 88771792,
+            "min_ns": 20984034,
+            "n": 12,
+            "p25_ns": 42073395,
+            "p75_ns": 215441264,
+            "p95_ns": 1250768247
+          },
+          "rounds": 1,
+          "term_updates_are": "updates per term with the s-term first: the search fetches every xtag of the x-terms, so cost grows with them (their Fig. 3)",
+          "term_updates_per_query": [
+            [
+              2338,
+              2843,
+              7384,
+              10350,
+              12984,
+              13452
+            ],
+            [
+              18,
+              29,
+              174,
+              182,
+              394,
+              629
+            ],
+            [
+              15,
+              21,
+              60,
+              87,
+              176,
+              317
+            ],
+            [
+              8,
+              8,
+              9,
+              44,
+              316,
+              1456
+            ],
+            [
+              22,
+              49,
+              61,
+              210,
+              586,
+              1336
+            ],
+            [
+              9,
+              88,
+              181,
+              189,
+              389,
+              406
+            ],
+            [
+              43,
+              285,
+              1824,
+              2317,
+              4158,
+              4779
+            ],
+            [
+              2,
+              2,
+              96,
+              191,
+              312,
+              341
+            ],
+            [
+              158,
+              390,
+              452,
+              603,
+              826,
+              898
+            ],
+            [
+              94,
+              738,
+              991,
+              1053,
+              1067,
+              1153
+            ],
+            [
+              9,
+              28,
+              61,
+              454,
+              595,
+              2467
+            ],
+            [
+              718,
+              1287,
+              2913,
+              7132,
+              7169,
+              12725
+            ]
+          ],
+          "total_hits_first_iteration": 166,
+          "tset_entries": 38208979,
+          "tset_stored_bytes": 18326293632,
+          "wire_bytes_up_per_query": [
+            3771248,
+            103374,
+            54221,
+            134497,
+            170456,
+            93920,
+            967832,
+            65352,
+            256203,
+            366934,
+            247656,
+            2342475
+          ],
+          "xset_entries": 38208979,
+          "xset_stored_bytes": 13741216152
+        },
+        "summary_over": "per-query medians"
+      }
+    ],
+    "workload": {
+      "beta": 256,
+      "chain_round_trip": false,
+      "corpus_seed": 14860457,
+      "delete_fraction_denominator": 10,
+      "deletion_granularity": "document",
+      "deletion_granularity_reason": "ODXT registers a deletion only under the s-term and assumes document-level deletion (NDSS'21 III-C fn.3). Per-pair deletion would make it return stale matches -- a strawman in our favour.",
+      "language": "rust-vs-rust on one host; no Python figure appears here",
+      "queries_by_width": {
+        "2": [
+          [
+            "pallen",
+            "forecast"
+          ],
+          [
+            "differentiating",
+            "circulation"
+          ],
+          [
+            "samples",
+            "reactive"
+          ],
+          [
+            "rhirasuna",
+            "hirasuna"
+          ],
+          [
+            "tractabel",
+            "raroc"
+          ],
+          [
+            "thinker",
+            "stochastic"
+          ],
+          [
+            "bottomed",
+            "alfredo"
+          ],
+          [
+            "turnback",
+            "recoup"
+          ],
+          [
+            "ehronline",
+            "customizable"
+          ],
+          [
+            "westlaw",
+            "alice"
+          ],
+          [
+            "jgiordano",
+            "giordano"
+          ],
+          [
+            "apb",
+            "broker"
+          ]
+        ],
+        "3": [
+          [
+            "pallen",
+            "forecast",
+            "belden"
+          ],
+          [
+            "differentiating",
+            "circulation",
+            "shorter"
+          ],
+          [
+            "samples",
+            "reactive",
+            "rapt"
+          ],
+          [
+            "rhirasuna",
+            "hirasuna",
+            "delted"
+          ],
+          [
+            "tractabel",
+            "raroc",
+            "performed"
+          ],
+          [
+            "thinker",
+            "stochastic",
+            "shifted"
+          ],
+          [
+            "bottomed",
+            "alfredo",
+            "evaluation"
+          ],
+          [
+            "turnback",
+            "recoup",
+            "recoated"
+          ],
+          [
+            "ehronline",
+            "customizable",
+            "evaluations"
+          ],
+          [
+            "westlaw",
+            "alice",
+            "srrs"
+          ],
+          [
+            "jgiordano",
+            "giordano",
+            "catequil"
+          ],
+          [
+            "apb",
+            "broker",
+            "kerri"
+          ]
+        ],
+        "6": [
+          [
+            "pallen",
+            "forecast",
+            "belden",
+            "enronxgate",
+            "tim",
+            "allen"
+          ],
+          [
+            "differentiating",
+            "circulation",
+            "shorter",
+            "referencing",
+            "occassion",
+            "educated"
+          ],
+          [
+            "samples",
+            "reactive",
+            "rapt",
+            "rap",
+            "protein",
+            "polishing"
+          ],
+          [
+            "rhirasuna",
+            "hirasuna",
+            "delted",
+            "dashes",
+            "akingump",
+            "delivering"
+          ],
+          [
+            "tractabel",
+            "raroc",
+            "performed",
+            "interfaces",
+            "implementations",
+            "ferrell"
+          ],
+          [
+            "thinker",
+            "stochastic",
+            "shifted",
+            "recruited",
+            "lawera",
+            "lab"
+          ],
+          [
+            "bottomed",
+            "alfredo",
+            "evaluation",
+            "self",
+            "bottom",
+            "foster"
+          ],
+          [
+            "turnback",
+            "recoup",
+            "recoated",
+            "railment",
+            "interventions",
+            "interruption"
+          ],
+          [
+            "ehronline",
+            "customizable",
+            "evaluations",
+            "clickathome",
+            "reviewers",
+            "portal"
+          ],
+          [
+            "westlaw",
+            "alice",
+            "srrs",
+            "itcapps",
+            "harlan",
+            "emaillink"
+          ],
+          [
+            "jgiordano",
+            "giordano",
+            "catequil",
+            "templates",
+            "abramo",
+            "pages"
+          ],
+          [
+            "apb",
+            "broker",
+            "kerri",
+            "symes",
+            "thompson",
+            "deals"
+          ]
+        ]
+      },
+      "query_set": "fixed across tiers: drawn once from the smallest tier, whose documents every tier contains",
+      "sdsse_bloom": "h = 5, p = 1e-4 (their 5.1); each keyword's filter sized for its own deletions, floor 10: kinder than the authors' one d for all (Require-Consultant 1cu.2)",
+      "sdsse_first_and_repeat": "each first search is timed and rolled back outside the timed region; the repeat is timed after one kept first search",
+      "tiers": "nested: one seeded permutation of the corpus, tier N its first N files (corpus::load_nested)"
+    }
+  }
+}

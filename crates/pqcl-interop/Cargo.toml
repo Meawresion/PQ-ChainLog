@@ -1,0 +1,19 @@
+[package]
+name = "pqcl-interop"
+description = "Cross-implementation gate fixtures. Emits signatures our own signer produced, for verification by a different implementation. Never a source of a measurement."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+# `cargo xtask interop-fixture` runs the package without naming a binary.
+default-run = "pqcl-interop"
+
+[dependencies]
+pqcl-primitives = { path = "../pqcl-primitives" }
+pqcl-capsule = { path = "../pqcl-capsule" }
+serde_json = "1"
+
+[lints]
+workspace = true

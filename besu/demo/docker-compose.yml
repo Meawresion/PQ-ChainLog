@@ -1,0 +1,40 @@
+# The midterm demo's chain: ONE Hyperledger Besu QBFT validator (plan M8b,
+# extended 2026-10-01, constraint 2).
+#
+# ⚠️ **Not the measurement chain.** Four validators are the minimum that makes
+# Byzantine fault tolerance real (`../docker-compose.yml`), and every Exp. 6
+# number came from four. Four JVMs do not fit the demo's ~5 GB local budget, so
+# the demo runs one: still a real QBFT chain producing real blocks, with no fault
+# tolerance, and the dashboard says so on screen.
+#
+# A separate chain id (138042, not 138041) so a demo chain can never be mistaken
+# for the measurement chain by anything that reads `eth_chainId`.
+#
+# Same image digest as the measurement chain.
+
+services:
+  node:
+    image: hyperledger/besu@sha256:6f3f21ce533383fcc8db3bce02252b59d5a9e776b72b5a1c8ecd2db011600042
+    container_name: pqcl-demo-besu
+    restart: "no"
+    environment:
+      # Cap the JVM heap: the demo's whole peak must stay under ~5 GB.
+      BESU_OPTS: "-Xmx768m"
+    command:
+      - --genesis-file=/opt/besu/genesis.json
+      - --data-path=/opt/besu/data
+      - --node-private-key-file=/opt/besu/data/key
+      - --min-gas-price=0
+      - --sync-mode=FULL
+      - --rpc-http-enabled=true
+      - --rpc-http-host=0.0.0.0
+      - --rpc-http-port=8545
+      - --rpc-http-api=ETH,NET,WEB3,QBFT
+      - --host-allowlist=*
+      - --discovery-enabled=false
+    # Loopback only: the host publishes the RPC port on 127.0.0.1, never on an
+    # external interface.
+    ports: ["127.0.0.1:8555:8545"]
+    volumes:
+      - ./data/networkFiles/genesis.json:/opt/besu/genesis.json:ro
+      - ./data/node:/opt/besu/data

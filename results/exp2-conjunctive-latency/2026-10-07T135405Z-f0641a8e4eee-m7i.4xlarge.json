@@ -1,0 +1,1484 @@
+{
+  "experiment": "exp2-conjunctive-latency",
+  "git_sha": "f0641a8e4eeef91ba552dcae3dbddf774343b24c",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.4xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "n/a: symmetric-only search path",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {
+    "enron-selection-1000": "7c1040989e299bc6af8b189868f959c8092ab9efe617e0d421a8f467732b0c31",
+    "enron-selection-10000": "f261d527a726794b27ac54310d2bae50375eac2a335eb0681afe952b07b9be08",
+    "enron-selection-100000": "2e25240bc5559629ceac1d40a9084d690b8fc52a1e67c8872c7e448d2de9a47b",
+    "enron-selection-2000": "e72bf327939320ced5d2dbfc6949883dc8a58c02785285c82babf44572b55886",
+    "enron-selection-20000": "72f3c6bf607c128feb3dc09f6c89d1e960d2879775a450126a1a0edf81188236",
+    "enron-selection-250000": "8410e0506b0809600918056c489424b39b2f4622314765a0b64071f2eaae557c",
+    "enron-selection-5000": "1efecfc0456433e48031366b2b1f9118e198b40b5024490229ece16c45b34be1",
+    "enron-selection-50000": "fd1290a1f6c5942f1438eb494229ac3594708b42514e7c3293651d17980216d6"
+  },
+  "rng_seeds": [
+    33,
+    34,
+    51,
+    1592590338
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-07T13:54:05Z",
+  "measurements": {
+    "caveat": "We lose asymptotically to fp-GA-ODXT and win on the constant factor. No wall-clock result here may be written up as an asymptotic win.",
+    "rows": [
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 2,
+        "documents": 1000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 57019,
+            "max_ns": 756740,
+            "median_ns": 62435,
+            "min_ns": 58499,
+            "n": 12,
+            "p25_ns": 60257,
+            "p75_ns": 117276
+          },
+          "total_hits_first_iteration": 12,
+          "tset_len": 165070,
+          "xset_len": 165070
+        },
+        "pairs": 150035,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 5119,
+            "max_ns": 79952,
+            "median_ns": 27881,
+            "min_ns": 27132,
+            "n": 12,
+            "p25_ns": 27188,
+            "p75_ns": 32307
+          },
+          "total_hits_first_iteration": 12
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2737,
+            "max_ns": 45618,
+            "median_ns": 15784,
+            "min_ns": 15057,
+            "n": 12,
+            "p25_ns": 15179,
+            "p75_ns": 17916
+          },
+          "total_hits_first_iteration": 12,
+          "xtag_count": 150035
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 3,
+        "documents": 1000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 114368,
+            "max_ns": 1450235,
+            "median_ns": 120964,
+            "min_ns": 117490,
+            "n": 12,
+            "p25_ns": 118792,
+            "p75_ns": 233160
+          },
+          "total_hits_first_iteration": 12,
+          "tset_len": 165070,
+          "xset_len": 165070
+        },
+        "pairs": 150035,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 15425,
+            "max_ns": 147910,
+            "median_ns": 46175,
+            "min_ns": 40514,
+            "n": 12,
+            "p25_ns": 41625,
+            "p75_ns": 57050
+          },
+          "total_hits_first_iteration": 12
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2561,
+            "max_ns": 52668,
+            "median_ns": 17279,
+            "min_ns": 16546,
+            "n": 12,
+            "p25_ns": 17044,
+            "p75_ns": 19605
+          },
+          "total_hits_first_iteration": 12,
+          "xtag_count": 150035
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 6,
+        "documents": 1000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 269889,
+            "max_ns": 3660320,
+            "median_ns": 290123,
+            "min_ns": 279412,
+            "n": 12,
+            "p25_ns": 288172,
+            "p75_ns": 558061
+          },
+          "total_hits_first_iteration": 11,
+          "tset_len": 165070,
+          "xset_len": 165070
+        },
+        "pairs": 150035,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 59788,
+            "max_ns": 480541,
+            "median_ns": 102158,
+            "min_ns": 83670,
+            "n": 12,
+            "p25_ns": 84300,
+            "p75_ns": 144088
+          },
+          "total_hits_first_iteration": 11
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 4523,
+            "max_ns": 77082,
+            "median_ns": 20530,
+            "min_ns": 18235,
+            "n": 12,
+            "p25_ns": 20388,
+            "p75_ns": 24911
+          },
+          "total_hits_first_iteration": 11,
+          "xtag_count": 150035
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 2,
+        "documents": 2000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 58792,
+            "max_ns": 953480,
+            "median_ns": 60395,
+            "min_ns": 58477,
+            "n": 12,
+            "p25_ns": 58731,
+            "p75_ns": 117523
+          },
+          "total_hits_first_iteration": 13,
+          "tset_len": 333272,
+          "xset_len": 333272
+        },
+        "pairs": 300764,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 11627,
+            "max_ns": 112523,
+            "median_ns": 29007,
+            "min_ns": 27129,
+            "n": 12,
+            "p25_ns": 27181,
+            "p75_ns": 38808
+          },
+          "total_hits_first_iteration": 13
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2931,
+            "max_ns": 55819,
+            "median_ns": 15219,
+            "min_ns": 15080,
+            "n": 12,
+            "p25_ns": 15184,
+            "p75_ns": 18115
+          },
+          "total_hits_first_iteration": 13,
+          "xtag_count": 300764
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 3,
+        "documents": 2000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 114287,
+            "max_ns": 1901222,
+            "median_ns": 119302,
+            "min_ns": 115246,
+            "n": 12,
+            "p25_ns": 116277,
+            "p75_ns": 230564
+          },
+          "total_hits_first_iteration": 13,
+          "tset_len": 333272,
+          "xset_len": 333272
+        },
+        "pairs": 300764,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 20257,
+            "max_ns": 243800,
+            "median_ns": 47531,
+            "min_ns": 42048,
+            "n": 12,
+            "p25_ns": 44307,
+            "p75_ns": 64564
+          },
+          "total_hits_first_iteration": 13
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2665,
+            "max_ns": 66380,
+            "median_ns": 17251,
+            "min_ns": 16569,
+            "n": 12,
+            "p25_ns": 16984,
+            "p75_ns": 19649
+          },
+          "total_hits_first_iteration": 13,
+          "xtag_count": 300764
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 6,
+        "documents": 2000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 284725,
+            "max_ns": 4673402,
+            "median_ns": 288712,
+            "min_ns": 278336,
+            "n": 12,
+            "p25_ns": 284189,
+            "p75_ns": 568914
+          },
+          "total_hits_first_iteration": 12,
+          "tset_len": 333272,
+          "xset_len": 333272
+        },
+        "pairs": 300764,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 108516,
+            "max_ns": 863275,
+            "median_ns": 112205,
+            "min_ns": 87986,
+            "n": 12,
+            "p25_ns": 91363,
+            "p75_ns": 199879
+          },
+          "total_hits_first_iteration": 12
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 5184,
+            "max_ns": 88191,
+            "median_ns": 20523,
+            "min_ns": 19901,
+            "n": 12,
+            "p25_ns": 20400,
+            "p75_ns": 25584
+          },
+          "total_hits_first_iteration": 12,
+          "xtag_count": 300764
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 2,
+        "documents": 5000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 117617,
+            "max_ns": 2517152,
+            "median_ns": 120717,
+            "min_ns": 59791,
+            "n": 12,
+            "p25_ns": 62062,
+            "p75_ns": 179679
+          },
+          "total_hits_first_iteration": 11,
+          "tset_len": 801292,
+          "xset_len": 801292
+        },
+        "pairs": 728203,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 30122,
+            "max_ns": 233857,
+            "median_ns": 40734,
+            "min_ns": 27669,
+            "n": 12,
+            "p25_ns": 30899,
+            "p75_ns": 61021
+          },
+          "total_hits_first_iteration": 11
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 5123,
+            "max_ns": 118928,
+            "median_ns": 17602,
+            "min_ns": 15105,
+            "n": 12,
+            "p25_ns": 15882,
+            "p75_ns": 21005
+          },
+          "total_hits_first_iteration": 11,
+          "xtag_count": 728203
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 3,
+        "documents": 5000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 198168,
+            "max_ns": 4810997,
+            "median_ns": 116521,
+            "min_ns": 101036,
+            "n": 12,
+            "p25_ns": 107790,
+            "p75_ns": 305958
+          },
+          "total_hits_first_iteration": 11,
+          "tset_len": 801292,
+          "xset_len": 801292
+        },
+        "pairs": 728203,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 68811,
+            "max_ns": 514034,
+            "median_ns": 69563,
+            "min_ns": 35745,
+            "n": 12,
+            "p25_ns": 48611,
+            "p75_ns": 117422
+          },
+          "total_hits_first_iteration": 11
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 4085,
+            "max_ns": 136477,
+            "median_ns": 16693,
+            "min_ns": 14657,
+            "n": 12,
+            "p25_ns": 15243,
+            "p75_ns": 19328
+          },
+          "total_hits_first_iteration": 11,
+          "xtag_count": 728203
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 6,
+        "documents": 5000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 539267,
+            "max_ns": 12262581,
+            "median_ns": 289880,
+            "min_ns": 262334,
+            "n": 12,
+            "p25_ns": 281222,
+            "p75_ns": 820489
+          },
+          "total_hits_first_iteration": 10,
+          "tset_len": 801292,
+          "xset_len": 801292
+        },
+        "pairs": 728203,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 225404,
+            "max_ns": 1928304,
+            "median_ns": 174563,
+            "min_ns": 101348,
+            "n": 12,
+            "p25_ns": 124994,
+            "p75_ns": 350398
+          },
+          "total_hits_first_iteration": 10
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 5322,
+            "max_ns": 194010,
+            "median_ns": 20511,
+            "min_ns": 18864,
+            "n": 12,
+            "p25_ns": 19992,
+            "p75_ns": 25314
+          },
+          "total_hits_first_iteration": 10,
+          "xtag_count": 728203
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 2,
+        "documents": 10000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 224937,
+            "max_ns": 5575725,
+            "median_ns": 178075,
+            "min_ns": 60848,
+            "n": 12,
+            "p25_ns": 119881,
+            "p75_ns": 344818
+          },
+          "total_hits_first_iteration": 24,
+          "tset_len": 1626281,
+          "xset_len": 1626281
+        },
+        "pairs": 1481970,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 50778,
+            "max_ns": 449526,
+            "median_ns": 57293,
+            "min_ns": 28043,
+            "n": 12,
+            "p25_ns": 37932,
+            "p75_ns": 88710
+          },
+          "total_hits_first_iteration": 24
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 9835,
+            "max_ns": 229458,
+            "median_ns": 21222,
+            "min_ns": 15415,
+            "n": 12,
+            "p25_ns": 18417,
+            "p75_ns": 28252
+          },
+          "total_hits_first_iteration": 24,
+          "xtag_count": 1481970
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 3,
+        "documents": 10000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 512400,
+            "max_ns": 10821798,
+            "median_ns": 227870,
+            "min_ns": 111696,
+            "n": 12,
+            "p25_ns": 116816,
+            "p75_ns": 629216
+          },
+          "total_hits_first_iteration": 21,
+          "tset_len": 1626281,
+          "xset_len": 1626281
+        },
+        "pairs": 1481970,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 128826,
+            "max_ns": 979122,
+            "median_ns": 115066,
+            "min_ns": 40925,
+            "n": 12,
+            "p25_ns": 65156,
+            "p75_ns": 193982
+          },
+          "total_hits_first_iteration": 21
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 12865,
+            "max_ns": 269764,
+            "median_ns": 20104,
+            "min_ns": 16604,
+            "n": 12,
+            "p25_ns": 16771,
+            "p75_ns": 29636
+          },
+          "total_hits_first_iteration": 21,
+          "xtag_count": 1481970
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 6,
+        "documents": 10000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1366209,
+            "max_ns": 26543085,
+            "median_ns": 552453,
+            "min_ns": 272463,
+            "n": 12,
+            "p25_ns": 288497,
+            "p75_ns": 1654706
+          },
+          "total_hits_first_iteration": 17,
+          "tset_len": 1626281,
+          "xset_len": 1626281
+        },
+        "pairs": 1481970,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 464398,
+            "max_ns": 3634409,
+            "median_ns": 270111,
+            "min_ns": 120187,
+            "n": 12,
+            "p25_ns": 172347,
+            "p75_ns": 636745
+          },
+          "total_hits_first_iteration": 17
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 21336,
+            "max_ns": 388842,
+            "median_ns": 25050,
+            "min_ns": 19749,
+            "n": 12,
+            "p25_ns": 20722,
+            "p75_ns": 42058
+          },
+          "total_hits_first_iteration": 17,
+          "xtag_count": 1481970
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 2,
+        "documents": 20000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 493553,
+            "max_ns": 11144409,
+            "median_ns": 343100,
+            "min_ns": 60576,
+            "n": 12,
+            "p25_ns": 118273,
+            "p75_ns": 611826
+          },
+          "total_hits_first_iteration": 37,
+          "tset_len": 3265177,
+          "xset_len": 3265177
+        },
+        "pairs": 2971428,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 125774,
+            "max_ns": 843272,
+            "median_ns": 89952,
+            "min_ns": 27993,
+            "n": 12,
+            "p25_ns": 57107,
+            "p75_ns": 182881
+          },
+          "total_hits_first_iteration": 37
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 22427,
+            "max_ns": 452963,
+            "median_ns": 28940,
+            "min_ns": 15553,
+            "n": 12,
+            "p25_ns": 18464,
+            "p75_ns": 40891
+          },
+          "total_hits_first_iteration": 37,
+          "xtag_count": 2971428
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 3,
+        "documents": 20000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1015007,
+            "max_ns": 21103431,
+            "median_ns": 283244,
+            "min_ns": 116256,
+            "n": 12,
+            "p25_ns": 196692,
+            "p75_ns": 1211699
+          },
+          "total_hits_first_iteration": 31,
+          "tset_len": 3265177,
+          "xset_len": 3265177
+        },
+        "pairs": 2971428,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 257892,
+            "max_ns": 1822981,
+            "median_ns": 206575,
+            "min_ns": 40702,
+            "n": 12,
+            "p25_ns": 110418,
+            "p75_ns": 368310
+          },
+          "total_hits_first_iteration": 31
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 27336,
+            "max_ns": 534702,
+            "median_ns": 21731,
+            "min_ns": 16690,
+            "n": 12,
+            "p25_ns": 19068,
+            "p75_ns": 46404
+          },
+          "total_hits_first_iteration": 31,
+          "xtag_count": 2971428
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 6,
+        "documents": 20000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2682110,
+            "max_ns": 53486592,
+            "median_ns": 556466,
+            "min_ns": 279164,
+            "n": 12,
+            "p25_ns": 284164,
+            "p75_ns": 2966274
+          },
+          "total_hits_first_iteration": 20,
+          "tset_len": 3265177,
+          "xset_len": 3265177
+        },
+        "pairs": 2971428,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 880680,
+            "max_ns": 7600274,
+            "median_ns": 480994,
+            "min_ns": 190435,
+            "n": 12,
+            "p25_ns": 274455,
+            "p75_ns": 1155135
+          },
+          "total_hits_first_iteration": 20
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 37511,
+            "max_ns": 848644,
+            "median_ns": 25397,
+            "min_ns": 19900,
+            "n": 12,
+            "p25_ns": 20491,
+            "p75_ns": 58002
+          },
+          "total_hits_first_iteration": 20,
+          "xtag_count": 2971428
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 2,
+        "documents": 50000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1224353,
+            "max_ns": 26314505,
+            "median_ns": 1066336,
+            "min_ns": 62633,
+            "n": 12,
+            "p25_ns": 379899,
+            "p75_ns": 1604252
+          },
+          "total_hits_first_iteration": 89,
+          "tset_len": 8350070,
+          "xset_len": 8350070
+        },
+        "pairs": 7579064,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 270461,
+            "max_ns": 1982980,
+            "median_ns": 181883,
+            "min_ns": 37560,
+            "n": 12,
+            "p25_ns": 97799,
+            "p75_ns": 368260
+          },
+          "total_hits_first_iteration": 89
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 59822,
+            "max_ns": 1039316,
+            "median_ns": 62977,
+            "min_ns": 15959,
+            "n": 12,
+            "p25_ns": 28275,
+            "p75_ns": 88097
+          },
+          "total_hits_first_iteration": 89,
+          "xtag_count": 7579064
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 3,
+        "documents": 50000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2677549,
+            "max_ns": 51450842,
+            "median_ns": 840137,
+            "min_ns": 115080,
+            "n": 12,
+            "p25_ns": 333413,
+            "p75_ns": 3010962
+          },
+          "total_hits_first_iteration": 71,
+          "tset_len": 8350070,
+          "xset_len": 8350070
+        },
+        "pairs": 7579064,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 584349,
+            "max_ns": 4729239,
+            "median_ns": 484817,
+            "min_ns": 59216,
+            "n": 12,
+            "p25_ns": 201783,
+            "p75_ns": 786132
+          },
+          "total_hits_first_iteration": 71
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 84092,
+            "max_ns": 1293456,
+            "median_ns": 34443,
+            "min_ns": 16941,
+            "n": 12,
+            "p25_ns": 21058,
+            "p75_ns": 105150
+          },
+          "total_hits_first_iteration": 71,
+          "xtag_count": 7579064
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 6,
+        "documents": 50000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 6628099,
+            "max_ns": 129957225,
+            "median_ns": 1265950,
+            "min_ns": 285206,
+            "n": 12,
+            "p25_ns": 765888,
+            "p75_ns": 7393987
+          },
+          "total_hits_first_iteration": 39,
+          "tset_len": 8350070,
+          "xset_len": 8350070
+        },
+        "pairs": 7579064,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2077891,
+            "max_ns": 22429581,
+            "median_ns": 1112261,
+            "min_ns": 366754,
+            "n": 12,
+            "p25_ns": 608105,
+            "p75_ns": 2685996
+          },
+          "total_hits_first_iteration": 39
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 96790,
+            "max_ns": 2192463,
+            "median_ns": 36985,
+            "min_ns": 20273,
+            "n": 12,
+            "p25_ns": 25511,
+            "p75_ns": 122301
+          },
+          "total_hits_first_iteration": 39,
+          "xtag_count": 7579064
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 2,
+        "documents": 100000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2382638,
+            "max_ns": 55637269,
+            "median_ns": 1978647,
+            "min_ns": 175391,
+            "n": 12,
+            "p25_ns": 446448,
+            "p75_ns": 2829086
+          },
+          "total_hits_first_iteration": 164,
+          "tset_len": 16789065,
+          "xset_len": 16789065
+        },
+        "pairs": 15255073,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 546983,
+            "max_ns": 4315781,
+            "median_ns": 337040,
+            "min_ns": 39229,
+            "n": 12,
+            "p25_ns": 168516,
+            "p75_ns": 715499
+          },
+          "total_hits_first_iteration": 164
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 92366,
+            "max_ns": 2186733,
+            "median_ns": 97987,
+            "min_ns": 23730,
+            "n": 12,
+            "p25_ns": 38423,
+            "p75_ns": 130789
+          },
+          "total_hits_first_iteration": 164,
+          "xtag_count": 15255073
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 3,
+        "documents": 100000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 4568548,
+            "max_ns": 109391196,
+            "median_ns": 1435831,
+            "min_ns": 228528,
+            "n": 12,
+            "p25_ns": 519610,
+            "p75_ns": 5088158
+          },
+          "total_hits_first_iteration": 124,
+          "tset_len": 16789065,
+          "xset_len": 16789065
+        },
+        "pairs": 15255073,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1170303,
+            "max_ns": 11920731,
+            "median_ns": 915828,
+            "min_ns": 55791,
+            "n": 12,
+            "p25_ns": 373357,
+            "p75_ns": 1543660
+          },
+          "total_hits_first_iteration": 124
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 108431,
+            "max_ns": 2891524,
+            "median_ns": 58208,
+            "min_ns": 20442,
+            "n": 12,
+            "p25_ns": 33243,
+            "p75_ns": 141674
+          },
+          "total_hits_first_iteration": 124,
+          "xtag_count": 15255073
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 6,
+        "documents": 100000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 11274126,
+            "max_ns": 270409698,
+            "median_ns": 1978646,
+            "min_ns": 542990,
+            "n": 12,
+            "p25_ns": 1046644,
+            "p75_ns": 12320770
+          },
+          "total_hits_first_iteration": 68,
+          "tset_len": 16789065,
+          "xset_len": 16789065
+        },
+        "pairs": 15255073,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 4213991,
+            "max_ns": 47424476,
+            "median_ns": 2152273,
+            "min_ns": 582991,
+            "n": 12,
+            "p25_ns": 1094114,
+            "p75_ns": 5308105
+          },
+          "total_hits_first_iteration": 68
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 170411,
+            "max_ns": 4802736,
+            "median_ns": 63909,
+            "min_ns": 24506,
+            "n": 12,
+            "p25_ns": 40623,
+            "p75_ns": 211034
+          },
+          "total_hits_first_iteration": 68,
+          "xtag_count": 15255073
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 2,
+        "documents": 250000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 4769603,
+            "max_ns": 132821976,
+            "median_ns": 4955987,
+            "min_ns": 458868,
+            "n": 12,
+            "p25_ns": 1544594,
+            "p75_ns": 6314197
+          },
+          "total_hits_first_iteration": 397,
+          "tset_len": 42047254,
+          "xset_len": 42047254
+        },
+        "pairs": 38208979,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1301409,
+            "max_ns": 13368069,
+            "median_ns": 854123,
+            "min_ns": 57353,
+            "n": 12,
+            "p25_ns": 470199,
+            "p75_ns": 1771608
+          },
+          "total_hits_first_iteration": 397
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 198584,
+            "max_ns": 6490770,
+            "median_ns": 218976,
+            "min_ns": 33470,
+            "n": 12,
+            "p25_ns": 87490,
+            "p75_ns": 286074
+          },
+          "total_hits_first_iteration": 397,
+          "xtag_count": 38208979
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 3,
+        "documents": 250000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 10811696,
+            "max_ns": 261201474,
+            "median_ns": 4110220,
+            "min_ns": 231631,
+            "n": 12,
+            "p25_ns": 1523751,
+            "p75_ns": 12335447
+          },
+          "total_hits_first_iteration": 298,
+          "tset_len": 42047254,
+          "xset_len": 42047254
+        },
+        "pairs": 38208979,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 3300732,
+            "max_ns": 32813696,
+            "median_ns": 2569891,
+            "min_ns": 85671,
+            "n": 12,
+            "p25_ns": 932068,
+            "p75_ns": 4232800
+          },
+          "total_hits_first_iteration": 298
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 293837,
+            "max_ns": 8388893,
+            "median_ns": 150653,
+            "min_ns": 20718,
+            "n": 12,
+            "p25_ns": 57539,
+            "p75_ns": 351376
+          },
+          "total_hits_first_iteration": 298,
+          "xtag_count": 38208979
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 1,
+        "conjunction_width": 6,
+        "documents": 250000,
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 27892045,
+            "max_ns": 638756922,
+            "median_ns": 5563411,
+            "min_ns": 573349,
+            "n": 12,
+            "p25_ns": 2577204,
+            "p75_ns": 30469249
+          },
+          "total_hits_first_iteration": 166,
+          "tset_len": 42047254,
+          "xset_len": 42047254
+        },
+        "pairs": 38208979,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 14715666,
+            "max_ns": 129654124,
+            "median_ns": 6291545,
+            "min_ns": 1470264,
+            "n": 12,
+            "p25_ns": 2864256,
+            "p75_ns": 17579922
+          },
+          "total_hits_first_iteration": 166
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 453211,
+            "max_ns": 12490244,
+            "median_ns": 136929,
+            "min_ns": 26999,
+            "n": 12,
+            "p25_ns": 76780,
+            "p75_ns": 529991
+          },
+          "total_hits_first_iteration": 166,
+          "xtag_count": 38208979
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      }
+    ],
+    "workload": {
+      "beta": 256,
+      "chain_round_trip": false,
+      "corpus_seed": 14860457,
+      "delete_fraction_denominator": 10,
+      "deletion_granularity": "document",
+      "deletion_granularity_reason": "ODXT registers a deletion only under the s-term and assumes document-level deletion (NDSS'21 III-C fn.3). Per-pair deletion would make it return stale matches -- a strawman in our favour.",
+      "language": "rust-vs-rust on one host; no Python figure appears here",
+      "queries_by_width": {
+        "2": [
+          [
+            "pallen",
+            "forecast"
+          ],
+          [
+            "differentiating",
+            "circulation"
+          ],
+          [
+            "samples",
+            "reactive"
+          ],
+          [
+            "rhirasuna",
+            "hirasuna"
+          ],
+          [
+            "tractabel",
+            "raroc"
+          ],
+          [
+            "thinker",
+            "stochastic"
+          ],
+          [
+            "bottomed",
+            "alfredo"
+          ],
+          [
+            "turnback",
+            "recoup"
+          ],
+          [
+            "ehronline",
+            "customizable"
+          ],
+          [
+            "westlaw",
+            "alice"
+          ],
+          [
+            "jgiordano",
+            "giordano"
+          ],
+          [
+            "apb",
+            "broker"
+          ]
+        ],
+        "3": [
+          [
+            "pallen",
+            "forecast",
+            "belden"
+          ],
+          [
+            "differentiating",
+            "circulation",
+            "shorter"
+          ],
+          [
+            "samples",
+            "reactive",
+            "rapt"
+          ],
+          [
+            "rhirasuna",
+            "hirasuna",
+            "delted"
+          ],
+          [
+            "tractabel",
+            "raroc",
+            "performed"
+          ],
+          [
+            "thinker",
+            "stochastic",
+            "shifted"
+          ],
+          [
+            "bottomed",
+            "alfredo",
+            "evaluation"
+          ],
+          [
+            "turnback",
+            "recoup",
+            "recoated"
+          ],
+          [
+            "ehronline",
+            "customizable",
+            "evaluations"
+          ],
+          [
+            "westlaw",
+            "alice",
+            "srrs"
+          ],
+          [
+            "jgiordano",
+            "giordano",
+            "catequil"
+          ],
+          [
+            "apb",
+            "broker",
+            "kerri"
+          ]
+        ],
+        "6": [
+          [
+            "pallen",
+            "forecast",
+            "belden",
+            "enronxgate",
+            "tim",
+            "allen"
+          ],
+          [
+            "differentiating",
+            "circulation",
+            "shorter",
+            "referencing",
+            "occassion",
+            "educated"
+          ],
+          [
+            "samples",
+            "reactive",
+            "rapt",
+            "rap",
+            "protein",
+            "polishing"
+          ],
+          [
+            "rhirasuna",
+            "hirasuna",
+            "delted",
+            "dashes",
+            "akingump",
+            "delivering"
+          ],
+          [
+            "tractabel",
+            "raroc",
+            "performed",
+            "interfaces",
+            "implementations",
+            "ferrell"
+          ],
+          [
+            "thinker",
+            "stochastic",
+            "shifted",
+            "recruited",
+            "lawera",
+            "lab"
+          ],
+          [
+            "bottomed",
+            "alfredo",
+            "evaluation",
+            "self",
+            "bottom",
+            "foster"
+          ],
+          [
+            "turnback",
+            "recoup",
+            "recoated",
+            "railment",
+            "interventions",
+            "interruption"
+          ],
+          [
+            "ehronline",
+            "customizable",
+            "evaluations",
+            "clickathome",
+            "reviewers",
+            "portal"
+          ],
+          [
+            "westlaw",
+            "alice",
+            "srrs",
+            "itcapps",
+            "harlan",
+            "emaillink"
+          ],
+          [
+            "jgiordano",
+            "giordano",
+            "catequil",
+            "templates",
+            "abramo",
+            "pages"
+          ],
+          [
+            "apb",
+            "broker",
+            "kerri",
+            "symes",
+            "thompson",
+            "deals"
+          ]
+        ]
+      },
+      "query_set": "fixed across tiers: drawn once from the smallest tier, whose documents every tier contains",
+      "tiers": "nested: one seeded permutation of the corpus, tier N its first N files (corpus::load_nested)"
+    }
+  }
+}

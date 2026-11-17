@@ -1,0 +1,26 @@
+[package]
+name = "warrant-guest"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# ⚠️ NOT a workspace member. This compiles to `riscv32im-succinct-zkvm-elf`
+# under the SP1 toolchain, not to the host target, so `cargo build --workspace`
+# must not try to build it. `cargo prove build` drives it instead; the host
+# crate's build script invokes that.
+
+[dependencies]
+sp1-zkvm = "6.7.0"
+
+# ⭐ The guest shares the host's relation code rather than reimplementing it.
+# draft6: the Merkle rule "must hold identically in the circuit and in the
+# verifier; a divergence there is silent" — a guest with its own copy still
+# produces proofs, and they verify against the wrong root.
+#
+# `default-features = false` drops Case Authority signing and key delegation,
+# which the circuit does not contain: draft6 discharges the single ML-DSA clause
+# at issuance. What is left is hashes, a Merkle path and two comparisons, which
+# is exactly what design §7b promises the circuit would be.
+pqcl-warrant = { path = "../../crates/pqcl-warrant", default-features = false }
+
+[workspace]

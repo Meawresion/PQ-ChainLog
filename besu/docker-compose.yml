@@ -1,0 +1,93 @@
+# Four-validator Hyperledger Besu QBFT network.
+#
+# ⭐ Four is the minimum that makes Byzantine fault tolerance real rather than
+# nominal: QBFT needs 2f+1 of 3f+1, so tolerating one faulty validator requires
+# four. A single-validator chain measures nothing about consensus (plan §9), and
+# the restart-survival acceptance test is meaningless without a quorum that can
+# keep producing while one node is down.
+#
+# The image is pinned **by digest**. `latest` moves, and a client version that
+# changed silently between two measurement runs would make them incomparable —
+# the same reasoning that pins the Rust toolchain and the ETHDILITHIUM commit.
+#
+# ⚠️ **Static IPs, not service names.** Besu refuses a hostname in a static
+# enode — it fails at startup with "Illegal static enode supplied", which reads
+# like a malformed key rather than a DNS issue. The subnet below is fixed so
+# `generate.sh` can write enodes that Besu will accept.
+
+x-besu: &besu
+  image: hyperledger/besu@sha256:6f3f21ce533383fcc8db3bce02252b59d5a9e776b72b5a1c8ecd2db011600042
+  restart: "no"
+  command: &besu-command
+    - --genesis-file=/opt/besu/genesis.json
+    - --data-path=/opt/besu/data
+    - --node-private-key-file=/opt/besu/data/key
+    # Pairs with `zeroBaseFee` in genesis: we measure gas *units*, and a fee
+    # market would only add noise to a number describing computation.
+    - --min-gas-price=0
+    # A validator must execute every block; any other sync mode leaves it
+    # unable to propose.
+    - --sync-mode=FULL
+    - --rpc-http-enabled=true
+    - --rpc-http-host=0.0.0.0
+    - --rpc-http-port=8545
+    - --rpc-http-api=ETH,NET,WEB3,QBFT,ADMIN,TXPOOL
+    - --rpc-http-cors-origins=all
+    - --host-allowlist=*
+    - --p2p-host=0.0.0.0
+    - --p2p-port=30303
+    - --discovery-enabled=false
+    # How far past an account's confirmed nonce the pool accepts. Besu's own
+    # default (200) unless a harness overrides it: SAC Exp. 4 submits B-DEMS's
+    # k = 1,000 TxEs at once from one Sender, which Fabric (B-DEMS's platform)
+    # has no nonce to refuse; `besu/redaction.sh` raises it so our platform
+    # substitution does not charge B-DEMS for nonce ordering.
+    - --tx-pool-max-future-by-sender=${PQCL_BESU_MAX_FUTURE_BY_SENDER:-200}
+
+services:
+  node1:
+    <<: *besu
+    container_name: pqcl-besu-1
+    ports: ["8545:8545"]
+    volumes:
+      - ./networkFiles/genesis.json:/opt/besu/genesis.json:ro
+      - ./nodes/node1/data:/opt/besu/data
+    networks:
+      pqcl: {ipv4_address: 172.28.0.11}
+
+  node2:
+    <<: *besu
+    container_name: pqcl-besu-2
+    ports: ["8546:8545"]
+    volumes:
+      - ./networkFiles/genesis.json:/opt/besu/genesis.json:ro
+      - ./nodes/node2/data:/opt/besu/data
+    networks:
+      pqcl: {ipv4_address: 172.28.0.12}
+
+  node3:
+    <<: *besu
+    container_name: pqcl-besu-3
+    ports: ["8547:8545"]
+    volumes:
+      - ./networkFiles/genesis.json:/opt/besu/genesis.json:ro
+      - ./nodes/node3/data:/opt/besu/data
+    networks:
+      pqcl: {ipv4_address: 172.28.0.13}
+
+  node4:
+    <<: *besu
+    container_name: pqcl-besu-4
+    ports: ["8548:8545"]
+    volumes:
+      - ./networkFiles/genesis.json:/opt/besu/genesis.json:ro
+      - ./nodes/node4/data:/opt/besu/data
+    networks:
+      pqcl: {ipv4_address: 172.28.0.14}
+
+networks:
+  pqcl:
+    name: pqcl-besu
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16

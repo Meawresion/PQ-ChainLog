@@ -1,0 +1,4575 @@
+{
+  "experiment": "custody-disclosure",
+  "git_sha": "26660f592c0097cc697c7d2ae0cf9eb2b9b0f01a",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.8xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "ML-DSA-65 via liboqs",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [
+    201683159
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-14T21:18:58Z",
+  "secure_module": "nitro-enclave",
+  "measurements": {
+    "bilateral_transfer": {
+      "bilateral_bytes": 10603,
+      "bilateral_ns": {
+        "iqr_ns": 598089,
+        "max_ns": 1893166,
+        "mean_ns": 1425983,
+        "median_ns": 1490354,
+        "min_ns": 1020851,
+        "n": 10,
+        "p25_ns": 1095119,
+        "p75_ns": 1693208,
+        "p95_ns": 1832330
+      },
+      "bilateral_records": 2,
+      "bilateral_signatures": 3,
+      "both_arms_indexed": "each record's 29 custody tokens are produced inside the timed call, as the enclave does in the same round trip",
+      "custodian_keys": 2,
+      "custodian_keys_note": "actors enrolled by (role, id): the evidence store signs the release, the lab custodian witnesses it and signs the receipt; both keys checked distinct and both signatures verified outside the timer",
+      "unilateral_ns": {
+        "iqr_ns": 155007,
+        "max_ns": 805461,
+        "mean_ns": 497870,
+        "median_ns": 454276,
+        "min_ns": 299072,
+        "n": 10,
+        "p25_ns": 425504,
+        "p75_ns": 580511,
+        "p95_ns": 763098
+      }
+    },
+    "cases": [
+      {
+        "capsules": 117,
+        "disposed_capsules": 12,
+        "flat_mmr": {
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 208324,
+                "max_ns": 12771419,
+                "mean_ns": 12190381,
+                "median_ns": 12171211,
+                "min_ns": 11852598,
+                "n": 10,
+                "p25_ns": 12035893,
+                "p75_ns": 12244217,
+                "p95_ns": 12572526
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 199394,
+                "max_ns": 6798242,
+                "mean_ns": 6603995,
+                "median_ns": 6610339,
+                "min_ns": 6403841,
+                "n": 10,
+                "p25_ns": 6501683,
+                "p75_ns": 6701077,
+                "p95_ns": 6787574
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 107299,
+                "max_ns": 4170543,
+                "mean_ns": 3928721,
+                "median_ns": 3937556,
+                "min_ns": 3705502,
+                "n": 10,
+                "p25_ns": 3872313,
+                "p75_ns": 3979612,
+                "p95_ns": 4092822
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 560688,
+                "max_ns": 3456700,
+                "mean_ns": 2875536,
+                "median_ns": 2953010,
+                "min_ns": 2257090,
+                "n": 10,
+                "p25_ns": 2584906,
+                "p75_ns": 3145594,
+                "p95_ns": 3397441
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 727995,
+                "max_ns": 5173389,
+                "mean_ns": 3192703,
+                "median_ns": 3046897,
+                "min_ns": 2305267,
+                "n": 10,
+                "p25_ns": 2708860,
+                "p75_ns": 3436855,
+                "p95_ns": 4490639
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 41734,
+          "disclosed_records": 9,
+          "exposed": "case size: every proof carries the MMR's leaf count",
+          "full_replay_bytes": 4306840,
+          "full_replay_ns": {
+            "iqr_ns": 106017,
+            "max_ns": 11887483,
+            "mean_ns": 11719434,
+            "median_ns": 11701660,
+            "min_ns": 11562885,
+            "n": 10,
+            "p25_ns": 11664372,
+            "p75_ns": 11770389,
+            "p95_ns": 11886374
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 4375517,
+            "max_ns": 12068568,
+            "mean_ns": 5835921,
+            "median_ns": 6528666,
+            "min_ns": 2487064,
+            "n": 10,
+            "p25_ns": 2812205,
+            "p75_ns": 7187722,
+            "p95_ns": 10120160
+          },
+          "leaf_count_in_every_proof": 1148,
+          "proof_form": "one batched MMR proof per disclosure (shared siblings and peaks), M13 A8",
+          "redacted": {
+            "carries": "the capsule's records and the 0x05 leaf under one batched proof, the order, target membership",
+            "disclosed_bytes": 45464,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 598,
+              "max_ns": 120408,
+              "mean_ns": 115633,
+              "median_ns": 114962,
+              "min_ns": 114726,
+              "n": 10,
+              "p25_ns": 114837,
+              "p75_ns": 115435,
+              "p95_ns": 118462
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 6420,
+            "max_ns": 129620,
+            "mean_ns": 122387,
+            "median_ns": 123736,
+            "min_ns": 117777,
+            "n": 10,
+            "p25_ns": 117849,
+            "p75_ns": 124269,
+            "p95_ns": 128501
+          }
+        },
+        "glassdb": {
+          "audit": "VerifyBlock over every block (block proof against the digest, every written key included with its value), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 250927,
+                "max_ns": 19779103,
+                "mean_ns": 19322415,
+                "median_ns": 19324973,
+                "min_ns": 18965539,
+                "n": 10,
+                "p25_ns": 19177941,
+                "p75_ns": 19428868,
+                "p95_ns": 19684688
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 181354,
+                "max_ns": 16301331,
+                "mean_ns": 16059941,
+                "median_ns": 16097297,
+                "min_ns": 15698924,
+                "n": 10,
+                "p25_ns": 15994808,
+                "p75_ns": 16176162,
+                "p95_ns": 16292464
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 137821,
+                "max_ns": 13221171,
+                "mean_ns": 12943223,
+                "median_ns": 12901108,
+                "min_ns": 12809851,
+                "n": 10,
+                "p25_ns": 12865361,
+                "p75_ns": 13003182,
+                "p95_ns": 13149945
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 235065,
+                "max_ns": 8804759,
+                "mean_ns": 8459992,
+                "median_ns": 8490508,
+                "min_ns": 8199058,
+                "n": 10,
+                "p25_ns": 8306617,
+                "p75_ns": 8541682,
+                "p95_ns": 8726782
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 309321,
+                "max_ns": 4916999,
+                "mean_ns": 4682298,
+                "median_ns": 4726416,
+                "min_ns": 4434411,
+                "n": 10,
+                "p25_ns": 4514840,
+                "p75_ns": 4824161,
+                "p95_ns": 4884342
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "batch": 1000,
+          "blocks": 25,
+          "build_ns": 35873559,
+          "disclosed_bytes": 69132,
+          "disclosed_nodes": 13,
+          "disclosed_records": 9,
+          "exposed": "the neighbouring entries of every disclosed leaf node (other capsules' sealed records and intake numbers), and the block count",
+          "full_replay_bytes": 4729802,
+          "full_replay_ns": {
+            "iqr_ns": 210884,
+            "max_ns": 19199170,
+            "mean_ns": 18824500,
+            "median_ns": 18805336,
+            "min_ns": 18500848,
+            "n": 10,
+            "p25_ns": 18713650,
+            "p75_ns": 18924534,
+            "p95_ns": 19111268
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 2031591,
+            "max_ns": 6689765,
+            "mean_ns": 4507228,
+            "median_ns": 3932116,
+            "min_ns": 3079893,
+            "n": 10,
+            "p25_ns": 3493343,
+            "p75_ns": 5524934,
+            "p95_ns": 6372927
+          },
+          "proof_form": "current-value proof at the last block (upper path, data block, lower path) plus each earlier version through its H_prev pointer",
+          "redacted": {
+            "carries": "the capsule object, the order and the record key's full history under one de-duplicated node set, target membership",
+            "disclosed_bytes": 87549,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 8747,
+              "max_ns": 213400,
+              "mean_ns": 208069,
+              "median_ns": 210151,
+              "min_ns": 200733,
+              "n": 10,
+              "p25_ns": 203264,
+              "p75_ns": 212011,
+              "p95_ns": 213344
+            }
+          },
+          "stored_nodes": 1092,
+          "verify_ns": {
+            "iqr_ns": 909,
+            "max_ns": 175446,
+            "mean_ns": 161737,
+            "median_ns": 158945,
+            "min_ns": 158438,
+            "n": 10,
+            "p25_ns": 158726,
+            "p75_ns": 159635,
+            "p95_ns": 173217
+          }
+        },
+        "hash_chain_replay": {
+          "disclosed_bytes": 4310406,
+          "disclosed_records": 1031,
+          "exposed": "all records of the case",
+          "full_replay_bytes": 4310406,
+          "full_replay_ns": {
+            "iqr_ns": 61840,
+            "max_ns": 10420145,
+            "mean_ns": 10271313,
+            "median_ns": 10259135,
+            "min_ns": 10162676,
+            "n": 10,
+            "p25_ns": 10231383,
+            "p75_ns": 10293223,
+            "p95_ns": 10389705
+          },
+          "full_replay_parallel_ns": null,
+          "parallel_note": "inherently sequential: each link needs the previous head, so the all-cores audit is the one-core audit",
+          "redacted": {
+            "carries": "every record and the order entry, plus target membership",
+            "disclosed_bytes": 4310538,
+            "disclosed_records": 1031,
+            "verify_ns": {
+              "iqr_ns": 175939,
+              "max_ns": 10473528,
+              "mean_ns": 10257838,
+              "median_ns": 10224687,
+              "min_ns": 10126542,
+              "n": 10,
+              "p25_ns": 10157523,
+              "p75_ns": 10333462,
+              "p95_ns": 10460521
+            }
+          },
+          "target_records": 9,
+          "verify_ns": {
+            "iqr_ns": 86328,
+            "max_ns": 10574650,
+            "mean_ns": 10304191,
+            "median_ns": 10253866,
+            "min_ns": 10172406,
+            "n": 10,
+            "p25_ns": 10226751,
+            "p75_ns": 10313079,
+            "p95_ns": 10559155
+          }
+        },
+        "order": {
+          "encoded_bytes": 3448,
+          "mode": "ERASED",
+          "one_sweep_over_every_disposal": true,
+          "scope": "FULL"
+        },
+        "ours": {
+          "audit_includes": "both epochs' bundles and 0x05 accounting (order anchored at R_e', genuine, targeting every disposed capsule, referenced by every DISPOSE)",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 229513,
+                "max_ns": 13071278,
+                "mean_ns": 12840438,
+                "median_ns": 12805660,
+                "min_ns": 12636818,
+                "n": 10,
+                "p25_ns": 12733341,
+                "p75_ns": 12962854,
+                "p95_ns": 13050435
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 127228,
+                "max_ns": 6989047,
+                "mean_ns": 6877741,
+                "median_ns": 6913789,
+                "min_ns": 6664704,
+                "n": 10,
+                "p25_ns": 6828674,
+                "p75_ns": 6955902,
+                "p95_ns": 6978889
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 86095,
+                "max_ns": 4122682,
+                "mean_ns": 3872340,
+                "median_ns": 3843700,
+                "min_ns": 3700209,
+                "n": 10,
+                "p25_ns": 3835084,
+                "p75_ns": 3921179,
+                "p95_ns": 4039951
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 229295,
+                "max_ns": 2976957,
+                "mean_ns": 2344130,
+                "median_ns": 2289940,
+                "min_ns": 2006254,
+                "n": 10,
+                "p25_ns": 2187849,
+                "p75_ns": 2417144,
+                "p95_ns": 2821495
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1241321,
+                "max_ns": 3328730,
+                "mean_ns": 2282136,
+                "median_ns": 2220635,
+                "min_ns": 1420319,
+                "n": 10,
+                "p25_ns": 1680780,
+                "p75_ns": 2922101,
+                "p95_ns": 3212045
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 41108,
+          "disclosed_records": 9,
+          "disclosed_segments": 1,
+          "exposed": "none",
+          "full_replay_bytes": 4893989,
+          "full_replay_memo_hits": 2210,
+          "full_replay_ns": {
+            "iqr_ns": 240816,
+            "max_ns": 12588165,
+            "mean_ns": 12334030,
+            "median_ns": 12307502,
+            "min_ns": 12159251,
+            "n": 10,
+            "p25_ns": 12197664,
+            "p75_ns": 12438480,
+            "p95_ns": 12563365
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 4150261,
+            "max_ns": 10091377,
+            "mean_ns": 5173534,
+            "median_ns": 4878595,
+            "min_ns": 1580388,
+            "n": 10,
+            "p25_ns": 2736908,
+            "p75_ns": 6887169,
+            "p95_ns": 9437642
+          },
+          "full_replay_unmemoised_ns": {
+            "iqr_ns": 149269,
+            "max_ns": 13403401,
+            "mean_ns": 13018195,
+            "median_ns": 12928068,
+            "min_ns": 12859235,
+            "n": 10,
+            "p25_ns": 12911281,
+            "p75_ns": 13060550,
+            "p95_ns": 13353100
+          },
+          "redacted": {
+            "carries": "one Tier-1 segment per epoch with its own 0x02 proof, the 0x05 proof at R_e', the order, target membership",
+            "disclosed_bytes": 45522,
+            "disclosed_records": 10,
+            "disclosed_segments": 2,
+            "verify_ns": {
+              "iqr_ns": 3618,
+              "max_ns": 137199,
+              "mean_ns": 127713,
+              "median_ns": 127817,
+              "min_ns": 123847,
+              "n": 10,
+              "p25_ns": 124699,
+              "p75_ns": 128317,
+              "p95_ns": 134114
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 971,
+            "max_ns": 137602,
+            "mean_ns": 116500,
+            "median_ns": 113302,
+            "min_ns": 112511,
+            "n": 10,
+            "p25_ns": 112899,
+            "p75_ns": 113870,
+            "p95_ns": 130621
+          }
+        },
+        "pq_abl": {
+          "audit": "full-epoch verification of both epochs: recompute every h_n, rebuild, compare (eq. (1)), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 223316,
+                "max_ns": 12634594,
+                "mean_ns": 12451873,
+                "median_ns": 12502016,
+                "min_ns": 12122553,
+                "n": 10,
+                "p25_ns": 12345142,
+                "p75_ns": 12568458,
+                "p95_ns": 12624621
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 168306,
+                "max_ns": 7352644,
+                "mean_ns": 6977835,
+                "median_ns": 6977263,
+                "min_ns": 6676648,
+                "n": 10,
+                "p25_ns": 6902999,
+                "p75_ns": 7071305,
+                "p95_ns": 7255891
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 403960,
+                "max_ns": 5529157,
+                "mean_ns": 4590268,
+                "median_ns": 4556219,
+                "min_ns": 3877555,
+                "n": 10,
+                "p25_ns": 4269390,
+                "p75_ns": 4673350,
+                "p95_ns": 5443478
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 331870,
+                "max_ns": 4911407,
+                "mean_ns": 3719407,
+                "median_ns": 3727809,
+                "min_ns": 2698890,
+                "n": 10,
+                "p25_ns": 3570770,
+                "p75_ns": 3902640,
+                "p95_ns": 4708024
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 2126656,
+                "max_ns": 7895443,
+                "mean_ns": 4622145,
+                "median_ns": 4229892,
+                "min_ns": 2525398,
+                "n": 10,
+                "p25_ns": 3600561,
+                "p75_ns": 5727217,
+                "p95_ns": 7122754
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 43350,
+          "disclosed_paths": 10,
+          "disclosed_records": 9,
+          "epoch_logs": [
+            1135,
+            13
+          ],
+          "exposed": "each epoch's log count: every path carries it, and fixes the tree's shape",
+          "full_replay_bytes": 4724062,
+          "full_replay_ns": {
+            "iqr_ns": 40756,
+            "max_ns": 11620532,
+            "mean_ns": 11473943,
+            "median_ns": 11455167,
+            "min_ns": 11419066,
+            "n": 10,
+            "p25_ns": 11446488,
+            "p75_ns": 11487244,
+            "p95_ns": 11563503
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 3473899,
+            "max_ns": 12164688,
+            "mean_ns": 5049602,
+            "median_ns": 3904526,
+            "min_ns": 2322986,
+            "n": 10,
+            "p25_ns": 2801718,
+            "p75_ns": 6275617,
+            "p95_ns": 10275801
+          },
+          "proof_form": "one standalone O(log N) path per object against its epoch root (Phase 5 Step 3)",
+          "redacted": {
+            "carries": "seal object and every record with its own path (DISPOSE against R_1), the order with its R_1 path, target membership",
+            "disclosed_bytes": 47584,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 98,
+              "max_ns": 141071,
+              "mean_ns": 139310,
+              "median_ns": 138900,
+              "min_ns": 138822,
+              "n": 10,
+              "p25_ns": 138859,
+              "p75_ns": 138957,
+              "p95_ns": 141013
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 111,
+            "max_ns": 130172,
+            "mean_ns": 128958,
+            "median_ns": 129266,
+            "min_ns": 125725,
+            "n": 10,
+            "p25_ns": 129234,
+            "p75_ns": 129345,
+            "p95_ns": 129808
+          }
+        },
+        "record_build_total_ns": 548362764,
+        "records": 1030,
+        "redacted_capsule": 102,
+        "stream": {
+          "counts": {
+            "Access": 161,
+            "Analyze": 153,
+            "Collect": 117,
+            "Dispose": 12,
+            "Export": 138,
+            "Seal": 117,
+            "Transfer": 332
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 117,
+            "dispose_pct": 10,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        },
+        "target_capsule": 46
+      },
+      {
+        "capsules": 349,
+        "disposed_capsules": 23,
+        "flat_mmr": {
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 148057,
+                "max_ns": 34337955,
+                "mean_ns": 33629344,
+                "median_ns": 33580048,
+                "min_ns": 33334898,
+                "n": 10,
+                "p25_ns": 33517145,
+                "p75_ns": 33665202,
+                "p95_ns": 34052784
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 78733,
+                "max_ns": 18105223,
+                "mean_ns": 17970298,
+                "median_ns": 17955838,
+                "min_ns": 17827359,
+                "n": 10,
+                "p25_ns": 17930796,
+                "p75_ns": 18009529,
+                "p95_ns": 18091116
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 219284,
+                "max_ns": 10420320,
+                "mean_ns": 10099272,
+                "median_ns": 10059635,
+                "min_ns": 9907411,
+                "n": 10,
+                "p25_ns": 9970823,
+                "p75_ns": 10190107,
+                "p95_ns": 10358664
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 322939,
+                "max_ns": 7049803,
+                "mean_ns": 6472578,
+                "median_ns": 6471947,
+                "min_ns": 6007686,
+                "n": 10,
+                "p25_ns": 6320105,
+                "p75_ns": 6643044,
+                "p95_ns": 6896771
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 201293,
+                "max_ns": 6526825,
+                "mean_ns": 6097928,
+                "median_ns": 6072178,
+                "min_ns": 5926040,
+                "n": 10,
+                "p25_ns": 5965688,
+                "p75_ns": 6166981,
+                "p95_ns": 6379028
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 38083,
+          "disclosed_records": 8,
+          "exposed": "case size: every proof carries the MMR's leaf count",
+          "full_replay_bytes": 12116958,
+          "full_replay_ns": {
+            "iqr_ns": 174193,
+            "max_ns": 33787198,
+            "mean_ns": 33435534,
+            "median_ns": 33430953,
+            "min_ns": 33202025,
+            "n": 10,
+            "p25_ns": 33313480,
+            "p75_ns": 33487673,
+            "p95_ns": 33706062
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 2986676,
+            "max_ns": 10826496,
+            "mean_ns": 7573968,
+            "median_ns": 7508449,
+            "min_ns": 5250742,
+            "n": 10,
+            "p25_ns": 5729181,
+            "p75_ns": 8715857,
+            "p95_ns": 10779253
+          },
+          "leaf_count_in_every_proof": 3277,
+          "proof_form": "one batched MMR proof per disclosure (shared siblings and peaks), M13 A8",
+          "redacted": {
+            "carries": "the capsule's records and the 0x05 leaf under one batched proof, the order, target membership",
+            "disclosed_bytes": 45272,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 321,
+              "max_ns": 123040,
+              "mean_ns": 114014,
+              "median_ns": 112998,
+              "min_ns": 112787,
+              "n": 10,
+              "p25_ns": 112849,
+              "p75_ns": 113170,
+              "p95_ns": 118737
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 785,
+            "max_ns": 122996,
+            "mean_ns": 108425,
+            "median_ns": 106656,
+            "min_ns": 106295,
+            "n": 10,
+            "p25_ns": 106507,
+            "p75_ns": 107292,
+            "p95_ns": 116131
+          }
+        },
+        "glassdb": {
+          "audit": "VerifyBlock over every block (block proof against the digest, every written key included with its value), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 626103,
+                "max_ns": 56452231,
+                "mean_ns": 55877806,
+                "median_ns": 55772190,
+                "min_ns": 55504587,
+                "n": 10,
+                "p25_ns": 55569850,
+                "p75_ns": 56195953,
+                "p95_ns": 56357211
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 316937,
+                "max_ns": 34135170,
+                "mean_ns": 33550445,
+                "median_ns": 33471011,
+                "min_ns": 33154950,
+                "n": 10,
+                "p25_ns": 33344719,
+                "p75_ns": 33661656,
+                "p95_ns": 34054643
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 214470,
+                "max_ns": 18004042,
+                "mean_ns": 17560538,
+                "median_ns": 17515047,
+                "min_ns": 17330479,
+                "n": 10,
+                "p25_ns": 17449994,
+                "p75_ns": 17664464,
+                "p95_ns": 17884746
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 176770,
+                "max_ns": 13941366,
+                "mean_ns": 13733169,
+                "median_ns": 13725536,
+                "min_ns": 13494252,
+                "n": 10,
+                "p25_ns": 13647296,
+                "p75_ns": 13824066,
+                "p95_ns": 13925278
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 131837,
+                "max_ns": 10405086,
+                "mean_ns": 10066974,
+                "median_ns": 10054618,
+                "min_ns": 9779660,
+                "n": 10,
+                "p25_ns": 9997708,
+                "p75_ns": 10129545,
+                "p95_ns": 10298519
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "batch": 1000,
+          "blocks": 49,
+          "build_ns": 106398930,
+          "disclosed_bytes": 58279,
+          "disclosed_nodes": 14,
+          "disclosed_records": 8,
+          "exposed": "the neighbouring entries of every disclosed leaf node (other capsules' sealed records and intake numbers), and the block count",
+          "full_replay_bytes": 13377877,
+          "full_replay_ns": {
+            "iqr_ns": 454149,
+            "max_ns": 55897604,
+            "mean_ns": 55075807,
+            "median_ns": 55100304,
+            "min_ns": 54646380,
+            "n": 10,
+            "p25_ns": 54755347,
+            "p75_ns": 55209496,
+            "p95_ns": 55673216
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 781778,
+            "max_ns": 11100454,
+            "mean_ns": 9052653,
+            "median_ns": 9013012,
+            "min_ns": 6836490,
+            "n": 10,
+            "p25_ns": 8666015,
+            "p75_ns": 9447793,
+            "p95_ns": 10715593
+          },
+          "proof_form": "current-value proof at the last block (upper path, data block, lower path) plus each earlier version through its H_prev pointer",
+          "redacted": {
+            "carries": "the capsule object, the order and the record key's full history under one de-duplicated node set, target membership",
+            "disclosed_bytes": 110642,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 2761,
+              "max_ns": 271985,
+              "mean_ns": 265152,
+              "median_ns": 266024,
+              "min_ns": 258255,
+              "n": 10,
+              "p25_ns": 263836,
+              "p75_ns": 266597,
+              "p95_ns": 269783
+            }
+          },
+          "stored_nodes": 3035,
+          "verify_ns": {
+            "iqr_ns": 1639,
+            "max_ns": 146700,
+            "mean_ns": 141584,
+            "median_ns": 142209,
+            "min_ns": 136136,
+            "n": 10,
+            "p25_ns": 140843,
+            "p75_ns": 142482,
+            "p95_ns": 144835
+          }
+        },
+        "hash_chain_replay": {
+          "disclosed_bytes": 12120524,
+          "disclosed_records": 2928,
+          "exposed": "all records of the case",
+          "full_replay_bytes": 12120524,
+          "full_replay_ns": {
+            "iqr_ns": 101493,
+            "max_ns": 29586726,
+            "mean_ns": 29296763,
+            "median_ns": 29270984,
+            "min_ns": 29118754,
+            "n": 10,
+            "p25_ns": 29225044,
+            "p75_ns": 29326537,
+            "p95_ns": 29511556
+          },
+          "full_replay_parallel_ns": null,
+          "parallel_note": "inherently sequential: each link needs the previous head, so the all-cores audit is the one-core audit",
+          "redacted": {
+            "carries": "every record and the order entry, plus target membership",
+            "disclosed_bytes": 12120656,
+            "disclosed_records": 2928,
+            "verify_ns": {
+              "iqr_ns": 224307,
+              "max_ns": 29490530,
+              "mean_ns": 29289112,
+              "median_ns": 29328383,
+              "min_ns": 28997753,
+              "n": 10,
+              "p25_ns": 29170570,
+              "p75_ns": 29394877,
+              "p95_ns": 29469427
+            }
+          },
+          "target_records": 8,
+          "verify_ns": {
+            "iqr_ns": 412023,
+            "max_ns": 30024219,
+            "mean_ns": 29656087,
+            "median_ns": 29698344,
+            "min_ns": 29276804,
+            "n": 10,
+            "p25_ns": 29445537,
+            "p75_ns": 29857560,
+            "p95_ns": 29980080
+          }
+        },
+        "order": {
+          "encoded_bytes": 3448,
+          "mode": "ERASED",
+          "one_sweep_over_every_disposal": true,
+          "scope": "FULL"
+        },
+        "ours": {
+          "audit_includes": "both epochs' bundles and 0x05 accounting (order anchored at R_e', genuine, targeting every disposed capsule, referenced by every DISPOSE)",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 113084,
+                "max_ns": 35896822,
+                "mean_ns": 35558361,
+                "median_ns": 35514364,
+                "min_ns": 35334704,
+                "n": 10,
+                "p25_ns": 35477477,
+                "p75_ns": 35590561,
+                "p95_ns": 35823006
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 151027,
+                "max_ns": 19063692,
+                "mean_ns": 18865337,
+                "median_ns": 18887443,
+                "min_ns": 18719129,
+                "n": 10,
+                "p25_ns": 18759652,
+                "p75_ns": 18910679,
+                "p95_ns": 19025013
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 145119,
+                "max_ns": 10298030,
+                "mean_ns": 10147855,
+                "median_ns": 10124074,
+                "min_ns": 9967162,
+                "n": 10,
+                "p25_ns": 10091675,
+                "p75_ns": 10236794,
+                "p95_ns": 10292837
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 72080,
+                "max_ns": 5832159,
+                "mean_ns": 5586495,
+                "median_ns": 5553962,
+                "min_ns": 5419517,
+                "n": 10,
+                "p25_ns": 5530422,
+                "p75_ns": 5602502,
+                "p95_ns": 5815458
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 114182,
+                "max_ns": 5060999,
+                "mean_ns": 4867952,
+                "median_ns": 4881049,
+                "min_ns": 4715815,
+                "n": 10,
+                "p25_ns": 4787001,
+                "p75_ns": 4901183,
+                "p95_ns": 5028168
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 37684,
+          "disclosed_records": 8,
+          "disclosed_segments": 1,
+          "exposed": "none",
+          "full_replay_bytes": 13958259,
+          "full_replay_memo_hits": 8631,
+          "full_replay_ns": {
+            "iqr_ns": 154876,
+            "max_ns": 35520068,
+            "mean_ns": 35039280,
+            "median_ns": 34972266,
+            "min_ns": 34794951,
+            "n": 10,
+            "p25_ns": 34887927,
+            "p75_ns": 35042803,
+            "p95_ns": 35470390
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 2870882,
+            "max_ns": 9396741,
+            "mean_ns": 5776326,
+            "median_ns": 5339246,
+            "min_ns": 3623735,
+            "n": 10,
+            "p25_ns": 4139890,
+            "p75_ns": 7010772,
+            "p95_ns": 8844964
+          },
+          "full_replay_unmemoised_ns": {
+            "iqr_ns": 243254,
+            "max_ns": 38099197,
+            "mean_ns": 37810286,
+            "median_ns": 37743463,
+            "min_ns": 37606876,
+            "n": 10,
+            "p25_ns": 37678231,
+            "p75_ns": 37921485,
+            "p95_ns": 38071040
+          },
+          "redacted": {
+            "carries": "one Tier-1 segment per epoch with its own 0x02 proof, the 0x05 proof at R_e', the order, target membership",
+            "disclosed_bytes": 45808,
+            "disclosed_records": 10,
+            "disclosed_segments": 2,
+            "verify_ns": {
+              "iqr_ns": 4080,
+              "max_ns": 142438,
+              "mean_ns": 131155,
+              "median_ns": 129922,
+              "min_ns": 127270,
+              "n": 10,
+              "p25_ns": 128277,
+              "p75_ns": 132357,
+              "p95_ns": 138257
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 3728,
+            "max_ns": 114532,
+            "mean_ns": 104988,
+            "median_ns": 104297,
+            "min_ns": 98953,
+            "n": 10,
+            "p25_ns": 101705,
+            "p75_ns": 105433,
+            "p95_ns": 113443
+          }
+        },
+        "pq_abl": {
+          "audit": "full-epoch verification of both epochs: recompute every h_n, rebuild, compare (eq. (1)), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 315767,
+                "max_ns": 34808489,
+                "mean_ns": 34158299,
+                "median_ns": 34173014,
+                "min_ns": 33772017,
+                "n": 10,
+                "p25_ns": 33942266,
+                "p75_ns": 34258033,
+                "p95_ns": 34607564
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 454649,
+                "max_ns": 18899493,
+                "mean_ns": 18400004,
+                "median_ns": 18408235,
+                "min_ns": 17928763,
+                "n": 10,
+                "p25_ns": 18158496,
+                "p75_ns": 18613145,
+                "p95_ns": 18845166
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 650379,
+                "max_ns": 12007937,
+                "mean_ns": 10699678,
+                "median_ns": 10550721,
+                "min_ns": 10045023,
+                "n": 10,
+                "p25_ns": 10245646,
+                "p75_ns": 10896025,
+                "p95_ns": 11748066
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 777782,
+                "max_ns": 9066918,
+                "mean_ns": 7977044,
+                "median_ns": 7912272,
+                "min_ns": 6815766,
+                "n": 10,
+                "p25_ns": 7524280,
+                "p75_ns": 8302062,
+                "p95_ns": 9044868
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1127049,
+                "max_ns": 9477543,
+                "mean_ns": 8018193,
+                "median_ns": 7842071,
+                "min_ns": 6655237,
+                "n": 10,
+                "p25_ns": 7530646,
+                "p75_ns": 8657695,
+                "p95_ns": 9192359
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 39627,
+          "disclosed_paths": 9,
+          "disclosed_records": 8,
+          "epoch_logs": [
+            3253,
+            24
+          ],
+          "exposed": "each epoch's log count: every path carries it, and fixes the tree's shape",
+          "full_replay_bytes": 13361492,
+          "full_replay_ns": {
+            "iqr_ns": 275322,
+            "max_ns": 33246926,
+            "mean_ns": 32906028,
+            "median_ns": 32877565,
+            "min_ns": 32637021,
+            "n": 10,
+            "p25_ns": 32749128,
+            "p75_ns": 33024450,
+            "p95_ns": 33224954
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 1868419,
+            "max_ns": 11103314,
+            "mean_ns": 8870279,
+            "median_ns": 9276516,
+            "min_ns": 6123727,
+            "n": 10,
+            "p25_ns": 7850379,
+            "p75_ns": 9718798,
+            "p95_ns": 10637401
+          },
+          "proof_form": "one standalone O(log N) path per object against its epoch root (Phase 5 Step 3)",
+          "redacted": {
+            "carries": "seal object and every record with its own path (DISPOSE against R_1), the order with its R_1 path, target membership",
+            "disclosed_bytes": 47936,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 68,
+              "max_ns": 143582,
+              "mean_ns": 142662,
+              "median_ns": 142561,
+              "min_ns": 142505,
+              "n": 10,
+              "p25_ns": 142535,
+              "p75_ns": 142603,
+              "p95_ns": 143146
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 3201,
+            "max_ns": 120946,
+            "mean_ns": 118682,
+            "median_ns": 118790,
+            "min_ns": 116842,
+            "n": 10,
+            "p25_ns": 116915,
+            "p75_ns": 120116,
+            "p95_ns": 120737
+          }
+        },
+        "record_build_total_ns": 1647333967,
+        "records": 2927,
+        "redacted_capsule": 241,
+        "stream": {
+          "counts": {
+            "Access": 467,
+            "Analyze": 425,
+            "Collect": 349,
+            "Dispose": 23,
+            "Export": 440,
+            "Seal": 349,
+            "Transfer": 874
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 349,
+            "dispose_pct": 10,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        },
+        "target_capsule": 275
+      },
+      {
+        "capsules": 1163,
+        "disposed_capsules": 101,
+        "flat_mmr": {
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1242692,
+                "max_ns": 111951628,
+                "mean_ns": 110815547,
+                "median_ns": 110882204,
+                "min_ns": 109600797,
+                "n": 10,
+                "p25_ns": 110194987,
+                "p75_ns": 111437679,
+                "p95_ns": 111944724
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 420300,
+                "max_ns": 60025417,
+                "mean_ns": 58694895,
+                "median_ns": 58638599,
+                "min_ns": 58020209,
+                "n": 10,
+                "p25_ns": 58436460,
+                "p75_ns": 58856760,
+                "p95_ns": 59508359
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 423172,
+                "max_ns": 32634145,
+                "mean_ns": 32269120,
+                "median_ns": 32334372,
+                "min_ns": 31871205,
+                "n": 10,
+                "p25_ns": 32026932,
+                "p75_ns": 32450104,
+                "p95_ns": 32623489
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 562233,
+                "max_ns": 19803135,
+                "mean_ns": 19395702,
+                "median_ns": 19420176,
+                "min_ns": 18981377,
+                "n": 10,
+                "p25_ns": 19112919,
+                "p75_ns": 19675152,
+                "p95_ns": 19758838
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 951698,
+                "max_ns": 18892373,
+                "mean_ns": 18180334,
+                "median_ns": 18218896,
+                "min_ns": 16961237,
+                "n": 10,
+                "p25_ns": 17755104,
+                "p75_ns": 18706802,
+                "p95_ns": 18874808
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 41432,
+          "disclosed_records": 8,
+          "exposed": "case size: every proof carries the MMR's leaf count",
+          "full_replay_bytes": 40210570,
+          "full_replay_ns": {
+            "iqr_ns": 550714,
+            "max_ns": 112213290,
+            "mean_ns": 111125753,
+            "median_ns": 111089966,
+            "min_ns": 110418849,
+            "n": 10,
+            "p25_ns": 110695434,
+            "p75_ns": 111246148,
+            "p95_ns": 112087631
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 3486036,
+            "max_ns": 18778747,
+            "mean_ns": 15973161,
+            "median_ns": 15745747,
+            "min_ns": 13040119,
+            "n": 10,
+            "p25_ns": 14274651,
+            "p75_ns": 17760687,
+            "p95_ns": 18769435
+          },
+          "leaf_count_in_every_proof": 10874,
+          "proof_form": "one batched MMR proof per disclosure (shared siblings and peaks), M13 A8",
+          "redacted": {
+            "carries": "the capsule's records and the 0x05 leaf under one batched proof, the order, target membership",
+            "disclosed_bytes": 46139,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 1788,
+              "max_ns": 134046,
+              "mean_ns": 124522,
+              "median_ns": 122312,
+              "min_ns": 121648,
+              "n": 10,
+              "p25_ns": 122016,
+              "p75_ns": 123804,
+              "p95_ns": 132990
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 2656,
+            "max_ns": 129796,
+            "mean_ns": 118343,
+            "median_ns": 115884,
+            "min_ns": 114918,
+            "n": 10,
+            "p25_ns": 115329,
+            "p75_ns": 117985,
+            "p95_ns": 127833
+          }
+        },
+        "glassdb": {
+          "audit": "VerifyBlock over every block (block proof against the digest, every written key included with its value), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 428960,
+                "max_ns": 183516178,
+                "mean_ns": 182320397,
+                "median_ns": 182258671,
+                "min_ns": 181446842,
+                "n": 10,
+                "p25_ns": 182124235,
+                "p75_ns": 182553195,
+                "p95_ns": 183138228
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 428954,
+                "max_ns": 99198173,
+                "mean_ns": 98087585,
+                "median_ns": 97862954,
+                "min_ns": 97504848,
+                "n": 10,
+                "p25_ns": 97763898,
+                "p75_ns": 98192852,
+                "p95_ns": 99107923
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 362245,
+                "max_ns": 51132111,
+                "mean_ns": 50696322,
+                "median_ns": 50811164,
+                "min_ns": 50064600,
+                "n": 10,
+                "p25_ns": 50520793,
+                "p75_ns": 50883038,
+                "p95_ns": 51090930
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 315403,
+                "max_ns": 31381522,
+                "mean_ns": 30933620,
+                "median_ns": 30969492,
+                "min_ns": 30515474,
+                "n": 10,
+                "p25_ns": 30738338,
+                "p75_ns": 31053741,
+                "p95_ns": 31280821
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 206514,
+                "max_ns": 23641112,
+                "mean_ns": 23418234,
+                "median_ns": 23445781,
+                "min_ns": 23148869,
+                "n": 10,
+                "p25_ns": 23317432,
+                "p75_ns": 23523946,
+                "p95_ns": 23616032
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "batch": 1000,
+          "blocks": 144,
+          "build_ns": 348053404,
+          "disclosed_bytes": 131134,
+          "disclosed_nodes": 12,
+          "disclosed_records": 8,
+          "exposed": "the neighbouring entries of every disclosed leaf node (other capsules' sealed records and intake numbers), and the block count",
+          "full_replay_bytes": 44412198,
+          "full_replay_ns": {
+            "iqr_ns": 600658,
+            "max_ns": 181368546,
+            "mean_ns": 180879534,
+            "median_ns": 180867260,
+            "min_ns": 180303031,
+            "n": 10,
+            "p25_ns": 180625060,
+            "p75_ns": 181225718,
+            "p95_ns": 181353943
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 2824487,
+            "max_ns": 24838107,
+            "mean_ns": 22454453,
+            "median_ns": 22267985,
+            "min_ns": 19628503,
+            "n": 10,
+            "p25_ns": 21245361,
+            "p75_ns": 24069848,
+            "p95_ns": 24766566
+          },
+          "proof_form": "current-value proof at the last block (upper path, data block, lower path) plus each earlier version through its H_prev pointer",
+          "redacted": {
+            "carries": "the capsule object, the order and the record key's full history under one de-duplicated node set, target membership",
+            "disclosed_bytes": 131269,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 2206,
+              "max_ns": 321071,
+              "mean_ns": 314547,
+              "median_ns": 315994,
+              "min_ns": 300004,
+              "n": 10,
+              "p25_ns": 314260,
+              "p75_ns": 316466,
+              "p95_ns": 319196
+            }
+          },
+          "stored_nodes": 10028,
+          "verify_ns": {
+            "iqr_ns": 7175,
+            "max_ns": 321359,
+            "mean_ns": 300628,
+            "median_ns": 296450,
+            "min_ns": 295159,
+            "n": 10,
+            "p25_ns": 295367,
+            "p75_ns": 302542,
+            "p95_ns": 315003
+          }
+        },
+        "hash_chain_replay": {
+          "disclosed_bytes": 40214136,
+          "disclosed_records": 9711,
+          "exposed": "all records of the case",
+          "full_replay_bytes": 40214136,
+          "full_replay_ns": {
+            "iqr_ns": 654765,
+            "max_ns": 97477745,
+            "mean_ns": 96668518,
+            "median_ns": 96579423,
+            "min_ns": 96057361,
+            "n": 10,
+            "p25_ns": 96284770,
+            "p75_ns": 96939535,
+            "p95_ns": 97390975
+          },
+          "full_replay_parallel_ns": null,
+          "parallel_note": "inherently sequential: each link needs the previous head, so the all-cores audit is the one-core audit",
+          "redacted": {
+            "carries": "every record and the order entry, plus target membership",
+            "disclosed_bytes": 40214367,
+            "disclosed_records": 9711,
+            "verify_ns": {
+              "iqr_ns": 496522,
+              "max_ns": 97913534,
+              "mean_ns": 97139311,
+              "median_ns": 97199311,
+              "min_ns": 96458938,
+              "n": 10,
+              "p25_ns": 96888563,
+              "p75_ns": 97385085,
+              "p95_ns": 97706654
+            }
+          },
+          "target_records": 8,
+          "verify_ns": {
+            "iqr_ns": 359420,
+            "max_ns": 97337181,
+            "mean_ns": 96511612,
+            "median_ns": 96561382,
+            "min_ns": 95812740,
+            "n": 10,
+            "p25_ns": 96302319,
+            "p75_ns": 96661739,
+            "p95_ns": 97052449
+          }
+        },
+        "order": {
+          "encoded_bytes": 3448,
+          "mode": "ERASED",
+          "one_sweep_over_every_disposal": true,
+          "scope": "FULL"
+        },
+        "ours": {
+          "audit_includes": "both epochs' bundles and 0x05 accounting (order anchored at R_e', genuine, targeting every disposed capsule, referenced by every DISPOSE)",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 387257,
+                "max_ns": 117569526,
+                "mean_ns": 117083215,
+                "median_ns": 117105493,
+                "min_ns": 116570234,
+                "n": 10,
+                "p25_ns": 116903834,
+                "p75_ns": 117291091,
+                "p95_ns": 117471222
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 413416,
+                "max_ns": 59975744,
+                "mean_ns": 59517828,
+                "median_ns": 59402868,
+                "min_ns": 59254936,
+                "n": 10,
+                "p25_ns": 59298466,
+                "p75_ns": 59711882,
+                "p95_ns": 59969189
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 255046,
+                "max_ns": 31181487,
+                "mean_ns": 30975005,
+                "median_ns": 30983588,
+                "min_ns": 30779812,
+                "n": 10,
+                "p25_ns": 30843631,
+                "p75_ns": 31098677,
+                "p95_ns": 31157667
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 169357,
+                "max_ns": 17306494,
+                "mean_ns": 17053996,
+                "median_ns": 17050533,
+                "min_ns": 16827462,
+                "n": 10,
+                "p25_ns": 16948615,
+                "p75_ns": 17117972,
+                "p95_ns": 17273756
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 560219,
+                "max_ns": 16594215,
+                "mean_ns": 15129294,
+                "median_ns": 15311033,
+                "min_ns": 13814797,
+                "n": 10,
+                "p25_ns": 14860447,
+                "p75_ns": 15420666,
+                "p95_ns": 16078160
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 41215,
+          "disclosed_records": 8,
+          "disclosed_segments": 1,
+          "exposed": "none",
+          "full_replay_bytes": 46547419,
+          "full_replay_memo_hits": 32379,
+          "full_replay_ns": {
+            "iqr_ns": 814220,
+            "max_ns": 116864187,
+            "mean_ns": 116305717,
+            "median_ns": 116391859,
+            "min_ns": 115759731,
+            "n": 10,
+            "p25_ns": 115858146,
+            "p75_ns": 116672366,
+            "p95_ns": 116843160
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 2172512,
+            "max_ns": 13267964,
+            "mean_ns": 11399670,
+            "median_ns": 11111126,
+            "min_ns": 10034696,
+            "n": 10,
+            "p25_ns": 10264142,
+            "p75_ns": 12436654,
+            "p95_ns": 13187418
+          },
+          "full_replay_unmemoised_ns": {
+            "iqr_ns": 332258,
+            "max_ns": 127324320,
+            "mean_ns": 126825160,
+            "median_ns": 126824674,
+            "min_ns": 126208046,
+            "n": 10,
+            "p25_ns": 126701546,
+            "p75_ns": 127033804,
+            "p95_ns": 127264066
+          },
+          "redacted": {
+            "carries": "one Tier-1 segment per epoch with its own 0x02 proof, the 0x05 proof at R_e', the order, target membership",
+            "disclosed_bytes": 46478,
+            "disclosed_records": 10,
+            "disclosed_segments": 2,
+            "verify_ns": {
+              "iqr_ns": 2847,
+              "max_ns": 154533,
+              "mean_ns": 139784,
+              "median_ns": 136996,
+              "min_ns": 136256,
+              "n": 10,
+              "p25_ns": 136679,
+              "p75_ns": 139526,
+              "p95_ns": 150469
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 2220,
+            "max_ns": 116284,
+            "mean_ns": 112068,
+            "median_ns": 111476,
+            "min_ns": 110074,
+            "n": 10,
+            "p25_ns": 110626,
+            "p75_ns": 112846,
+            "p95_ns": 115475
+          }
+        },
+        "pq_abl": {
+          "audit": "full-epoch verification of both epochs: recompute every h_n, rebuild, compare (eq. (1)), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 717510,
+                "max_ns": 112336190,
+                "mean_ns": 111033225,
+                "median_ns": 110986299,
+                "min_ns": 110162772,
+                "n": 10,
+                "p25_ns": 110547206,
+                "p75_ns": 111264716,
+                "p95_ns": 112192797
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 378682,
+                "max_ns": 58893661,
+                "mean_ns": 58427429,
+                "median_ns": 58426429,
+                "min_ns": 58093096,
+                "n": 10,
+                "p25_ns": 58205252,
+                "p75_ns": 58583934,
+                "p95_ns": 58798983
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 732316,
+                "max_ns": 32568078,
+                "mean_ns": 32057802,
+                "median_ns": 32201538,
+                "min_ns": 31216250,
+                "n": 10,
+                "p25_ns": 31702629,
+                "p75_ns": 32434945,
+                "p95_ns": 32567943
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 900083,
+                "max_ns": 20513877,
+                "mean_ns": 19751466,
+                "median_ns": 19723316,
+                "min_ns": 18911944,
+                "n": 10,
+                "p25_ns": 19400649,
+                "p75_ns": 20300732,
+                "p95_ns": 20451554
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 3293002,
+                "max_ns": 26107898,
+                "mean_ns": 22635319,
+                "median_ns": 22924900,
+                "min_ns": 18716852,
+                "n": 10,
+                "p25_ns": 20833760,
+                "p75_ns": 24126762,
+                "p95_ns": 25874309
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 43520,
+          "disclosed_paths": 9,
+          "disclosed_records": 8,
+          "epoch_logs": [
+            10772,
+            102
+          ],
+          "exposed": "each epoch's log count: every path carries it, and fixes the tree's shape",
+          "full_replay_bytes": 44357828,
+          "full_replay_ns": {
+            "iqr_ns": 676388,
+            "max_ns": 110092289,
+            "mean_ns": 109187644,
+            "median_ns": 109021705,
+            "min_ns": 108283263,
+            "n": 10,
+            "p25_ns": 108874509,
+            "p75_ns": 109550897,
+            "p95_ns": 110047006
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 3343971,
+            "max_ns": 25416166,
+            "mean_ns": 20418386,
+            "median_ns": 20482126,
+            "min_ns": 16813214,
+            "n": 10,
+            "p25_ns": 18721333,
+            "p75_ns": 22065304,
+            "p95_ns": 24211244
+          },
+          "proof_form": "one standalone O(log N) path per object against its epoch root (Phase 5 Step 3)",
+          "redacted": {
+            "carries": "seal object and every record with its own path (DISPOSE against R_1), the order with its R_1 path, target membership",
+            "disclosed_bytes": 48835,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 190,
+              "max_ns": 156991,
+              "mean_ns": 152341,
+              "median_ns": 151667,
+              "min_ns": 150739,
+              "n": 10,
+              "p25_ns": 151634,
+              "p75_ns": 151824,
+              "p95_ns": 155596
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 50,
+            "max_ns": 131027,
+            "mean_ns": 130316,
+            "median_ns": 130263,
+            "min_ns": 130126,
+            "n": 10,
+            "p25_ns": 130222,
+            "p75_ns": 130272,
+            "p95_ns": 130715
+          }
+        },
+        "record_build_total_ns": 5085527494,
+        "records": 9710,
+        "redacted_capsule": 93,
+        "stream": {
+          "counts": {
+            "Access": 1495,
+            "Analyze": 1426,
+            "Collect": 1163,
+            "Dispose": 101,
+            "Export": 1450,
+            "Seal": 1163,
+            "Transfer": 2912
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 1163,
+            "dispose_pct": 10,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        },
+        "target_capsule": 697
+      },
+      {
+        "capsules": 3489,
+        "disposed_capsules": 332,
+        "flat_mmr": {
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1199382,
+                "max_ns": 330728614,
+                "mean_ns": 328882956,
+                "median_ns": 328740887,
+                "min_ns": 327822687,
+                "n": 10,
+                "p25_ns": 328168315,
+                "p75_ns": 329367697,
+                "p95_ns": 330187884
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 748547,
+                "max_ns": 174740460,
+                "mean_ns": 174143147,
+                "median_ns": 174099629,
+                "min_ns": 173613736,
+                "n": 10,
+                "p25_ns": 173785564,
+                "p75_ns": 174534111,
+                "p95_ns": 174713617
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 467167,
+                "max_ns": 96556546,
+                "mean_ns": 95835812,
+                "median_ns": 95716154,
+                "min_ns": 95414736,
+                "n": 10,
+                "p25_ns": 95524666,
+                "p75_ns": 95991833,
+                "p95_ns": 96528748
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 183703,
+                "max_ns": 56684670,
+                "mean_ns": 56225424,
+                "median_ns": 56185614,
+                "min_ns": 55868338,
+                "n": 10,
+                "p25_ns": 56091269,
+                "p75_ns": 56274972,
+                "p95_ns": 56634406
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 2964674,
+                "max_ns": 53648133,
+                "mean_ns": 51332004,
+                "median_ns": 51409505,
+                "min_ns": 48551485,
+                "n": 10,
+                "p25_ns": 49986984,
+                "p75_ns": 52951658,
+                "p95_ns": 53381773
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 35054,
+          "disclosed_records": 8,
+          "exposed": "case size: every proof carries the MMR's leaf count",
+          "full_replay_bytes": 120270419,
+          "full_replay_ns": {
+            "iqr_ns": 197050,
+            "max_ns": 329810982,
+            "mean_ns": 328041043,
+            "median_ns": 327950309,
+            "min_ns": 326968553,
+            "n": 10,
+            "p25_ns": 327874654,
+            "p75_ns": 328071704,
+            "p95_ns": 329321925
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 3290966,
+            "max_ns": 44128622,
+            "mean_ns": 40083866,
+            "median_ns": 39701763,
+            "min_ns": 37506047,
+            "n": 10,
+            "p25_ns": 38383724,
+            "p75_ns": 41674690,
+            "p95_ns": 43289291
+          },
+          "leaf_count_in_every_proof": 32557,
+          "proof_form": "one batched MMR proof per disclosure (shared siblings and peaks), M13 A8",
+          "redacted": {
+            "carries": "the capsule's records and the 0x05 leaf under one batched proof, the order, target membership",
+            "disclosed_bytes": 46237,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 525,
+              "max_ns": 140950,
+              "mean_ns": 125915,
+              "median_ns": 124337,
+              "min_ns": 123451,
+              "n": 10,
+              "p25_ns": 124082,
+              "p75_ns": 124607,
+              "p95_ns": 133746
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 1732,
+            "max_ns": 121602,
+            "mean_ns": 106511,
+            "median_ns": 103701,
+            "min_ns": 103121,
+            "n": 10,
+            "p25_ns": 103197,
+            "p75_ns": 104929,
+            "p95_ns": 118159
+          }
+        },
+        "glassdb": {
+          "audit": "VerifyBlock over every block (block proof against the digest, every written key included with its value), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 2321892,
+                "max_ns": 557250160,
+                "mean_ns": 554980002,
+                "median_ns": 555506675,
+                "min_ns": 552418467,
+                "n": 10,
+                "p25_ns": 553645800,
+                "p75_ns": 555967692,
+                "p95_ns": 556785362
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 604925,
+                "max_ns": 293648822,
+                "mean_ns": 292720718,
+                "median_ns": 292626540,
+                "min_ns": 292160946,
+                "n": 10,
+                "p25_ns": 292365354,
+                "p75_ns": 292970279,
+                "p95_ns": 293548122
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 849635,
+                "max_ns": 151930949,
+                "mean_ns": 151131522,
+                "median_ns": 151006962,
+                "min_ns": 150262427,
+                "n": 10,
+                "p25_ns": 150844070,
+                "p75_ns": 151693705,
+                "p95_ns": 151850934
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 217575,
+                "max_ns": 127469683,
+                "mean_ns": 91745050,
+                "median_ns": 83403874,
+                "min_ns": 83102667,
+                "n": 10,
+                "p25_ns": 83277903,
+                "p75_ns": 83495478,
+                "p95_ns": 125588144
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 7949814,
+                "max_ns": 66834253,
+                "mean_ns": 62015206,
+                "median_ns": 62943869,
+                "min_ns": 54343339,
+                "n": 10,
+                "p25_ns": 58662898,
+                "p75_ns": 66612712,
+                "p95_ns": 66801929
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "batch": 1000,
+          "blocks": 431,
+          "build_ns": 1060430707,
+          "disclosed_bytes": 108897,
+          "disclosed_nodes": 14,
+          "disclosed_records": 8,
+          "exposed": "the neighbouring entries of every disclosed leaf node (other capsules' sealed records and intake numbers), and the block count",
+          "full_replay_bytes": 132874978,
+          "full_replay_ns": {
+            "iqr_ns": 1205823,
+            "max_ns": 554006395,
+            "mean_ns": 552058727,
+            "median_ns": 551806161,
+            "min_ns": 550963422,
+            "n": 10,
+            "p25_ns": 551449442,
+            "p75_ns": 552655265,
+            "p95_ns": 553449205
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 1574308,
+            "max_ns": 75086687,
+            "mean_ns": 51451193,
+            "median_ns": 48997567,
+            "min_ns": 47136396,
+            "n": 10,
+            "p25_ns": 48245041,
+            "p75_ns": 49819349,
+            "p95_ns": 63770988
+          },
+          "proof_form": "current-value proof at the last block (upper path, data block, lower path) plus each earlier version through its H_prev pointer",
+          "redacted": {
+            "carries": "the capsule object, the order and the record key's full history under one de-duplicated node set, target membership",
+            "disclosed_bytes": 109055,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 4554,
+              "max_ns": 262936,
+              "mean_ns": 257366,
+              "median_ns": 258424,
+              "min_ns": 251418,
+              "n": 10,
+              "p25_ns": 254887,
+              "p75_ns": 259441,
+              "p95_ns": 261751
+            }
+          },
+          "stored_nodes": 30363,
+          "verify_ns": {
+            "iqr_ns": 14724,
+            "max_ns": 268345,
+            "mean_ns": 254596,
+            "median_ns": 253815,
+            "min_ns": 245868,
+            "n": 10,
+            "p25_ns": 246655,
+            "p75_ns": 261379,
+            "p95_ns": 265282
+          }
+        },
+        "hash_chain_replay": {
+          "disclosed_bytes": 120273985,
+          "disclosed_records": 29068,
+          "exposed": "all records of the case",
+          "full_replay_bytes": 120273985,
+          "full_replay_ns": {
+            "iqr_ns": 587350,
+            "max_ns": 290961686,
+            "mean_ns": 289108013,
+            "median_ns": 288923531,
+            "min_ns": 288246464,
+            "n": 10,
+            "p25_ns": 288737756,
+            "p75_ns": 289325106,
+            "p95_ns": 290336972
+          },
+          "full_replay_parallel_ns": null,
+          "parallel_note": "inherently sequential: each link needs the previous head, so the all-cores audit is the one-core audit",
+          "redacted": {
+            "carries": "every record and the order entry, plus target membership",
+            "disclosed_bytes": 120274282,
+            "disclosed_records": 29068,
+            "verify_ns": {
+              "iqr_ns": 1536905,
+              "max_ns": 292912907,
+              "mean_ns": 288934439,
+              "median_ns": 288539764,
+              "min_ns": 286780710,
+              "n": 10,
+              "p25_ns": 287616194,
+              "p75_ns": 289153099,
+              "p95_ns": 292324343
+            }
+          },
+          "target_records": 8,
+          "verify_ns": {
+            "iqr_ns": 2253566,
+            "max_ns": 293790717,
+            "mean_ns": 290894726,
+            "median_ns": 291195043,
+            "min_ns": 286261587,
+            "n": 10,
+            "p25_ns": 289866551,
+            "p75_ns": 292120117,
+            "p95_ns": 293314395
+          }
+        },
+        "order": {
+          "encoded_bytes": 3448,
+          "mode": "ERASED",
+          "one_sweep_over_every_disposal": true,
+          "scope": "FULL"
+        },
+        "ours": {
+          "audit_includes": "both epochs' bundles and 0x05 accounting (order anchored at R_e', genuine, targeting every disposed capsule, referenced by every DISPOSE)",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 420477,
+                "max_ns": 349188356,
+                "mean_ns": 346931931,
+                "median_ns": 346669493,
+                "min_ns": 346325193,
+                "n": 10,
+                "p25_ns": 346476633,
+                "p75_ns": 346897110,
+                "p95_ns": 348363597
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 405755,
+                "max_ns": 176630642,
+                "mean_ns": 176051235,
+                "median_ns": 175912700,
+                "min_ns": 175707560,
+                "n": 10,
+                "p25_ns": 175808065,
+                "p75_ns": 176213820,
+                "p95_ns": 176610346
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 374363,
+                "max_ns": 91896594,
+                "mean_ns": 91489833,
+                "median_ns": 91408865,
+                "min_ns": 91116922,
+                "n": 10,
+                "p25_ns": 91287568,
+                "p75_ns": 91661931,
+                "p95_ns": 91890996
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 282253,
+                "max_ns": 48625631,
+                "mean_ns": 48333800,
+                "median_ns": 48349443,
+                "min_ns": 48090825,
+                "n": 10,
+                "p25_ns": 48176917,
+                "p75_ns": 48459170,
+                "p95_ns": 48571006
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 8093146,
+                "max_ns": 47083069,
+                "mean_ns": 42483117,
+                "median_ns": 42127851,
+                "min_ns": 37275442,
+                "n": 10,
+                "p25_ns": 38814294,
+                "p75_ns": 46907440,
+                "p95_ns": 47045772
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 34710,
+          "disclosed_records": 8,
+          "disclosed_segments": 1,
+          "exposed": "none",
+          "full_replay_bytes": 139854340,
+          "full_replay_memo_hits": 110087,
+          "full_replay_ns": {
+            "iqr_ns": 640576,
+            "max_ns": 348852459,
+            "mean_ns": 348064893,
+            "median_ns": 348080074,
+            "min_ns": 347475970,
+            "n": 10,
+            "p25_ns": 347681729,
+            "p75_ns": 348322305,
+            "p95_ns": 348701511
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 1050824,
+            "max_ns": 39486884,
+            "mean_ns": 30980810,
+            "median_ns": 29788893,
+            "min_ns": 28873300,
+            "n": 10,
+            "p25_ns": 29314899,
+            "p75_ns": 30365723,
+            "p95_ns": 36798342
+          },
+          "full_replay_unmemoised_ns": {
+            "iqr_ns": 439598,
+            "max_ns": 384896268,
+            "mean_ns": 383513993,
+            "median_ns": 383186763,
+            "min_ns": 383019585,
+            "n": 10,
+            "p25_ns": 383131608,
+            "p75_ns": 383571206,
+            "p95_ns": 384705525
+          },
+          "redacted": {
+            "carries": "one Tier-1 segment per epoch with its own 0x02 proof, the 0x05 proof at R_e', the order, target membership",
+            "disclosed_bytes": 46958,
+            "disclosed_records": 10,
+            "disclosed_segments": 2,
+            "verify_ns": {
+              "iqr_ns": 795,
+              "max_ns": 149993,
+              "mean_ns": 140176,
+              "median_ns": 138824,
+              "min_ns": 138210,
+              "n": 10,
+              "p25_ns": 138472,
+              "p75_ns": 139267,
+              "p95_ns": 146491
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 896,
+            "max_ns": 106243,
+            "mean_ns": 100360,
+            "median_ns": 99773,
+            "min_ns": 98286,
+            "n": 10,
+            "p25_ns": 99090,
+            "p75_ns": 99986,
+            "p95_ns": 104542
+          }
+        },
+        "pq_abl": {
+          "audit": "full-epoch verification of both epochs: recompute every h_n, rebuild, compare (eq. (1)), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1606205,
+                "max_ns": 332352755,
+                "mean_ns": 329799288,
+                "median_ns": 330653991,
+                "min_ns": 326260461,
+                "n": 10,
+                "p25_ns": 329116225,
+                "p75_ns": 330722430,
+                "p95_ns": 331752317
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 740306,
+                "max_ns": 172888392,
+                "mean_ns": 171741918,
+                "median_ns": 171588663,
+                "min_ns": 171097571,
+                "n": 10,
+                "p25_ns": 171310070,
+                "p75_ns": 172050376,
+                "p95_ns": 172703067
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 376277,
+                "max_ns": 92499915,
+                "mean_ns": 91803309,
+                "median_ns": 91815658,
+                "min_ns": 91196594,
+                "n": 10,
+                "p25_ns": 91529289,
+                "p75_ns": 91905566,
+                "p95_ns": 92427116
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1618986,
+                "max_ns": 54130816,
+                "mean_ns": 51861576,
+                "median_ns": 51860494,
+                "min_ns": 49807165,
+                "n": 10,
+                "p25_ns": 50954584,
+                "p75_ns": 52573570,
+                "p95_ns": 53671421
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1307941,
+                "max_ns": 57491962,
+                "mean_ns": 55110069,
+                "median_ns": 55180563,
+                "min_ns": 51877202,
+                "n": 10,
+                "p25_ns": 54575724,
+                "p75_ns": 55883665,
+                "p95_ns": 57066921
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 37174,
+          "disclosed_paths": 9,
+          "disclosed_records": 8,
+          "epoch_logs": [
+            32224,
+            333
+          ],
+          "exposed": "each epoch's log count: every path carries it, and fixes the tree's shape",
+          "full_replay_bytes": 132712193,
+          "full_replay_ns": {
+            "iqr_ns": 1816072,
+            "max_ns": 328245349,
+            "mean_ns": 326133520,
+            "median_ns": 325623388,
+            "min_ns": 324647008,
+            "n": 10,
+            "p25_ns": 325321006,
+            "p75_ns": 327137078,
+            "p95_ns": 328131848
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 5309849,
+            "max_ns": 48888227,
+            "mean_ns": 41846724,
+            "median_ns": 40929012,
+            "min_ns": 37557442,
+            "n": 10,
+            "p25_ns": 38892195,
+            "p75_ns": 44202044,
+            "p95_ns": 47986346
+          },
+          "proof_form": "one standalone O(log N) path per object against its epoch root (Phase 5 Step 3)",
+          "redacted": {
+            "carries": "seal object and every record with its own path (DISPOSE against R_1), the order with its R_1 path, target membership",
+            "disclosed_bytes": 49349,
+            "disclosed_records": 10,
+            "verify_ns": {
+              "iqr_ns": 111,
+              "max_ns": 161862,
+              "mean_ns": 157118,
+              "median_ns": 156577,
+              "min_ns": 156494,
+              "n": 10,
+              "p25_ns": 156532,
+              "p75_ns": 156643,
+              "p95_ns": 159610
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 195,
+            "max_ns": 118970,
+            "mean_ns": 117903,
+            "median_ns": 117822,
+            "min_ns": 117628,
+            "n": 10,
+            "p25_ns": 117695,
+            "p75_ns": 117890,
+            "p95_ns": 118496
+          }
+        },
+        "record_build_total_ns": 15570074794,
+        "records": 29067,
+        "redacted_capsule": 59,
+        "stream": {
+          "counts": {
+            "Access": 4439,
+            "Analyze": 4301,
+            "Collect": 3489,
+            "Dispose": 332,
+            "Export": 4357,
+            "Seal": 3489,
+            "Transfer": 8660
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 3489,
+            "dispose_pct": 10,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        },
+        "target_capsule": 2153
+      },
+      {
+        "capsules": 11628,
+        "disposed_capsules": 1177,
+        "flat_mmr": {
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1200163,
+                "max_ns": 1089529491,
+                "mean_ns": 1087996484,
+                "median_ns": 1087869304,
+                "min_ns": 1086581182,
+                "n": 10,
+                "p25_ns": 1087463698,
+                "p75_ns": 1088663861,
+                "p95_ns": 1089299933
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 553704,
+                "max_ns": 576806026,
+                "mean_ns": 575254937,
+                "median_ns": 575112991,
+                "min_ns": 573986195,
+                "n": 10,
+                "p25_ns": 575015170,
+                "p75_ns": 575568874,
+                "p95_ns": 576473795
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 210676,
+                "max_ns": 316774217,
+                "mean_ns": 315870902,
+                "median_ns": 315869665,
+                "min_ns": 315142658,
+                "n": 10,
+                "p25_ns": 315774000,
+                "p75_ns": 315984676,
+                "p95_ns": 316493621
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 447822,
+                "max_ns": 186034011,
+                "mean_ns": 185461447,
+                "median_ns": 185555601,
+                "min_ns": 184881597,
+                "n": 10,
+                "p25_ns": 185206302,
+                "p75_ns": 185654124,
+                "p95_ns": 185889070
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 300307,
+                "max_ns": 176533742,
+                "mean_ns": 174500014,
+                "median_ns": 174266517,
+                "min_ns": 173922707,
+                "n": 10,
+                "p25_ns": 174128661,
+                "p75_ns": 174428968,
+                "p95_ns": 175740653
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 38563,
+          "disclosed_records": 8,
+          "exposed": "case size: every proof carries the MMR's leaf count",
+          "full_replay_bytes": 398268848,
+          "full_replay_ns": {
+            "iqr_ns": 646655,
+            "max_ns": 1089330615,
+            "mean_ns": 1087643743,
+            "median_ns": 1087692216,
+            "min_ns": 1085634595,
+            "n": 10,
+            "p25_ns": 1087430011,
+            "p75_ns": 1088076666,
+            "p95_ns": 1089183690
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 4349818,
+            "max_ns": 179127317,
+            "mean_ns": 131438213,
+            "median_ns": 125121184,
+            "min_ns": 123166963,
+            "n": 10,
+            "p25_ns": 123796013,
+            "p75_ns": 128145831,
+            "p95_ns": 159546361
+          },
+          "leaf_count_in_every_proof": 107962,
+          "proof_form": "one batched MMR proof per disclosure (shared siblings and peaks), M13 A8",
+          "redacted": {
+            "carries": "the capsule's records and the 0x05 leaf under one batched proof, the order, target membership",
+            "disclosed_bytes": 42588,
+            "disclosed_records": 9,
+            "verify_ns": {
+              "iqr_ns": 359,
+              "max_ns": 130543,
+              "mean_ns": 117169,
+              "median_ns": 115563,
+              "min_ns": 115359,
+              "n": 10,
+              "p25_ns": 115429,
+              "p75_ns": 115788,
+              "p95_ns": 124373
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 704,
+            "max_ns": 126614,
+            "mean_ns": 114328,
+            "median_ns": 112851,
+            "min_ns": 112423,
+            "n": 10,
+            "p25_ns": 112549,
+            "p75_ns": 113253,
+            "p95_ns": 121151
+          }
+        },
+        "glassdb": {
+          "audit": "VerifyBlock over every block (block proof against the digest, every written key included with its value), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 3649481,
+                "max_ns": 1833522008,
+                "mean_ns": 1827465883,
+                "median_ns": 1826454646,
+                "min_ns": 1825023219,
+                "n": 10,
+                "p25_ns": 1825305802,
+                "p75_ns": 1828955283,
+                "p95_ns": 1831915158
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1454403,
+                "max_ns": 926559191,
+                "mean_ns": 925642755,
+                "median_ns": 925689673,
+                "min_ns": 924344775,
+                "n": 10,
+                "p25_ns": 924968685,
+                "p75_ns": 926423088,
+                "p95_ns": 926526927
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1095927,
+                "max_ns": 480409389,
+                "mean_ns": 478991023,
+                "median_ns": 479108081,
+                "min_ns": 477565978,
+                "n": 10,
+                "p25_ns": 478523463,
+                "p75_ns": 479619390,
+                "p95_ns": 480117880
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 294621,
+                "max_ns": 261331897,
+                "mean_ns": 260478775,
+                "median_ns": 260621703,
+                "min_ns": 258932692,
+                "n": 10,
+                "p25_ns": 260423885,
+                "p75_ns": 260718506,
+                "p95_ns": 261148798
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 41830027,
+                "max_ns": 248621401,
+                "mean_ns": 229759199,
+                "median_ns": 245372903,
+                "min_ns": 200292230,
+                "n": 10,
+                "p25_ns": 205405080,
+                "p75_ns": 247235107,
+                "p95_ns": 248259316
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "batch": 1000,
+          "blocks": 1390,
+          "build_ns": 3548905078,
+          "disclosed_bytes": 79432,
+          "disclosed_nodes": 16,
+          "disclosed_records": 8,
+          "exposed": "the neighbouring entries of every disclosed leaf node (other capsules' sealed records and intake numbers), and the block count",
+          "full_replay_bytes": 440274106,
+          "full_replay_ns": {
+            "iqr_ns": 3501488,
+            "max_ns": 1824041276,
+            "mean_ns": 1820220112,
+            "median_ns": 1819491602,
+            "min_ns": 1817180797,
+            "n": 10,
+            "p25_ns": 1818579106,
+            "p75_ns": 1822080594,
+            "p95_ns": 1823777964
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 1355264,
+            "max_ns": 187483298,
+            "mean_ns": 149262668,
+            "median_ns": 145554561,
+            "min_ns": 143199097,
+            "n": 10,
+            "p25_ns": 144606993,
+            "p75_ns": 145962257,
+            "p95_ns": 168899472
+          },
+          "proof_form": "current-value proof at the last block (upper path, data block, lower path) plus each earlier version through its H_prev pointer",
+          "redacted": {
+            "carries": "the capsule object, the order and the record key's full history under one de-duplicated node set, target membership",
+            "disclosed_bytes": 97723,
+            "disclosed_records": 9,
+            "verify_ns": {
+              "iqr_ns": 1654,
+              "max_ns": 242125,
+              "mean_ns": 229185,
+              "median_ns": 227030,
+              "min_ns": 226220,
+              "n": 10,
+              "p25_ns": 226436,
+              "p75_ns": 228090,
+              "p95_ns": 238544
+            }
+          },
+          "stored_nodes": 103124,
+          "verify_ns": {
+            "iqr_ns": 9976,
+            "max_ns": 201553,
+            "mean_ns": 188057,
+            "median_ns": 185135,
+            "min_ns": 181997,
+            "n": 10,
+            "p25_ns": 182616,
+            "p75_ns": 192592,
+            "p95_ns": 199318
+          }
+        },
+        "hash_chain_replay": {
+          "disclosed_bytes": 398272414,
+          "disclosed_records": 96334,
+          "exposed": "all records of the case",
+          "full_replay_bytes": 398272414,
+          "full_replay_ns": {
+            "iqr_ns": 2061442,
+            "max_ns": 973326120,
+            "mean_ns": 959652471,
+            "median_ns": 958158410,
+            "min_ns": 956791947,
+            "n": 10,
+            "p25_ns": 957074242,
+            "p75_ns": 959135684,
+            "p95_ns": 967688823
+          },
+          "full_replay_parallel_ns": null,
+          "parallel_note": "inherently sequential: each link needs the previous head, so the all-cores audit is the one-core audit",
+          "redacted": {
+            "carries": "every record and the order entry, plus target membership",
+            "disclosed_bytes": 398272777,
+            "disclosed_records": 96334,
+            "verify_ns": {
+              "iqr_ns": 3823215,
+              "max_ns": 966189405,
+              "mean_ns": 963564253,
+              "median_ns": 964583891,
+              "min_ns": 958561446,
+              "n": 10,
+              "p25_ns": 961848565,
+              "p75_ns": 965671780,
+              "p95_ns": 966075613
+            }
+          },
+          "target_records": 8,
+          "verify_ns": {
+            "iqr_ns": 2323479,
+            "max_ns": 968445859,
+            "mean_ns": 965687742,
+            "median_ns": 966409542,
+            "min_ns": 958258117,
+            "n": 10,
+            "p25_ns": 965161057,
+            "p75_ns": 967484536,
+            "p95_ns": 968158801
+          }
+        },
+        "order": {
+          "encoded_bytes": 3448,
+          "mode": "ERASED",
+          "one_sweep_over_every_disposal": true,
+          "scope": "FULL"
+        },
+        "ours": {
+          "audit_includes": "both epochs' bundles and 0x05 accounting (order anchored at R_e', genuine, targeting every disposed capsule, referenced by every DISPOSE)",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1679719,
+                "max_ns": 1158636849,
+                "mean_ns": 1150230621,
+                "median_ns": 1149153034,
+                "min_ns": 1148473401,
+                "n": 10,
+                "p25_ns": 1148617896,
+                "p75_ns": 1150297615,
+                "p95_ns": 1155222753
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 811070,
+                "max_ns": 584476723,
+                "mean_ns": 583699853,
+                "median_ns": 583649790,
+                "min_ns": 582872370,
+                "n": 10,
+                "p25_ns": 583374768,
+                "p75_ns": 584185838,
+                "p95_ns": 584450478
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 442532,
+                "max_ns": 304168070,
+                "mean_ns": 302992990,
+                "median_ns": 302893916,
+                "min_ns": 302215608,
+                "n": 10,
+                "p25_ns": 302750670,
+                "p75_ns": 303193202,
+                "p95_ns": 303911388
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 426130,
+                "max_ns": 159947167,
+                "mean_ns": 159528532,
+                "median_ns": 159553629,
+                "min_ns": 158811469,
+                "n": 10,
+                "p25_ns": 159354309,
+                "p75_ns": 159780439,
+                "p95_ns": 159889414
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 28601811,
+                "max_ns": 183412058,
+                "mean_ns": 145693038,
+                "median_ns": 154377730,
+                "min_ns": 121878464,
+                "n": 10,
+                "p25_ns": 126557681,
+                "p75_ns": 155159492,
+                "p95_ns": 170758242
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 38334,
+          "disclosed_records": 8,
+          "disclosed_segments": 1,
+          "exposed": "none",
+          "full_replay_bytes": 467753158,
+          "full_replay_memo_hits": 461316,
+          "full_replay_ns": {
+            "iqr_ns": 855633,
+            "max_ns": 1163297150,
+            "mean_ns": 1162521823,
+            "median_ns": 1162936523,
+            "min_ns": 1160883497,
+            "n": 10,
+            "p25_ns": 1162187209,
+            "p75_ns": 1163042842,
+            "p95_ns": 1163259540
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 671228,
+            "max_ns": 111162731,
+            "mean_ns": 94703245,
+            "median_ns": 92802374,
+            "min_ns": 91759715,
+            "n": 10,
+            "p25_ns": 92360820,
+            "p75_ns": 93032048,
+            "p95_ns": 104327883
+          },
+          "full_replay_unmemoised_ns": {
+            "iqr_ns": 1377754,
+            "max_ns": 1311843290,
+            "mean_ns": 1310789318,
+            "median_ns": 1310834994,
+            "min_ns": 1309709132,
+            "n": 10,
+            "p25_ns": 1310117314,
+            "p75_ns": 1311495068,
+            "p95_ns": 1311733311
+          },
+          "redacted": {
+            "carries": "one Tier-1 segment per epoch with its own 0x02 proof, the 0x05 proof at R_e', the order, target membership",
+            "disclosed_bytes": 43746,
+            "disclosed_records": 9,
+            "disclosed_segments": 2,
+            "verify_ns": {
+              "iqr_ns": 4346,
+              "max_ns": 151574,
+              "mean_ns": 136936,
+              "median_ns": 135947,
+              "min_ns": 132627,
+              "n": 10,
+              "p25_ns": 132782,
+              "p75_ns": 137128,
+              "p95_ns": 146724
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 3304,
+            "max_ns": 115815,
+            "mean_ns": 109183,
+            "median_ns": 107871,
+            "min_ns": 104769,
+            "n": 10,
+            "p25_ns": 107302,
+            "p75_ns": 110606,
+            "p95_ns": 115326
+          }
+        },
+        "pq_abl": {
+          "audit": "full-epoch verification of both epochs: recompute every h_n, rebuild, compare (eq. (1)), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1869265,
+                "max_ns": 1095908894,
+                "mean_ns": 1092739958,
+                "median_ns": 1094346475,
+                "min_ns": 1078522048,
+                "n": 10,
+                "p25_ns": 1093174352,
+                "p75_ns": 1095043617,
+                "p95_ns": 1095713858
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 2631023,
+                "max_ns": 567829646,
+                "mean_ns": 563638886,
+                "median_ns": 563738472,
+                "min_ns": 559877636,
+                "n": 10,
+                "p25_ns": 562268486,
+                "p75_ns": 564899509,
+                "p95_ns": 567439975
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 435524,
+                "max_ns": 296377334,
+                "mean_ns": 295322620,
+                "median_ns": 295298680,
+                "min_ns": 294518166,
+                "n": 10,
+                "p25_ns": 295080511,
+                "p75_ns": 295516035,
+                "p95_ns": 296047109
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1229046,
+                "max_ns": 163200786,
+                "mean_ns": 161469049,
+                "median_ns": 161286544,
+                "min_ns": 160402430,
+                "n": 10,
+                "p25_ns": 160768882,
+                "p75_ns": 161997928,
+                "p95_ns": 162856516
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 25651675,
+                "max_ns": 160844613,
+                "mean_ns": 145041430,
+                "median_ns": 150674513,
+                "min_ns": 123742245,
+                "n": 10,
+                "p25_ns": 130482571,
+                "p75_ns": 156134246,
+                "p95_ns": 160403258
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 41067,
+          "disclosed_paths": 9,
+          "disclosed_records": 8,
+          "epoch_logs": [
+            106784,
+            1178
+          ],
+          "exposed": "each epoch's log count: every path carries it, and fixes the tree's shape",
+          "full_replay_bytes": 439734296,
+          "full_replay_ns": {
+            "iqr_ns": 3750709,
+            "max_ns": 1090604786,
+            "mean_ns": 1084054333,
+            "median_ns": 1084643002,
+            "min_ns": 1075495713,
+            "n": 10,
+            "p25_ns": 1083597124,
+            "p75_ns": 1087347833,
+            "p95_ns": 1089481838
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 3054687,
+            "max_ns": 138959001,
+            "mean_ns": 110764635,
+            "median_ns": 108005185,
+            "min_ns": 105028081,
+            "n": 10,
+            "p25_ns": 106639139,
+            "p75_ns": 109693826,
+            "p95_ns": 126024029
+          },
+          "proof_form": "one standalone O(log N) path per object against its epoch root (Phase 5 Step 3)",
+          "redacted": {
+            "carries": "seal object and every record with its own path (DISPOSE against R_1), the order with its R_1 path, target membership",
+            "disclosed_bytes": 45980,
+            "disclosed_records": 9,
+            "verify_ns": {
+              "iqr_ns": 298,
+              "max_ns": 159146,
+              "mean_ns": 152754,
+              "median_ns": 151222,
+              "min_ns": 150985,
+              "n": 10,
+              "p25_ns": 151084,
+              "p75_ns": 151382,
+              "p95_ns": 159097
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 77,
+            "max_ns": 133859,
+            "mean_ns": 131724,
+            "median_ns": 131501,
+            "min_ns": 131383,
+            "n": 10,
+            "p25_ns": 131442,
+            "p75_ns": 131519,
+            "p95_ns": 132860
+          }
+        },
+        "record_build_total_ns": 54398278648,
+        "records": 96333,
+        "redacted_capsule": 8870,
+        "stream": {
+          "counts": {
+            "Access": 14596,
+            "Analyze": 14383,
+            "Collect": 11628,
+            "Dispose": 1177,
+            "Export": 14415,
+            "Seal": 11628,
+            "Transfer": 28506
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 11628,
+            "dispose_pct": 10,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        },
+        "target_capsule": 6704
+      },
+      {
+        "capsules": 34884,
+        "disposed_capsules": 3547,
+        "flat_mmr": {
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1598656,
+                "max_ns": 3284566086,
+                "mean_ns": 3279916899,
+                "median_ns": 3279698105,
+                "min_ns": 3275622346,
+                "n": 10,
+                "p25_ns": 3279148563,
+                "p75_ns": 3280747219,
+                "p95_ns": 3283238723
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 951054,
+                "max_ns": 1735078547,
+                "mean_ns": 1733902803,
+                "median_ns": 1734176650,
+                "min_ns": 1731929945,
+                "n": 10,
+                "p25_ns": 1733466328,
+                "p75_ns": 1734417382,
+                "p95_ns": 1734831551
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 620583,
+                "max_ns": 955155736,
+                "mean_ns": 951468728,
+                "median_ns": 951296368,
+                "min_ns": 950175393,
+                "n": 10,
+                "p25_ns": 950871134,
+                "p75_ns": 951491717,
+                "p95_ns": 953567087
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 953559,
+                "max_ns": 557644766,
+                "mean_ns": 556689349,
+                "median_ns": 556549152,
+                "min_ns": 555914453,
+                "n": 10,
+                "p25_ns": 556309464,
+                "p75_ns": 557263023,
+                "p95_ns": 557552983
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 6698173,
+                "max_ns": 500190485,
+                "mean_ns": 495562607,
+                "median_ns": 495034596,
+                "min_ns": 490161834,
+                "n": 10,
+                "p25_ns": 492673897,
+                "p75_ns": 499372070,
+                "p95_ns": 500146911
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 38403,
+          "disclosed_records": 8,
+          "exposed": "case size: every proof carries the MMR's leaf count",
+          "full_replay_bytes": 1201487701,
+          "full_replay_ns": {
+            "iqr_ns": 4257447,
+            "max_ns": 3279915785,
+            "mean_ns": 3274721914,
+            "median_ns": 3274491875,
+            "min_ns": 3271508678,
+            "n": 10,
+            "p25_ns": 3272330796,
+            "p75_ns": 3276588243,
+            "p95_ns": 3278866725
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 1352753,
+            "max_ns": 370860852,
+            "mean_ns": 369886254,
+            "median_ns": 369789724,
+            "min_ns": 369035285,
+            "n": 10,
+            "p25_ns": 369196641,
+            "p75_ns": 370549394,
+            "p95_ns": 370843506
+          },
+          "leaf_count_in_every_proof": 325279,
+          "proof_form": "one batched MMR proof per disclosure (shared siblings and peaks), M13 A8",
+          "redacted": {
+            "carries": "the capsule's records and the 0x05 leaf under one batched proof, the order, target membership",
+            "disclosed_bytes": 46066,
+            "disclosed_records": 9,
+            "verify_ns": {
+              "iqr_ns": 1404,
+              "max_ns": 142235,
+              "mean_ns": 127306,
+              "median_ns": 125505,
+              "min_ns": 124660,
+              "n": 10,
+              "p25_ns": 125124,
+              "p75_ns": 126528,
+              "p95_ns": 135387
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 1196,
+            "max_ns": 125771,
+            "mean_ns": 112868,
+            "median_ns": 110860,
+            "min_ns": 110435,
+            "n": 10,
+            "p25_ns": 110770,
+            "p75_ns": 111966,
+            "p95_ns": 121054
+          }
+        },
+        "glassdb": {
+          "audit": "VerifyBlock over every block (block proof against the digest, every written key included with its value), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 2812036,
+                "max_ns": 5742546504,
+                "mean_ns": 5739414411,
+                "median_ns": 5741153006,
+                "min_ns": 5730998662,
+                "n": 10,
+                "p25_ns": 5739261049,
+                "p75_ns": 5742073085,
+                "p95_ns": 5742475223
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 3781509,
+                "max_ns": 2900047375,
+                "mean_ns": 2894785008,
+                "median_ns": 2894712700,
+                "min_ns": 2889147312,
+                "n": 10,
+                "p25_ns": 2893318811,
+                "p75_ns": 2897100320,
+                "p95_ns": 2899034208
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 4005006,
+                "max_ns": 1504369749,
+                "mean_ns": 1500419219,
+                "median_ns": 1500416746,
+                "min_ns": 1492783385,
+                "n": 10,
+                "p25_ns": 1499041666,
+                "p75_ns": 1503046672,
+                "p95_ns": 1504171849
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 5878177,
+                "max_ns": 819276863,
+                "mean_ns": 813674428,
+                "median_ns": 813960581,
+                "min_ns": 809260898,
+                "n": 10,
+                "p25_ns": 810318354,
+                "p75_ns": 816196531,
+                "p95_ns": 818544503
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 2989490,
+                "max_ns": 691763082,
+                "mean_ns": 686936367,
+                "median_ns": 686669242,
+                "min_ns": 683326973,
+                "n": 10,
+                "p25_ns": 685345172,
+                "p75_ns": 688334662,
+                "p95_ns": 690553130
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "batch": 1000,
+          "blocks": 4212,
+          "build_ns": 11452526458,
+          "disclosed_bytes": 79060,
+          "disclosed_nodes": 16,
+          "disclosed_records": 8,
+          "exposed": "the neighbouring entries of every disclosed leaf node (other capsules' sealed records and intake numbers), and the block count",
+          "full_replay_bytes": 1327510440,
+          "full_replay_ns": {
+            "iqr_ns": 39007969,
+            "max_ns": 5740543167,
+            "mean_ns": 5707133084,
+            "median_ns": 5730423255,
+            "min_ns": 5612619582,
+            "n": 10,
+            "p25_ns": 5696545090,
+            "p75_ns": 5735553059,
+            "p95_ns": 5738885983
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 2441672,
+            "max_ns": 485868847,
+            "mean_ns": 477746193,
+            "median_ns": 476522772,
+            "min_ns": 475659373,
+            "n": 10,
+            "p25_ns": 475953508,
+            "p75_ns": 478395180,
+            "p95_ns": 482616881
+          },
+          "proof_form": "current-value proof at the last block (upper path, data block, lower path) plus each earlier version through its H_prev pointer",
+          "redacted": {
+            "carries": "the capsule object, the order and the record key's full history under one de-duplicated node set, target membership",
+            "disclosed_bytes": 170839,
+            "disclosed_records": 9,
+            "verify_ns": {
+              "iqr_ns": 16262,
+              "max_ns": 433444,
+              "mean_ns": 399800,
+              "median_ns": 391013,
+              "min_ns": 388595,
+              "n": 10,
+              "p25_ns": 390179,
+              "p75_ns": 406441,
+              "p95_ns": 425086
+            }
+          },
+          "stored_nodes": 311891,
+          "verify_ns": {
+            "iqr_ns": 5423,
+            "max_ns": 190605,
+            "mean_ns": 185730,
+            "median_ns": 183666,
+            "min_ns": 183066,
+            "n": 10,
+            "p25_ns": 183403,
+            "p75_ns": 188826,
+            "p95_ns": 190372
+          }
+        },
+        "hash_chain_replay": {
+          "disclosed_bytes": 1201491267,
+          "disclosed_records": 290395,
+          "exposed": "all records of the case",
+          "full_replay_bytes": 1201491267,
+          "full_replay_ns": {
+            "iqr_ns": 2083786,
+            "max_ns": 2892311124,
+            "mean_ns": 2888909651,
+            "median_ns": 2888682598,
+            "min_ns": 2886747013,
+            "n": 10,
+            "p25_ns": 2887684299,
+            "p75_ns": 2889768085,
+            "p95_ns": 2891687883
+          },
+          "full_replay_parallel_ns": null,
+          "parallel_note": "inherently sequential: each link needs the previous head, so the all-cores audit is the one-core audit",
+          "redacted": {
+            "carries": "every record and the order entry, plus target membership",
+            "disclosed_bytes": 1201491663,
+            "disclosed_records": 290395,
+            "verify_ns": {
+              "iqr_ns": 16937035,
+              "max_ns": 2903166477,
+              "mean_ns": 2883296903,
+              "median_ns": 2876756175,
+              "min_ns": 2873018117,
+              "n": 10,
+              "p25_ns": 2875305183,
+              "p75_ns": 2892242218,
+              "p95_ns": 2902628241
+            }
+          },
+          "target_records": 8,
+          "verify_ns": {
+            "iqr_ns": 33310896,
+            "max_ns": 2918270040,
+            "mean_ns": 2886532949,
+            "median_ns": 2874596741,
+            "min_ns": 2868302602,
+            "n": 10,
+            "p25_ns": 2871933414,
+            "p75_ns": 2905244310,
+            "p95_ns": 2916454781
+          }
+        },
+        "order": {
+          "encoded_bytes": 3448,
+          "mode": "ERASED",
+          "one_sweep_over_every_disposal": true,
+          "scope": "FULL"
+        },
+        "ours": {
+          "audit_includes": "both epochs' bundles and 0x05 accounting (order anchored at R_e', genuine, targeting every disposed capsule, referenced by every DISPOSE)",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 3640604,
+                "max_ns": 3474672208,
+                "mean_ns": 3464911946,
+                "median_ns": 3463957944,
+                "min_ns": 3460644504,
+                "n": 10,
+                "p25_ns": 3462383851,
+                "p75_ns": 3466024455,
+                "p95_ns": 3471611968
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 2812110,
+                "max_ns": 1759374375,
+                "mean_ns": 1755763121,
+                "median_ns": 1755441803,
+                "min_ns": 1752730244,
+                "n": 10,
+                "p25_ns": 1754364866,
+                "p75_ns": 1757176976,
+                "p95_ns": 1758838098
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 902710,
+                "max_ns": 906597598,
+                "mean_ns": 905464050,
+                "median_ns": 905520980,
+                "min_ns": 904312269,
+                "n": 10,
+                "p25_ns": 904943685,
+                "p75_ns": 905846395,
+                "p95_ns": 906412549
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 405678,
+                "max_ns": 477002383,
+                "mean_ns": 476146904,
+                "median_ns": 476067312,
+                "min_ns": 475578357,
+                "n": 10,
+                "p25_ns": 475937249,
+                "p75_ns": 476342927,
+                "p95_ns": 476729144
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 10170050,
+                "max_ns": 416215734,
+                "mean_ns": 409880291,
+                "median_ns": 412997483,
+                "min_ns": 397595327,
+                "n": 10,
+                "p25_ns": 404504072,
+                "p75_ns": 414674122,
+                "p95_ns": 415758364
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 38308,
+          "disclosed_records": 8,
+          "disclosed_segments": 1,
+          "exposed": "none",
+          "full_replay_bytes": 1408043177,
+          "full_replay_memo_hits": 1295648,
+          "full_replay_ns": {
+            "iqr_ns": 4823196,
+            "max_ns": 3484858493,
+            "mean_ns": 3477558456,
+            "median_ns": 3477838306,
+            "min_ns": 3469026230,
+            "n": 10,
+            "p25_ns": 3475002975,
+            "p75_ns": 3479826171,
+            "p95_ns": 3483982997
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 206411,
+            "max_ns": 344777651,
+            "mean_ns": 283037687,
+            "median_ns": 276206633,
+            "min_ns": 275890592,
+            "n": 10,
+            "p25_ns": 276085024,
+            "p75_ns": 276291435,
+            "p95_ns": 314046139
+          },
+          "full_replay_unmemoised_ns": {
+            "iqr_ns": 2105157,
+            "max_ns": 3953272618,
+            "mean_ns": 3949671391,
+            "median_ns": 3949422053,
+            "min_ns": 3945402842,
+            "n": 10,
+            "p25_ns": 3948884425,
+            "p75_ns": 3950989582,
+            "p95_ns": 3952365466
+          },
+          "redacted": {
+            "carries": "one Tier-1 segment per epoch with its own 0x02 proof, the 0x05 proof at R_e', the order, target membership",
+            "disclosed_bytes": 47368,
+            "disclosed_records": 9,
+            "disclosed_segments": 2,
+            "verify_ns": {
+              "iqr_ns": 902,
+              "max_ns": 159017,
+              "mean_ns": 151100,
+              "median_ns": 149934,
+              "min_ns": 148019,
+              "n": 10,
+              "p25_ns": 149738,
+              "p75_ns": 150640,
+              "p95_ns": 156788
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 2259,
+            "max_ns": 119246,
+            "mean_ns": 112645,
+            "median_ns": 112416,
+            "min_ns": 108915,
+            "n": 10,
+            "p25_ns": 111043,
+            "p75_ns": 113302,
+            "p95_ns": 117356
+          }
+        },
+        "pq_abl": {
+          "audit": "full-epoch verification of both epochs: recompute every h_n, rebuild, compare (eq. (1)), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 7887192,
+                "max_ns": 3309896433,
+                "mean_ns": 3299946587,
+                "median_ns": 3300942121,
+                "min_ns": 3284418400,
+                "n": 10,
+                "p25_ns": 3297353403,
+                "p75_ns": 3305240595,
+                "p95_ns": 3308507238
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 6289977,
+                "max_ns": 1698630517,
+                "mean_ns": 1690917814,
+                "median_ns": 1693234934,
+                "min_ns": 1674045163,
+                "n": 10,
+                "p25_ns": 1690310318,
+                "p75_ns": 1696600295,
+                "p95_ns": 1698274964
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 4074201,
+                "max_ns": 885285045,
+                "mean_ns": 879935802,
+                "median_ns": 880045212,
+                "min_ns": 872050776,
+                "n": 10,
+                "p25_ns": 878545592,
+                "p75_ns": 882619793,
+                "p95_ns": 884366050
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 3034404,
+                "max_ns": 477124976,
+                "mean_ns": 474219674,
+                "median_ns": 474806656,
+                "min_ns": 470331503,
+                "n": 10,
+                "p25_ns": 472661462,
+                "p75_ns": 475695866,
+                "p95_ns": 477121883
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 12973424,
+                "max_ns": 419277854,
+                "mean_ns": 398685159,
+                "median_ns": 401186413,
+                "min_ns": 374084961,
+                "n": 10,
+                "p25_ns": 392726125,
+                "p75_ns": 405699549,
+                "p95_ns": 413837849
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 41643,
+          "disclosed_paths": 9,
+          "disclosed_records": 8,
+          "epoch_logs": [
+            321731,
+            3548
+          ],
+          "exposed": "each epoch's log count: every path carries it, and fixes the tree's shape",
+          "full_replay_bytes": 1325884045,
+          "full_replay_ns": {
+            "iqr_ns": 27866289,
+            "max_ns": 3281836862,
+            "mean_ns": 3262817344,
+            "median_ns": 3258402225,
+            "min_ns": 3244880616,
+            "n": 10,
+            "p25_ns": 3249908741,
+            "p75_ns": 3277775030,
+            "p95_ns": 3280748124
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 4320253,
+            "max_ns": 300817603,
+            "mean_ns": 291225208,
+            "median_ns": 291316869,
+            "min_ns": 281142938,
+            "n": 10,
+            "p25_ns": 288365743,
+            "p75_ns": 292685996,
+            "p95_ns": 299973200
+          },
+          "proof_form": "one standalone O(log N) path per object against its epoch root (Phase 5 Step 3)",
+          "redacted": {
+            "carries": "seal object and every record with its own path (DISPOSE against R_1), the order with its R_1 path, target membership",
+            "disclosed_bytes": 49970,
+            "disclosed_records": 9,
+            "verify_ns": {
+              "iqr_ns": 580,
+              "max_ns": 186003,
+              "mean_ns": 174697,
+              "median_ns": 174532,
+              "min_ns": 165926,
+              "n": 10,
+              "p25_ns": 174030,
+              "p75_ns": 174610,
+              "p95_ns": 180892
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 189,
+            "max_ns": 158331,
+            "mean_ns": 139813,
+            "median_ns": 137458,
+            "min_ns": 137353,
+            "n": 10,
+            "p25_ns": 137403,
+            "p75_ns": 137592,
+            "p95_ns": 150184
+          }
+        },
+        "record_build_total_ns": 161372140114,
+        "records": 290394,
+        "redacted_capsule": 27296,
+        "stream": {
+          "counts": {
+            "Access": 43567,
+            "Analyze": 43540,
+            "Collect": 34884,
+            "Dispose": 3547,
+            "Export": 43486,
+            "Seal": 34884,
+            "Transfer": 86486
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 34884,
+            "dispose_pct": 10,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        },
+        "target_capsule": 21744
+      },
+      {
+        "capsules": 116280,
+        "disposed_capsules": 11549,
+        "flat_mmr": {
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 6742459,
+                "max_ns": 11260505909,
+                "mean_ns": 11246514315,
+                "median_ns": 11245707098,
+                "min_ns": 11235732108,
+                "n": 10,
+                "p25_ns": 11242635992,
+                "p75_ns": 11249378451,
+                "p95_ns": 11256655801
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 6971698,
+                "max_ns": 5967268706,
+                "mean_ns": 5956707618,
+                "median_ns": 5955502919,
+                "min_ns": 5950155415,
+                "n": 10,
+                "p25_ns": 5952259807,
+                "p75_ns": 5959231505,
+                "p95_ns": 5965996346
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 10774835,
+                "max_ns": 3276090865,
+                "mean_ns": 3267167000,
+                "median_ns": 3267754276,
+                "min_ns": 3258205906,
+                "n": 10,
+                "p25_ns": 3261751983,
+                "p75_ns": 3272526818,
+                "p95_ns": 3275191880
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 6095245,
+                "max_ns": 1977461753,
+                "mean_ns": 1970022874,
+                "median_ns": 1973282808,
+                "min_ns": 1950759312,
+                "n": 10,
+                "p25_ns": 1968758064,
+                "p75_ns": 1974853309,
+                "p95_ns": 1977091312
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 3329478,
+                "max_ns": 1625320057,
+                "mean_ns": 1616621873,
+                "median_ns": 1616591357,
+                "min_ns": 1608473715,
+                "n": 10,
+                "p25_ns": 1614630372,
+                "p75_ns": 1617959850,
+                "p95_ns": 1625132658
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 35150,
+          "disclosed_records": 8,
+          "exposed": "case size: every proof carries the MMR's leaf count",
+          "full_replay_bytes": 4011496774,
+          "full_replay_ns": {
+            "iqr_ns": 5252116,
+            "max_ns": 11263529360,
+            "mean_ns": 11253061158,
+            "median_ns": 11253345389,
+            "min_ns": 11244714894,
+            "n": 10,
+            "p25_ns": 11249738117,
+            "p75_ns": 11254990233,
+            "p95_ns": 11260827544
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 3443156,
+            "max_ns": 1342063885,
+            "mean_ns": 1295273666,
+            "median_ns": 1287919252,
+            "min_ns": 1287392024,
+            "n": 10,
+            "p25_ns": 1287496229,
+            "p75_ns": 1290939385,
+            "p95_ns": 1325311674
+          },
+          "leaf_count_in_every_proof": 1085625,
+          "proof_form": "one batched MMR proof per disclosure (shared siblings and peaks), M13 A8",
+          "redacted": {
+            "carries": "the capsule's records and the 0x05 leaf under one batched proof, the order, target membership",
+            "disclosed_bytes": 46388,
+            "disclosed_records": 9,
+            "verify_ns": {
+              "iqr_ns": 2662,
+              "max_ns": 152496,
+              "mean_ns": 134607,
+              "median_ns": 131892,
+              "min_ns": 131384,
+              "n": 10,
+              "p25_ns": 131603,
+              "p75_ns": 134265,
+              "p95_ns": 145350
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 2981,
+            "max_ns": 122169,
+            "mean_ns": 110239,
+            "median_ns": 108099,
+            "min_ns": 106518,
+            "n": 10,
+            "p25_ns": 106980,
+            "p75_ns": 109961,
+            "p95_ns": 119929
+          }
+        },
+        "glassdb": {
+          "audit": "VerifyBlock over every block (block proof against the digest, every written key included with its value), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 39496505,
+                "max_ns": 19039169776,
+                "mean_ns": 18996467565,
+                "median_ns": 19001251181,
+                "min_ns": 18954308122,
+                "n": 10,
+                "p25_ns": 18977298650,
+                "p75_ns": 19016795155,
+                "p95_ns": 19029829063
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 16419004,
+                "max_ns": 9732021741,
+                "mean_ns": 9668577878,
+                "median_ns": 9662215261,
+                "min_ns": 9634988841,
+                "n": 10,
+                "p25_ns": 9651525850,
+                "p75_ns": 9667944854,
+                "p95_ns": 9721526400
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 4463992,
+                "max_ns": 5058705900,
+                "mean_ns": 5053267794,
+                "median_ns": 5051989645,
+                "min_ns": 5048205651,
+                "n": 10,
+                "p25_ns": 5051700406,
+                "p75_ns": 5056164398,
+                "p95_ns": 5058601797
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 8394856,
+                "max_ns": 2742970680,
+                "mean_ns": 2732381854,
+                "median_ns": 2733589478,
+                "min_ns": 2725504742,
+                "n": 10,
+                "p25_ns": 2727046235,
+                "p75_ns": 2735441091,
+                "p95_ns": 2740675379
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 6782717,
+                "max_ns": 2214887649,
+                "mean_ns": 2198035651,
+                "median_ns": 2198124169,
+                "min_ns": 2188476000,
+                "n": 10,
+                "p25_ns": 2193493823,
+                "p75_ns": 2200276540,
+                "p95_ns": 2208505504
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "batch": 1000,
+          "blocks": 14014,
+          "build_ns": 46808828797,
+          "disclosed_bytes": 101948,
+          "disclosed_nodes": 15,
+          "disclosed_records": 8,
+          "exposed": "the neighbouring entries of every disclosed leaf node (other capsules' sealed records and intake numbers), and the block count",
+          "full_replay_bytes": 4431579379,
+          "full_replay_ns": {
+            "iqr_ns": 279304493,
+            "max_ns": 19316251993,
+            "mean_ns": 19170901096,
+            "median_ns": 19234766276,
+            "min_ns": 18925711162,
+            "n": 10,
+            "p25_ns": 19021901248,
+            "p75_ns": 19301205741,
+            "p95_ns": 19311449691
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 6287186,
+            "max_ns": 1628719765,
+            "mean_ns": 1609671901,
+            "median_ns": 1607996422,
+            "min_ns": 1597301955,
+            "n": 10,
+            "p25_ns": 1604714051,
+            "p75_ns": 1611001237,
+            "p95_ns": 1624528790
+          },
+          "proof_form": "current-value proof at the last block (upper path, data block, lower path) plus each earlier version through its H_prev pointer",
+          "redacted": {
+            "carries": "the capsule object, the order and the record key's full history under one de-duplicated node set, target membership",
+            "disclosed_bytes": 146194,
+            "disclosed_records": 9,
+            "verify_ns": {
+              "iqr_ns": 7545,
+              "max_ns": 367735,
+              "mean_ns": 349341,
+              "median_ns": 344824,
+              "min_ns": 343560,
+              "n": 10,
+              "p25_ns": 344120,
+              "p75_ns": 351665,
+              "p95_ns": 364644
+            }
+          },
+          "stored_nodes": 1048483,
+          "verify_ns": {
+            "iqr_ns": 11020,
+            "max_ns": 256605,
+            "mean_ns": 243544,
+            "median_ns": 238897,
+            "min_ns": 238148,
+            "n": 10,
+            "p25_ns": 238434,
+            "p75_ns": 249454,
+            "p95_ns": 254461
+          }
+        },
+        "hash_chain_replay": {
+          "disclosed_bytes": 4011500340,
+          "disclosed_records": 969345,
+          "exposed": "all records of the case",
+          "full_replay_bytes": 4011500340,
+          "full_replay_ns": {
+            "iqr_ns": 76628294,
+            "max_ns": 10072537323,
+            "mean_ns": 10009745010,
+            "median_ns": 10023877362,
+            "min_ns": 9914026202,
+            "n": 10,
+            "p25_ns": 9978658629,
+            "p75_ns": 10055286923,
+            "p95_ns": 10070414804
+          },
+          "full_replay_parallel_ns": null,
+          "parallel_note": "inherently sequential: each link needs the previous head, so the all-cores audit is the one-core audit",
+          "redacted": {
+            "carries": "every record and the order entry, plus target membership",
+            "disclosed_bytes": 4011500802,
+            "disclosed_records": 969345,
+            "verify_ns": {
+              "iqr_ns": 9188199,
+              "max_ns": 9976606052,
+              "mean_ns": 9962927083,
+              "median_ns": 9962653566,
+              "min_ns": 9938867347,
+              "n": 10,
+              "p25_ns": 9961190331,
+              "p75_ns": 9970378530,
+              "p95_ns": 9975759970
+            }
+          },
+          "target_records": 8,
+          "verify_ns": {
+            "iqr_ns": 97171901,
+            "max_ns": 10003431173,
+            "mean_ns": 9948388751,
+            "median_ns": 9983078574,
+            "min_ns": 9854125992,
+            "n": 10,
+            "p25_ns": 9895195346,
+            "p75_ns": 9992367247,
+            "p95_ns": 10000453347
+          }
+        },
+        "order": {
+          "encoded_bytes": 3448,
+          "mode": "ERASED",
+          "one_sweep_over_every_disposal": true,
+          "scope": "FULL"
+        },
+        "ours": {
+          "audit_includes": "both epochs' bundles and 0x05 accounting (order anchored at R_e', genuine, targeting every disposed capsule, referenced by every DISPOSE)",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 14425670,
+                "max_ns": 12008125932,
+                "mean_ns": 11996634142,
+                "median_ns": 11995805239,
+                "min_ns": 11984562388,
+                "n": 10,
+                "p25_ns": 11989909938,
+                "p75_ns": 12004335608,
+                "p95_ns": 12007469302
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 7748279,
+                "max_ns": 6084144533,
+                "mean_ns": 6074091508,
+                "median_ns": 6073910255,
+                "min_ns": 6066757295,
+                "n": 10,
+                "p25_ns": 6068641525,
+                "p75_ns": 6076389804,
+                "p95_ns": 6084120190
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 2647476,
+                "max_ns": 3142145491,
+                "mean_ns": 3133023243,
+                "median_ns": 3132079147,
+                "min_ns": 3128215105,
+                "n": 10,
+                "p25_ns": 3130792204,
+                "p75_ns": 3133439680,
+                "p95_ns": 3140232001
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 22052931,
+                "max_ns": 1692017636,
+                "mean_ns": 1677548881,
+                "median_ns": 1684301987,
+                "min_ns": 1650424779,
+                "n": 10,
+                "p25_ns": 1666328988,
+                "p75_ns": 1688381919,
+                "p95_ns": 1691715410
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 1315279,
+                "max_ns": 1320650284,
+                "mean_ns": 1317195640,
+                "median_ns": 1319293439,
+                "min_ns": 1305987055,
+                "n": 10,
+                "p25_ns": 1318636290,
+                "p75_ns": 1319951569,
+                "p95_ns": 1320543366
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 35360,
+          "disclosed_records": 8,
+          "disclosed_segments": 1,
+          "exposed": "none",
+          "full_replay_bytes": 4744967488,
+          "full_replay_memo_hits": 5407748,
+          "full_replay_ns": {
+            "iqr_ns": 39162704,
+            "max_ns": 12101318297,
+            "mean_ns": 12056658903,
+            "median_ns": 12091670667,
+            "min_ns": 11844851424,
+            "n": 10,
+            "p25_ns": 12057799361,
+            "p75_ns": 12096962065,
+            "p95_ns": 12100586722
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 3000397,
+            "max_ns": 971661008,
+            "mean_ns": 954444278,
+            "median_ns": 951263102,
+            "min_ns": 949343628,
+            "n": 10,
+            "p25_ns": 950660031,
+            "p75_ns": 953660428,
+            "p95_ns": 967702896
+          },
+          "full_replay_unmemoised_ns": {
+            "iqr_ns": 14122031,
+            "max_ns": 14013637186,
+            "mean_ns": 13999913358,
+            "median_ns": 13999068805,
+            "min_ns": 13986099680,
+            "n": 10,
+            "p25_ns": 13992295147,
+            "p75_ns": 14006417178,
+            "p95_ns": 14013166238
+          },
+          "redacted": {
+            "carries": "one Tier-1 segment per epoch with its own 0x02 proof, the 0x05 proof at R_e', the order, target membership",
+            "disclosed_bytes": 47967,
+            "disclosed_records": 9,
+            "disclosed_segments": 2,
+            "verify_ns": {
+              "iqr_ns": 640,
+              "max_ns": 174906,
+              "mean_ns": 157145,
+              "median_ns": 155203,
+              "min_ns": 154509,
+              "n": 10,
+              "p25_ns": 154919,
+              "p75_ns": 155559,
+              "p95_ns": 166427
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 3590,
+            "max_ns": 118118,
+            "mean_ns": 111082,
+            "median_ns": 110444,
+            "min_ns": 107342,
+            "n": 10,
+            "p25_ns": 108287,
+            "p75_ns": 111877,
+            "p95_ns": 116901
+          }
+        },
+        "pq_abl": {
+          "audit": "full-epoch verification of both epochs: recompute every h_n, rebuild, compare (eq. (1)), plus order accounting",
+          "audit_scaling": [
+            {
+              "full_replay_ns": {
+                "iqr_ns": 50044958,
+                "max_ns": 11336856727,
+                "mean_ns": 11293353080,
+                "median_ns": 11325487519,
+                "min_ns": 11178487524,
+                "n": 10,
+                "p25_ns": 11280213055,
+                "p75_ns": 11330258013,
+                "p95_ns": 11335052892
+              },
+              "threads": 1
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 19933097,
+                "max_ns": 5811633378,
+                "mean_ns": 5793770216,
+                "median_ns": 5801220850,
+                "min_ns": 5754130900,
+                "n": 10,
+                "p25_ns": 5783501599,
+                "p75_ns": 5803434696,
+                "p95_ns": 5809767494
+              },
+              "threads": 2
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 15121302,
+                "max_ns": 3032725969,
+                "mean_ns": 3022123703,
+                "median_ns": 3020166411,
+                "min_ns": 3011737471,
+                "n": 10,
+                "p25_ns": 3015862331,
+                "p75_ns": 3030983633,
+                "p95_ns": 3032161038
+              },
+              "threads": 4
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 29899739,
+                "max_ns": 1671022252,
+                "mean_ns": 1640634463,
+                "median_ns": 1636108662,
+                "min_ns": 1608930854,
+                "n": 10,
+                "p25_ns": 1628668476,
+                "p75_ns": 1658568215,
+                "p95_ns": 1669157057
+              },
+              "threads": 8
+            },
+            {
+              "full_replay_ns": {
+                "iqr_ns": 16262404,
+                "max_ns": 1303131899,
+                "mean_ns": 1281732712,
+                "median_ns": 1279761310,
+                "min_ns": 1265107325,
+                "n": 10,
+                "p25_ns": 1275247998,
+                "p75_ns": 1291510402,
+                "p95_ns": 1299577174
+              },
+              "threads": 16
+            }
+          ],
+          "audit_threads": 30,
+          "disclosed_bytes": 38902,
+          "disclosed_paths": 9,
+          "disclosed_records": 8,
+          "epoch_logs": [
+            1074075,
+            11550
+          ],
+          "exposed": "each epoch's log count: every path carries it, and fixes the tree's shape",
+          "full_replay_bytes": 4426151254,
+          "full_replay_ns": {
+            "iqr_ns": 108954245,
+            "max_ns": 11234029109,
+            "mean_ns": 11165471137,
+            "median_ns": 11132991578,
+            "min_ns": 11111480869,
+            "n": 10,
+            "p25_ns": 11120178690,
+            "p75_ns": 11229132935,
+            "p95_ns": 11232758926
+          },
+          "full_replay_parallel_ns": {
+            "iqr_ns": 8045637,
+            "max_ns": 969845027,
+            "mean_ns": 959034469,
+            "median_ns": 957888407,
+            "min_ns": 948220750,
+            "n": 10,
+            "p25_ns": 956334508,
+            "p75_ns": 964380145,
+            "p95_ns": 968706530
+          },
+          "proof_form": "one standalone O(log N) path per object against its epoch root (Phase 5 Step 3)",
+          "redacted": {
+            "carries": "seal object and every record with its own path (DISPOSE against R_1), the order with its R_1 path, target membership",
+            "disclosed_bytes": 50740,
+            "disclosed_records": 9,
+            "verify_ns": {
+              "iqr_ns": 175,
+              "max_ns": 196479,
+              "mean_ns": 180537,
+              "median_ns": 178763,
+              "min_ns": 178615,
+              "n": 10,
+              "p25_ns": 178708,
+              "p75_ns": 178883,
+              "p95_ns": 188586
+            }
+          },
+          "verify_ns": {
+            "iqr_ns": 144,
+            "max_ns": 145679,
+            "mean_ns": 142941,
+            "median_ns": 142641,
+            "min_ns": 142424,
+            "n": 10,
+            "p25_ns": 142580,
+            "p75_ns": 142724,
+            "p95_ns": 144411
+          }
+        },
+        "record_build_total_ns": 578044467737,
+        "records": 969344,
+        "redacted_capsule": 81420,
+        "stream": {
+          "counts": {
+            "Access": 144941,
+            "Analyze": 145441,
+            "Collect": 116280,
+            "Dispose": 11549,
+            "Export": 145609,
+            "Seal": 116280,
+            "Transfer": 289244
+          },
+          "params": {
+            "actions_max": 8,
+            "actions_min": 2,
+            "active": 64,
+            "actors": 32,
+            "capsules": 116280,
+            "dispose_pct": 10,
+            "seed": 201683159,
+            "transfer_pct": 25
+          }
+        },
+        "target_capsule": 75361
+      }
+    ],
+    "committee": [
+      {
+        "members": 1,
+        "sign_ns": {
+          "iqr_ns": 75163,
+          "max_ns": 167611,
+          "mean_ns": 107831,
+          "median_ns": 123286,
+          "min_ns": 48084,
+          "n": 10,
+          "p25_ns": 62074,
+          "p75_ns": 137237,
+          "p95_ns": 162796
+        },
+        "signature_bytes": 3309,
+        "verify_ns": {
+          "iqr_ns": 320,
+          "max_ns": 40277,
+          "mean_ns": 40030,
+          "median_ns": 40042,
+          "min_ns": 39749,
+          "n": 10,
+          "p25_ns": 39868,
+          "p75_ns": 40188,
+          "p95_ns": 40266
+        }
+      },
+      {
+        "members": 3,
+        "sign_ns": {
+          "iqr_ns": 164371,
+          "max_ns": 645646,
+          "mean_ns": 303408,
+          "median_ns": 262410,
+          "min_ns": 164831,
+          "n": 10,
+          "p25_ns": 194671,
+          "p75_ns": 359042,
+          "p95_ns": 531692
+        },
+        "signature_bytes": 9927,
+        "verify_ns": {
+          "iqr_ns": 6185,
+          "max_ns": 155696,
+          "mean_ns": 127829,
+          "median_ns": 125107,
+          "min_ns": 121141,
+          "n": 10,
+          "p25_ns": 122136,
+          "p75_ns": 128321,
+          "p95_ns": 143764
+        }
+      },
+      {
+        "members": 5,
+        "sign_ns": {
+          "iqr_ns": 188474,
+          "max_ns": 699864,
+          "mean_ns": 468366,
+          "median_ns": 462246,
+          "min_ns": 321480,
+          "n": 10,
+          "p25_ns": 348293,
+          "p75_ns": 536767,
+          "p95_ns": 663753
+        },
+        "signature_bytes": 16545,
+        "verify_ns": {
+          "iqr_ns": 12725,
+          "max_ns": 209936,
+          "mean_ns": 196460,
+          "median_ns": 193567,
+          "min_ns": 188837,
+          "n": 10,
+          "p25_ns": 190024,
+          "p75_ns": 202749,
+          "p95_ns": 207003
+        }
+      },
+      {
+        "members": 7,
+        "sign_ns": {
+          "iqr_ns": 134270,
+          "max_ns": 840293,
+          "mean_ns": 664198,
+          "median_ns": 660989,
+          "min_ns": 494668,
+          "n": 10,
+          "p25_ns": 578155,
+          "p75_ns": 712425,
+          "p95_ns": 837809
+        },
+        "signature_bytes": 23163,
+        "verify_ns": {
+          "iqr_ns": 13142,
+          "max_ns": 289990,
+          "mean_ns": 274542,
+          "median_ns": 272203,
+          "min_ns": 265920,
+          "n": 10,
+          "p25_ns": 267955,
+          "p75_ns": 281097,
+          "p95_ns": 288087
+        }
+      }
+    ],
+    "enclave": [
+      {
+        "CPUIDs": [
+          1,
+          17
+        ],
+        "EnclaveCID": 16,
+        "EnclaveID": "i-0889ce6fdb93ab2c6-enc1a13c0a58bf363c",
+        "EnclaveName": "A",
+        "Flags": "NONE",
+        "Measurements": {
+          "HashAlgorithm": "Sha512_48 { .. }",
+          "PCR0": "a3fdb3a255410e89cd6ba21e54c191f122b52ef64d0f647fbaa27e0b54daba887c99975f9ee5028d50afa81177ada852",
+          "PCR1": "4b4d5b3661b3efc12920900c80e126e4ce783c522de6c02a2a5bf7af3a2b9327b86776f188e4be1c1c404a129dbda493",
+          "PCR2": "e9f77ca167c5fae75e7690e1c1cfd1c5914b0782f7ddf866e05234218b311e5e68a3dadc4198afa4f7febfd447cff3bc"
+        },
+        "MemoryMiB": 2048,
+        "NumberOfCPUs": 2,
+        "ProcessID": 72098,
+        "State": "RUNNING"
+      }
+    ],
+    "method": {
+      "committee_is_not_threshold": "M independent ML-DSA-65 signatures: the upper bound a threshold scheme reduces to one signature",
+      "same_records": "each case's records are built once and every scheme discloses from them",
+      "target": "the capsule with the median chain length",
+      "verify": "hash-level integrity from the anchored root for all three; ML-DSA verification of the disclosed records is common and reported once"
+    },
+    "record_signature_verify_ns": {
+      "iqr_ns": 445,
+      "max_ns": 41877,
+      "mean_ns": 41441,
+      "median_ns": 41504,
+      "min_ns": 40541,
+      "n": 10,
+      "p25_ns": 41270,
+      "p75_ns": 41715,
+      "p95_ns": 41844
+    }
+  }
+}

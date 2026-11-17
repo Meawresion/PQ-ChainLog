@@ -1,0 +1,19 @@
+# LEChain's contract, compiled as its authors could have compiled it.
+#
+# The source pins `pragma solidity >=0.4.22 <0.7.0` and the paper says only
+# "the smart contract is written on Remix" (§7.1). So: the newest compiler the
+# pragma admits, and Remix's 2020 defaults — optimizer off, the compiler's own
+# default EVM target (Istanbul for 0.6.12). Every choice is in
+# `baselines/UPGRADES.md` under LEChain. Gas depends on all of them.
+#
+# Separate from `contracts/foundry.toml` on purpose: that profile is pinned to
+# ETHDILITHIUM's solc 0.8.30 / osaka / optimizer-10k, and neither project's
+# settings may leak into the other's bytecode.
+
+[profile.default]
+src = "upstream"
+out = "out"
+libs = []
+solc_version = "0.6.12"
+evm_version = "istanbul"
+optimizer = false

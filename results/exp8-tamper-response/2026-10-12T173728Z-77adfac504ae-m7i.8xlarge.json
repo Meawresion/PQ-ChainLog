@@ -1,0 +1,559 @@
+{
+  "experiment": "exp8-tamper-response",
+  "git_sha": "77adfac504aec1f59ea152969ad26f24451d194f",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.8xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "ML-DSA-65 via liboqs",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [
+    128163346
+  ],
+  "iterations": 20,
+  "started_utc": "2026-10-12T17:37:28Z",
+  "secure_module": "nitro-enclave",
+  "measurements": {
+    "agent_epoch_omitted": {
+      "agents": 4,
+      "epochs_per_agent": 6,
+      "full_rehash": "not applicable: an omitted epoch leaves no object to re-hash",
+      "ours_epoch_la_id_contiguity": {
+        "audit_period_ns": 10000000000,
+        "detect_ns": {
+          "iqr_ns": 4120522018,
+          "max_ns": 9683513342,
+          "mean_ns": 4393438832,
+          "median_ns": 4285185686,
+          "min_ns": 52727004,
+          "n": 20,
+          "p25_ns": 2107092560,
+          "p75_ns": 6227614578,
+          "p95_ns": 8918670225
+        }
+      },
+      "record_bytes": 4096,
+      "records_per_epoch": 64,
+      "tail_omitted": {
+        "dropped_epoch": 5,
+        "full_rehash": "not applicable: an omitted epoch leaves no object to re-hash",
+        "ours_epoch_la_id_contiguity": {
+          "detected_trials": 0,
+          "reason": "a dropped last epoch leaves every held counter contiguous"
+        },
+        "ours_heartbeat": {
+          "audit_period_ns": 10000000000,
+          "detect_ns": {
+            "iqr_ns": 4877071874,
+            "max_ns": 13931039321,
+            "mean_ns": 8894189503,
+            "median_ns": 10150717559,
+            "min_ns": 3467261692,
+            "n": 20,
+            "p25_ns": 5934415290,
+            "p75_ns": 10811487164,
+            "p95_ns": 12122601103
+          },
+          "heartbeat_period_ns": 5000000000
+        },
+        "trials": 20,
+        "verify_on_access": {
+          "detect_ns": null,
+          "reason": "the records are gone: nothing is ever accessed, so nothing is checked"
+        }
+      },
+      "trials": 20,
+      "verify_on_access": {
+        "detect_ns": null,
+        "reason": "the records are gone: nothing is ever accessed, so nothing is checked"
+      }
+    },
+    "artefacts": [
+      {
+        "chunks": 30,
+        "id": "nps-2009-canon2-gen6.E01",
+        "sealed_bytes": 31144870
+      },
+      {
+        "chunks": 2047,
+        "id": "charlie-2009-12-03.mddramimage",
+        "sealed_bytes": 2145398768
+      },
+      {
+        "chunks": 51,
+        "id": "multifile_25_21.pcap",
+        "sealed_bytes": 52987794
+      }
+    ],
+    "audit_period_ns": 10000000000,
+    "custody_record_edited": {
+      "capsules": 100,
+      "full_rehash": "not applicable: there is no evidence object to re-hash, and custody records are not in d_ev",
+      "ours_epoch_auditor": {
+        "audit_period_ns": 10000000000,
+        "bytes_read": [
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883,
+          4197883
+        ],
+        "detect_ns": {
+          "iqr_ns": 4119653580,
+          "max_ns": 9288813425,
+          "mean_ns": 4617333792,
+          "median_ns": 5111788887,
+          "min_ns": 19210731,
+          "n": 20,
+          "p25_ns": 2512751414,
+          "p75_ns": 6632404994,
+          "p95_ns": 8031659852
+        }
+      },
+      "trials": 20,
+      "verify_on_access": {
+        "detect_ns": null,
+        "reason": "only a disclosure of that capsule would check it; none in the window"
+      }
+    },
+    "enclave": [
+      {
+        "CPUIDs": [
+          1,
+          17
+        ],
+        "EnclaveCID": 16,
+        "EnclaveID": "i-0e84e0b5375017d44-enc1a131080a273e56",
+        "EnclaveName": "A",
+        "Flags": "NONE",
+        "Measurements": {
+          "HashAlgorithm": "Sha512_48 { .. }",
+          "PCR0": "dc74d76c68705badba5834bee12d32e87742fa8d60785cbeb86d63588758a1745a9c37b44cdec0c2b5da41115600321f",
+          "PCR1": "4b4d5b3661b3efc12920900c80e126e4ce783c522de6c02a2a5bf7af3a2b9327b86776f188e4be1c1c404a129dbda493",
+          "PCR2": "74bf5a2edb31e49a6e51e47b3944494a98e678001f9445e660a63dea589d2f50b8a112c85238a132f65c7c939dfd9717"
+        },
+        "MemoryMiB": 2048,
+        "NumberOfCPUs": 2,
+        "ProcessID": 71633,
+        "State": "RUNNING"
+      }
+    ],
+    "method": {
+      "never": "null detect_ns means no alert within the trial window, not an unmeasured cell",
+      "rehash_verdict": "whole-object root only, the verdict a flat digest gives at the same I/O",
+      "sampling": "passes without replacement: each pass checks ceil(c*N) distinct chunks, a uniform subset in random order, the case the (1-c)^{mk} bound is stated for (M13 A13); c = PQCL_SWEEP_FRACTION, default 0.05 from design §14.3, fixed before measuring",
+      "sealed": "each artefact AES-256-GCM sealed per 1 MiB chunk; every check reads ciphertext and holds no key"
+    },
+    "payload_at_rest": {
+      "full_rehash_same_budget": {
+        "admissible_ppm_of_object": 0,
+        "bytes_read": [
+          2595699309,
+          2034249712,
+          836775920,
+          1710239728,
+          648032240,
+          3703213837,
+          2952735167,
+          2456764126,
+          2350392942,
+          2248272627,
+          1420859064,
+          3373417258,
+          2065706992,
+          1685073904,
+          2912947742,
+          1676685296,
+          2583170705,
+          3832722429,
+          2137010160,
+          632303600
+        ],
+        "detect_ns": {
+          "iqr_ns": 19840690764,
+          "max_ns": 76655227737,
+          "mean_ns": 43857015035,
+          "median_ns": 43853603560,
+          "min_ns": 12646843783,
+          "n": 20,
+          "p25_ns": 33660309051,
+          "p75_ns": 53500999815,
+          "p95_ns": 74194586876
+        },
+        "phase": "uniformly random in its cycle; a verdict on the object in progress when the damage lies at or past the phase (prefix hashed before the clock, M13 A11), otherwise at the damaged object's next whole pass"
+      },
+      "ours_sampled_sweep": {
+        "admissible_observed": [
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 51,
+            "object": "multifile_25_21.pcap",
+            "verified": 50
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          },
+          {
+            "chunks": 2047,
+            "object": "charlie-2009-12-03.mddramimage",
+            "verified": 2046
+          }
+        ],
+        "admissible_ppm_of_object": [
+          999511,
+          999511,
+          999511,
+          999511,
+          999511,
+          999511,
+          999511,
+          999511,
+          999511,
+          999511,
+          980392,
+          999511,
+          999511,
+          999511,
+          999511,
+          999511,
+          999511,
+          999511,
+          999511,
+          999511
+        ],
+        "bytes_read": [
+          1089918764,
+          729184076,
+          2499097148,
+          61865984,
+          2096851862,
+          192937984,
+          158334976,
+          3470066252,
+          7518844448,
+          1021571880,
+          1274335836,
+          3562328668,
+          1978185602,
+          1573422994,
+          2853421880,
+          416284672,
+          922993464,
+          628725430,
+          2501425026,
+          954216432
+        ],
+        "chunk_checks": [
+          1042,
+          696,
+          2387,
+          59,
+          2001,
+          184,
+          151,
+          3312,
+          7177,
+          976,
+          1217,
+          3399,
+          1888,
+          1501,
+          2722,
+          397,
+          881,
+          601,
+          2387,
+          911
+        ],
+        "chunks_per_pass": 107,
+        "detect_ns": {
+          "iqr_ns": 35912177460,
+          "max_ns": 150358553607,
+          "mean_ns": 35485733577,
+          "median_ns": 23624232536,
+          "min_ns": 1219046468,
+          "n": 20,
+          "p25_ns": 14063109377,
+          "p75_ns": 49975286837,
+          "p95_ns": 75184779549
+        },
+        "expected_checks_one_bad_chunk": 2075,
+        "fraction_c": 0.05,
+        "passes": [
+          10,
+          7,
+          23,
+          1,
+          19,
+          2,
+          2,
+          31,
+          68,
+          10,
+          12,
+          32,
+          18,
+          15,
+          26,
+          4,
+          9,
+          6,
+          23,
+          9
+        ],
+        "total_chunks": 2128
+      },
+      "trials": 20,
+      "verify_on_access": {
+        "detect_ns": null,
+        "reason": "nobody read the object during the trial window: no access, no check"
+      }
+    },
+    "payload_deleted": {
+      "full_rehash_same_budget": {
+        "bytes_read": [
+          659422314,
+          1173029387,
+          251319744,
+          483341335,
+          1970284865,
+          2080115068,
+          1310962031,
+          574509477,
+          640644782,
+          467825057,
+          247332685,
+          2024158965,
+          71940575,
+          1432472815,
+          131615580,
+          2207850,
+          1013254222,
+          1442610119,
+          674280865,
+          773149947
+        ],
+        "detect_ns": {
+          "iqr_ns": 18552818382,
+          "max_ns": 41602520885,
+          "mean_ns": 17424642623,
+          "median_ns": 13337245672,
+          "min_ns": 44266457,
+          "n": 20,
+          "p25_ns": 8274105394,
+          "p75_ns": 26826923776,
+          "p95_ns": 40539334998
+        },
+        "given_deletion_list": true,
+        "phase": "uniform in bytes over its cycle, as class 1; a read in progress on the deleted object finishes through its open descriptor, so the absence is found when the next cycle opens it",
+        "swept_store": "the measured artefacts, identical every trial (the lawful deletion is an extra object outside it, §1z.3)"
+      },
+      "lawful_deletion_per_trial": "an extra sealed object outside the measured artefacts, under a genuine recorded order: no alarm from either side",
+      "lawful_object_bytes": 1048608,
+      "ours_0x05_accounting": {
+        "audit_period_ns": 10000000000,
+        "bytes_read": 0,
+        "check": "stat every anchored payload; an absence needs a genuine anchored order targeting it and a DISPOSE referencing it",
+        "detect_ns": {
+          "iqr_ns": 5278734573,
+          "max_ns": 9178776962,
+          "mean_ns": 4792641068,
+          "median_ns": 3852089813,
+          "min_ns": 206867942,
+          "n": 20,
+          "p25_ns": 2691686028,
+          "p75_ns": 7970420601,
+          "p95_ns": 8984072011
+        }
+      },
+      "trials": 20,
+      "verify_on_access": {
+        "detect_ns": null,
+        "reason": "nobody read the object during the trial window: no access, no check"
+      }
+    },
+    "payload_then_read": {
+      "flat_verify_on_access": {
+        "admissible_ppm_of_object": 0,
+        "bytes_read": [
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768,
+          2145398768
+        ],
+        "detect_ns": {
+          "iqr_ns": 9022714,
+          "max_ns": 5065604698,
+          "mean_ns": 5041211529,
+          "median_ns": 5042686725,
+          "min_ns": 5015583938,
+          "n": 20,
+          "p25_ns": 5037349628,
+          "p75_ns": 5046372342,
+          "p95_ns": 5060171341
+        }
+      },
+      "full_rehash": "as for payload at rest: a read does not trigger it",
+      "ours_q2_chunk_on_read": {
+        "bytes_read": [
+          2097152,
+          1048576,
+          1048576,
+          1048576,
+          1048576,
+          1048576,
+          1048576,
+          1048576,
+          1048576,
+          1048576,
+          1048576,
+          2097152,
+          1048576,
+          2097152,
+          2097152,
+          1048576,
+          1048576,
+          2097152,
+          1048576,
+          1048576
+        ],
+        "detect_ns": {
+          "iqr_ns": 116432,
+          "max_ns": 5091268,
+          "mean_ns": 2837985,
+          "median_ns": 2444774,
+          "min_ns": 2396382,
+          "n": 20,
+          "p25_ns": 2420538,
+          "p75_ns": 2536970,
+          "p95_ns": 4974815
+        },
+        "read_bytes": 65536
+      },
+      "trials": 20
+    },
+    "read_budget_bytes_per_s": 50000000
+  }
+}

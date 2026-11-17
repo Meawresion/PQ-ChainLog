@@ -1,0 +1,2640 @@
+{
+  "experiment": "index-size",
+  "git_sha": "4f098afa2662faa1f1ec73cf8223d939506ad4db",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.8xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "n/a: index structures only",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [
+    81,
+    82,
+    83,
+    84,
+    85,
+    86
+  ],
+  "iterations": 10,
+  "started_utc": "2026-11-03T00:18:40Z",
+  "measurements": {
+    "bloom_epsilon": "each scheme at max_epsilon(delta, n-1, E) for its own structure; ODXT has no epochs (E = 1); ODXT's paper states no rate",
+    "convention": "Doris's: occupied TSet/EDB entries at label + value, exact XSet 32 B per tag, Bloom XSet bits/8, canonical widths",
+    "rows": [
+      {
+        "dataset": "enron",
+        "doris_fu": {
+          "attempts": [
+            1,
+            1
+          ],
+          "determinism": "two builds under different keys and seeds gave these counts",
+          "doris_record": {
+            "tset_bytes": 4100,
+            "xset_bytes": 48640
+          },
+          "filter_slots": 1521,
+          "segments": 3,
+          "tset_bytes": 4100,
+          "tset_entries": 100,
+          "xset_bytes": 48672,
+          "xset_tags": 1210
+        },
+        "keywords": 86,
+        "odxt": {
+          "tset_bytes": 8000,
+          "tset_entries": 100,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 162
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 222
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 360,
+          "xset_exact_bytes": 3200,
+          "xset_tags": 100
+        },
+        "ours": {
+          "edb_bytes": 5700,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 120
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 210
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 245
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 180
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 270
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 305
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 360,
+          "xset_exact_bytes": 3200,
+          "xset_tags": 100
+        },
+        "pairs": 100,
+        "sdsse_cq": {
+          "client_bytes": 22188,
+          "tset_bytes": 45248,
+          "tset_entries": 100,
+          "xset_bytes": 29248,
+          "xset_entries": 100
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 22188,
+          "tset_bytes": 45248,
+          "tset_entries": 100,
+          "xset_bytes": 33248,
+          "xset_entries": 100
+        },
+        "tier": 0
+      },
+      {
+        "dataset": "enron",
+        "keywords": 76,
+        "odxt": {
+          "tset_bytes": 16000,
+          "tset_entries": 200,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 324
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 444
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 719,
+          "xset_exact_bytes": 6400,
+          "xset_tags": 200
+        },
+        "ours": {
+          "edb_bytes": 11400,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 240
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 420
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 489
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 360
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 540
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 609
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 719,
+          "xset_exact_bytes": 6400,
+          "xset_tags": 200
+        },
+        "pairs": 200,
+        "sdsse_cq": {
+          "client_bytes": 19608,
+          "tset_bytes": 93568,
+          "tset_entries": 200,
+          "xset_bytes": 61568,
+          "xset_entries": 200
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 19608,
+          "tset_bytes": 93568,
+          "tset_entries": 200,
+          "xset_bytes": 69568,
+          "xset_entries": 200
+        },
+        "tier": null,
+        "truncated_from_tier": 1
+      },
+      {
+        "dataset": "enron",
+        "keywords": 239,
+        "odxt": {
+          "tset_bytes": 40000,
+          "tset_entries": 500,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 808
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 1108
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 1798,
+          "xset_exact_bytes": 16000,
+          "xset_tags": 500
+        },
+        "ours": {
+          "edb_bytes": 28500,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 600
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 1050
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 1222
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 899
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 1350
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 1522
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 1798,
+          "xset_exact_bytes": 16000,
+          "xset_tags": 500
+        },
+        "pairs": 500,
+        "sdsse_cq": {
+          "client_bytes": 61662,
+          "tset_bytes": 232352,
+          "tset_entries": 500,
+          "xset_bytes": 152352,
+          "xset_entries": 500
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 61662,
+          "tset_bytes": 232352,
+          "tset_entries": 500,
+          "xset_bytes": 172352,
+          "xset_entries": 500
+        },
+        "tier": null,
+        "truncated_from_tier": 1
+      },
+      {
+        "dataset": "enron",
+        "doris_fu": {
+          "attempts": [
+            1,
+            1
+          ],
+          "determinism": "two builds under different keys and seeds gave these counts",
+          "doris_record": {
+            "tset_bytes": 41000,
+            "xset_bytes": 646272
+          },
+          "filter_slots": 20197,
+          "segments": 3,
+          "tset_bytes": 41000,
+          "tset_entries": 1000,
+          "xset_bytes": 646304,
+          "xset_tags": 16394
+        },
+        "keywords": 620,
+        "odxt": {
+          "tset_bytes": 80000,
+          "tset_entries": 1000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 1616
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 2216
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 3595,
+          "xset_exact_bytes": 32000,
+          "xset_tags": 1000
+        },
+        "ours": {
+          "edb_bytes": 57000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 1199
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 2099
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 2443
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 1798
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 2699
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 3043
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 3595,
+          "xset_exact_bytes": 32000,
+          "xset_tags": 1000
+        },
+        "pairs": 1000,
+        "sdsse_cq": {
+          "client_bytes": 159960,
+          "tset_bytes": 460160,
+          "tset_entries": 1000,
+          "xset_bytes": 300160,
+          "xset_entries": 1000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 159960,
+          "tset_bytes": 460160,
+          "tset_entries": 1000,
+          "xset_bytes": 340160,
+          "xset_entries": 1000
+        },
+        "tier": 1
+      },
+      {
+        "dataset": "enron",
+        "keywords": 174,
+        "odxt": {
+          "tset_bytes": 160000,
+          "tset_entries": 2000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 3232
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 4432
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 7189,
+          "xset_exact_bytes": 64000,
+          "xset_tags": 2000
+        },
+        "ours": {
+          "edb_bytes": 114000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 2397
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 4198
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 4885
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 3595
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 5398
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 6086
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 7189,
+          "xset_exact_bytes": 64000,
+          "xset_tags": 2000
+        },
+        "pairs": 2000,
+        "sdsse_cq": {
+          "client_bytes": 44892,
+          "tset_bytes": 954432,
+          "tset_entries": 2000,
+          "xset_bytes": 634432,
+          "xset_entries": 2000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 44892,
+          "tset_bytes": 954432,
+          "tset_entries": 2000,
+          "xset_bytes": 714432,
+          "xset_entries": 2000
+        },
+        "tier": null,
+        "truncated_from_tier": 2
+      },
+      {
+        "dataset": "enron",
+        "keywords": 605,
+        "odxt": {
+          "tset_bytes": 400000,
+          "tset_entries": 5000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 8080
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 11080
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 17972,
+          "xset_exact_bytes": 160000,
+          "xset_tags": 5000
+        },
+        "ours": {
+          "edb_bytes": 285000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 5991
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 10493
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 12213
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 8986
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 13494
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 15214
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 17972,
+          "xset_exact_bytes": 160000,
+          "xset_tags": 5000
+        },
+        "pairs": 5000,
+        "sdsse_cq": {
+          "client_bytes": 156090,
+          "tset_bytes": 2380640,
+          "tset_entries": 5000,
+          "xset_bytes": 1580640,
+          "xset_entries": 5000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 156090,
+          "tset_bytes": 2380640,
+          "tset_entries": 5000,
+          "xset_bytes": 1780640,
+          "xset_entries": 5000
+        },
+        "tier": null,
+        "truncated_from_tier": 2
+      },
+      {
+        "dataset": "enron",
+        "doris_fu": {
+          "attempts": [
+            1,
+            1
+          ],
+          "determinism": "two builds under different keys and seeds gave these counts",
+          "doris_record": {
+            "tset_bytes": 410000,
+            "xset_bytes": 5988544
+          },
+          "filter_slots": 187143,
+          "segments": 3,
+          "tset_bytes": 410000,
+          "tset_entries": 10000,
+          "xset_bytes": 5988576,
+          "xset_tags": 152122
+        },
+        "keywords": 2756,
+        "odxt": {
+          "tset_bytes": 800000,
+          "tset_entries": 10000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 16159
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 22159
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 35944,
+          "xset_exact_bytes": 320000,
+          "xset_tags": 10000
+        },
+        "ours": {
+          "edb_bytes": 570000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 11982
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 20986
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 24425
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 17972
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 26988
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 30427
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 35944,
+          "xset_exact_bytes": 320000,
+          "xset_tags": 10000
+        },
+        "pairs": 10000,
+        "sdsse_cq": {
+          "client_bytes": 711048,
+          "tset_bytes": 4711808,
+          "tset_entries": 10000,
+          "xset_bytes": 3111808,
+          "xset_entries": 10000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 711048,
+          "tset_bytes": 4711808,
+          "tset_entries": 10000,
+          "xset_bytes": 3511808,
+          "xset_entries": 10000
+        },
+        "tier": 2
+      },
+      {
+        "dataset": "enron",
+        "keywords": 241,
+        "odxt": {
+          "tset_bytes": 1600000,
+          "tset_entries": 20000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 32317
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 44317
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 71888,
+          "xset_exact_bytes": 640000,
+          "xset_tags": 20000
+        },
+        "ours": {
+          "edb_bytes": 1140000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 23963
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 41972
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 48849
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 35944
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 53976
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 60853
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 71888,
+          "xset_exact_bytes": 640000,
+          "xset_tags": 20000
+        },
+        "pairs": 20000,
+        "sdsse_cq": {
+          "client_bytes": 62178,
+          "tset_bytes": 9592288,
+          "tset_entries": 20000,
+          "xset_bytes": 6392288,
+          "xset_entries": 20000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 62178,
+          "tset_bytes": 9592288,
+          "tset_entries": 20000,
+          "xset_bytes": 7192288,
+          "xset_entries": 20000
+        },
+        "tier": null,
+        "truncated_from_tier": 3
+      },
+      {
+        "dataset": "enron",
+        "keywords": 1512,
+        "odxt": {
+          "tset_bytes": 4000000,
+          "tset_entries": 50000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 80791
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 110792
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 179720,
+          "xset_exact_bytes": 1600000,
+          "xset_tags": 50000
+        },
+        "ours": {
+          "edb_bytes": 2850000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 59907
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 104928
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 122121
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 89860
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 134938
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 152132
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 179720,
+          "xset_exact_bytes": 1600000,
+          "xset_tags": 50000
+        },
+        "pairs": 50000,
+        "sdsse_cq": {
+          "client_bytes": 390096,
+          "tset_bytes": 23951616,
+          "tset_entries": 50000,
+          "xset_bytes": 15951616,
+          "xset_entries": 50000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 390096,
+          "tset_bytes": 23951616,
+          "tset_entries": 50000,
+          "xset_bytes": 17951616,
+          "xset_entries": 50000
+        },
+        "tier": null,
+        "truncated_from_tier": 3
+      },
+      {
+        "dataset": "enron",
+        "doris_fu": {
+          "attempts": [
+            1,
+            1
+          ],
+          "determinism": "two builds under different keys and seeds gave these counts",
+          "doris_record": {
+            "tset_bytes": 4100000,
+            "xset_bytes": 83309248
+          },
+          "filter_slots": 2603431,
+          "segments": 3,
+          "tset_bytes": 4100000,
+          "tset_entries": 100000,
+          "xset_bytes": 83309792,
+          "xset_tags": 2116584
+        },
+        "keywords": 10997,
+        "odxt": {
+          "tset_bytes": 8000000,
+          "tset_entries": 100000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 161582
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 221583
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 359440,
+          "xset_exact_bytes": 3200000,
+          "xset_tags": 100000
+        },
+        "ours": {
+          "edb_bytes": 5700000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 119814
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 209856
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 244241
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 179720
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 269876
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 304264
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 359440,
+          "xset_exact_bytes": 3200000,
+          "xset_tags": 100000
+        },
+        "pairs": 100000,
+        "sdsse_cq": {
+          "client_bytes": 2837226,
+          "tset_bytes": 47648096,
+          "tset_entries": 100000,
+          "xset_bytes": 31648096,
+          "xset_entries": 100000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 2837226,
+          "tset_bytes": 47648096,
+          "tset_entries": 100000,
+          "xset_bytes": 35648096,
+          "xset_entries": 100000
+        },
+        "tier": 3
+      },
+      {
+        "dataset": "enron",
+        "keywords": 251,
+        "odxt": {
+          "tset_bytes": 16000000,
+          "tset_entries": 200000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 323164
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 443165
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 718880,
+          "xset_exact_bytes": 6400000,
+          "xset_tags": 200000
+        },
+        "ours": {
+          "edb_bytes": 11400000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 239627
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 419711
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 488481
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 359440
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 539752
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 608528
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 718880,
+          "xset_exact_bytes": 6400000,
+          "xset_tags": 200000
+        },
+        "pairs": 200000,
+        "sdsse_cq": {
+          "client_bytes": 64758,
+          "tset_bytes": 95991968,
+          "tset_entries": 200000,
+          "xset_bytes": 63991968,
+          "xset_entries": 200000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 64758,
+          "tset_bytes": 95991968,
+          "tset_entries": 200000,
+          "xset_bytes": 71991968,
+          "xset_entries": 200000
+        },
+        "tier": null,
+        "truncated_from_tier": 4
+      },
+      {
+        "dataset": "enron",
+        "keywords": 1662,
+        "odxt": {
+          "tset_bytes": 40000000,
+          "tset_entries": 500000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 807909
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 1107912
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 1797199,
+          "xset_exact_bytes": 16000000,
+          "xset_tags": 500000
+        },
+        "ours": {
+          "edb_bytes": 28500000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 599067
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 1049276
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 1221202
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 898600
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 1349379
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 1521319
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 1797199,
+          "xset_exact_bytes": 16000000,
+          "xset_tags": 500000
+        },
+        "pairs": 500000,
+        "sdsse_cq": {
+          "client_bytes": 428796,
+          "tset_bytes": 239946816,
+          "tset_entries": 500000,
+          "xset_bytes": 159946816,
+          "xset_entries": 500000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 428796,
+          "tset_bytes": 239946816,
+          "tset_entries": 500000,
+          "xset_bytes": 179946816,
+          "xset_entries": 500000
+        },
+        "tier": null,
+        "truncated_from_tier": 4
+      },
+      {
+        "dataset": "enron",
+        "doris_fu": {
+          "attempts": [
+            1,
+            1
+          ],
+          "determinism": "two builds under different keys and seeds gave these counts",
+          "doris_record": {
+            "tset_bytes": 41000000,
+            "xset_bytes": 818997696
+          },
+          "filter_slots": 23408946,
+          "segments": 200,
+          "tset_bytes": 41000000,
+          "tset_entries": 1000000,
+          "xset_bytes": 749086272,
+          "xset_tags": 20807952
+        },
+        "keywords": 44681,
+        "odxt": {
+          "tset_bytes": 80000000,
+          "tset_entries": 1000000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 1615817
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 2215824
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 3594397,
+          "xset_exact_bytes": 32000000,
+          "xset_tags": 1000000
+        },
+        "ours": {
+          "edb_bytes": 57000000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 1198133
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 2098552
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 2442404
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 1797199
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 2698757
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 3042637
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 3594397,
+          "xset_exact_bytes": 32000000,
+          "xset_tags": 1000000
+        },
+        "pairs": 1000000,
+        "sdsse_cq": {
+          "client_bytes": 11527698,
+          "tset_bytes": 478570208,
+          "tset_entries": 1000000,
+          "xset_bytes": 318570208,
+          "xset_entries": 1000000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 11527698,
+          "tset_bytes": 478570208,
+          "tset_entries": 1000000,
+          "xset_bytes": 358570208,
+          "xset_entries": 1000000
+        },
+        "tier": 4
+      },
+      {
+        "dataset": "enwiki",
+        "doris_fu": {
+          "attempts": [
+            1,
+            1
+          ],
+          "determinism": "two builds under different keys and seeds gave these counts",
+          "doris_record": {
+            "tset_bytes": 4100,
+            "xset_bytes": 243072
+          },
+          "filter_slots": 7597,
+          "segments": 3,
+          "tset_bytes": 4100,
+          "tset_entries": 100,
+          "xset_bytes": 243104,
+          "xset_tags": 6150
+        },
+        "keywords": 100,
+        "odxt": {
+          "tset_bytes": 8000,
+          "tset_entries": 100,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 162
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 222
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 360,
+          "xset_exact_bytes": 3200,
+          "xset_tags": 100
+        },
+        "ours": {
+          "edb_bytes": 5700,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 120
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 210
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 245
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 180
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 270
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 305
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 360,
+          "xset_exact_bytes": 3200,
+          "xset_tags": 100
+        },
+        "pairs": 100,
+        "sdsse_cq": {
+          "client_bytes": 25800,
+          "tset_bytes": 44800,
+          "tset_entries": 100,
+          "xset_bytes": 28800,
+          "xset_entries": 100
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 25800,
+          "tset_bytes": 44800,
+          "tset_entries": 100,
+          "xset_bytes": 32800,
+          "xset_entries": 100
+        },
+        "tier": 0
+      },
+      {
+        "dataset": "enwiki",
+        "keywords": 170,
+        "odxt": {
+          "tset_bytes": 16000,
+          "tset_entries": 200,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 324
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 444
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 719,
+          "xset_exact_bytes": 6400,
+          "xset_tags": 200
+        },
+        "ours": {
+          "edb_bytes": 11400,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 240
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 420
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 489
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 360
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 540
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 609
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 719,
+          "xset_exact_bytes": 6400,
+          "xset_tags": 200
+        },
+        "pairs": 200,
+        "sdsse_cq": {
+          "client_bytes": 43860,
+          "tset_bytes": 90560,
+          "tset_entries": 200,
+          "xset_bytes": 58560,
+          "xset_entries": 200
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 43860,
+          "tset_bytes": 90560,
+          "tset_entries": 200,
+          "xset_bytes": 66560,
+          "xset_entries": 200
+        },
+        "tier": null,
+        "truncated_from_tier": 1
+      },
+      {
+        "dataset": "enwiki",
+        "keywords": 457,
+        "odxt": {
+          "tset_bytes": 40000,
+          "tset_entries": 500,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 808
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 1108
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 1798,
+          "xset_exact_bytes": 16000,
+          "xset_tags": 500
+        },
+        "ours": {
+          "edb_bytes": 28500,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 600
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 1050
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 1222
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 899
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 1350
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 1522
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 1798,
+          "xset_exact_bytes": 16000,
+          "xset_tags": 500
+        },
+        "pairs": 500,
+        "sdsse_cq": {
+          "client_bytes": 117906,
+          "tset_bytes": 225376,
+          "tset_entries": 500,
+          "xset_bytes": 145376,
+          "xset_entries": 500
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 117906,
+          "tset_bytes": 225376,
+          "tset_entries": 500,
+          "xset_bytes": 165376,
+          "xset_entries": 500
+        },
+        "tier": null,
+        "truncated_from_tier": 1
+      },
+      {
+        "dataset": "enwiki",
+        "doris_fu": {
+          "attempts": [
+            1,
+            1
+          ],
+          "determinism": "two builds under different keys and seeds gave these counts",
+          "doris_record": {
+            "tset_bytes": 41000,
+            "xset_bytes": 3248832
+          },
+          "filter_slots": 101527,
+          "segments": 3,
+          "tset_bytes": 41000,
+          "tset_entries": 1000,
+          "xset_bytes": 3248864,
+          "xset_tags": 82516
+        },
+        "keywords": 942,
+        "odxt": {
+          "tset_bytes": 80000,
+          "tset_entries": 1000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 1616
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 2216
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 3595,
+          "xset_exact_bytes": 32000,
+          "xset_tags": 1000
+        },
+        "ours": {
+          "edb_bytes": 57000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 1199
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 2099
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 2443
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 1798
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 2699
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 3043
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 3595,
+          "xset_exact_bytes": 32000,
+          "xset_tags": 1000
+        },
+        "pairs": 1000,
+        "sdsse_cq": {
+          "client_bytes": 243036,
+          "tset_bytes": 449856,
+          "tset_entries": 1000,
+          "xset_bytes": 289856,
+          "xset_entries": 1000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 243036,
+          "tset_bytes": 449856,
+          "tset_entries": 1000,
+          "xset_bytes": 329856,
+          "xset_entries": 1000
+        },
+        "tier": 1
+      },
+      {
+        "dataset": "enwiki",
+        "keywords": 928,
+        "odxt": {
+          "tset_bytes": 160000,
+          "tset_entries": 2000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 3232
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 4432
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 7189,
+          "xset_exact_bytes": 64000,
+          "xset_tags": 2000
+        },
+        "ours": {
+          "edb_bytes": 114000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 2397
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 4198
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 4885
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 3595
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 5398
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 6086
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 7189,
+          "xset_exact_bytes": 64000,
+          "xset_tags": 2000
+        },
+        "pairs": 2000,
+        "sdsse_cq": {
+          "client_bytes": 239424,
+          "tset_bytes": 930304,
+          "tset_entries": 2000,
+          "xset_bytes": 610304,
+          "xset_entries": 2000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 239424,
+          "tset_bytes": 930304,
+          "tset_entries": 2000,
+          "xset_bytes": 690304,
+          "xset_entries": 2000
+        },
+        "tier": null,
+        "truncated_from_tier": 2
+      },
+      {
+        "dataset": "enwiki",
+        "keywords": 2840,
+        "odxt": {
+          "tset_bytes": 400000,
+          "tset_entries": 5000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 8080
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 11080
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 17972,
+          "xset_exact_bytes": 160000,
+          "xset_tags": 5000
+        },
+        "ours": {
+          "edb_bytes": 285000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 5991
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 10493
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 12213
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 8986
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 13494
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 15214
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 17972,
+          "xset_exact_bytes": 160000,
+          "xset_tags": 5000
+        },
+        "pairs": 5000,
+        "sdsse_cq": {
+          "client_bytes": 732720,
+          "tset_bytes": 2309120,
+          "tset_entries": 5000,
+          "xset_bytes": 1509120,
+          "xset_entries": 5000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 732720,
+          "tset_bytes": 2309120,
+          "tset_entries": 5000,
+          "xset_bytes": 1709120,
+          "xset_entries": 5000
+        },
+        "tier": null,
+        "truncated_from_tier": 2
+      },
+      {
+        "dataset": "enwiki",
+        "doris_fu": {
+          "attempts": [
+            1,
+            1
+          ],
+          "determinism": "two builds under different keys and seeds gave these counts",
+          "doris_record": {
+            "tset_bytes": 410000,
+            "xset_bytes": 57574272
+          },
+          "filter_slots": 1799200,
+          "segments": 3,
+          "tset_bytes": 410000,
+          "tset_entries": 10000,
+          "xset_bytes": 57574400,
+          "xset_tags": 1462738
+        },
+        "keywords": 7268,
+        "odxt": {
+          "tset_bytes": 800000,
+          "tset_entries": 10000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 16159
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 22159
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 35944,
+          "xset_exact_bytes": 320000,
+          "xset_tags": 10000
+        },
+        "ours": {
+          "edb_bytes": 570000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 11982
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 20986
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 24425
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 17972
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 26988
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 30427
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 35944,
+          "xset_exact_bytes": 320000,
+          "xset_tags": 10000
+        },
+        "pairs": 10000,
+        "sdsse_cq": {
+          "client_bytes": 1875144,
+          "tset_bytes": 4567424,
+          "tset_entries": 10000,
+          "xset_bytes": 2967424,
+          "xset_entries": 10000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 1875144,
+          "tset_bytes": 4567424,
+          "tset_entries": 10000,
+          "xset_bytes": 3367424,
+          "xset_entries": 10000
+        },
+        "tier": 2
+      },
+      {
+        "dataset": "enwiki",
+        "keywords": 2068,
+        "odxt": {
+          "tset_bytes": 1600000,
+          "tset_entries": 20000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 32317
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 44317
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 71888,
+          "xset_exact_bytes": 640000,
+          "xset_tags": 20000
+        },
+        "ours": {
+          "edb_bytes": 1140000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 23963
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 41972
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 48849
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 35944
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 53976
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 60853
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 71888,
+          "xset_exact_bytes": 640000,
+          "xset_tags": 20000
+        },
+        "pairs": 20000,
+        "sdsse_cq": {
+          "client_bytes": 533544,
+          "tset_bytes": 9533824,
+          "tset_entries": 20000,
+          "xset_bytes": 6333824,
+          "xset_entries": 20000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 533544,
+          "tset_bytes": 9533824,
+          "tset_entries": 20000,
+          "xset_bytes": 7133824,
+          "xset_entries": 20000
+        },
+        "tier": null,
+        "truncated_from_tier": 3
+      },
+      {
+        "dataset": "enwiki",
+        "keywords": 9709,
+        "odxt": {
+          "tset_bytes": 4000000,
+          "tset_entries": 50000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 80791
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 110792
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 179720,
+          "xset_exact_bytes": 1600000,
+          "xset_tags": 50000
+        },
+        "ours": {
+          "edb_bytes": 2850000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 59907
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 104928
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 122121
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 89860
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 134938
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 152132
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 179720,
+          "xset_exact_bytes": 1600000,
+          "xset_tags": 50000
+        },
+        "pairs": 50000,
+        "sdsse_cq": {
+          "client_bytes": 2504922,
+          "tset_bytes": 23689312,
+          "tset_entries": 50000,
+          "xset_bytes": 15689312,
+          "xset_entries": 50000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 2504922,
+          "tset_bytes": 23689312,
+          "tset_entries": 50000,
+          "xset_bytes": 17689312,
+          "xset_entries": 50000
+        },
+        "tier": null,
+        "truncated_from_tier": 3
+      },
+      {
+        "dataset": "enwiki",
+        "doris_fu": {
+          "attempts": [
+            1,
+            1
+          ],
+          "determinism": "two builds under different keys and seeds gave these counts",
+          "doris_record": {
+            "tset_bytes": 4100000,
+            "xset_bytes": 606189280
+          },
+          "filter_slots": 17326380,
+          "segments": 200,
+          "tset_bytes": 4100000,
+          "tset_entries": 100000,
+          "xset_bytes": 554444160,
+          "xset_tags": 15401226
+        },
+        "keywords": 48555,
+        "odxt": {
+          "tset_bytes": 8000000,
+          "tset_entries": 100000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 161582
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 221583
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 359440,
+          "xset_exact_bytes": 3200000,
+          "xset_tags": 100000
+        },
+        "ours": {
+          "edb_bytes": 5700000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 119814
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 209856
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 244241
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 179720
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 269876
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 304264
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 359440,
+          "xset_exact_bytes": 3200000,
+          "xset_tags": 100000
+        },
+        "pairs": 100000,
+        "sdsse_cq": {
+          "client_bytes": 12527190,
+          "tset_bytes": 46446240,
+          "tset_entries": 100000,
+          "xset_bytes": 30446240,
+          "xset_entries": 100000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 12527190,
+          "tset_bytes": 46446240,
+          "tset_entries": 100000,
+          "xset_bytes": 34446240,
+          "xset_entries": 100000
+        },
+        "tier": 3
+      },
+      {
+        "dataset": "enwiki",
+        "keywords": 2267,
+        "odxt": {
+          "tset_bytes": 16000000,
+          "tset_entries": 200000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 323164
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 443165
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 718880,
+          "xset_exact_bytes": 6400000,
+          "xset_tags": 200000
+        },
+        "ours": {
+          "edb_bytes": 11400000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 239627
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 419711
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 488481
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 359440
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 539752
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 608528
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 718880,
+          "xset_exact_bytes": 6400000,
+          "xset_tags": 200000
+        },
+        "pairs": 200000,
+        "sdsse_cq": {
+          "client_bytes": 584886,
+          "tset_bytes": 95927456,
+          "tset_entries": 200000,
+          "xset_bytes": 63927456,
+          "xset_entries": 200000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 584886,
+          "tset_bytes": 95927456,
+          "tset_entries": 200000,
+          "xset_bytes": 71927456,
+          "xset_entries": 200000
+        },
+        "tier": null,
+        "truncated_from_tier": 4
+      },
+      {
+        "dataset": "enwiki",
+        "keywords": 16475,
+        "odxt": {
+          "tset_bytes": 40000000,
+          "tset_entries": 500000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 807909
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 1107912
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 1797199,
+          "xset_exact_bytes": 16000000,
+          "xset_tags": 500000
+        },
+        "ours": {
+          "edb_bytes": 28500000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 599067
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 1049276
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 1221202
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 898600
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 1349379
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 1521319
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 1797199,
+          "xset_exact_bytes": 16000000,
+          "xset_tags": 500000
+        },
+        "pairs": 500000,
+        "sdsse_cq": {
+          "client_bytes": 4250550,
+          "tset_bytes": 239472800,
+          "tset_entries": 500000,
+          "xset_bytes": 159472800,
+          "xset_entries": 500000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 4250550,
+          "tset_bytes": 239472800,
+          "tset_entries": 500000,
+          "xset_bytes": 179472800,
+          "xset_entries": 500000
+        },
+        "tier": null,
+        "truncated_from_tier": 4
+      },
+      {
+        "dataset": "enwiki",
+        "doris_fu": {
+          "attempts": [
+            1,
+            1
+          ],
+          "determinism": "two builds under different keys and seeds gave these counts",
+          "doris_record": null,
+          "filter_slots": 171146325,
+          "segments": 200,
+          "tset_bytes": 41000000,
+          "tset_entries": 1000000,
+          "xset_bytes": 5476682400,
+          "xset_tags": 152130066
+        },
+        "keywords": 330489,
+        "odxt": {
+          "tset_bytes": 80000000,
+          "tset_entries": 1000000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.002008048338574153,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 1615817
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.000200080048033624,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 2215824
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 3594397,
+          "xset_exact_bytes": 32000000,
+          "xset_tags": 1000000
+        },
+        "ours": {
+          "edb_bytes": 57000000,
+          "xset_bloom": [
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.010000000000000009,
+              "target_loss": 0.01,
+              "x_terms": 1,
+              "xset_bytes": 1198133
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.0003140236796617124,
+              "target_loss": 0.01,
+              "x_terms": 2,
+              "xset_bytes": 2098552
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 0.00008374929161147904,
+              "target_loss": 0.01,
+              "x_terms": 5,
+              "xset_bytes": 2442404
+            },
+            {
+              "closed_epochs": 1,
+              "epsilon": 0.0010000000000000009,
+              "target_loss": 0.001,
+              "x_terms": 1,
+              "xset_bytes": 1797199
+            },
+            {
+              "closed_epochs": 16,
+              "epsilon": 0.000031265146659631426,
+              "target_loss": 0.001,
+              "x_terms": 2,
+              "xset_bytes": 2698757
+            },
+            {
+              "closed_epochs": 24,
+              "epsilon": 8.337468022978634e-6,
+              "target_loss": 0.001,
+              "x_terms": 5,
+              "xset_bytes": 3042637
+            }
+          ],
+          "xset_bloom_doris_epsilon_bytes": 3594397,
+          "xset_exact_bytes": 32000000,
+          "xset_tags": 1000000
+        },
+        "pairs": 1000000,
+        "sdsse_cq": {
+          "client_bytes": 85266162,
+          "tset_bytes": 469424352,
+          "tset_entries": 1000000,
+          "xset_bytes": 309424352,
+          "xset_entries": 1000000
+        },
+        "sdsse_cq_s": {
+          "client_bytes": 85266162,
+          "tset_bytes": 469424352,
+          "tset_entries": 1000000,
+          "xset_bytes": 349424352,
+          "xset_entries": 1000000
+        },
+        "tier": 4
+      }
+    ],
+    "sizes_are_structural": "byte counts, deterministic; no wall clock is reported here",
+    "source_pairs": "baselines/doris/upstream/data/{dataset}_inverted{tier}.csv, checked equal to Doris's TIER_PAIRS; the x2 and x5 rows are the next tier's file truncated to its first pairs, in file order",
+    "widths_bytes": {
+      "addr": 32,
+      "odxt_alpha": 32,
+      "odxt_val": 16,
+      "tag": 32
+    }
+  }
+}

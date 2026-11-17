@@ -1,0 +1,25 @@
+results/*
+!results/*.json
+
+# ⭐ Except the determinism intermediates, which are scratch, not artefacts.
+#
+# ⛔ This line must live **here**, not in the root `.gitignore`. The negation
+# above force-includes every JSON under `results/`, and a pattern in a deeper
+# `.gitignore` beats the root's — so the root rule silently did nothing. That
+# cost a debugging round.
+#
+# It matters because `run.sh publish` writes these two *while* producing the
+# record: untracked, they make the tree dirty during the run, `git_dirty` is
+# stamped true, and `mkfigs.py` refuses the output. The publish path could not
+# emit a publishable record until this existed.
+results/.determinism-*.json
+
+# ⛔ And their CURRENT name. `run.sh` renamed the intermediates to
+# `.<record-stem>-run<n>.json` so two publishes could not share scratch, and the
+# line above silently stopped matching: every publish after the first on a box
+# then stamped `git_dirty = true` and was refused. That is why two of the three
+# local tier-4 records came out dirty. Found 2026-09-25 by reading `git status`
+# on the WSL clone, not by anything failing.
+results/.*-run[0-9].json
+
+upstream/log/

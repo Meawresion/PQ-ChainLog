@@ -1,0 +1,92 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/pqcl-primitives",
+    "crates/pqcl-bench",
+    "crates/pqcl-ggm",
+    "crates/pqcl-dsse",
+    "crates/pqcl-forest",
+    "crates/pqcl-capsule",
+    "crates/pqcl-sm",
+    "crates/pqcl-warrant",
+    "crates/pqcl-interop",
+    "crates/pqcl-pipeline",
+    "crates/pqcl-chainproof",
+    "crates/pqcl-nitro",
+    "crates/pqcl-exp",
+    "crates/pqcl-investigator",
+    "baselines/odxt",
+    "baselines/zuo22",
+    "baselines/sdsse_cq",
+    "baselines/dsse_skq",
+    "baselines/doris_fu",
+    "baselines/vcfb",
+    "baselines/mdrsse",
+    "baselines/pqabl",
+    "baselines/glassdb",
+    "xtask",
+]
+
+# Crates are added at the milestone that needs them. Twelve empty library crates
+# would be scaffolding, which is exactly the shape ground rule #1 exists to
+# prevent. The eventual layout is in that plan §3.
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.97"
+authors = [
+    "Krittapak Jairak",
+    "Chuesing Ni",
+    "Phurich Siangsoong",
+    "Pitinun Wiphumitsitsakul",
+    "Somchart Fugkeaw",
+]
+license = "MIT OR Apache-2.0"
+publish = false
+
+[workspace.lints.rust]
+# pqcl-primitives wraps liboqs through the `oqs` crate, which is already a safe
+# wrapper. If a crate here ever needs `unsafe`, that is a design discussion, not
+# a local `#[allow]`.
+unsafe_code = "deny"
+missing_docs = "warn"
+unreachable_pub = "warn"
+rust_2018_idioms = { level = "warn", priority = -1 }
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+# Panicking paths are acceptable in tests and benches; in library code they are
+# how a measurement run dies at hour six.
+unwrap_used = "warn"
+expect_used = "warn"
+panic = "warn"
+# Silence pedantic lints that fight cryptographic code specifically.
+module_name_repetitions = "allow"
+missing_errors_doc = "allow"
+similar_names = "allow"
+
+[profile.release]
+# Benchmarks are taken from release builds. These settings are part of the
+# measurement environment and are recorded in RunMetadata.
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+debug = true          # keep symbols so `perf` can attribute time honestly
+panic = "unwind"
+
+[profile.bench]
+inherits = "release"
+
+# Optimise dependencies even in debug builds, while keeping our own crates
+# debuggable.
+#
+# Not a convenience: SLH-DSA-SHAKE-192s signing is deliberately expensive — the
+# `s` variant trades signing time for a small signature, which is exactly why we
+# chose it for a once-per-epoch co-signature. Unoptimised, its known-answer
+# tests take long enough to make `cargo xtask ci` unusable, and a gate people
+# skip is a gate that does not exist. liboqs is C and already compiled with its
+# own flags, so this mainly affects the pure-Rust hash-based code.
+[profile.dev.package."*"]
+opt-level = 3

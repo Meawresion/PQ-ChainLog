@@ -1,0 +1,17 @@
+[package]
+name = "baseline-glassdb"
+description = "GlassDB's two-level POS-tree ledger (Yue et al., PVLDB 16(6) 2023), reimplemented in Rust for a same-language wall clock. A baseline, never part of the system under test."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+# The paper hashes with BLAKE2b. Every Exp. 2 arm hashes with the SHAKE256 our
+# system uses, through the same crate and version (UPGRADES.md).
+tiny-keccak = { version = "2.0.2", features = ["shake"] }
+
+[lints]
+workspace = true

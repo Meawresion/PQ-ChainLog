@@ -1,0 +1,23 @@
+[package]
+name = "baseline-dsse-skq"
+description = "Faithful reimplementation of DSSE_SKQ (Wang et al., IEEE TDSC 2023), one-dimensional. A baseline, never part of the system under test."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-primitives = { path = "../../crates/pqcl-primitives" }
+
+# The DPRF is a GGM PRF (its section 7); ours is the same construction, at the
+# same depth, which keeps the comparison about the schemes.
+pqcl-ggm = { path = "../../crates/pqcl-ggm" }
+
+# Enc, Add and the best-prefix cover are the same as FBDSSE-RQ's: bitmaps in
+# Z_{2^l}, and a minimal cover of a range by binary prefixes.
+baseline-zuo22 = { path = "../zuo22" }
+
+[lints]
+workspace = true

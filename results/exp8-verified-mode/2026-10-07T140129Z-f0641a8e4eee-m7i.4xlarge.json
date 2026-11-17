@@ -1,0 +1,101 @@
+{
+  "experiment": "exp8-verified-mode",
+  "git_sha": "f0641a8e4eeef91ba552dcae3dbddf774343b24c",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.4xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "n/a: hash and AEAD only on these paths",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [
+    129
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-07T14:01:29Z",
+  "measurements": {
+    "no_unverified_mode": "There is no unverified variant to compare against, because verification is not a mode: the client derives every addr_i itself and K^M_w never leaves, so AEAD with AD = addr_i is the retrieval path rather than an addition to it. 'Free' in thm:verif means structurally free, and the honest measurement is the absolute cost rather than a difference.",
+    "rows": [
+      {
+        "detects": [
+          "omission",
+          "forgery",
+          "substitution",
+          "replay"
+        ],
+        "detects_note": "All four are pinned by pqcl-dsse/tests/pi_core.rs, which is where thm:verif is executable. This experiment measures the cost of the path those tests exercise; it does not re-prove them.",
+        "postings": 64,
+        "verified_search_ns": {
+          "iqr_ns": 9271,
+          "max_ns": 86360,
+          "median_ns": 74111,
+          "min_ns": 68787,
+          "n": 10,
+          "p25_ns": 68902,
+          "p75_ns": 78173
+        }
+      },
+      {
+        "detects": [
+          "omission",
+          "forgery",
+          "substitution",
+          "replay"
+        ],
+        "detects_note": "All four are pinned by pqcl-dsse/tests/pi_core.rs, which is where thm:verif is executable. This experiment measures the cost of the path those tests exercise; it does not re-prove them.",
+        "postings": 256,
+        "verified_search_ns": {
+          "iqr_ns": 2260,
+          "max_ns": 293307,
+          "median_ns": 287963,
+          "min_ns": 286968,
+          "n": 10,
+          "p25_ns": 287203,
+          "p75_ns": 289463
+        }
+      },
+      {
+        "detects": [
+          "omission",
+          "forgery",
+          "substitution",
+          "replay"
+        ],
+        "detects_note": "All four are pinned by pqcl-dsse/tests/pi_core.rs, which is where thm:verif is executable. This experiment measures the cost of the path those tests exercise; it does not re-prove them.",
+        "postings": 1024,
+        "verified_search_ns": {
+          "iqr_ns": 52365,
+          "max_ns": 1218180,
+          "median_ns": 1158037,
+          "min_ns": 1117784,
+          "n": 10,
+          "p25_ns": 1135179,
+          "p75_ns": 1187544
+        }
+      },
+      {
+        "detects": [
+          "omission",
+          "forgery",
+          "substitution",
+          "replay"
+        ],
+        "detects_note": "All four are pinned by pqcl-dsse/tests/pi_core.rs, which is where thm:verif is executable. This experiment measures the cost of the path those tests exercise; it does not re-prove them.",
+        "postings": 4096,
+        "verified_search_ns": {
+          "iqr_ns": 33501,
+          "max_ns": 4934996,
+          "median_ns": 4733710,
+          "min_ns": 4703225,
+          "n": 10,
+          "p25_ns": 4719603,
+          "p75_ns": 4753104
+        }
+      }
+    ]
+  }
+}

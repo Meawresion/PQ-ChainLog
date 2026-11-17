@@ -1,0 +1,198 @@
+{
+  "experiment": "exp10-integrity-audit",
+  "git_sha": "77adfac504aec1f59ea152969ad26f24451d194f",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.4xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "n/a: hash and AEAD only on these paths",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [
+    129
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-12T16:56:08Z",
+  "measurements": {
+    "detection_bound": [
+      {
+        "corrupted_fraction_bp": 10,
+        "corrupted_fraction_pct": 0.1,
+        "undetected_ppm_after_8_32_128_samples": [
+          992022,
+          968466,
+          879729
+        ]
+      },
+      {
+        "corrupted_fraction_bp": 50,
+        "corrupted_fraction_pct": 0.5,
+        "undetected_ppm_after_8_32_128_samples": [
+          960690,
+          851787,
+          526398
+        ]
+      },
+      {
+        "corrupted_fraction_bp": 100,
+        "corrupted_fraction_pct": 1.0,
+        "undetected_ppm_after_8_32_128_samples": [
+          922744,
+          724968,
+          276216
+        ]
+      },
+      {
+        "corrupted_fraction_bp": 200,
+        "corrupted_fraction_pct": 2.0,
+        "undetected_ppm_after_8_32_128_samples": [
+          850761,
+          523871,
+          75302
+        ]
+      },
+      {
+        "corrupted_fraction_bp": 500,
+        "corrupted_fraction_pct": 5.0,
+        "undetected_ppm_after_8_32_128_samples": [
+          663419,
+          193705,
+          1399
+        ]
+      },
+      {
+        "corrupted_fraction_bp": 1000,
+        "corrupted_fraction_pct": 10.0,
+        "undetected_ppm_after_8_32_128_samples": [
+          430466,
+          34333,
+          0
+        ]
+      },
+      {
+        "corrupted_fraction_bp": 2000,
+        "corrupted_fraction_pct": 20.0,
+        "undetected_ppm_after_8_32_128_samples": [
+          167772,
+          790,
+          0
+        ]
+      }
+    ],
+    "detection_bound_attribution": "The (1-c)^{mk} bound is the Provable Data Possession / Proofs of Retrievability line's, not ours. We need their sampling result and not their protocol: d_ev is anchored, so a spot-check is an ordinary hash comparison.",
+    "rows": [
+      {
+        "artefact_mib": 1,
+        "chunk_bytes": 1048576,
+        "chunks": 1,
+        "full_rehash_ns": {
+          "iqr_ns": 52434,
+          "max_ns": 2570765,
+          "mean_ns": 2470770,
+          "median_ns": 2469742,
+          "min_ns": 2385973,
+          "n": 10,
+          "p25_ns": 2427836,
+          "p75_ns": 2480270,
+          "p95_ns": 2567372
+        },
+        "keyless": true,
+        "keyless_reason": "d_ev binds ciphertext, so the sweeper never needs a key. That is a payoff of the two-digest decision and is why the sweep is safely delegable to a low-privilege service.",
+        "localisation": {
+          "chunks_still_valid_after_one_corruption": 0,
+          "note": "One corrupted chunk invalidates one chunk. A partially damaged image stays admissible for its intact regions -- the consequence of chunked digests the design claims."
+        },
+        "sampled_sweep_chunks": 1,
+        "sampled_sweep_ns": {
+          "iqr_ns": 66106,
+          "max_ns": 2567698,
+          "mean_ns": 2469034,
+          "median_ns": 2475200,
+          "min_ns": 2378571,
+          "n": 10,
+          "p25_ns": 2434123,
+          "p75_ns": 2500229,
+          "p95_ns": 2550325
+        }
+      },
+      {
+        "artefact_mib": 4,
+        "chunk_bytes": 1048576,
+        "chunks": 4,
+        "full_rehash_ns": {
+          "iqr_ns": 200291,
+          "max_ns": 10086964,
+          "mean_ns": 9854142,
+          "median_ns": 9815740,
+          "min_ns": 9729069,
+          "n": 10,
+          "p25_ns": 9745346,
+          "p75_ns": 9945637,
+          "p95_ns": 10054798
+        },
+        "keyless": true,
+        "keyless_reason": "d_ev binds ciphertext, so the sweeper never needs a key. That is a payoff of the two-digest decision and is why the sweep is safely delegable to a low-privilege service.",
+        "localisation": {
+          "chunks_still_valid_after_one_corruption": 3,
+          "note": "One corrupted chunk invalidates one chunk. A partially damaged image stays admissible for its intact regions -- the consequence of chunked digests the design claims."
+        },
+        "sampled_sweep_chunks": 1,
+        "sampled_sweep_ns": {
+          "iqr_ns": 108377,
+          "max_ns": 2572197,
+          "mean_ns": 2466903,
+          "median_ns": 2463649,
+          "min_ns": 2391580,
+          "n": 10,
+          "p25_ns": 2408767,
+          "p75_ns": 2517144,
+          "p95_ns": 2552752
+        }
+      },
+      {
+        "artefact_mib": 16,
+        "chunk_bytes": 1048576,
+        "chunks": 16,
+        "full_rehash_ns": {
+          "iqr_ns": 331512,
+          "max_ns": 40490798,
+          "mean_ns": 39589563,
+          "median_ns": 39499772,
+          "min_ns": 39043090,
+          "n": 10,
+          "p25_ns": 39307884,
+          "p75_ns": 39639396,
+          "p95_ns": 40379213
+        },
+        "keyless": true,
+        "keyless_reason": "d_ev binds ciphertext, so the sweeper never needs a key. That is a payoff of the two-digest decision and is why the sweep is safely delegable to a low-privilege service.",
+        "localisation": {
+          "chunks_still_valid_after_one_corruption": 15,
+          "note": "One corrupted chunk invalidates one chunk. A partially damaged image stays admissible for its intact regions -- the consequence of chunked digests the design claims."
+        },
+        "sampled_sweep_chunks": 4,
+        "sampled_sweep_ns": {
+          "iqr_ns": 429043,
+          "max_ns": 10490259,
+          "mean_ns": 10143858,
+          "median_ns": 10229458,
+          "min_ns": 9762762,
+          "n": 10,
+          "p25_ns": 9904493,
+          "p75_ns": 10333536,
+          "p95_ns": 10443468
+        }
+      }
+    ],
+    "three_questions": {
+      "anchored_history": "O(1) per epoch, touches no evidence; one root comparison",
+      "cold_storage_rot": "budgeted sampled sweep, bounded by (1-c)^{mk}",
+      "specific_object": "on access, never scheduled",
+      "why_separate": "The perceived expense of integrity auditing comes from answering the third question with the second's mechanism at the first's cadence."
+    }
+  }
+}

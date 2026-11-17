@@ -1,0 +1,81 @@
+{
+  "experiment": "doris-structural",
+  "aws_exempt": "reused-baseline-structural",
+  "aws_exempt_rule": "Require-Consultant.md \u00a72 standing rule, 'the one AWS-only carve-out'. Scope: the reused CDSecLab/Doris container, structural quantities only. Our own Rust structural metrics are not covered and run on AWS.",
+  "git_sha": "4cb4e1e72b4efb06de1d43b048fb8a83c7764627",
+  "git_dirty": false,
+  "provenance": {
+    "upstream": "github.com/CDSecLab/Doris",
+    "upstream_commit": "61907c60910e159830009051c32fef077274c6e1",
+    "stack": {
+      "ubuntu": "20.04",
+      "python": "Python 3.8.10",
+      "pbc": "0.5.14",
+      "pypbc": "c518d6ff074f538080c5794924f83ee441ed44ea",
+      "bitarray": "=2.8.3",
+      "mmh3": "=4.0.1",
+      "pycryptodome": "=3.19.0",
+      "Pympler": "=1.1"
+    },
+    "python": "3.8.10",
+    "bloom_fpr": 1e-06,
+    "tset_expansion_k": 2,
+    "note": "Structural metrics only. No wall-clock figure is produced or permitted from this baseline: plan \u00a75 restricts a Python implementation to language-independent axes."
+  },
+  "determinism": {
+    "runs": 2,
+    "identical": true,
+    "compared": "every row field except canonical_bytes_added, setup_attempts, zr_short_encodings",
+    "excluded_reason": "setup_attempts counts retries of upstream's probabilistic TSet setup and is a property of the run, not of the index. It is recorded per run below.",
+    "setup_attempts_run1": {
+      "OXT/enron/4": 1,
+      "OXT/enwiki/4": 1
+    },
+    "setup_attempts_run2": {
+      "OXT/enron/4": 1,
+      "OXT/enwiki/4": 1
+    }
+  },
+  "rows": [
+    {
+      "scheme": "OXT",
+      "dataset": "enron",
+      "tier": 4,
+      "pairs": 1000000,
+      "tset_bytes": 63000000,
+      "xset_bytes": 3594397,
+      "index_bytes": 66594397,
+      "setup_attempts": 1,
+      "comm_bytes": null,
+      "comm_note": "not measured: upstream's cal_comm_cost is len(pickle.dumps(...)), which is Python serialization overhead rather than a wire-format byte count, so it is not comparable across languages (plan section 5)",
+      "zr_elements": 1000000,
+      "zr_short_encodings": 7870,
+      "canonical_bytes_added": 7898,
+      "search_rounds": 1,
+      "storage_order": "O(n)",
+      "kprp_hidden": false,
+      "ip_hidden": false,
+      "protocol_fields_source": "DORIS_CCS2024.pdf Table 1 (paper-derived, not measured)"
+    },
+    {
+      "scheme": "OXT",
+      "dataset": "enwiki",
+      "tier": 4,
+      "pairs": 1000000,
+      "tset_bytes": 63000000,
+      "xset_bytes": 3594397,
+      "index_bytes": 66594397,
+      "setup_attempts": 1,
+      "comm_bytes": null,
+      "comm_note": "not measured: upstream's cal_comm_cost is len(pickle.dumps(...)), which is Python serialization overhead rather than a wire-format byte count, so it is not comparable across languages (plan section 5)",
+      "zr_elements": 1000000,
+      "zr_short_encodings": 7818,
+      "canonical_bytes_added": 7844,
+      "search_rounds": 1,
+      "storage_order": "O(n)",
+      "kprp_hidden": false,
+      "ip_hidden": false,
+      "protocol_fields_source": "DORIS_CCS2024.pdf Table 1 (paper-derived, not measured)"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+[package]
+name = "pqcl-chainproof"
+description = "Ethereum receipt-trie inclusion proofs. Lets the Secure Module verify a SearchAuthorised event happened on chain without trusting the node that told it so."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+# ⚠️ Ethereum hashes with **Keccak-256**, the pre-standardisation variant, not
+# SHA3-256. They differ only in the padding byte (0x01 vs 0x06) and produce
+# completely different digests, so using `pqcl_primitives::xof` here would
+# silently fail to reproduce any real chain's roots.
+sha3 = "0.10"
+
+[lints]
+workspace = true

@@ -1,0 +1,23 @@
+[package]
+name = "pqcl-dsse"
+description = "Pi_core: single-keyword dynamic searchable symmetric encryption, forward private and Type-II backward private, from symmetric primitives alone."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-primitives = { path = "../pqcl-primitives" }
+pqcl-ggm = { path = "../pqcl-ggm" }
+# Verified mode (`src/verified.rs`): the 0x03 leaf commits MR(sorted XSet_e), the
+# same promote-never-duplicate tree as Tier 1.
+pqcl-forest = { path = "../pqcl-forest" }
+# Client-side maps (§1q.5): a fast hasher that is still KEYED, randomised per
+# process. Keywords come from evidence, and evidence can be adversarial, so an
+# unkeyed hasher would open a hash-flooding path into ingest.
+ahash = "0.8"
+
+[lints]
+workspace = true

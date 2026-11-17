@@ -1,0 +1,2798 @@
+{
+  "experiment": "exp7-range-latency",
+  "git_sha": "f0641a8e4eeef91ba552dcae3dbddf774343b24c",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.4xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "n/a: symmetric-only on both sides",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [
+    113,
+    114,
+    115,
+    1592590343
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-07T13:55:47Z",
+  "measurements": {
+    "boolean_forms": [
+      {
+        "client_eval_ns": {
+          "iqr_ns": 26150,
+          "max_ns": 1262974,
+          "median_ns": 1197755,
+          "min_ns": 1150850,
+          "n": 10,
+          "p25_ns": 1186065,
+          "p75_ns": 1212215
+        },
+        "form": "w1 AND w2",
+        "hits": 683,
+        "rounds": 2,
+        "total_ns": {
+          "iqr_ns": 368586,
+          "max_ns": 11962806,
+          "median_ns": 11606440,
+          "min_ns": 11393011,
+          "n": 10,
+          "p25_ns": 11430879,
+          "p75_ns": 11799465
+        }
+      },
+      {
+        "client_eval_ns": {
+          "iqr_ns": 45784,
+          "max_ns": 1293484,
+          "median_ns": 1250568,
+          "min_ns": 1180570,
+          "n": 10,
+          "p25_ns": 1212956,
+          "p75_ns": 1258740
+        },
+        "form": "w1 AND (w2 OR w3)",
+        "hits": 2731,
+        "rounds": 2,
+        "total_ns": {
+          "iqr_ns": 271687,
+          "max_ns": 11900227,
+          "median_ns": 11724682,
+          "min_ns": 11428962,
+          "n": 10,
+          "p25_ns": 11579880,
+          "p75_ns": 11851567
+        }
+      },
+      {
+        "client_eval_ns": {
+          "iqr_ns": 67107,
+          "max_ns": 1275419,
+          "median_ns": 1217302,
+          "min_ns": 1143024,
+          "n": 10,
+          "p25_ns": 1200007,
+          "p75_ns": 1267114
+        },
+        "form": "w1 AND NOT w2",
+        "hits": 2048,
+        "rounds": 2,
+        "total_ns": {
+          "iqr_ns": 87607,
+          "max_ns": 11718459,
+          "median_ns": 11635142,
+          "min_ns": 11367473,
+          "n": 10,
+          "p25_ns": 11586021,
+          "p75_ns": 11673628
+        }
+      },
+      {
+        "client_eval_ns": {
+          "iqr_ns": 84176,
+          "max_ns": 3542786,
+          "median_ns": 3405658,
+          "min_ns": 3290377,
+          "n": 10,
+          "p25_ns": 3350919,
+          "p75_ns": 3435095
+        },
+        "cover_size": 5,
+        "form": "w1 AND range",
+        "hits": 412,
+        "rounds": 2,
+        "total_ns": {
+          "iqr_ns": 289731,
+          "max_ns": 19755544,
+          "median_ns": 19410080,
+          "min_ns": 19161189,
+          "n": 10,
+          "p25_ns": 19283277,
+          "p75_ns": 19573008
+        }
+      }
+    ],
+    "boolean_note": "tab:exp7's query-shape rows. client_eval_ns is reported beside the              totals because if the three forms come out near-identical THAT IS              THE RESULT -- the formula never reaches the server (thm:bool) -- and              without isolating the one stage that does depend on the formula a              reader cannot tell that from a harness that varied nothing.",
+    "constraints": {
+      "cold_and_warm_separated": true,
+      "cold_and_warm_separated_reason": "Their search compacts the server index, so a repeated query does far less work. Reporting their warm number against our cold one, or the reverse, would be a fabricated comparison.",
+      "every_value_updated_once": true,
+      "every_value_updated_once_reason": "Zuo'22 Algorithm 2 lines 5-7 return BOTTOM for the whole query if any cover node has no history. A sparse workload would let it answer queries by not answering them -- fast for a reason unrelated to its design. The authors' own setup updates one time for each value."
+    },
+    "domain_note": "Depths are capped at 2^14 because Zuo'22 materialises a bitmap per value in the domain, so the committed 2^32 is not runnable. That is a property of their design and is reported as one, not worked around.",
+    "index_note": "tab:exp7's Index (x) column. The denominator is the keyword-only              token count -- one per value, which is what the 1.00 rows index --              so the ratio is the range cover's expansion and nothing else.              Counted during the build rather than derived from the depth,              because a counted number survives a change to index_keywords.",
+    "index_sizes": [
+      {
+        "depth": 8,
+        "index_ratio_milli": 9000,
+        "keyword_only_tokens": 256,
+        "range_tokens": 2304,
+        "zuo_entries": 2304,
+        "zuo_index_ratio_milli": 9000
+      },
+      {
+        "depth": 10,
+        "index_ratio_milli": 11000,
+        "keyword_only_tokens": 1024,
+        "range_tokens": 11264,
+        "zuo_entries": 11264,
+        "zuo_index_ratio_milli": 11000
+      },
+      {
+        "depth": 12,
+        "index_ratio_milli": 13000,
+        "keyword_only_tokens": 4096,
+        "range_tokens": 53248,
+        "zuo_entries": 53248,
+        "zuo_index_ratio_milli": 13000
+      },
+      {
+        "depth": 14,
+        "index_ratio_milli": 15000,
+        "keyword_only_tokens": 16384,
+        "range_tokens": 245760,
+        "zuo_entries": 245760,
+        "zuo_index_ratio_milli": 15000
+      }
+    ],
+    "median_configuration": {
+      "boolean_forms_measured_at": 4096,
+      "depth": 10,
+      "range_width_pct": 10,
+      "records": 4096
+    },
+    "n_axis_note": "M10 H5: N swept at fixed depth, never tuned; the crossover is reported wherever it lands. Zuo'22's cost carries an N-bit bitmap per cover node, ours the matching postings.",
+    "n_axis_rows": [
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 10,
+          "search_ns": {
+            "iqr_ns": 670,
+            "max_ns": 50874,
+            "median_ns": 37774,
+            "min_ns": 36996,
+            "n": 10,
+            "p25_ns": 37337,
+            "p75_ns": 38007
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 256,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 20851,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 180,
+            "max_ns": 8180,
+            "median_ns": 7843,
+            "min_ns": 7602,
+            "n": 10,
+            "p25_ns": 7695,
+            "p75_ns": 7875
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 102,
+          "search_ns": {
+            "iqr_ns": 5766,
+            "max_ns": 243195,
+            "median_ns": 214912,
+            "min_ns": 207864,
+            "n": 10,
+            "p25_ns": 214342,
+            "p75_ns": 220108
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 256,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 144096,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 480,
+            "max_ns": 48773,
+            "median_ns": 48255,
+            "min_ns": 48006,
+            "n": 10,
+            "p25_ns": 48059,
+            "p75_ns": 48539
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 256,
+          "search_ns": {
+            "iqr_ns": 30486,
+            "max_ns": 1020583,
+            "median_ns": 888588,
+            "min_ns": 871137,
+            "n": 10,
+            "p25_ns": 880896,
+            "p75_ns": 911382
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 256,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 641235,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 11479,
+            "max_ns": 233076,
+            "median_ns": 211338,
+            "min_ns": 210324,
+            "n": 10,
+            "p25_ns": 210801,
+            "p75_ns": 222280
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 10,
+          "search_ns": {
+            "iqr_ns": 249,
+            "max_ns": 46190,
+            "median_ns": 37863,
+            "min_ns": 37479,
+            "n": 10,
+            "p25_ns": 37689,
+            "p75_ns": 37938
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 384,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 22101,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 115,
+            "max_ns": 8203,
+            "median_ns": 7905,
+            "min_ns": 7787,
+            "n": 10,
+            "p25_ns": 7829,
+            "p75_ns": 7944
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 102,
+          "search_ns": {
+            "iqr_ns": 10437,
+            "max_ns": 243044,
+            "median_ns": 210319,
+            "min_ns": 205226,
+            "n": 10,
+            "p25_ns": 205763,
+            "p75_ns": 216200
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 384,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 142960,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 260,
+            "max_ns": 51255,
+            "median_ns": 50544,
+            "min_ns": 50373,
+            "n": 10,
+            "p25_ns": 50435,
+            "p75_ns": 50695
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 384,
+          "search_ns": {
+            "iqr_ns": 22201,
+            "max_ns": 971943,
+            "median_ns": 887973,
+            "min_ns": 865174,
+            "n": 10,
+            "p25_ns": 874467,
+            "p75_ns": 896668
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 384,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 667773,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 432,
+            "max_ns": 242342,
+            "median_ns": 223273,
+            "min_ns": 221892,
+            "n": 10,
+            "p25_ns": 222908,
+            "p75_ns": 223340
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 10,
+          "search_ns": {
+            "iqr_ns": 1752,
+            "max_ns": 51062,
+            "median_ns": 38334,
+            "min_ns": 36920,
+            "n": 10,
+            "p25_ns": 37340,
+            "p75_ns": 39092
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 512,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 21523,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 53,
+            "max_ns": 8890,
+            "median_ns": 8625,
+            "min_ns": 8538,
+            "n": 10,
+            "p25_ns": 8601,
+            "p75_ns": 8654
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 102,
+          "search_ns": {
+            "iqr_ns": 4323,
+            "max_ns": 264378,
+            "median_ns": 214085,
+            "min_ns": 205539,
+            "n": 10,
+            "p25_ns": 210764,
+            "p75_ns": 215087
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 512,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 141291,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 588,
+            "max_ns": 54853,
+            "median_ns": 53009,
+            "min_ns": 52600,
+            "n": 10,
+            "p25_ns": 52809,
+            "p75_ns": 53397
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 512,
+          "search_ns": {
+            "iqr_ns": 50208,
+            "max_ns": 1039335,
+            "median_ns": 926298,
+            "min_ns": 873547,
+            "n": 10,
+            "p25_ns": 881973,
+            "p75_ns": 932181
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 512,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 747085,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 3855,
+            "max_ns": 247792,
+            "median_ns": 247132,
+            "min_ns": 233111,
+            "n": 10,
+            "p25_ns": 243526,
+            "p75_ns": 247381
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 10,
+          "search_ns": {
+            "iqr_ns": 323,
+            "max_ns": 45755,
+            "median_ns": 34833,
+            "min_ns": 34617,
+            "n": 10,
+            "p25_ns": 34655,
+            "p75_ns": 34978
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 768,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 22043,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 154,
+            "max_ns": 9214,
+            "median_ns": 8883,
+            "min_ns": 8759,
+            "n": 10,
+            "p25_ns": 8811,
+            "p75_ns": 8965
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 102,
+          "search_ns": {
+            "iqr_ns": 13749,
+            "max_ns": 240221,
+            "median_ns": 222992,
+            "min_ns": 205765,
+            "n": 10,
+            "p25_ns": 212049,
+            "p75_ns": 225798
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 768,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 163605,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 144,
+            "max_ns": 73455,
+            "median_ns": 60932,
+            "min_ns": 60757,
+            "n": 10,
+            "p25_ns": 60855,
+            "p75_ns": 60999
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 512,
+          "search_ns": {
+            "iqr_ns": 22382,
+            "max_ns": 1022307,
+            "median_ns": 930301,
+            "min_ns": 907992,
+            "n": 10,
+            "p25_ns": 927794,
+            "p75_ns": 950176
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 768,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 829517,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 15613,
+            "max_ns": 278417,
+            "median_ns": 254253,
+            "min_ns": 253606,
+            "n": 10,
+            "p25_ns": 254101,
+            "p75_ns": 269714
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 10,
+          "search_ns": {
+            "iqr_ns": 212,
+            "max_ns": 46913,
+            "median_ns": 37021,
+            "min_ns": 36609,
+            "n": 10,
+            "p25_ns": 36891,
+            "p75_ns": 37103
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 1024,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 23741,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 136,
+            "max_ns": 10560,
+            "median_ns": 10245,
+            "min_ns": 10166,
+            "n": 10,
+            "p25_ns": 10181,
+            "p75_ns": 10317
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 102,
+          "search_ns": {
+            "iqr_ns": 14145,
+            "max_ns": 250090,
+            "median_ns": 217908,
+            "min_ns": 205355,
+            "n": 10,
+            "p25_ns": 209005,
+            "p75_ns": 223150
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 1024,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 168644,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 210,
+            "max_ns": 68172,
+            "median_ns": 67310,
+            "min_ns": 64962,
+            "n": 10,
+            "p25_ns": 67267,
+            "p75_ns": 67477
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 512,
+          "search_ns": {
+            "iqr_ns": 33891,
+            "max_ns": 966439,
+            "median_ns": 930572,
+            "min_ns": 887253,
+            "n": 10,
+            "p25_ns": 908846,
+            "p75_ns": 942737
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 1024,
+        "updates": 1024,
+        "zuo22": {
+          "cold_search_ns": 789979,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 19431,
+            "max_ns": 312683,
+            "median_ns": 296702,
+            "min_ns": 284063,
+            "n": 10,
+            "p25_ns": 286886,
+            "p75_ns": 306317
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 20,
+          "search_ns": {
+            "iqr_ns": 4989,
+            "max_ns": 65916,
+            "median_ns": 51832,
+            "min_ns": 50716,
+            "n": 10,
+            "p25_ns": 51015,
+            "p75_ns": 56004
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 1536,
+        "updates": 1536,
+        "zuo22": {
+          "cold_search_ns": 48454,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 265,
+            "max_ns": 24909,
+            "median_ns": 23765,
+            "min_ns": 23522,
+            "n": 10,
+            "p25_ns": 23662,
+            "p75_ns": 23927
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 204,
+          "search_ns": {
+            "iqr_ns": 32350,
+            "max_ns": 433026,
+            "median_ns": 375089,
+            "min_ns": 365550,
+            "n": 10,
+            "p25_ns": 370196,
+            "p75_ns": 402546
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 1536,
+        "updates": 1536,
+        "zuo22": {
+          "cold_search_ns": 432323,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 5410,
+            "max_ns": 207992,
+            "median_ns": 198917,
+            "min_ns": 198088,
+            "n": 10,
+            "p25_ns": 198672,
+            "p75_ns": 204082
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 768,
+          "search_ns": {
+            "iqr_ns": 31393,
+            "max_ns": 1485525,
+            "median_ns": 1344252,
+            "min_ns": 1305504,
+            "n": 10,
+            "p25_ns": 1324664,
+            "p75_ns": 1356057
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 1536,
+        "updates": 1536,
+        "zuo22": {
+          "cold_search_ns": 1595971,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 18001,
+            "max_ns": 776146,
+            "median_ns": 754841,
+            "min_ns": 698762,
+            "n": 10,
+            "p25_ns": 745922,
+            "p75_ns": 763923
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 20,
+          "search_ns": {
+            "iqr_ns": 439,
+            "max_ns": 70342,
+            "median_ns": 50910,
+            "min_ns": 50760,
+            "n": 10,
+            "p25_ns": 50820,
+            "p75_ns": 51259
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 2048,
+        "updates": 2048,
+        "zuo22": {
+          "cold_search_ns": 54619,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 129,
+            "max_ns": 26396,
+            "median_ns": 25778,
+            "min_ns": 25647,
+            "n": 10,
+            "p25_ns": 25715,
+            "p75_ns": 25844
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 204,
+          "search_ns": {
+            "iqr_ns": 4852,
+            "max_ns": 449348,
+            "median_ns": 377724,
+            "min_ns": 375991,
+            "n": 10,
+            "p25_ns": 376680,
+            "p75_ns": 381532
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 2048,
+        "updates": 2048,
+        "zuo22": {
+          "cold_search_ns": 484466,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 1049,
+            "max_ns": 265877,
+            "median_ns": 233959,
+            "min_ns": 225264,
+            "n": 10,
+            "p25_ns": 233338,
+            "p75_ns": 234387
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 1024,
+          "search_ns": {
+            "iqr_ns": 84379,
+            "max_ns": 2086358,
+            "median_ns": 1824009,
+            "min_ns": 1728199,
+            "n": 10,
+            "p25_ns": 1778002,
+            "p75_ns": 1862381
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 2048,
+        "updates": 2048,
+        "zuo22": {
+          "cold_search_ns": 2392283,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 39269,
+            "max_ns": 1129583,
+            "median_ns": 1075816,
+            "min_ns": 1032777,
+            "n": 10,
+            "p25_ns": 1058105,
+            "p75_ns": 1097374
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 30,
+          "search_ns": {
+            "iqr_ns": 1004,
+            "max_ns": 102546,
+            "median_ns": 72095,
+            "min_ns": 71517,
+            "n": 10,
+            "p25_ns": 71649,
+            "p75_ns": 72653
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 3072,
+        "updates": 3072,
+        "zuo22": {
+          "cold_search_ns": 102885,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 121,
+            "max_ns": 55760,
+            "median_ns": 51816,
+            "min_ns": 51555,
+            "n": 10,
+            "p25_ns": 51783,
+            "p75_ns": 51904
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 306,
+          "search_ns": {
+            "iqr_ns": 37158,
+            "max_ns": 683469,
+            "median_ns": 559479,
+            "min_ns": 546499,
+            "n": 10,
+            "p25_ns": 548349,
+            "p75_ns": 585507
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 3072,
+        "updates": 3072,
+        "zuo22": {
+          "cold_search_ns": 965966,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 19221,
+            "max_ns": 522199,
+            "median_ns": 496056,
+            "min_ns": 480534,
+            "n": 10,
+            "p25_ns": 487625,
+            "p75_ns": 506846
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 1536,
+          "search_ns": {
+            "iqr_ns": 67000,
+            "max_ns": 3114991,
+            "median_ns": 2689581,
+            "min_ns": 2637137,
+            "n": 10,
+            "p25_ns": 2652923,
+            "p75_ns": 2719923
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 3072,
+        "updates": 3072,
+        "zuo22": {
+          "cold_search_ns": 4823775,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 84738,
+            "max_ns": 2462203,
+            "median_ns": 2442945,
+            "min_ns": 2353387,
+            "n": 10,
+            "p25_ns": 2363643,
+            "p75_ns": 2448381
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 40,
+          "search_ns": {
+            "iqr_ns": 945,
+            "max_ns": 127690,
+            "median_ns": 89827,
+            "min_ns": 88770,
+            "n": 10,
+            "p25_ns": 89136,
+            "p75_ns": 90081
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 4096,
+        "updates": 4096,
+        "zuo22": {
+          "cold_search_ns": 166150,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 1898,
+            "max_ns": 97444,
+            "median_ns": 92968,
+            "min_ns": 87735,
+            "n": 10,
+            "p25_ns": 92599,
+            "p75_ns": 94497
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 408,
+          "search_ns": {
+            "iqr_ns": 12322,
+            "max_ns": 917173,
+            "median_ns": 729348,
+            "min_ns": 705302,
+            "n": 10,
+            "p25_ns": 721766,
+            "p75_ns": 734088
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 4096,
+        "updates": 4096,
+        "zuo22": {
+          "cold_search_ns": 1540203,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 33612,
+            "max_ns": 907510,
+            "median_ns": 831847,
+            "min_ns": 807496,
+            "n": 10,
+            "p25_ns": 816291,
+            "p75_ns": 849903
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 2048,
+          "search_ns": {
+            "iqr_ns": 64994,
+            "max_ns": 4034154,
+            "median_ns": 3627895,
+            "min_ns": 3546872,
+            "n": 10,
+            "p25_ns": 3589955,
+            "p75_ns": 3654949
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 4096,
+        "updates": 4096,
+        "zuo22": {
+          "cold_search_ns": 7992569,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 78404,
+            "max_ns": 4503580,
+            "median_ns": 4405748,
+            "min_ns": 4343612,
+            "n": 10,
+            "p25_ns": 4371509,
+            "p75_ns": 4449913
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 60,
+          "search_ns": {
+            "iqr_ns": 12593,
+            "max_ns": 181440,
+            "median_ns": 118029,
+            "min_ns": 117042,
+            "n": 10,
+            "p25_ns": 117403,
+            "p75_ns": 129996
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 6144,
+        "updates": 6144,
+        "zuo22": {
+          "cold_search_ns": 312706,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 427,
+            "max_ns": 223195,
+            "median_ns": 187838,
+            "min_ns": 187567,
+            "n": 10,
+            "p25_ns": 187779,
+            "p75_ns": 188206
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 612,
+          "search_ns": {
+            "iqr_ns": 33379,
+            "max_ns": 1363454,
+            "median_ns": 1098622,
+            "min_ns": 1056643,
+            "n": 10,
+            "p25_ns": 1092550,
+            "p75_ns": 1125929
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 6144,
+        "updates": 6144,
+        "zuo22": {
+          "cold_search_ns": 3215238,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 41445,
+            "max_ns": 1916501,
+            "median_ns": 1866760,
+            "min_ns": 1818590,
+            "n": 10,
+            "p25_ns": 1854123,
+            "p75_ns": 1895568
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 3072,
+          "search_ns": {
+            "iqr_ns": 66537,
+            "max_ns": 6333443,
+            "median_ns": 5551299,
+            "min_ns": 5432787,
+            "n": 10,
+            "p25_ns": 5522105,
+            "p75_ns": 5588642
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 6144,
+        "updates": 6144,
+        "zuo22": {
+          "cold_search_ns": 16697860,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 110544,
+            "max_ns": 9896893,
+            "median_ns": 9770625,
+            "min_ns": 9576239,
+            "n": 10,
+            "p25_ns": 9747821,
+            "p75_ns": 9858365
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 80,
+          "search_ns": {
+            "iqr_ns": 6647,
+            "max_ns": 219285,
+            "median_ns": 161432,
+            "min_ns": 159205,
+            "n": 10,
+            "p25_ns": 160078,
+            "p75_ns": 166725
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 8192,
+        "updates": 8192,
+        "zuo22": {
+          "cold_search_ns": 539279,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 1383,
+            "max_ns": 333875,
+            "median_ns": 325457,
+            "min_ns": 321806,
+            "n": 10,
+            "p25_ns": 324555,
+            "p75_ns": 325938
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 816,
+          "search_ns": {
+            "iqr_ns": 49296,
+            "max_ns": 1746503,
+            "median_ns": 1456323,
+            "min_ns": 1432715,
+            "n": 10,
+            "p25_ns": 1443483,
+            "p75_ns": 1492779
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 8192,
+        "updates": 8192,
+        "zuo22": {
+          "cold_search_ns": 5303056,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 50687,
+            "max_ns": 3408753,
+            "median_ns": 3355136,
+            "min_ns": 3262925,
+            "n": 10,
+            "p25_ns": 3328986,
+            "p75_ns": 3379673
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 4096,
+          "search_ns": {
+            "iqr_ns": 194380,
+            "max_ns": 8524713,
+            "median_ns": 7452820,
+            "min_ns": 7334535,
+            "n": 10,
+            "p25_ns": 7385474,
+            "p75_ns": 7579854
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 8192,
+        "updates": 8192,
+        "zuo22": {
+          "cold_search_ns": 26984919,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 219537,
+            "max_ns": 17008428,
+            "median_ns": 16534869,
+            "min_ns": 16372188,
+            "n": 10,
+            "p25_ns": 16458343,
+            "p75_ns": 16677880
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 120,
+          "search_ns": {
+            "iqr_ns": 16908,
+            "max_ns": 308167,
+            "median_ns": 228797,
+            "min_ns": 218081,
+            "n": 10,
+            "p25_ns": 221308,
+            "p75_ns": 238216
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 12288,
+        "updates": 12288,
+        "zuo22": {
+          "cold_search_ns": 1134063,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 34543,
+            "max_ns": 767460,
+            "median_ns": 723086,
+            "min_ns": 701669,
+            "n": 10,
+            "p25_ns": 715053,
+            "p75_ns": 749596
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 1224,
+          "search_ns": {
+            "iqr_ns": 41608,
+            "max_ns": 2634398,
+            "median_ns": 2150486,
+            "min_ns": 2119415,
+            "n": 10,
+            "p25_ns": 2139264,
+            "p75_ns": 2180872
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 12288,
+        "updates": 12288,
+        "zuo22": {
+          "cold_search_ns": 11584080,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 70093,
+            "max_ns": 7442489,
+            "median_ns": 7380962,
+            "min_ns": 7214718,
+            "n": 10,
+            "p25_ns": 7340613,
+            "p75_ns": 7410706
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 6144,
+          "search_ns": {
+            "iqr_ns": 285625,
+            "max_ns": 13008892,
+            "median_ns": 11584518,
+            "min_ns": 11169690,
+            "n": 10,
+            "p25_ns": 11503527,
+            "p75_ns": 11789152
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 12288,
+        "updates": 12288,
+        "zuo22": {
+          "cold_search_ns": 57902698,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 842177,
+            "max_ns": 38083020,
+            "median_ns": 37029559,
+            "min_ns": 36376425,
+            "n": 10,
+            "p25_ns": 36685286,
+            "p75_ns": 37527463
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 160,
+          "search_ns": {
+            "iqr_ns": 23132,
+            "max_ns": 386355,
+            "median_ns": 285827,
+            "min_ns": 281409,
+            "n": 10,
+            "p25_ns": 284317,
+            "p75_ns": 307449
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 16384,
+        "updates": 16384,
+        "zuo22": {
+          "cold_search_ns": 1977665,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 55856,
+            "max_ns": 1344703,
+            "median_ns": 1292440,
+            "min_ns": 1272801,
+            "n": 10,
+            "p25_ns": 1279206,
+            "p75_ns": 1335062
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 1632,
+          "search_ns": {
+            "iqr_ns": 47300,
+            "max_ns": 3493087,
+            "median_ns": 2911237,
+            "min_ns": 2881521,
+            "n": 10,
+            "p25_ns": 2896336,
+            "p75_ns": 2943636
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 16384,
+        "updates": 16384,
+        "zuo22": {
+          "cold_search_ns": 20104851,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 184574,
+            "max_ns": 13307523,
+            "median_ns": 13152356,
+            "min_ns": 12537567,
+            "n": 10,
+            "p25_ns": 13033840,
+            "p75_ns": 13218414
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 8192,
+          "search_ns": {
+            "iqr_ns": 490284,
+            "max_ns": 17391754,
+            "median_ns": 15683085,
+            "min_ns": 15159963,
+            "n": 10,
+            "p25_ns": 15598981,
+            "p75_ns": 16089265
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 16384,
+        "updates": 16384,
+        "zuo22": {
+          "cold_search_ns": 98901200,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 247007,
+            "max_ns": 66410060,
+            "median_ns": 65448500,
+            "min_ns": 64740729,
+            "n": 10,
+            "p25_ns": 65255090,
+            "p75_ns": 65502097
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 240,
+          "search_ns": {
+            "iqr_ns": 25302,
+            "max_ns": 614810,
+            "median_ns": 424670,
+            "min_ns": 418332,
+            "n": 10,
+            "p25_ns": 418940,
+            "p75_ns": 444242
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 24576,
+        "updates": 24576,
+        "zuo22": {
+          "cold_search_ns": 4154237,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 78124,
+            "max_ns": 2940192,
+            "median_ns": 2807927,
+            "min_ns": 2708702,
+            "n": 10,
+            "p25_ns": 2774718,
+            "p75_ns": 2852842
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 2448,
+          "search_ns": {
+            "iqr_ns": 78399,
+            "max_ns": 5347082,
+            "median_ns": 4421065,
+            "min_ns": 4358705,
+            "n": 10,
+            "p25_ns": 4391925,
+            "p75_ns": 4470324
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 24576,
+        "updates": 24576,
+        "zuo22": {
+          "cold_search_ns": 42147509,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 527852,
+            "max_ns": 29113382,
+            "median_ns": 28577593,
+            "min_ns": 28106303,
+            "n": 10,
+            "p25_ns": 28463699,
+            "p75_ns": 28991551
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 12288,
+          "search_ns": {
+            "iqr_ns": 517796,
+            "max_ns": 25566401,
+            "median_ns": 24111126,
+            "min_ns": 23605132,
+            "n": 10,
+            "p25_ns": 23974427,
+            "p75_ns": 24492223
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 24576,
+        "updates": 24576,
+        "zuo22": {
+          "cold_search_ns": 210682631,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 1086418,
+            "max_ns": 145067560,
+            "median_ns": 143395125,
+            "min_ns": 142417291,
+            "n": 10,
+            "p25_ns": 142699945,
+            "p75_ns": 143786363
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 320,
+          "search_ns": {
+            "iqr_ns": 45995,
+            "max_ns": 758752,
+            "median_ns": 586470,
+            "min_ns": 554752,
+            "n": 10,
+            "p25_ns": 561284,
+            "p75_ns": 607279
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 32768,
+        "updates": 32768,
+        "zuo22": {
+          "cold_search_ns": 7260862,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 110456,
+            "max_ns": 5204934,
+            "median_ns": 5044899,
+            "min_ns": 4927800,
+            "n": 10,
+            "p25_ns": 4990386,
+            "p75_ns": 5100842
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 3264,
+          "search_ns": {
+            "iqr_ns": 134441,
+            "max_ns": 7280611,
+            "median_ns": 5942889,
+            "min_ns": 5801086,
+            "n": 10,
+            "p25_ns": 5860819,
+            "p75_ns": 5995260
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 32768,
+        "updates": 32768,
+        "zuo22": {
+          "cold_search_ns": 74020647,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 427906,
+            "max_ns": 52718110,
+            "median_ns": 51053764,
+            "min_ns": 50284659,
+            "n": 10,
+            "p25_ns": 50826448,
+            "p75_ns": 51254354
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 16384,
+          "search_ns": {
+            "iqr_ns": 267347,
+            "max_ns": 34778563,
+            "median_ns": 33704972,
+            "min_ns": 33130921,
+            "n": 10,
+            "p25_ns": 33561037,
+            "p75_ns": 33828384
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 32768,
+        "updates": 32768,
+        "zuo22": {
+          "cold_search_ns": 370122348,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 1363014,
+            "max_ns": 259001814,
+            "median_ns": 257064747,
+            "min_ns": 254716859,
+            "n": 10,
+            "p25_ns": 256203805,
+            "p75_ns": 257566819
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 480,
+          "search_ns": {
+            "iqr_ns": 43165,
+            "max_ns": 1174696,
+            "median_ns": 856320,
+            "min_ns": 823689,
+            "n": 10,
+            "p25_ns": 837935,
+            "p75_ns": 881100
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 49152,
+        "updates": 49152,
+        "zuo22": {
+          "cold_search_ns": 15950086,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 107697,
+            "max_ns": 11477892,
+            "median_ns": 11263420,
+            "min_ns": 11180976,
+            "n": 10,
+            "p25_ns": 11201703,
+            "p75_ns": 11309400
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 4896,
+          "search_ns": {
+            "iqr_ns": 158247,
+            "max_ns": 10798423,
+            "median_ns": 9248773,
+            "min_ns": 9065827,
+            "n": 10,
+            "p25_ns": 9154182,
+            "p75_ns": 9312429
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 49152,
+        "updates": 49152,
+        "zuo22": {
+          "cold_search_ns": 162980797,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 1463618,
+            "max_ns": 116294010,
+            "median_ns": 114120806,
+            "min_ns": 112730312,
+            "n": 10,
+            "p25_ns": 113514636,
+            "p75_ns": 114978254
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 24576,
+          "search_ns": {
+            "iqr_ns": 1687932,
+            "max_ns": 52666458,
+            "median_ns": 50689251,
+            "min_ns": 50369792,
+            "n": 10,
+            "p25_ns": 50423328,
+            "p75_ns": 52111260
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 49152,
+        "updates": 49152,
+        "zuo22": {
+          "cold_search_ns": 807138266,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 3424811,
+            "max_ns": 579291409,
+            "median_ns": 571230593,
+            "min_ns": 569170211,
+            "n": 10,
+            "p25_ns": 570089849,
+            "p75_ns": 573514660
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 640,
+          "search_ns": {
+            "iqr_ns": 39251,
+            "max_ns": 1486322,
+            "median_ns": 1149088,
+            "min_ns": 1095839,
+            "n": 10,
+            "p25_ns": 1140081,
+            "p75_ns": 1179332
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "records": 65536,
+        "updates": 65536,
+        "zuo22": {
+          "cold_search_ns": 27774613,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 204581,
+            "max_ns": 20183613,
+            "median_ns": 19827657,
+            "min_ns": 19443203,
+            "n": 10,
+            "p25_ns": 19690575,
+            "p75_ns": 19895156
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 6528,
+          "search_ns": {
+            "iqr_ns": 183757,
+            "max_ns": 14076416,
+            "median_ns": 12253070,
+            "min_ns": 11919741,
+            "n": 10,
+            "p25_ns": 12202291,
+            "p75_ns": 12386048
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "records": 65536,
+        "updates": 65536,
+        "zuo22": {
+          "cold_search_ns": 281964840,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 1300979,
+            "max_ns": 203663886,
+            "median_ns": 202078215,
+            "min_ns": 200964527,
+            "n": 10,
+            "p25_ns": 201731866,
+            "p75_ns": 203032845
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 32768,
+          "search_ns": {
+            "iqr_ns": 432161,
+            "max_ns": 69493516,
+            "median_ns": 69106212,
+            "min_ns": 68290002,
+            "n": 10,
+            "p25_ns": 69039562,
+            "p75_ns": 69471723
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "records": 65536,
+        "updates": 65536,
+        "zuo22": {
+          "cold_search_ns": 1421569600,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 2235239,
+            "max_ns": 1017748513,
+            "median_ns": 1012742109,
+            "min_ns": 1009148802,
+            "n": 10,
+            "p25_ns": 1011470708,
+            "p75_ns": 1013705947
+          }
+        }
+      }
+    ],
+    "records": 512,
+    "records_note": "Both schemes index exactly RECORDS documents. Zuo'22's bitmap width is fixed at that value, so ours must map values onto the same document set or the two are answering queries over different corpora -- which an earlier version of this harness did, giving our side up to 32x more results for the same range.",
+    "rows": [
+      {
+        "cover_size": 1,
+        "depth": 8,
+        "domain": 256,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 2,
+          "search_ns": {
+            "iqr_ns": 185,
+            "max_ns": 17500,
+            "median_ns": 12702,
+            "min_ns": 12547,
+            "n": 10,
+            "p25_ns": 12627,
+            "p75_ns": 12812
+          }
+        },
+        "range": [
+          64,
+          65
+        ],
+        "range_width_pct": 1,
+        "zuo22": {
+          "cold_search_ns": 5906,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 121,
+            "max_ns": 3287,
+            "median_ns": 2875,
+            "min_ns": 2825,
+            "n": 10,
+            "p25_ns": 2860,
+            "p75_ns": 2981
+          }
+        }
+      },
+      {
+        "cover_size": 3,
+        "depth": 8,
+        "domain": 256,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 25,
+          "search_ns": {
+            "iqr_ns": 5704,
+            "max_ns": 75258,
+            "median_ns": 71296,
+            "min_ns": 68729,
+            "n": 10,
+            "p25_ns": 69073,
+            "p75_ns": 74777
+          }
+        },
+        "range": [
+          64,
+          88
+        ],
+        "range_width_pct": 10,
+        "zuo22": {
+          "cold_search_ns": 37289,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 289,
+            "max_ns": 18693,
+            "median_ns": 18187,
+            "min_ns": 18045,
+            "n": 10,
+            "p25_ns": 18083,
+            "p75_ns": 18372
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 8,
+        "domain": 256,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 128,
+          "search_ns": {
+            "iqr_ns": 8891,
+            "max_ns": 266826,
+            "median_ns": 232737,
+            "min_ns": 230514,
+            "n": 10,
+            "p25_ns": 231345,
+            "p75_ns": 240236
+          }
+        },
+        "range": [
+          64,
+          191
+        ],
+        "range_width_pct": 50,
+        "zuo22": {
+          "cold_search_ns": 167412,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 1751,
+            "max_ns": 65878,
+            "median_ns": 62291,
+            "min_ns": 61253,
+            "n": 10,
+            "p25_ns": 61415,
+            "p75_ns": 63166
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 10,
+          "search_ns": {
+            "iqr_ns": 2207,
+            "max_ns": 49274,
+            "median_ns": 34856,
+            "min_ns": 34643,
+            "n": 10,
+            "p25_ns": 34759,
+            "p75_ns": 36966
+          }
+        },
+        "range": [
+          256,
+          265
+        ],
+        "range_width_pct": 1,
+        "zuo22": {
+          "cold_search_ns": 18713,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 61,
+            "max_ns": 8332,
+            "median_ns": 8153,
+            "min_ns": 8115,
+            "n": 10,
+            "p25_ns": 8139,
+            "p75_ns": 8200
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 102,
+          "search_ns": {
+            "iqr_ns": 1247,
+            "max_ns": 323396,
+            "median_ns": 206770,
+            "min_ns": 205493,
+            "n": 10,
+            "p25_ns": 206402,
+            "p75_ns": 207649
+          }
+        },
+        "range": [
+          256,
+          357
+        ],
+        "range_width_pct": 10,
+        "zuo22": {
+          "cold_search_ns": 142585,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 153,
+            "max_ns": 58671,
+            "median_ns": 52882,
+            "min_ns": 52749,
+            "n": 10,
+            "p25_ns": 52860,
+            "p75_ns": 53013
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 10,
+        "domain": 1024,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 512,
+          "search_ns": {
+            "iqr_ns": 57828,
+            "max_ns": 1011048,
+            "median_ns": 899723,
+            "min_ns": 886156,
+            "n": 10,
+            "p25_ns": 890857,
+            "p75_ns": 948685
+          }
+        },
+        "range": [
+          256,
+          767
+        ],
+        "range_width_pct": 50,
+        "zuo22": {
+          "cold_search_ns": 713243,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 9671,
+            "max_ns": 250144,
+            "median_ns": 244960,
+            "min_ns": 232849,
+            "n": 10,
+            "p25_ns": 237778,
+            "p75_ns": 247449
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 12,
+        "domain": 4096,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 40,
+          "search_ns": {
+            "iqr_ns": 3377,
+            "max_ns": 124905,
+            "median_ns": 91742,
+            "min_ns": 88965,
+            "n": 10,
+            "p25_ns": 89537,
+            "p75_ns": 92914
+          }
+        },
+        "range": [
+          1024,
+          1063
+        ],
+        "range_width_pct": 1,
+        "zuo22": {
+          "cold_search_ns": 71598,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 313,
+            "max_ns": 24345,
+            "median_ns": 23592,
+            "min_ns": 23528,
+            "n": 10,
+            "p25_ns": 23562,
+            "p75_ns": 23875
+          }
+        }
+      },
+      {
+        "cover_size": 5,
+        "depth": 12,
+        "domain": 4096,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 409,
+          "search_ns": {
+            "iqr_ns": 24090,
+            "max_ns": 936694,
+            "median_ns": 778648,
+            "min_ns": 742787,
+            "n": 10,
+            "p25_ns": 760506,
+            "p75_ns": 784596
+          }
+        },
+        "range": [
+          1024,
+          1432
+        ],
+        "range_width_pct": 10,
+        "zuo22": {
+          "cold_search_ns": 644005,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 317,
+            "max_ns": 205764,
+            "median_ns": 192244,
+            "min_ns": 191852,
+            "n": 10,
+            "p25_ns": 192095,
+            "p75_ns": 192412
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 12,
+        "domain": 4096,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 512,
+          "search_ns": {
+            "iqr_ns": 54383,
+            "max_ns": 4146647,
+            "median_ns": 3568265,
+            "min_ns": 3448590,
+            "n": 10,
+            "p25_ns": 3538371,
+            "p75_ns": 3592754
+          }
+        },
+        "range": [
+          1024,
+          3071
+        ],
+        "range_width_pct": 50,
+        "zuo22": {
+          "cold_search_ns": 3184490,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 15818,
+            "max_ns": 988901,
+            "median_ns": 915940,
+            "min_ns": 894648,
+            "n": 10,
+            "p25_ns": 906149,
+            "p75_ns": 921967
+          }
+        }
+      },
+      {
+        "cover_size": 4,
+        "depth": 14,
+        "domain": 16384,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 163,
+          "search_ns": {
+            "iqr_ns": 9855,
+            "max_ns": 430068,
+            "median_ns": 315329,
+            "min_ns": 309889,
+            "n": 10,
+            "p25_ns": 311769,
+            "p75_ns": 321624
+          }
+        },
+        "range": [
+          4096,
+          4258
+        ],
+        "range_width_pct": 1,
+        "zuo22": {
+          "cold_search_ns": 270138,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 2085,
+            "max_ns": 90250,
+            "median_ns": 85089,
+            "min_ns": 84795,
+            "n": 10,
+            "p25_ns": 84923,
+            "p75_ns": 87008
+          }
+        }
+      },
+      {
+        "cover_size": 6,
+        "depth": 14,
+        "domain": 16384,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 512,
+          "search_ns": {
+            "iqr_ns": 70944,
+            "max_ns": 3640300,
+            "median_ns": 2874041,
+            "min_ns": 2810920,
+            "n": 10,
+            "p25_ns": 2833484,
+            "p75_ns": 2904428
+          }
+        },
+        "range": [
+          4096,
+          5733
+        ],
+        "range_width_pct": 10,
+        "zuo22": {
+          "cold_search_ns": 2800665,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 15279,
+            "max_ns": 807716,
+            "median_ns": 745656,
+            "min_ns": 731078,
+            "n": 10,
+            "p25_ns": 744265,
+            "p75_ns": 759544
+          }
+        }
+      },
+      {
+        "cover_size": 2,
+        "depth": 14,
+        "domain": 16384,
+        "pi_range": {
+          "cold_equals_warm": true,
+          "cold_equals_warm_reason": "Our search does not mutate the index, so there is no cold/warm distinction to report. Stated so the asymmetry with Zuo'22 is visible rather than looking like an omission.",
+          "destructive": false,
+          "hits": 512,
+          "search_ns": {
+            "iqr_ns": 457883,
+            "max_ns": 16978725,
+            "median_ns": 14785081,
+            "min_ns": 14479668,
+            "n": 10,
+            "p25_ns": 14601060,
+            "p75_ns": 15058943
+          }
+        },
+        "range": [
+          4096,
+          12287
+        ],
+        "range_width_pct": 50,
+        "zuo22": {
+          "cold_search_ns": 14238846,
+          "destructive": true,
+          "destructive_reason": "Algorithm 2's server deletes every entry it walked and writes back one summary, 'in order to save the server storage'. The first search is therefore a different measurement from every later one.",
+          "returned_bottom": false,
+          "warm_search_ns": {
+            "iqr_ns": 58898,
+            "max_ns": 3922120,
+            "median_ns": 3822364,
+            "min_ns": 3713170,
+            "n": 10,
+            "p25_ns": 3785714,
+            "p75_ns": 3844612
+          }
+        }
+      }
+    ]
+  }
+}

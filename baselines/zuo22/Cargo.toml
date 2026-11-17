@@ -1,0 +1,19 @@
+[package]
+name = "baseline-zuo22"
+description = "Faithful reimplementation of FBDSSE-RQ (Zuo et al., IEEE TDSC 2022). A baseline, never part of the system under test."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+# H1, H2 and H3 are random oracles in the paper. SHAKE256 is the system XOF and
+# is the only one of ours with the arbitrary output length H3 needs — it must
+# produce a full y-bit one-time key. See ../UPGRADES.md.
+pqcl-primitives = { path = "../../crates/pqcl-primitives" }
+rand = "0.8"
+
+[lints]
+workspace = true

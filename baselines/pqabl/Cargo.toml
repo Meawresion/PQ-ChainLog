@@ -1,0 +1,19 @@
+[package]
+name = "baseline-pqabl"
+description = "PQ-ABL's per-epoch Merkle commitment and epoch validation (Fugkeaw et al., IEEE TCC 2026), the integrity half only. A baseline, never part of the system under test."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+flate2 = "1"
+# The paper hashes with SHA3-256. Every Exp. 2 arm hashes with the SHAKE256 our
+# system uses, through the same crate and version, so the table compares
+# structures rather than hash functions (UPGRADES.md).
+tiny-keccak = { version = "2.0.2", features = ["shake"] }
+
+[lints]
+workspace = true

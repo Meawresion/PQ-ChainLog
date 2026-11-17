@@ -1,0 +1,19 @@
+[package]
+name = "baseline-mdrsse"
+description = "Faithful reimplementation of MDRSSE (Kasra Kermanshahi et al., Information Sciences 652, 2024, art. 119773), one dimension, static. A baseline, never part of the system under test."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+# `F`, keyed AES-256: ODXT's, as for every other comparator port.
+baseline-odxt = { path = "../odxt" }
+# `Π`, the IND-CPA scheme for the records: AES-256-GCM (their Java used the JDK's
+# AES; UPGRADES.md).
+aes-gcm = { version = "0.10", features = ["aes"] }
+
+[lints]
+workspace = true

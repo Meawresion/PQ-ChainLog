@@ -1,0 +1,42 @@
+# Build output
+target/
+**/target/
+# Cargo.lock is tracked on purpose: every build runs with --locked.
+
+# Datasets: download scripts, manifests and notes only, never the data.
+datasets/**
+!datasets/
+!datasets/**/
+!datasets/**/*.sh
+!datasets/**/*.py
+!datasets/**/*.toml
+!datasets/*.sha256
+!datasets/**/*.md
+
+# Chain state and generated validator keys (private keys: never commit them)
+besu/**/data/
+besu/**/database/
+besu/networkFiles/
+
+# Foundry build output
+contracts/out/
+contracts/cache/
+
+# Enclave images, keys and secrets
+*.eif
+.env
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editors and OS
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+desktop.ini

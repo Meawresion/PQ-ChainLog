@@ -1,0 +1,91 @@
+{
+  "provenance": {
+    "upstream": "github.com/CDSecLab/Doris",
+    "upstream_commit": "61907c60910e159830009051c32fef077274c6e1",
+    "stack": {
+      "ubuntu": "20.04",
+      "python": "Python 3.8.10",
+      "pbc": "0.5.14",
+      "pypbc": "c518d6ff074f538080c5794924f83ee441ed44ea",
+      "bitarray": "=2.8.3",
+      "mmh3": "=4.0.1",
+      "pycryptodome": "=3.19.0",
+      "Pympler": "=1.1"
+    },
+    "python": "3.8.10",
+    "bloom_fpr": 1e-06,
+    "tset_expansion_k": 2,
+    "note": "Structural metrics only. No wall-clock figure is produced or permitted from this baseline: plan \u00a75 restricts a Python implementation to language-independent axes."
+  },
+  "rows": [
+    {
+      "scheme": "OXT",
+      "dataset": "enron",
+      "tier": 4,
+      "pairs": 1000000,
+      "tset_bytes": 62992127,
+      "xset_bytes": 3594397,
+      "index_bytes": 66586524,
+      "setup_attempts": 1,
+      "comm_bytes": null,
+      "comm_note": "not measured: upstream's cal_comm_cost is len(pickle.dumps(...)), which is Python serialization overhead rather than a wire-format byte count, so it is not comparable across languages (plan section 5)",
+      "search_rounds": 1,
+      "storage_order": "O(n)",
+      "kprp_hidden": false,
+      "ip_hidden": false,
+      "protocol_fields_source": "DORIS_CCS2024.pdf Table 1 (paper-derived, not measured)"
+    },
+    {
+      "scheme": "HXT",
+      "dataset": "enron",
+      "tier": 4,
+      "pairs": 1000000,
+      "tset_bytes": 62992051,
+      "xset_bytes": 920165632,
+      "index_bytes": 983157683,
+      "setup_attempts": 1,
+      "comm_bytes": null,
+      "comm_note": "not measured: upstream's cal_comm_cost is len(pickle.dumps(...)), which is Python serialization overhead rather than a wire-format byte count, so it is not comparable across languages (plan section 5)",
+      "search_rounds": 2,
+      "storage_order": "O(n)",
+      "kprp_hidden": true,
+      "ip_hidden": false,
+      "protocol_fields_source": "DORIS_CCS2024.pdf Table 1 (paper-derived, not measured)"
+    },
+    {
+      "scheme": "ConjFilter",
+      "dataset": "enron",
+      "tier": 4,
+      "pairs": 1000000,
+      "tset_bytes": 107000000,
+      "xset_bytes": 665854464,
+      "index_bytes": 772854464,
+      "setup_attempts": 1,
+      "comm_bytes": null,
+      "comm_note": "not measured: upstream's cal_comm_cost is len(pickle.dumps(...)), which is Python serialization overhead rather than a wire-format byte count, so it is not comparable across languages (plan section 5)",
+      "search_rounds": 1,
+      "storage_order": "O(N)",
+      "kprp_hidden": false,
+      "ip_hidden": true,
+      "protocol_fields_source": "DORIS_CCS2024.pdf Table 1 (paper-derived, not measured)"
+    },
+    {
+      "scheme": "Doris",
+      "dataset": "enron",
+      "tier": 4,
+      "pairs": 1000000,
+      "tset_bytes": 41000000,
+      "xset_bytes": 818997696,
+      "index_bytes": 859997696,
+      "setup_attempts": 1,
+      "comm_bytes": null,
+      "comm_note": "not measured: upstream's cal_comm_cost is len(pickle.dumps(...)), which is Python serialization overhead rather than a wire-format byte count, so it is not comparable across languages (plan section 5)",
+      "search_rounds": 1,
+      "storage_order": "O(N)",
+      "kprp_hidden": true,
+      "ip_hidden": true,
+      "protocol_fields_source": "DORIS_CCS2024.pdf Table 1 (paper-derived, not measured)"
+    }
+  ],
+  "SUPERSEDED": "Pre-canonicalisation (2026-09-13): these tset_bytes sum MINIMAL-LENGTH field-element encodings, a Python artifact that understates OXT and HXT. The tell is that they are not round -- OXT reads 62992127 where the canonical run gives exactly 63000000 (63 B/entry x 10^6, correction canon+7894). There is also no determinism evidence and no aws_exempt marker, so the pipeline refuses it anyway. Kept so the correction stays visible. DO NOT QUOTE. Regenerate on AWS: see implementation-plan.md and baselines/doris/README.md."
+}

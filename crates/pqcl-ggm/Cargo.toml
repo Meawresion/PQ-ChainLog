@@ -1,0 +1,16 @@
+[package]
+name = "pqcl-ggm"
+description = "GGM range-constrained PRF (Diana). Used twice: over the counter space in Pi_core, and over the writer-identifier space for cryptographic writer selection."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-primitives = { path = "../pqcl-primitives" }
+zeroize = { version = "1.8", features = ["derive"] }
+
+[lints]
+workspace = true

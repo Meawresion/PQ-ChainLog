@@ -1,0 +1,904 @@
+{
+  "experiment": "exp9redact",
+  "git_sha": "f0641a8e4eeef91ba552dcae3dbddf774343b24c",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.4xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "ML-DSA-65 via liboqs",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [
+    614106
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-07T15:57:35Z",
+  "measurements": {
+    "beta": 256,
+    "cases": [
+      {
+        "documents": 182,
+        "pairs": 1000,
+        "query": [
+          "gas",
+          "north"
+        ],
+        "rows": {
+          "odxt_del": {
+            "erase_ns": {
+              "iqr_ns": 806,
+              "max_ns": 148188,
+              "median_ns": 141314,
+              "min_ns": 139933,
+              "n": 10,
+              "p25_ns": 140873,
+              "p75_ns": 141679
+            },
+            "residual": [
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5
+            ],
+            "search_after_ns": {
+              "iqr_ns": 5226,
+              "max_ns": 350126,
+              "median_ns": 339186,
+              "min_ns": 336925,
+              "n": 10,
+              "p25_ns": 338356,
+              "p75_ns": 343582
+            }
+          },
+          "odxt_rebuild": {
+            "erase_ns": {
+              "iqr_ns": 75843,
+              "max_ns": 28668095,
+              "median_ns": 28478255,
+              "min_ns": 28372064,
+              "n": 10,
+              "p25_ns": 28441653,
+              "p75_ns": 28517496
+            },
+            "residual": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "search_after_ns": {
+              "iqr_ns": 1828,
+              "max_ns": 242562,
+              "median_ns": 226445,
+              "min_ns": 222560,
+              "n": 10,
+              "p25_ns": 225624,
+              "p75_ns": 227452
+            }
+          },
+          "ours_full": {
+            "erase_ns": {
+              "iqr_ns": 22136,
+              "max_ns": 599869,
+              "median_ns": 574995,
+              "min_ns": 562162,
+              "n": 10,
+              "p25_ns": 565954,
+              "p75_ns": 588090
+            },
+            "residual": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "search_after_ns": {
+              "iqr_ns": 874,
+              "max_ns": 31582,
+              "median_ns": 30009,
+              "min_ns": 29224,
+              "n": 10,
+              "p25_ns": 29568,
+              "p75_ns": 30442
+            }
+          },
+          "ours_payload": {
+            "erase_ns": {
+              "iqr_ns": 3709,
+              "max_ns": 64878,
+              "median_ns": 54857,
+              "min_ns": 53442,
+              "n": 10,
+              "p25_ns": 54356,
+              "p75_ns": 58065
+            },
+            "residual": [
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5
+            ],
+            "search_after_ns": {
+              "iqr_ns": 1862,
+              "max_ns": 36002,
+              "median_ns": 30835,
+              "min_ns": 29426,
+              "n": 10,
+              "p25_ns": 29848,
+              "p75_ns": 31710
+            }
+          },
+          "ours_payload_index": {
+            "erase_ns": {
+              "iqr_ns": 1332,
+              "max_ns": 69462,
+              "median_ns": 65135,
+              "min_ns": 63155,
+              "n": 10,
+              "p25_ns": 64737,
+              "p75_ns": 66069
+            },
+            "residual": [
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5,
+              5
+            ],
+            "search_after_ns": {
+              "iqr_ns": 853,
+              "max_ns": 32019,
+              "median_ns": 31312,
+              "min_ns": 30075,
+              "n": 10,
+              "p25_ns": 30855,
+              "p75_ns": 31708
+            }
+          }
+        },
+        "sweep": [],
+        "target_document": 72,
+        "target_keywords": 5,
+        "tier": 1
+      },
+      {
+        "documents": 1348,
+        "pairs": 10000,
+        "query": [
+          "enron",
+          "gas"
+        ],
+        "rows": {
+          "odxt_del": {
+            "erase_ns": {
+              "iqr_ns": 8827,
+              "max_ns": 185311,
+              "median_ns": 170076,
+              "min_ns": 169417,
+              "n": 10,
+              "p25_ns": 169561,
+              "p75_ns": 178388
+            },
+            "residual": [
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6
+            ],
+            "search_after_ns": {
+              "iqr_ns": 34512,
+              "max_ns": 6080016,
+              "median_ns": 5984964,
+              "min_ns": 5879238,
+              "n": 10,
+              "p25_ns": 5970069,
+              "p75_ns": 6004581
+            }
+          },
+          "odxt_rebuild": {
+            "erase_ns": {
+              "iqr_ns": 1158557,
+              "max_ns": 286677989,
+              "median_ns": 285192532,
+              "min_ns": 284335130,
+              "n": 10,
+              "p25_ns": 284648304,
+              "p75_ns": 285806861
+            },
+            "residual": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "search_after_ns": {
+              "iqr_ns": 76248,
+              "max_ns": 5973611,
+              "median_ns": 5859332,
+              "min_ns": 5711210,
+              "n": 10,
+              "p25_ns": 5852927,
+              "p75_ns": 5929175
+            }
+          },
+          "ours_full": {
+            "erase_ns": {
+              "iqr_ns": 36330,
+              "max_ns": 5414805,
+              "median_ns": 5315297,
+              "min_ns": 5269920,
+              "n": 10,
+              "p25_ns": 5295789,
+              "p75_ns": 5332119
+            },
+            "residual": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "search_after_ns": {
+              "iqr_ns": 3727,
+              "max_ns": 308218,
+              "median_ns": 281029,
+              "min_ns": 274392,
+              "n": 10,
+              "p25_ns": 279205,
+              "p75_ns": 282932
+            }
+          },
+          "ours_payload": {
+            "erase_ns": {
+              "iqr_ns": 2539,
+              "max_ns": 76510,
+              "median_ns": 67089,
+              "min_ns": 63020,
+              "n": 10,
+              "p25_ns": 66625,
+              "p75_ns": 69164
+            },
+            "residual": [
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6
+            ],
+            "search_after_ns": {
+              "iqr_ns": 7804,
+              "max_ns": 357797,
+              "median_ns": 350394,
+              "min_ns": 330451,
+              "n": 10,
+              "p25_ns": 346598,
+              "p75_ns": 354402
+            }
+          },
+          "ours_payload_index": {
+            "erase_ns": {
+              "iqr_ns": 6262,
+              "max_ns": 91113,
+              "median_ns": 87627,
+              "min_ns": 79720,
+              "n": 10,
+              "p25_ns": 84050,
+              "p75_ns": 90312
+            },
+            "residual": [
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6
+            ],
+            "search_after_ns": {
+              "iqr_ns": 8778,
+              "max_ns": 360079,
+              "median_ns": 355899,
+              "min_ns": 347477,
+              "n": 10,
+              "p25_ns": 350378,
+              "p75_ns": 359156
+            }
+          }
+        },
+        "sweep": [],
+        "target_document": 448,
+        "target_keywords": 6,
+        "tier": 2
+      },
+      {
+        "documents": 12714,
+        "pairs": 100000,
+        "query": [
+          "enron",
+          "john"
+        ],
+        "rows": {
+          "odxt_del": {
+            "erase_ns": {
+              "iqr_ns": 5983,
+              "max_ns": 195225,
+              "median_ns": 179478,
+              "min_ns": 177383,
+              "n": 10,
+              "p25_ns": 178058,
+              "p75_ns": 184041
+            },
+            "residual": [
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6
+            ],
+            "search_after_ns": {
+              "iqr_ns": 352998,
+              "max_ns": 55266172,
+              "median_ns": 54932550,
+              "min_ns": 54634649,
+              "n": 10,
+              "p25_ns": 54829546,
+              "p75_ns": 55182544
+            }
+          },
+          "odxt_rebuild": {
+            "erase_ns": {
+              "iqr_ns": 1324905,
+              "max_ns": 2877279030,
+              "median_ns": 2856613505,
+              "min_ns": 2854889110,
+              "n": 10,
+              "p25_ns": 2855922630,
+              "p75_ns": 2857247535
+            },
+            "residual": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "search_after_ns": {
+              "iqr_ns": 274521,
+              "max_ns": 55176417,
+              "median_ns": 54914283,
+              "min_ns": 54536967,
+              "n": 10,
+              "p25_ns": 54808531,
+              "p75_ns": 55083052
+            }
+          },
+          "ours_full": {
+            "erase_ns": {
+              "iqr_ns": 332472,
+              "max_ns": 55134621,
+              "median_ns": 54343907,
+              "min_ns": 52749907,
+              "n": 10,
+              "p25_ns": 54200156,
+              "p75_ns": 54532628
+            },
+            "residual": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "search_after_ns": {
+              "iqr_ns": 44745,
+              "max_ns": 2677035,
+              "median_ns": 2623529,
+              "min_ns": 2561804,
+              "n": 10,
+              "p25_ns": 2616084,
+              "p75_ns": 2660829
+            }
+          },
+          "ours_payload": {
+            "erase_ns": {
+              "iqr_ns": 5190,
+              "max_ns": 79197,
+              "median_ns": 72341,
+              "min_ns": 68453,
+              "n": 10,
+              "p25_ns": 70430,
+              "p75_ns": 75620
+            },
+            "residual": [
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6
+            ],
+            "search_after_ns": {
+              "iqr_ns": 64543,
+              "max_ns": 3153397,
+              "median_ns": 3107627,
+              "min_ns": 3022048,
+              "n": 10,
+              "p25_ns": 3078010,
+              "p75_ns": 3142553
+            }
+          },
+          "ours_payload_index": {
+            "erase_ns": {
+              "iqr_ns": 7973,
+              "max_ns": 211682,
+              "median_ns": 198128,
+              "min_ns": 193260,
+              "n": 10,
+              "p25_ns": 196171,
+              "p75_ns": 204144
+            },
+            "residual": [
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6
+            ],
+            "search_after_ns": {
+              "iqr_ns": 29003,
+              "max_ns": 3139988,
+              "median_ns": 3064274,
+              "min_ns": 3024880,
+              "n": 10,
+              "p25_ns": 3054116,
+              "p75_ns": 3083119
+            }
+          }
+        },
+        "sweep": [
+          {
+            "k": 1,
+            "ours_full": {
+              "erase_ns": {
+                "iqr_ns": 1633434,
+                "max_ns": 54479106,
+                "median_ns": 54154133,
+                "min_ns": 52155104,
+                "n": 10,
+                "p25_ns": 52687263,
+                "p75_ns": 54320697
+              },
+              "residual": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "search_after_ns": {
+                "iqr_ns": 0,
+                "max_ns": 0,
+                "median_ns": 0,
+                "min_ns": 0,
+                "n": 10,
+                "p25_ns": 0,
+                "p75_ns": 0
+              }
+            }
+          },
+          {
+            "k": 10,
+            "ours_full": {
+              "erase_ns": {
+                "iqr_ns": 314282,
+                "max_ns": 54766678,
+                "median_ns": 54299409,
+                "min_ns": 53842188,
+                "n": 10,
+                "p25_ns": 54181520,
+                "p75_ns": 54495802
+              },
+              "residual": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "search_after_ns": {
+                "iqr_ns": 0,
+                "max_ns": 0,
+                "median_ns": 0,
+                "min_ns": 0,
+                "n": 10,
+                "p25_ns": 0,
+                "p75_ns": 0
+              }
+            }
+          },
+          {
+            "k": 100,
+            "ours_full": {
+              "erase_ns": {
+                "iqr_ns": 245249,
+                "max_ns": 60207323,
+                "median_ns": 59847991,
+                "min_ns": 59516619,
+                "n": 10,
+                "p25_ns": 59686132,
+                "p75_ns": 59931381
+              },
+              "residual": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "search_after_ns": {
+                "iqr_ns": 0,
+                "max_ns": 0,
+                "median_ns": 0,
+                "min_ns": 0,
+                "n": 10,
+                "p25_ns": 0,
+                "p75_ns": 0
+              }
+            }
+          },
+          {
+            "k": 1000,
+            "ours_full": {
+              "erase_ns": {
+                "iqr_ns": 1085283,
+                "max_ns": 111057974,
+                "median_ns": 108211230,
+                "min_ns": 107133008,
+                "n": 10,
+                "p25_ns": 107464089,
+                "p75_ns": 108549372
+              },
+              "residual": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "search_after_ns": {
+                "iqr_ns": 0,
+                "max_ns": 0,
+                "median_ns": 0,
+                "min_ns": 0,
+                "n": 10,
+                "p25_ns": 0,
+                "p75_ns": 0
+              }
+            }
+          }
+        ],
+        "target_document": 4096,
+        "target_keywords": 6,
+        "tier": 3
+      },
+      {
+        "documents": 122258,
+        "pairs": 1000000,
+        "query": [
+          "original",
+          "subject"
+        ],
+        "rows": {
+          "odxt_del": {
+            "erase_ns": {
+              "iqr_ns": 2671,
+              "max_ns": 206212,
+              "median_ns": 194889,
+              "min_ns": 190548,
+              "n": 10,
+              "p25_ns": 193977,
+              "p75_ns": 196648
+            },
+            "residual": [
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6
+            ],
+            "search_after_ns": {
+              "iqr_ns": 845284,
+              "max_ns": 337124867,
+              "median_ns": 334371299,
+              "min_ns": 332827533,
+              "n": 10,
+              "p25_ns": 334100012,
+              "p75_ns": 334945296
+            }
+          },
+          "odxt_rebuild": {
+            "erase_ns": {
+              "iqr_ns": 8136268,
+              "max_ns": 28793859171,
+              "median_ns": 28784824808,
+              "min_ns": 28772403766,
+              "n": 10,
+              "p25_ns": 28781029800,
+              "p75_ns": 28789166068
+            },
+            "residual": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "search_after_ns": {
+              "iqr_ns": 728139,
+              "max_ns": 335520423,
+              "median_ns": 334546378,
+              "min_ns": 334048030,
+              "n": 10,
+              "p25_ns": 334152121,
+              "p75_ns": 334880260
+            }
+          },
+          "ours_full": {
+            "erase_ns": {
+              "iqr_ns": 5618235,
+              "max_ns": 628097008,
+              "median_ns": 622594965,
+              "min_ns": 603300352,
+              "n": 10,
+              "p25_ns": 619021238,
+              "p75_ns": 624639473
+            },
+            "residual": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "search_after_ns": {
+              "iqr_ns": 82539,
+              "max_ns": 16770326,
+              "median_ns": 16623685,
+              "min_ns": 16552653,
+              "n": 10,
+              "p25_ns": 16608220,
+              "p75_ns": 16690759
+            }
+          },
+          "ours_payload": {
+            "erase_ns": {
+              "iqr_ns": 6657,
+              "max_ns": 78855,
+              "median_ns": 71500,
+              "min_ns": 69177,
+              "n": 10,
+              "p25_ns": 70080,
+              "p75_ns": 76737
+            },
+            "residual": [
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6
+            ],
+            "search_after_ns": {
+              "iqr_ns": 122558,
+              "max_ns": 20663534,
+              "median_ns": 20501616,
+              "min_ns": 20369222,
+              "n": 10,
+              "p25_ns": 20469214,
+              "p75_ns": 20591772
+            }
+          },
+          "ours_payload_index": {
+            "erase_ns": {
+              "iqr_ns": 3960,
+              "max_ns": 223857,
+              "median_ns": 210262,
+              "min_ns": 207223,
+              "n": 10,
+              "p25_ns": 208496,
+              "p75_ns": 212456
+            },
+            "residual": [
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6,
+              6
+            ],
+            "search_after_ns": {
+              "iqr_ns": 79065,
+              "max_ns": 20878577,
+              "median_ns": 20697042,
+              "min_ns": 20550349,
+              "n": 10,
+              "p25_ns": 20651302,
+              "p75_ns": 20730367
+            }
+          }
+        },
+        "sweep": [],
+        "target_document": 106819,
+        "target_keywords": 6,
+        "tier": 4
+      }
+    ],
+    "detection": {
+      "benign_ais": {
+        "ours_0x05": {
+          "false_alarms_on_lawful": 0,
+          "missed_unauthorised": 0
+        },
+        "rehash_with_list": {
+          "false_alarms_on_lawful": 0,
+          "missed_unauthorised": 0
+        }
+      },
+      "compromised_ais": {
+        "ours_0x05": {
+          "false_alarms_on_lawful": 0,
+          "missed_unauthorised": 0
+        },
+        "rehash_with_list": {
+          "false_alarms_on_lawful": 0,
+          "missed_unauthorised": 50
+        }
+      },
+      "compromised_means": "appends an entry for every unauthorised deletion to any list it can write: for ours, a forged order under its own key, its 0x05 leaf and a DISPOSE",
+      "lawful": 50,
+      "n": 100,
+      "unauthorised": 50
+    },
+    "epochs": 24,
+    "method": {
+      "erase": "from a recorded order to erasure complete; ours through pqcl_pipeline::redaction::execute, gate included; ODXT del: one Del update per pair; ODXT rebuild: Setup over the live pairs under a fresh key",
+      "odxt_no_compaction": "not added: not in ODXT's paper (baselines/UPGRADES.md)",
+      "residual": "redacted pairs whose Add cross-tag, derivable from the current key state, is in a retained or current XSet",
+      "search_after": "one surviving conjunctive query, the redacted document's two keywords of highest document frequency; for PAYLOAD+INDEX with tombstones pending compaction"
+    },
+    "operating_pairs": 100000,
+    "operating_tier": 3,
+    "payload_bytes": 4096,
+    "sweep_k": [
+      1,
+      10,
+      100,
+      1000
+    ]
+  }
+}

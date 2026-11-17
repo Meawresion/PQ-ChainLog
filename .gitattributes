@@ -1,0 +1,7 @@
+# Shell scripts and sources keep LF line endings on every platform.
+* text=auto eol=lf
+
+*.proof binary
+*.bin binary
+*.png binary
+*.pdf binary

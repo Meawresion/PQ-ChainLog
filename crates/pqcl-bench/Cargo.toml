@@ -1,0 +1,20 @@
+[package]
+name = "pqcl-bench"
+description = "Measurement harness. Emits results JSON and nothing else; every published number in the paper flows through this crate."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-primitives = { path = "../pqcl-primitives" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+tempfile = "3"
+
+[lints]
+workspace = true

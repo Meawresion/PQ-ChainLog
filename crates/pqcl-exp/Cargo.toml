@@ -1,0 +1,124 @@
+[package]
+name = "pqcl-exp"
+description = "The paper's experiments. One binary per experiment; every one emits a provenance-stamped record through pqcl-bench and nothing else."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+# ⭐ Separate from `pqcl-bench` on purpose. `pqcl-bench` is the provenance and
+# refusal layer, and it must stay dependency-light: it is what decides whether a
+# number may be published, so it should not itself depend on the schemes being
+# measured. The experiments depend on both.
+
+[dependencies]
+pqcl-bench = { path = "../pqcl-bench" }
+pqcl-primitives = { path = "../pqcl-primitives" }
+pqcl-dsse = { path = "../pqcl-dsse" }
+pqcl-forest = { path = "../pqcl-forest" }
+pqcl-pipeline = { path = "../pqcl-pipeline" }
+pqcl-capsule = { path = "../pqcl-capsule" }
+# ⭐ M13 A18: every custody record a harness builds comes from a
+# `CustodyAppender`, and every record it writes names that appender's backend.
+# `append-types` is the request language with **no** key-holding code behind
+# it, so this crate still cannot build a record except through an appender it
+# was handed. ⛔ Never `host-software`: row 11b keeps that module off the paper
+# build path, and `xtask` lints this exact shape of `pqcl-sm` to keep it
+# compiling without it.
+pqcl-sm = { path = "../pqcl-sm", default-features = false, features = ["append-types"] }
+# The parent-side proxy to the enclave, for the campaign. Behind `enclave`.
+pqcl-nitro = { path = "../pqcl-nitro", optional = true }
+baseline-odxt = { path = "../../baselines/odxt" }
+baseline-zuo22 = { path = "../../baselines/zuo22" }
+baseline-sdsse-cq = { path = "../../baselines/sdsse_cq" }
+baseline-dsse-skq = { path = "../../baselines/dsse_skq" }
+baseline-doris-fu = { path = "../../baselines/doris_fu" }
+# M15 arms: VCFB in exp2 and exp345; MDRSSE in exp7.
+baseline-vcfb = { path = "../../baselines/vcfb" }
+baseline-mdrsse = { path = "../../baselines/mdrsse" }
+# SAC Exp. 2's 2023+ arms.
+baseline-pqabl = { path = "../../baselines/pqabl" }
+baseline-glassdb = { path = "../../baselines/glassdb" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# ⭐ Seeded, and the seed is recorded in every results record. ODXT's search
+# token generation permutes its cross-tokens (NDSS'21 Fig. 9 step 5(e)), so an
+# RNG is genuinely part of its search cost and belongs inside the timed region.
+# A seeded generator keeps the run reproducible without removing that cost.
+rand = "0.8"
+
+[lints]
+workspace = true
+
+# ---------------------------------------------------------------------------
+# ⭐ The classical comparison point, ruled in the design record.
+#
+# Exp. 1's table needs ECDSA-P256 as well as a plaintext pipeline, and the
+# reason is sharper than "the ratio wants a denominator": without it we can say
+# *PQ signing costs X× a plaintext pipeline* but not *X× classical signing*.
+# The first conflates **we added signatures** with **we added post-quantum
+# signatures**, and the paper's whole systems argument rests on the second.
+# ⛔ If ECDSA and ML-DSA land close together, the cost is signing rather than
+# post-quantum signing and that argument needs rewriting — which is the point:
+# an experiment that cannot falsify its claim is not testing it.
+#
+# ⚠️ **Default-off, and banned outside this crate.** A classical signature must
+# never be linkable into the data path of a post-quantum system. `cargo xtask
+# no-stubs` bans `p256` everywhere except `crates/pqcl-exp/`, the same way the
+# Groth16/PLONK wrapper names are banned — a control rather than a convention,
+# because six instances now say a rule nobody enforces is a comment.
+[dependencies.p256]
+version = "0.13"
+default-features = false
+features = ["ecdsa", "std"]
+optional = true
+
+# ---------------------------------------------------------------------------
+# ⭐ The chain driver (M10 H2): submits real transactions to our Besu network,
+# for LEChain's contract and for our anchor alike, so both sides of Exp. 6 go
+# through one client.
+#
+# ⚠️ secp256k1 here signs **Ethereum transactions**, the envelope every EVM
+# client must produce to submit anything — it is how `forge create` already
+# deploys `Anchor.sol`. It signs no evidence and no custody record, and the
+# `xtask no-stubs` gate confines `k256` to this crate exactly as it does `p256`.
+[dependencies.k256]
+version = "0.13"
+default-features = false
+features = ["ecdsa", "std"]
+optional = true
+
+[dependencies.sha3]
+version = "0.10"
+optional = true
+
+# B-DEMS hashes with SHA-256 (Park & Jeong §3.2.1), so its confirmation hash
+# does too (SAC Exp. 4, `redaction`).
+[dependencies.sha2]
+version = "0.10"
+optional = true
+
+[features]
+# ⛔ Off by default. The campaign passes `--features classical-baseline`
+# explicitly; if it is forgotten, `mkfigs.py` refuses to emit and names the two
+# missing macros rather than letting the run look complete.
+classical-baseline = ["dep:p256"]
+# Off by default: only `exp6chain` needs it, and only against a live network.
+chain = ["dep:k256", "dep:sha3", "dep:sha2"]
+# ⭐ The campaign's Secure Module: custody records built inside the Nitro
+# enclave over vsock (M13 A18). Off by default, because vsock exists only on a
+# Nitro parent instance. Without it, `PQCL_SECURE_MODULE=nitro:<cid>` is refused
+# at start-up rather than quietly falling back, and an in-process run names
+# itself `host-software`, which `mkfigs.py` refuses to publish.
+enclave = ["dep:pqcl-nitro", "pqcl-nitro/enclave"]
+
+[[bin]]
+name = "exp6chain"
+required-features = ["chain"]
+
+[[bin]]
+name = "redaction"
+required-features = ["chain"]

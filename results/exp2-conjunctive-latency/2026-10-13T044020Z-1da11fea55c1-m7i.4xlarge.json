@@ -1,0 +1,1676 @@
+{
+  "experiment": "exp2-conjunctive-latency",
+  "git_sha": "1da11fea55c1f93a9ffa25b5ed6f8a962cb0bc18",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.4xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "n/a: symmetric-only search path",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {
+    "enron-selection-1000": "7c1040989e299bc6af8b189868f959c8092ab9efe617e0d421a8f467732b0c31",
+    "enron-selection-10000": "f261d527a726794b27ac54310d2bae50375eac2a335eb0681afe952b07b9be08",
+    "enron-selection-100000": "2e25240bc5559629ceac1d40a9084d690b8fc52a1e67c8872c7e448d2de9a47b",
+    "enron-selection-2000": "e72bf327939320ced5d2dbfc6949883dc8a58c02785285c82babf44572b55886",
+    "enron-selection-20000": "72f3c6bf607c128feb3dc09f6c89d1e960d2879775a450126a1a0edf81188236",
+    "enron-selection-250000": "8410e0506b0809600918056c489424b39b2f4622314765a0b64071f2eaae557c",
+    "enron-selection-5000": "1efecfc0456433e48031366b2b1f9118e198b40b5024490229ece16c45b34be1",
+    "enron-selection-50000": "fd1290a1f6c5942f1438eb494229ac3594708b42514e7c3293651d17980216d6"
+  },
+  "rng_seeds": [
+    33,
+    34,
+    51,
+    1592590338
+  ],
+  "iterations": 10,
+  "started_utc": "2026-10-13T04:40:20Z",
+  "measurements": {
+    "caveat": "We lose asymptotically to fp-GA-ODXT and win on the constant factor. No wall-clock result here may be written up as an asymptotic win.",
+    "rows": [
+      {
+        "closed_epochs": 2,
+        "conjunction_width": 2,
+        "documents": 1000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 60495,
+            "max_ns": 757371,
+            "mean_ns": 139851,
+            "median_ns": 62462,
+            "min_ns": 60615,
+            "n": 12,
+            "p25_ns": 61870,
+            "p75_ns": 122365,
+            "p95_ns": 408215
+          },
+          "total_hits_first_iteration": 12,
+          "tset_len": 165070,
+          "xset_len": 165070
+        },
+        "pairs": 150035,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 5533,
+            "max_ns": 78127,
+            "mean_ns": 34431,
+            "median_ns": 27451,
+            "min_ns": 27241,
+            "n": 12,
+            "p25_ns": 27362,
+            "p75_ns": 32895,
+            "p95_ns": 59017
+          },
+          "total_hits_first_iteration": 12
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2836,
+            "max_ns": 46415,
+            "mean_ns": 18717,
+            "median_ns": 15367,
+            "min_ns": 15237,
+            "n": 12,
+            "p25_ns": 15313,
+            "p75_ns": 18149,
+            "p95_ns": 30896
+          },
+          "total_hits_first_iteration": 12,
+          "xtag_count": 150035
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 2,
+        "conjunction_width": 3,
+        "documents": 1000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 114708,
+            "max_ns": 1510094,
+            "mean_ns": 274354,
+            "median_ns": 121151,
+            "min_ns": 118235,
+            "n": 12,
+            "p25_ns": 120146,
+            "p75_ns": 234854,
+            "p95_ns": 810363
+          },
+          "total_hits_first_iteration": 12,
+          "tset_len": 165070,
+          "xset_len": 165070
+        },
+        "pairs": 150035,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 15215,
+            "max_ns": 151450,
+            "mean_ns": 56905,
+            "median_ns": 44321,
+            "min_ns": 40786,
+            "n": 12,
+            "p25_ns": 40874,
+            "p75_ns": 56089,
+            "p95_ns": 108806
+          },
+          "total_hits_first_iteration": 12
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2909,
+            "max_ns": 55346,
+            "mean_ns": 20821,
+            "median_ns": 16952,
+            "min_ns": 16543,
+            "n": 12,
+            "p25_ns": 16825,
+            "p75_ns": 19734,
+            "p95_ns": 35954
+          },
+          "total_hits_first_iteration": 12,
+          "xtag_count": 150035
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 2,
+        "conjunction_width": 6,
+        "documents": 1000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 283331,
+            "max_ns": 3723082,
+            "mean_ns": 669742,
+            "median_ns": 291881,
+            "min_ns": 286704,
+            "n": 12,
+            "p25_ns": 288317,
+            "p75_ns": 571648,
+            "p95_ns": 1991316
+          },
+          "total_hits_first_iteration": 11,
+          "tset_len": 165070,
+          "xset_len": 165070
+        },
+        "pairs": 150035,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 59124,
+            "max_ns": 481638,
+            "mean_ns": 157215,
+            "median_ns": 100521,
+            "min_ns": 81650,
+            "n": 12,
+            "p25_ns": 84114,
+            "p75_ns": 143238,
+            "p95_ns": 410404
+          },
+          "total_hits_first_iteration": 11
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 5011,
+            "max_ns": 76349,
+            "mean_ns": 25920,
+            "median_ns": 20171,
+            "min_ns": 18734,
+            "n": 12,
+            "p25_ns": 19977,
+            "p75_ns": 24988,
+            "p95_ns": 48303
+          },
+          "total_hits_first_iteration": 11,
+          "xtag_count": 150035
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 3,
+        "conjunction_width": 2,
+        "documents": 2000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 58997,
+            "max_ns": 990061,
+            "mean_ns": 158507,
+            "median_ns": 62331,
+            "min_ns": 60472,
+            "n": 12,
+            "p25_ns": 61341,
+            "p75_ns": 120338,
+            "p95_ns": 543735
+          },
+          "total_hits_first_iteration": 13,
+          "tset_len": 333272,
+          "xset_len": 333272
+        },
+        "pairs": 300764,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 12234,
+            "max_ns": 116295,
+            "mean_ns": 41000,
+            "median_ns": 29265,
+            "min_ns": 26423,
+            "n": 12,
+            "p25_ns": 27294,
+            "p75_ns": 39528,
+            "p95_ns": 89733
+          },
+          "total_hits_first_iteration": 13
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2762,
+            "max_ns": 56413,
+            "mean_ns": 19640,
+            "median_ns": 15414,
+            "min_ns": 14887,
+            "n": 12,
+            "p25_ns": 15279,
+            "p75_ns": 18041,
+            "p95_ns": 36830
+          },
+          "total_hits_first_iteration": 13,
+          "xtag_count": 300764
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 3,
+        "conjunction_width": 3,
+        "documents": 2000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 108879,
+            "max_ns": 1959957,
+            "mean_ns": 309683,
+            "median_ns": 120961,
+            "min_ns": 116413,
+            "n": 12,
+            "p25_ns": 119080,
+            "p75_ns": 227959,
+            "p95_ns": 1071139
+          },
+          "total_hits_first_iteration": 13,
+          "tset_len": 333272,
+          "xset_len": 333272
+        },
+        "pairs": 300764,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 20736,
+            "max_ns": 249447,
+            "mean_ns": 71299,
+            "median_ns": 47399,
+            "min_ns": 40914,
+            "n": 12,
+            "p25_ns": 44009,
+            "p75_ns": 64745,
+            "p95_ns": 170010
+          },
+          "total_hits_first_iteration": 13
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 2476,
+            "max_ns": 67975,
+            "mean_ns": 21982,
+            "median_ns": 16888,
+            "min_ns": 16370,
+            "n": 12,
+            "p25_ns": 16730,
+            "p75_ns": 19206,
+            "p95_ns": 43300
+          },
+          "total_hits_first_iteration": 13,
+          "xtag_count": 300764
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 3,
+        "conjunction_width": 6,
+        "documents": 2000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 276989,
+            "max_ns": 4832840,
+            "mean_ns": 759816,
+            "median_ns": 288770,
+            "min_ns": 285936,
+            "n": 12,
+            "p25_ns": 287412,
+            "p75_ns": 564401,
+            "p95_ns": 2642902
+          },
+          "total_hits_first_iteration": 12,
+          "tset_len": 333272,
+          "xset_len": 333272
+        },
+        "pairs": 300764,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 107969,
+            "max_ns": 891805,
+            "mean_ns": 229270,
+            "median_ns": 110879,
+            "min_ns": 86663,
+            "n": 12,
+            "p25_ns": 90108,
+            "p75_ns": 198077,
+            "p95_ns": 728646
+          },
+          "total_hits_first_iteration": 12
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 4942,
+            "max_ns": 91994,
+            "mean_ns": 27901,
+            "median_ns": 20247,
+            "min_ns": 19747,
+            "n": 12,
+            "p25_ns": 20168,
+            "p75_ns": 25110,
+            "p95_ns": 58670
+          },
+          "total_hits_first_iteration": 12,
+          "xtag_count": 300764
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 5,
+        "conjunction_width": 2,
+        "documents": 5000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 120022,
+            "max_ns": 2573976,
+            "mean_ns": 334114,
+            "median_ns": 121823,
+            "min_ns": 58551,
+            "n": 12,
+            "p25_ns": 60451,
+            "p75_ns": 180473,
+            "p95_ns": 1351761
+          },
+          "total_hits_first_iteration": 11,
+          "tset_len": 801292,
+          "xset_len": 801292
+        },
+        "pairs": 728203,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 30578,
+            "max_ns": 238770,
+            "mean_ns": 63526,
+            "median_ns": 40333,
+            "min_ns": 26374,
+            "n": 12,
+            "p25_ns": 29430,
+            "p75_ns": 60008,
+            "p95_ns": 178195
+          },
+          "total_hits_first_iteration": 11
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 5433,
+            "max_ns": 121928,
+            "mean_ns": 26798,
+            "median_ns": 17448,
+            "min_ns": 14832,
+            "n": 12,
+            "p25_ns": 15316,
+            "p75_ns": 20749,
+            "p95_ns": 70357
+          },
+          "total_hits_first_iteration": 11,
+          "xtag_count": 728203
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 5,
+        "conjunction_width": 3,
+        "documents": 5000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 227135,
+            "max_ns": 5006723,
+            "mean_ns": 621384,
+            "median_ns": 119642,
+            "min_ns": 116356,
+            "n": 12,
+            "p25_ns": 118950,
+            "p75_ns": 346085,
+            "p95_ns": 2635146
+          },
+          "total_hits_first_iteration": 11,
+          "tset_len": 801292,
+          "xset_len": 801292
+        },
+        "pairs": 728203,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 63954,
+            "max_ns": 530019,
+            "mean_ns": 121275,
+            "median_ns": 71827,
+            "min_ns": 40858,
+            "n": 12,
+            "p25_ns": 55482,
+            "p75_ns": 119436,
+            "p95_ns": 348299
+          },
+          "total_hits_first_iteration": 11
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 4781,
+            "max_ns": 139348,
+            "mean_ns": 29180,
+            "median_ns": 16917,
+            "min_ns": 16426,
+            "n": 12,
+            "p25_ns": 16770,
+            "p75_ns": 21551,
+            "p95_ns": 80207
+          },
+          "total_hits_first_iteration": 11,
+          "xtag_count": 728203
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 5,
+        "conjunction_width": 6,
+        "documents": 5000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 564028,
+            "max_ns": 12424626,
+            "mean_ns": 1531474,
+            "median_ns": 288570,
+            "min_ns": 279669,
+            "n": 12,
+            "p25_ns": 284587,
+            "p75_ns": 848615,
+            "p95_ns": 6520930
+          },
+          "total_hits_first_iteration": 10,
+          "tset_len": 801292,
+          "xset_len": 801292
+        },
+        "pairs": 728203,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 225835,
+            "max_ns": 1934143,
+            "mean_ns": 432487,
+            "median_ns": 174250,
+            "min_ns": 101081,
+            "n": 12,
+            "p25_ns": 124480,
+            "p75_ns": 350315,
+            "p95_ns": 1552757
+          },
+          "total_hits_first_iteration": 10
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 6133,
+            "max_ns": 200772,
+            "mean_ns": 37869,
+            "median_ns": 20135,
+            "min_ns": 18593,
+            "n": 12,
+            "p25_ns": 19830,
+            "p75_ns": 25963,
+            "p95_ns": 112547
+          },
+          "total_hits_first_iteration": 10,
+          "xtag_count": 728203
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 10,
+        "conjunction_width": 2,
+        "documents": 10000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 229615,
+            "max_ns": 5668397,
+            "mean_ns": 689274,
+            "median_ns": 177691,
+            "min_ns": 60664,
+            "n": 12,
+            "p25_ns": 120319,
+            "p75_ns": 349934,
+            "p95_ns": 3005455
+          },
+          "total_hits_first_iteration": 24,
+          "tset_len": 1626281,
+          "xset_len": 1626281
+        },
+        "pairs": 1481970,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 56843,
+            "max_ns": 476902,
+            "mean_ns": 106807,
+            "median_ns": 56773,
+            "min_ns": 27488,
+            "n": 12,
+            "p25_ns": 36651,
+            "p75_ns": 93494,
+            "p95_ns": 362506
+          },
+          "total_hits_first_iteration": 24
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 10320,
+            "max_ns": 250799,
+            "mean_ns": 42993,
+            "median_ns": 21408,
+            "min_ns": 15595,
+            "n": 12,
+            "p25_ns": 18398,
+            "p75_ns": 28718,
+            "p95_ns": 142283
+          },
+          "total_hits_first_iteration": 24,
+          "xtag_count": 1481970
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 10,
+        "conjunction_width": 3,
+        "documents": 10000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 560458,
+            "max_ns": 11121007,
+            "mean_ns": 1309992,
+            "median_ns": 237332,
+            "min_ns": 118880,
+            "n": 12,
+            "p25_ns": 120868,
+            "p75_ns": 681326,
+            "p95_ns": 5876274
+          },
+          "total_hits_first_iteration": 21,
+          "tset_len": 1626281,
+          "xset_len": 1626281
+        },
+        "pairs": 1481970,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 142508,
+            "max_ns": 1044985,
+            "mean_ns": 208372,
+            "median_ns": 117100,
+            "min_ns": 41146,
+            "n": 12,
+            "p25_ns": 67462,
+            "p75_ns": 209970,
+            "p95_ns": 674739
+          },
+          "total_hits_first_iteration": 21
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 15737,
+            "max_ns": 307352,
+            "mean_ns": 49637,
+            "median_ns": 20595,
+            "min_ns": 16938,
+            "n": 12,
+            "p25_ns": 17128,
+            "p75_ns": 32865,
+            "p95_ns": 173560
+          },
+          "total_hits_first_iteration": 21,
+          "xtag_count": 1481970
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 10,
+        "conjunction_width": 6,
+        "documents": 10000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1413323,
+            "max_ns": 27246890,
+            "mean_ns": 3143327,
+            "median_ns": 568179,
+            "min_ns": 282168,
+            "n": 12,
+            "p25_ns": 288222,
+            "p75_ns": 1701545,
+            "p95_ns": 14418250
+          },
+          "total_hits_first_iteration": 17,
+          "tset_len": 1626281,
+          "xset_len": 1626281
+        },
+        "pairs": 1481970,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 487347,
+            "max_ns": 4037942,
+            "mean_ns": 820739,
+            "median_ns": 270329,
+            "min_ns": 121590,
+            "n": 12,
+            "p25_ns": 176858,
+            "p75_ns": 664205,
+            "p95_ns": 3176385
+          },
+          "total_hits_first_iteration": 17
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 25849,
+            "max_ns": 508148,
+            "mean_ns": 74298,
+            "median_ns": 26718,
+            "min_ns": 20108,
+            "n": 12,
+            "p25_ns": 20755,
+            "p75_ns": 46604,
+            "p95_ns": 285562
+          },
+          "total_hits_first_iteration": 17,
+          "xtag_count": 1481970
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 20,
+        "conjunction_width": 2,
+        "documents": 20000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 505113,
+            "max_ns": 11144262,
+            "mean_ns": 1430614,
+            "median_ns": 352701,
+            "min_ns": 61278,
+            "n": 12,
+            "p25_ns": 119440,
+            "p75_ns": 624553,
+            "p95_ns": 6589328
+          },
+          "total_hits_first_iteration": 37,
+          "tset_len": 3265177,
+          "xset_len": 3265177
+        },
+        "pairs": 2971428,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 127570,
+            "max_ns": 855681,
+            "mean_ns": 188522,
+            "median_ns": 88292,
+            "min_ns": 27262,
+            "n": 12,
+            "p25_ns": 57807,
+            "p75_ns": 185377,
+            "p95_ns": 672794
+          },
+          "total_hits_first_iteration": 37
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 24233,
+            "max_ns": 489567,
+            "mean_ns": 76143,
+            "median_ns": 30338,
+            "min_ns": 15319,
+            "n": 12,
+            "p25_ns": 18656,
+            "p75_ns": 42889,
+            "p95_ns": 300596
+          },
+          "total_hits_first_iteration": 37,
+          "xtag_count": 2971428
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 20,
+        "conjunction_width": 3,
+        "documents": 20000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1032983,
+            "max_ns": 21891949,
+            "mean_ns": 2723005,
+            "median_ns": 290016,
+            "min_ns": 115356,
+            "n": 12,
+            "p25_ns": 204528,
+            "p75_ns": 1237511,
+            "p95_ns": 12932342
+          },
+          "total_hits_first_iteration": 31,
+          "tset_len": 3265177,
+          "xset_len": 3265177
+        },
+        "pairs": 2971428,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 267013,
+            "max_ns": 1891618,
+            "mean_ns": 372755,
+            "median_ns": 205966,
+            "min_ns": 39463,
+            "n": 12,
+            "p25_ns": 110764,
+            "p75_ns": 377777,
+            "p95_ns": 1250412
+          },
+          "total_hits_first_iteration": 31
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 29980,
+            "max_ns": 652735,
+            "mean_ns": 92603,
+            "median_ns": 22961,
+            "min_ns": 16445,
+            "n": 12,
+            "p25_ns": 19612,
+            "p75_ns": 49592,
+            "p95_ns": 388127
+          },
+          "total_hits_first_iteration": 31,
+          "xtag_count": 2971428
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 20,
+        "conjunction_width": 6,
+        "documents": 20000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2728241,
+            "max_ns": 54576130,
+            "mean_ns": 6546490,
+            "median_ns": 574798,
+            "min_ns": 288698,
+            "n": 12,
+            "p25_ns": 291975,
+            "p75_ns": 3020216,
+            "p95_ns": 32134659
+          },
+          "total_hits_first_iteration": 20,
+          "tset_len": 3265177,
+          "xset_len": 3265177
+        },
+        "pairs": 2971428,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 912487,
+            "max_ns": 8183598,
+            "mean_ns": 1573079,
+            "median_ns": 490455,
+            "min_ns": 192809,
+            "n": 12,
+            "p25_ns": 278882,
+            "p75_ns": 1191369,
+            "p95_ns": 6345841
+          },
+          "total_hits_first_iteration": 20
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 46134,
+            "max_ns": 1487723,
+            "mean_ns": 178315,
+            "median_ns": 27115,
+            "min_ns": 20789,
+            "n": 12,
+            "p25_ns": 20941,
+            "p75_ns": 67075,
+            "p95_ns": 837866
+          },
+          "total_hits_first_iteration": 20,
+          "xtag_count": 2971428
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 50,
+        "conjunction_width": 2,
+        "documents": 50000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1251518,
+            "max_ns": 27340259,
+            "mean_ns": 3657246,
+            "median_ns": 1101858,
+            "min_ns": 62192,
+            "n": 12,
+            "p25_ns": 383969,
+            "p75_ns": 1635487,
+            "p95_ns": 16676717
+          },
+          "total_hits_first_iteration": 89,
+          "tset_len": 8350070,
+          "xset_len": 8350070
+        },
+        "pairs": 7579064,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 274227,
+            "max_ns": 2201280,
+            "mean_ns": 435229,
+            "median_ns": 185239,
+            "min_ns": 37182,
+            "n": 12,
+            "p25_ns": 100748,
+            "p75_ns": 374975,
+            "p95_ns": 1690776
+          },
+          "total_hits_first_iteration": 89
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 83193,
+            "max_ns": 1745628,
+            "mean_ns": 233814,
+            "median_ns": 76074,
+            "min_ns": 15495,
+            "n": 12,
+            "p25_ns": 29789,
+            "p75_ns": 112982,
+            "p95_ns": 1033557
+          },
+          "total_hits_first_iteration": 89,
+          "xtag_count": 7579064
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 50,
+        "conjunction_width": 3,
+        "documents": 50000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2731013,
+            "max_ns": 53718698,
+            "mean_ns": 6815575,
+            "median_ns": 860170,
+            "min_ns": 117963,
+            "n": 12,
+            "p25_ns": 346548,
+            "p75_ns": 3077561,
+            "p95_ns": 32733351
+          },
+          "total_hits_first_iteration": 71,
+          "tset_len": 8350070,
+          "xset_len": 8350070
+        },
+        "pairs": 7579064,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 596662,
+            "max_ns": 5408780,
+            "mean_ns": 940982,
+            "median_ns": 502658,
+            "min_ns": 62732,
+            "n": 12,
+            "p25_ns": 215551,
+            "p75_ns": 812213,
+            "p95_ns": 3409371
+          },
+          "total_hits_first_iteration": 71
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 127141,
+            "max_ns": 3208393,
+            "mean_ns": 376442,
+            "median_ns": 41868,
+            "min_ns": 17497,
+            "n": 12,
+            "p25_ns": 25181,
+            "p75_ns": 152322,
+            "p95_ns": 1814965
+          },
+          "total_hits_first_iteration": 71,
+          "xtag_count": 7579064
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 50,
+        "conjunction_width": 6,
+        "documents": 50000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 6796833,
+            "max_ns": 133286569,
+            "mean_ns": 16407954,
+            "median_ns": 1268199,
+            "min_ns": 286967,
+            "n": 12,
+            "p25_ns": 782017,
+            "p75_ns": 7578850,
+            "p95_ns": 81240480
+          },
+          "total_hits_first_iteration": 39,
+          "tset_len": 8350070,
+          "xset_len": 8350070
+        },
+        "pairs": 7579064,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2122317,
+            "max_ns": 23235350,
+            "mean_ns": 4201322,
+            "median_ns": 1133591,
+            "min_ns": 359883,
+            "n": 12,
+            "p25_ns": 613030,
+            "p75_ns": 2735347,
+            "p95_ns": 17928971
+          },
+          "total_hits_first_iteration": 39
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 184181,
+            "max_ns": 9119099,
+            "mean_ns": 1015096,
+            "median_ns": 44618,
+            "min_ns": 21568,
+            "n": 12,
+            "p25_ns": 30028,
+            "p75_ns": 214209,
+            "p95_ns": 5348210
+          },
+          "total_hits_first_iteration": 39,
+          "xtag_count": 7579064
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 100,
+        "conjunction_width": 2,
+        "documents": 100000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 2376161,
+            "max_ns": 55784304,
+            "mean_ns": 7191463,
+            "median_ns": 1954853,
+            "min_ns": 179269,
+            "n": 12,
+            "p25_ns": 449506,
+            "p75_ns": 2825667,
+            "p95_ns": 33779611
+          },
+          "total_hits_first_iteration": 164,
+          "tset_len": 16789065,
+          "xset_len": 16789065
+        },
+        "pairs": 15255073,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 546728,
+            "max_ns": 4999492,
+            "mean_ns": 920130,
+            "median_ns": 332016,
+            "min_ns": 38832,
+            "n": 12,
+            "p25_ns": 172581,
+            "p75_ns": 719309,
+            "p95_ns": 3795959
+          },
+          "total_hits_first_iteration": 164
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 158855,
+            "max_ns": 7259948,
+            "mean_ns": 827881,
+            "median_ns": 157779,
+            "min_ns": 24455,
+            "n": 12,
+            "p25_ns": 52646,
+            "p75_ns": 211501,
+            "p95_ns": 4073636
+          },
+          "total_hits_first_iteration": 164,
+          "xtag_count": 15255073
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 100,
+        "conjunction_width": 3,
+        "documents": 100000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 4513973,
+            "max_ns": 110350607,
+            "mean_ns": 13507760,
+            "median_ns": 1510727,
+            "min_ns": 232558,
+            "n": 12,
+            "p25_ns": 543231,
+            "p75_ns": 5057204,
+            "p95_ns": 66680869
+          },
+          "total_hits_first_iteration": 124,
+          "tset_len": 16789065,
+          "xset_len": 16789065
+        },
+        "pairs": 15255073,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1207725,
+            "max_ns": 12497152,
+            "mean_ns": 2012905,
+            "median_ns": 968140,
+            "min_ns": 59040,
+            "n": 12,
+            "p25_ns": 377360,
+            "p75_ns": 1585085,
+            "p95_ns": 7766004
+          },
+          "total_hits_first_iteration": 124
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 252317,
+            "max_ns": 15321104,
+            "mean_ns": 1601070,
+            "median_ns": 105103,
+            "min_ns": 23565,
+            "n": 12,
+            "p25_ns": 55040,
+            "p75_ns": 307357,
+            "p95_ns": 8288729
+          },
+          "total_hits_first_iteration": 124,
+          "xtag_count": 15255073
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 100,
+        "conjunction_width": 6,
+        "documents": 100000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 11469724,
+            "max_ns": 273009196,
+            "mean_ns": 32733447,
+            "median_ns": 1992700,
+            "min_ns": 562065,
+            "n": 12,
+            "p25_ns": 1066931,
+            "p75_ns": 12536655,
+            "p95_ns": 165074730
+          },
+          "total_hits_first_iteration": 68,
+          "tset_len": 16789065,
+          "xset_len": 16789065
+        },
+        "pairs": 15255073,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 4429788,
+            "max_ns": 47995753,
+            "mean_ns": 8763715,
+            "median_ns": 2303182,
+            "min_ns": 594963,
+            "n": 12,
+            "p25_ns": 1119815,
+            "p75_ns": 5549603,
+            "p95_ns": 38181895
+          },
+          "total_hits_first_iteration": 68
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 769462,
+            "max_ns": 33663118,
+            "mean_ns": 3885360,
+            "median_ns": 157138,
+            "min_ns": 37449,
+            "n": 12,
+            "p25_ns": 71609,
+            "p75_ns": 841071,
+            "p95_ns": 20710727
+          },
+          "total_hits_first_iteration": 68,
+          "xtag_count": 15255073
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 250,
+        "conjunction_width": 2,
+        "documents": 250000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 4881469,
+            "max_ns": 135512199,
+            "mean_ns": 17861228,
+            "median_ns": 5092592,
+            "min_ns": 468507,
+            "n": 12,
+            "p25_ns": 1600597,
+            "p75_ns": 6482066,
+            "p95_ns": 84015538
+          },
+          "total_hits_first_iteration": 397,
+          "tset_len": 42047254,
+          "xset_len": 42047254
+        },
+        "pairs": 38208979,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 1449958,
+            "max_ns": 13723994,
+            "mean_ns": 2640365,
+            "median_ns": 912185,
+            "min_ns": 57796,
+            "n": 12,
+            "p25_ns": 513859,
+            "p75_ns": 1963817,
+            "p95_ns": 11290697
+          },
+          "total_hits_first_iteration": 397
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 1035166,
+            "max_ns": 53716048,
+            "mean_ns": 6303033,
+            "median_ns": 888988,
+            "min_ns": 42171,
+            "n": 12,
+            "p25_ns": 233790,
+            "p75_ns": 1268956,
+            "p95_ns": 32628336
+          },
+          "total_hits_first_iteration": 397,
+          "xtag_count": 38208979
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 250,
+        "conjunction_width": 3,
+        "documents": 250000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 11061510,
+            "max_ns": 266476459,
+            "mean_ns": 33501625,
+            "median_ns": 4160758,
+            "min_ns": 235670,
+            "n": 12,
+            "p25_ns": 1543772,
+            "p75_ns": 12605282,
+            "p95_ns": 164947386
+          },
+          "total_hits_first_iteration": 298,
+          "tset_len": 42047254,
+          "xset_len": 42047254
+        },
+        "pairs": 38208979,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 3505590,
+            "max_ns": 33526730,
+            "mean_ns": 5654329,
+            "median_ns": 2739206,
+            "min_ns": 86136,
+            "n": 12,
+            "p25_ns": 953809,
+            "p75_ns": 4459399,
+            "p95_ns": 22113745
+          },
+          "total_hits_first_iteration": 298
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 1991812,
+            "max_ns": 99032793,
+            "mean_ns": 11361394,
+            "median_ns": 777330,
+            "min_ns": 34754,
+            "n": 12,
+            "p25_ns": 198171,
+            "p75_ns": 2189983,
+            "p95_ns": 60147924
+          },
+          "total_hits_first_iteration": 298,
+          "xtag_count": 38208979
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      },
+      {
+        "closed_epochs": 250,
+        "conjunction_width": 6,
+        "documents": 250000,
+        "epoch_size_docs": 1000,
+        "epochs_are": "Δ-bounded (M13 A21): one epoch per DELTA_DOCS documents, so the epoch size does not grow with the case and the epoch count does",
+        "iterations_per_query": 10,
+        "odxt": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 28598670,
+            "max_ns": 657571296,
+            "mean_ns": 80640700,
+            "median_ns": 5690093,
+            "min_ns": 565176,
+            "n": 12,
+            "p25_ns": 2615684,
+            "p75_ns": 31214354,
+            "p95_ns": 407428195
+          },
+          "total_hits_first_iteration": 166,
+          "tset_len": 42047254,
+          "xset_len": 42047254
+        },
+        "pairs": 38208979,
+        "pi_cd": {
+          "rounds": 1,
+          "search_ns": {
+            "iqr_ns": 14146451,
+            "max_ns": 131577233,
+            "mean_ns": 24648073,
+            "median_ns": 6456252,
+            "min_ns": 1549252,
+            "n": 12,
+            "p25_ns": 3071603,
+            "p75_ns": 17218054,
+            "p95_ns": 105627810
+          },
+          "total_hits_first_iteration": 166
+        },
+        "pi_xt": {
+          "rounds": 2,
+          "search_ns": {
+            "iqr_ns": 7547168,
+            "max_ns": 221095670,
+            "mean_ns": 26455680,
+            "median_ns": 1276399,
+            "min_ns": 61399,
+            "n": 12,
+            "p25_ns": 524530,
+            "p75_ns": 8071698,
+            "p95_ns": 137920690
+          },
+          "total_hits_first_iteration": 166,
+          "xtag_count": 38208979
+        },
+        "queries": 12,
+        "summary_over": "per-query medians"
+      }
+    ],
+    "workload": {
+      "beta": 256,
+      "chain_round_trip": false,
+      "corpus_seed": 14860457,
+      "delete_fraction_denominator": 10,
+      "deletion_granularity": "document",
+      "deletion_granularity_reason": "ODXT registers a deletion only under the s-term and assumes document-level deletion (NDSS'21 III-C fn.3). Per-pair deletion would make it return stale matches -- a strawman in our favour.",
+      "language": "rust-vs-rust on one host; no Python figure appears here",
+      "queries_by_width": {
+        "2": [
+          [
+            "pallen",
+            "forecast"
+          ],
+          [
+            "differentiating",
+            "circulation"
+          ],
+          [
+            "samples",
+            "reactive"
+          ],
+          [
+            "rhirasuna",
+            "hirasuna"
+          ],
+          [
+            "tractabel",
+            "raroc"
+          ],
+          [
+            "thinker",
+            "stochastic"
+          ],
+          [
+            "bottomed",
+            "alfredo"
+          ],
+          [
+            "turnback",
+            "recoup"
+          ],
+          [
+            "ehronline",
+            "customizable"
+          ],
+          [
+            "westlaw",
+            "alice"
+          ],
+          [
+            "jgiordano",
+            "giordano"
+          ],
+          [
+            "apb",
+            "broker"
+          ]
+        ],
+        "3": [
+          [
+            "pallen",
+            "forecast",
+            "belden"
+          ],
+          [
+            "differentiating",
+            "circulation",
+            "shorter"
+          ],
+          [
+            "samples",
+            "reactive",
+            "rapt"
+          ],
+          [
+            "rhirasuna",
+            "hirasuna",
+            "delted"
+          ],
+          [
+            "tractabel",
+            "raroc",
+            "performed"
+          ],
+          [
+            "thinker",
+            "stochastic",
+            "shifted"
+          ],
+          [
+            "bottomed",
+            "alfredo",
+            "evaluation"
+          ],
+          [
+            "turnback",
+            "recoup",
+            "recoated"
+          ],
+          [
+            "ehronline",
+            "customizable",
+            "evaluations"
+          ],
+          [
+            "westlaw",
+            "alice",
+            "srrs"
+          ],
+          [
+            "jgiordano",
+            "giordano",
+            "catequil"
+          ],
+          [
+            "apb",
+            "broker",
+            "kerri"
+          ]
+        ],
+        "6": [
+          [
+            "pallen",
+            "forecast",
+            "belden",
+            "enronxgate",
+            "tim",
+            "allen"
+          ],
+          [
+            "differentiating",
+            "circulation",
+            "shorter",
+            "referencing",
+            "occassion",
+            "educated"
+          ],
+          [
+            "samples",
+            "reactive",
+            "rapt",
+            "rap",
+            "protein",
+            "polishing"
+          ],
+          [
+            "rhirasuna",
+            "hirasuna",
+            "delted",
+            "dashes",
+            "akingump",
+            "delivering"
+          ],
+          [
+            "tractabel",
+            "raroc",
+            "performed",
+            "interfaces",
+            "implementations",
+            "ferrell"
+          ],
+          [
+            "thinker",
+            "stochastic",
+            "shifted",
+            "recruited",
+            "lawera",
+            "lab"
+          ],
+          [
+            "bottomed",
+            "alfredo",
+            "evaluation",
+            "self",
+            "bottom",
+            "foster"
+          ],
+          [
+            "turnback",
+            "recoup",
+            "recoated",
+            "railment",
+            "interventions",
+            "interruption"
+          ],
+          [
+            "ehronline",
+            "customizable",
+            "evaluations",
+            "clickathome",
+            "reviewers",
+            "portal"
+          ],
+          [
+            "westlaw",
+            "alice",
+            "srrs",
+            "itcapps",
+            "harlan",
+            "emaillink"
+          ],
+          [
+            "jgiordano",
+            "giordano",
+            "catequil",
+            "templates",
+            "abramo",
+            "pages"
+          ],
+          [
+            "apb",
+            "broker",
+            "kerri",
+            "symes",
+            "thompson",
+            "deals"
+          ]
+        ]
+      },
+      "query_set": "fixed across tiers: drawn once from the smallest tier, whose documents every tier contains",
+      "tiers": "nested: one seeded permutation of the corpus, tier N its first N files (corpus::load_nested)"
+    }
+  }
+}

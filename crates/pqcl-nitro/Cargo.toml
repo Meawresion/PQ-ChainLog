@@ -1,0 +1,75 @@
+[package]
+name = "pqcl-nitro"
+description = "M5b: the AWS Nitro Enclave Secure Module. The enclave application, the vsock wire protocol, and the host-side proxy that implements the role traits across the boundary."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-primitives = { path = "../pqcl-primitives" }
+# ⭐ Condition 3 of the Secure Module standing rule: "the host software module is
+# the enclave module minus the boundary — **same source**". The enclave binary
+# below is `HostAgentModule` plus vsock plus attestation, and nothing else. That
+# is why this depends on the `host-software` feature rather than reimplementing
+# the module: a second implementation is a second thing to diverge.
+pqcl-sm = { path = "../pqcl-sm", features = ["host-software"] }
+# M13 A18: the custody append crosses the boundary, so the wire format needs
+# the record builder's types and the index token's. Both arrive through
+# `pqcl-sm`'s `host-software` feature already; named here because this crate
+# uses them directly in `appendwire`.
+pqcl-pipeline = { path = "../pqcl-pipeline" }
+pqcl-dsse = { path = "../pqcl-dsse" }
+# The project's canonical length-framed encoding, reused rather than reinvented.
+# A wire format needs exactly what it already provides: unambiguous framing of
+# variable-length fields.
+pqcl-capsule = { path = "../pqcl-capsule" }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+# vsock is the only channel an enclave has. Linux-only, which is fine: both the
+# enclave and its parent instance are Linux.
+vsock = { version = "0.5", optional = true }
+# The Nitro Security Module, reached through `/dev/nsm`. AWS's own crate — the
+# ioctl protocol is undocumented outside it, so hand-rolling the bindings would
+# be guessing at a wire format that gates our key release.
+aws-nitro-enclaves-nsm-api = { version = "0.5.2", optional = true }
+# `ByteBuf` is what the NSM request type takes for nonce and public key.
+serde_bytes = { version = "0.11", optional = true }
+
+# ⭐ **Without this, `cargo clippy --all-targets` fails the whole workspace.**
+# The binary's source is `#![cfg(all(feature = "enclave", target_os = "linux"))]`,
+# so with the feature off the file compiles to an empty crate and rustc reports
+# `E0601: main function not found` — a hard error, not a warning. Cargo has to be
+# told the target needs the feature; the inner attribute only tells rustc.
+#
+# ⚠️ This was failing at `ff698e1` and went unnoticed because the commit that
+# introduced the binary did not re-run `cargo xtask ci`. Keep both the attribute
+# and this stanza: the attribute covers `--all-features` on a non-Linux host,
+# which `required-features` cannot express.
+[[bin]]
+name = "pqcl-enclave"
+path = "src/bin/pqcl-enclave.rs"
+required-features = ["enclave"]
+
+# The parent-side provisioning tool, gated identically and for the same reason.
+[[bin]]
+name = "pqcl-provision"
+path = "src/bin/pqcl-provision.rs"
+required-features = ["enclave"]
+
+[dev-dependencies]
+# The A18 acceptance test builds a case and a cast, and compares the enclave's
+# tokens against a host-built index.
+pqcl-sm = { path = "../pqcl-sm", features = ["host-software"] }
+pqcl-capsule = { path = "../pqcl-capsule" }
+
+[features]
+# ⛔ **Default off, and it must stay off.** The enclave binary only builds where
+# vsock exists, and a paper build path has no business pulling it in. Matches how
+# `pqcl-sm/host-software` is gated, and for the same reason.
+enclave = ["dep:vsock", "dep:aws-nitro-enclaves-nsm-api", "dep:serde_bytes"]
+
+[lints]
+workspace = true

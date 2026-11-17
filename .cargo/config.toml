@@ -1,0 +1,4 @@
+[alias]
+xtask = "run --quiet --package xtask --"
+# `cargo xtask ci` is the single entry point for correctness checks.
+# It is what the pre-push hook runs.

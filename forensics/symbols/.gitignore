@@ -1,0 +1,4 @@
+# Volatility symbol tables land here — reference data fetched by
+# `run.sh --fetch-symbols`. Large and re-fetchable, so not in git.
+*
+!.gitignore

@@ -1,0 +1,18 @@
+[package]
+name = "pqcl-pipeline"
+description = "M8: the end-to-end pipeline. Agent to AIS to investigator to auditor, over real forensic artefacts and real tool runs."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+pqcl-primitives = { path = "../pqcl-primitives" }
+pqcl-capsule = { path = "../pqcl-capsule" }
+pqcl-forest = { path = "../pqcl-forest" }
+pqcl-dsse = { path = "../pqcl-dsse" }
+
+[lints]
+workspace = true

@@ -1,0 +1,1 @@
+{"ok":true,"proof_bytes":2779063,"statement":{"epoch":2,"nullifier":"409dd4778c06181d95c17d41b0d376dad8cdf589a24baa14093909a9b1f4c196","scope_digest":"0ede08854cb410cd9219dc85fe6fc63fa84280fcc63d06d9335d6faba39d4f21","warrant_root":"b586f8e3046d0fd601d02a0435376539bd5d86b688e91f2816420e3656047f8b"},"variant":"core STARK","verify_ms":47659.425936}

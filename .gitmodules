@@ -1,0 +1,17 @@
+# `ignore = untracked`: `forge test` and the Doris container write build files
+# inside these vendored trees. Those must not mark the repository as modified,
+# because the results pipeline refuses records measured on a modified tree.
+# A moved pinned commit or a tracked change inside a submodule is still reported.
+
+[submodule "contracts/lib/forge-std"]
+	path = contracts/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+	ignore = untracked
+[submodule "contracts/lib/ETHDILITHIUM"]
+	path = contracts/lib/ETHDILITHIUM
+	url = https://github.com/ZKNoxHQ/ETHDILITHIUM
+	ignore = untracked
+[submodule "baselines/doris/upstream"]
+	path = baselines/doris/upstream
+	url = https://github.com/CDSecLab/Doris.git
+	ignore = untracked

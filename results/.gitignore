@@ -1,0 +1,24 @@
+# Live experiment records, written while a campaign runs.
+#
+# ⛔ **Ignored on purpose, and the reason is subtle enough to be worth spelling
+# out.** An experiment writes its record *into the repo*. Tracked, that record
+# makes the tree dirty the moment it lands — so the **next** experiment in the
+# same campaign collects `git_dirty = true`, and `mkfigs.py` refuses it. The
+# campaign would silently poison itself after its first result, and the failure
+# would look like a provenance bug rather than a bookkeeping one.
+#
+# This is the third instance of the same shape in this project: the Doris
+# determinism intermediates did it, the AWS audit log would have, and this
+# would. The pattern is *anything a run writes underneath the repo it is
+# measuring*.
+#
+# Traceability does not depend on tracking these. Each record carries its own
+# `git_sha`, and the pipeline stamps it at collection time. Records are promoted
+# into git deliberately, **after** a campaign rather than during one:
+#
+#     git add -f implementation/results/<exp>/<file>.json
+#
+# ⭐ `-f` is the point. Archiving is an act with its own timestamp; writing is
+# not, and the two must not be the same gesture.
+*
+!.gitignore

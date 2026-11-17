@@ -1,0 +1,32 @@
+# `unwrap_used`, `expect_used` and `panic` are denied in library code on purpose:
+# the ingest path runs for hours under a measurement harness, and a panic there
+# loses a run rather than a record.
+#
+# Tests are the opposite case — an assertion that cannot fail loudly is not an
+# assertion. These three keys relax the lints inside test code only, which is the
+# mechanism clippy provides for exactly this split.
+allow-unwrap-in-tests = true
+allow-expect-in-tests = true
+allow-panic-in-tests = true
+
+# The workspace MSRV, so clippy does not suggest APIs newer than the pin in
+# rust-toolchain.toml.
+#
+# ⚠️ **This deliberately disagrees with three crates, and clippy says so on every
+# run.** `pqcl-primitives`, `pqcl-sm` and `pqcl-warrant` declare `rust-version =
+# "1.85"` because they are reachable from the SP1 guest, whose toolchain is older
+# than the host's; a higher floor makes `cargo prove build` refuse the package.
+#
+# Keeping this at 1.97 is the right side of the trade: every *host* build uses
+# 1.97.1, so linting against it is accurate, and lowering it here would suppress
+# suggestions that are valid for the code we actually ship.
+#
+# The residual hazard is real and worth naming: clippy may suggest an idiom
+# newer than the guest toolchain accepts. `cargo prove build` is what catches
+# that, and it is not part of `cargo xtask ci` — so run it after taking a clippy
+# suggestion in one of those three crates.
+msrv = "1.97"
+
+# Proper nouns `doc_markdown` would otherwise demand backticks around. `..`
+# keeps clippy's default list.
+doc-valid-idents = ["LEChain", ".."]

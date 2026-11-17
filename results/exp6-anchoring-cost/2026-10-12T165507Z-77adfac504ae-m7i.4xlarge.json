@@ -1,0 +1,283 @@
+{
+  "experiment": "exp6-anchoring-cost",
+  "git_sha": "77adfac504aec1f59ea152969ad26f24451d194f",
+  "git_dirty": false,
+  "environment": "aws",
+  "profile": "release",
+  "instance_type": "m7i.4xlarge",
+  "region": null,
+  "kernel": "6.18.51-120.163.amzn2023.x86_64",
+  "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "liboqs_version": "ML-DSA-65 via liboqs; see the KAT suite for the FIPS 204 evidence",
+  "cpu_features": "aes+pclmulqdq+avx2+avx512f+sha",
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8488C",
+  "dataset_checksums": {},
+  "rng_seeds": [],
+  "iterations": 10,
+  "started_utc": "2026-10-12T16:55:07Z",
+  "measurements": {
+    "anchor_gas": {
+      "anchor_commit_gas": 48919,
+      "config": "D4",
+      "note": "steady-state commit of (cid, R_e, d_{e-1}, d_e, A_e), no leaf count (M13 A21); the first commit into zero slots pays cold SSTORE and is not representative"
+    },
+    "anchor_gas_source": "contracts/out/anchor-gas.json, written by              contracts/test/GasProfile.t.sol::test_GasProfile_AnchorCommit. Run              `cargo xtask contracts` first; null here means it was not run, not              that the anchor is free.",
+    "epochs": [
+      {
+        "anchor_message_bytes": 32,
+        "anchor_sign_iterations": 100,
+        "anchor_sign_note": "ML-DSA signing is rejection-sampled, so this is a distribution with a long tail rather than a constant. Measured at a higher repetition count than the rest for that reason; the spread is the sampler, not the epoch size.",
+        "anchor_sign_ns": {
+          "iqr_ns": 64766,
+          "max_ns": 426484,
+          "mean_ns": 109572,
+          "median_ns": 85083,
+          "min_ns": 47793,
+          "n": 100,
+          "p25_ns": 63789,
+          "p75_ns": 128555,
+          "p95_ns": 256481
+        },
+        "auditor_verify_inclusion_ns": {
+          "iqr_ns": 22,
+          "max_ns": 2253,
+          "mean_ns": 2135,
+          "median_ns": 2121,
+          "min_ns": 2099,
+          "n": 10,
+          "p25_ns": 2106,
+          "p75_ns": 2128,
+          "p95_ns": 2223
+        },
+        "inclusion_proof_bytes": 198,
+        "leaves": 64,
+        "mmr_build_and_root_ns": {
+          "iqr_ns": 1550,
+          "max_ns": 48035,
+          "mean_ns": 45554,
+          "median_ns": 45146,
+          "min_ns": 44512,
+          "n": 10,
+          "p25_ns": 44662,
+          "p75_ns": 46212,
+          "p95_ns": 47294
+        },
+        "signature_bytes": 3309
+      },
+      {
+        "anchor_message_bytes": 32,
+        "anchor_sign_iterations": 100,
+        "anchor_sign_note": "ML-DSA signing is rejection-sampled, so this is a distribution with a long tail rather than a constant. Measured at a higher repetition count than the rest for that reason; the spread is the sampler, not the epoch size.",
+        "anchor_sign_ns": {
+          "iqr_ns": 75088,
+          "max_ns": 371038,
+          "mean_ns": 110293,
+          "median_ns": 81519,
+          "min_ns": 47537,
+          "n": 100,
+          "p25_ns": 56860,
+          "p75_ns": 131948,
+          "p95_ns": 262121
+        },
+        "auditor_verify_inclusion_ns": {
+          "iqr_ns": 31,
+          "max_ns": 2940,
+          "mean_ns": 2892,
+          "median_ns": 2881,
+          "min_ns": 2863,
+          "n": 10,
+          "p25_ns": 2876,
+          "p75_ns": 2907,
+          "p95_ns": 2934
+        },
+        "inclusion_proof_bytes": 264,
+        "leaves": 256,
+        "mmr_build_and_root_ns": {
+          "iqr_ns": 876,
+          "max_ns": 185984,
+          "mean_ns": 183900,
+          "median_ns": 183621,
+          "min_ns": 183063,
+          "n": 10,
+          "p25_ns": 183240,
+          "p75_ns": 184116,
+          "p95_ns": 185540
+        },
+        "signature_bytes": 3309
+      },
+      {
+        "anchor_message_bytes": 32,
+        "anchor_sign_iterations": 100,
+        "anchor_sign_note": "ML-DSA signing is rejection-sampled, so this is a distribution with a long tail rather than a constant. Measured at a higher repetition count than the rest for that reason; the spread is the sampler, not the epoch size.",
+        "anchor_sign_ns": {
+          "iqr_ns": 64332,
+          "max_ns": 482263,
+          "mean_ns": 102461,
+          "median_ns": 80960,
+          "min_ns": 47535,
+          "n": 100,
+          "p25_ns": 60778,
+          "p75_ns": 125110,
+          "p95_ns": 212422
+        },
+        "auditor_verify_inclusion_ns": {
+          "iqr_ns": 243,
+          "max_ns": 4221,
+          "mean_ns": 3757,
+          "median_ns": 3635,
+          "min_ns": 3571,
+          "n": 10,
+          "p25_ns": 3607,
+          "p75_ns": 3850,
+          "p95_ns": 4186
+        },
+        "inclusion_proof_bytes": 330,
+        "leaves": 1024,
+        "mmr_build_and_root_ns": {
+          "iqr_ns": 29154,
+          "max_ns": 832444,
+          "mean_ns": 758221,
+          "median_ns": 742818,
+          "min_ns": 729603,
+          "n": 10,
+          "p25_ns": 731257,
+          "p75_ns": 760411,
+          "p95_ns": 827683
+        },
+        "signature_bytes": 3309
+      },
+      {
+        "anchor_message_bytes": 32,
+        "anchor_sign_iterations": 100,
+        "anchor_sign_note": "ML-DSA signing is rejection-sampled, so this is a distribution with a long tail rather than a constant. Measured at a higher repetition count than the rest for that reason; the spread is the sampler, not the epoch size.",
+        "anchor_sign_ns": {
+          "iqr_ns": 68068,
+          "max_ns": 250592,
+          "mean_ns": 99967,
+          "median_ns": 87697,
+          "min_ns": 47370,
+          "n": 100,
+          "p25_ns": 60488,
+          "p75_ns": 128556,
+          "p95_ns": 196027
+        },
+        "auditor_verify_inclusion_ns": {
+          "iqr_ns": 217,
+          "max_ns": 4752,
+          "mean_ns": 4527,
+          "median_ns": 4530,
+          "min_ns": 4312,
+          "n": 10,
+          "p25_ns": 4398,
+          "p75_ns": 4615,
+          "p95_ns": 4729
+        },
+        "inclusion_proof_bytes": 396,
+        "leaves": 4096,
+        "mmr_build_and_root_ns": {
+          "iqr_ns": 56726,
+          "max_ns": 3126253,
+          "mean_ns": 3062573,
+          "median_ns": 3076038,
+          "min_ns": 2987694,
+          "n": 10,
+          "p25_ns": 3035095,
+          "p75_ns": 3091821,
+          "p95_ns": 3118664
+        },
+        "signature_bytes": 3309
+      },
+      {
+        "anchor_message_bytes": 32,
+        "anchor_sign_iterations": 100,
+        "anchor_sign_note": "ML-DSA signing is rejection-sampled, so this is a distribution with a long tail rather than a constant. Measured at a higher repetition count than the rest for that reason; the spread is the sampler, not the epoch size.",
+        "anchor_sign_ns": {
+          "iqr_ns": 75147,
+          "max_ns": 389391,
+          "mean_ns": 111782,
+          "median_ns": 92662,
+          "min_ns": 47512,
+          "n": 100,
+          "p25_ns": 64688,
+          "p75_ns": 139835,
+          "p95_ns": 258802
+        },
+        "auditor_verify_inclusion_ns": {
+          "iqr_ns": 462,
+          "max_ns": 5928,
+          "mean_ns": 5339,
+          "median_ns": 5228,
+          "min_ns": 5048,
+          "n": 10,
+          "p25_ns": 5073,
+          "p75_ns": 5535,
+          "p95_ns": 5824
+        },
+        "inclusion_proof_bytes": 462,
+        "leaves": 16384,
+        "mmr_build_and_root_ns": {
+          "iqr_ns": 225203,
+          "max_ns": 12752770,
+          "mean_ns": 12279088,
+          "median_ns": 12228937,
+          "min_ns": 12032266,
+          "n": 10,
+          "p25_ns": 12163206,
+          "p75_ns": 12388409,
+          "p95_ns": 12620689
+        },
+        "signature_bytes": 3309
+      }
+    ],
+    "scope": {
+      "calldata_reported_separately": true,
+      "chain": "private QBFT; no blob market, so nothing extrapolates to a public rollup",
+      "gas_measured_by": "contracts/test/GasProfile.t.sol",
+      "gas_measured_here": false
+    },
+    "solidity_sweep_spec": {
+      "design": "triples at 136k-1, 136k, 136k+1",
+      "design_reason": "Evenly spaced samples cannot separate a per-block term from a per-byte one, because both grow with the message. Across a boundary only the block count changes; within a block only a per-byte term does. The pair of gaps identifies both.",
+      "known_misfit": "A two-parameter model c0 + c1*ceil((m+pad)/136) fitted to the three ACVP conformance lengths leaves a half-block residual at both levels, and no pad in [0,4096) removes it. How many parameters the data supports is for this sweep to establish.",
+      "lengths": [
+        135,
+        136,
+        137,
+        271,
+        272,
+        273,
+        407,
+        408,
+        409,
+        543,
+        544,
+        545,
+        679,
+        680,
+        681,
+        815,
+        816,
+        817,
+        951,
+        952,
+        953,
+        1087,
+        1088,
+        1089,
+        1223,
+        1224,
+        1225,
+        1359,
+        1360,
+        1361,
+        1495,
+        1496,
+        1497,
+        1631,
+        1632,
+        1633
+      ],
+      "rate_bytes": 136
+    }
+  }
+}
