@@ -192,6 +192,12 @@ tr.click:hover td { background: var(--hover); }
 .examples { display: flex; flex-wrap: wrap; gap: 6px; }
 .examples button { font-family: var(--mono); font-size: 12px; min-height: 28px; padding: 4px 8px; text-align: left; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; color: var(--ink-2); }
 .examples button:hover { background: var(--hover); color: var(--ink); }
+.vo-vals { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.vo-v { font-family: var(--mono); font-size: 12px; min-height: 24px; padding: 2px 7px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); white-space: nowrap; }
+button.vo-v { cursor: pointer; }
+button.vo-v:hover { background: var(--hover); color: var(--ink); }
+.vo-v.off { opacity: 0.6; }
+table.vo-t { table-layout: fixed; }
 .hidden { display: none !important; }
 
 /* Guide */
@@ -256,6 +262,7 @@ ol.steps .ph { font-size: 12px; color: var(--muted); }
     <a href="#ingest" data-page="ingest"><svg class="i" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"/></svg>Ingestion</a>
     <a href="#custody" data-page="custody"><svg class="i" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>Chain of custody</a>
     <a href="#search" data-page="search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search</a>
+    <a href="#vocab" data-page="vocab"><svg class="i" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M8 7h8M8 11h6"/></svg>Query reference</a>
     <div class="grp">System</div>
     <a href="#chain" data-page="chain"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4M17.5 10v4"/></svg>Chain explorer</a>
     <a href="#perf" data-page="perf"><svg class="i" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Performance</a>
@@ -395,6 +402,39 @@ ol.steps .ph { font-size: 12px; color: var(--muted); }
     <div class="stack">
       <div class="card result" id="q-panel"></div>
       <div class="card"><h2>Warrants</h2><div class="tw" id="warrant"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Query reference -->
+<section class="page" id="page-vocab">
+  <h1>Query reference</h1>
+  <p class="lede">Every field and value you can search, read from what is indexed right now. It grows as you ingest. Click a value to use it as the first term on the Search page.</p>
+  <div class="grid cols-2" style="margin-bottom:16px">
+    <div class="card">
+      <h2>Syntax</h2>
+      <table>
+        <tr><th>Part</th><th>Form</th></tr>
+        <tr><td>First term</td><td>one keyword <span class="tag">field:value</span>; ranges are not allowed here</td></tr>
+        <tr><td>Filter</td><td>keywords joined by <span class="tag">AND</span> <span class="tag">OR</span> <span class="tag">NOT</span> and <span class="tag">( )</span>; terms side by side mean AND</td></tr>
+        <tr><td>Byte range</td><td><span class="tag">bytes:LO..HI</span>, raw bytes, underscores allowed (<span class="tag">bytes:1_000_000..1_999_999</span>)</td></tr>
+        <tr><td>Duration range</td><td><span class="tag">dur:LO..HI</span>, seconds</td></tr>
+        <tr><td>Time</td><td><span class="tag">ts:last:Nh</span>, the last N hours (no absolute dates)</td></tr>
+        <tr><td>Matching</td><td>exact and case sensitive for keywords; AND, OR and NOT in any case</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>What the warrants allow</h2>
+      <div class="tw" id="vo-scope"></div>
+    </div>
+  </div>
+  <div id="vo-sources"></div>
+  <div class="card">
+    <h2>Custody records</h2>
+    <p class="small muted" id="vo-cnote"></p>
+    <div class="grid cols-2">
+      <div class="tw" id="vo-events"></div>
+      <div class="tw" id="vo-people"></div>
     </div>
   </div>
 </section>
@@ -865,6 +905,52 @@ function render() {
     $("history").innerHTML = log.slice(0, -1).reverse().map((e) => `<div style="margin-top:16px">${panelHtml(e, `${e.step.flow}: ${e.step.title}`)}</div>`).join("");
   }
   renderStorage();
+  renderVocab(c.vocab, c.classes);
+}
+
+// ------------------------------------------------------------ query reference
+// Rendered from state.corners.vocab, which the server derives from the indexed
+// documents and opened records each refresh; nothing here is typed by hand.
+const RANGE_UNIT = {bytes: "bytes", dur: "s", ts: "hour"};
+function rangeText(r) {
+  if (r.attr === "ts") {
+    const d = (h) => new Date(h * 3600 * 1000).toISOString().slice(0, 16).replace("T", " ");
+    return `${d(r.min)} to ${d(r.max)} UTC`;
+  }
+  return `${Number(r.min).toLocaleString()} to ${Number(r.max).toLocaleString()} ${RANGE_UNIT[r.attr] || ""}`;
+}
+function renderVocab(v, classes) {
+  if (page !== "vocab") return;
+  if (!v) { $("vo-sources").innerHTML = `<div class="card" style="margin-bottom:16px"><p class="muted">Available once the warm-up has finished.</p></div>`; return; }
+  const sc = v.evidence_scope, cs = v.custody_scope;
+  const scopeHtml = `<table><tr><th>Fields</th><th class="r">Classes</th><th>Evidence warrant${sc ? ` (${sc[0]}–${sc[1]})` : ""}</th></tr>`
+    + (classes || []).map(([f, k, ok]) => `<tr><td>${f.split(" ").filter((x) => !x.startsWith("(")).map((x) => `<span class="tag">${esc(x)}</span>`).join(" ")}</td><td class="r">${esc(k)}</td><td>${ok ? ck(true, "allowed") : `<span class="pill bad">refused</span>`}</td></tr>`).join("")
+    + `<tr><td><span class="tag">evt</span> <span class="tag">actor</span></td><td class="r">1–2</td><td>custody warrant${cs ? ` (${cs[0]}–${cs[1]})` : ""}: ${v.custody_allowed.evt && v.custody_allowed.actor ? ck(true, "allowed") : `<span class="pill bad">refused</span>`}</td></tr></table>`;
+  const html = scopeHtml + "|" + JSON.stringify(v.sources) + JSON.stringify(v.events) + JSON.stringify(v.people);
+  if ($("vo-sources").dataset.html === html) return;
+  $("vo-sources").dataset.html = html;
+  $("vo-scope").innerHTML = scopeHtml;
+  $("vo-sources").innerHTML = v.sources.map((s) => {
+    const rows = s.fields.map((f) => {
+      const vals = f.values.map(([x, n]) => f.allowed
+        ? `<button class="vo-v" data-q="${esc(f.field + ":" + x)}" title="${n} documents">${esc(x)} <span class="muted">${n}</span></button>`
+        : `<span class="vo-v off" title="${n} documents">${esc(x)} <span class="muted">${n}</span></span>`).join("");
+      const more = f.distinct > f.values.length ? `<span class="small muted">and ${f.distinct - f.values.length} more</span>` : "";
+      return `<tr><td><span class="tag">${esc(f.field)}</span></td><td class="r">${f.class}</td><td>${f.allowed ? ck(true, "allowed") : `<span class="pill bad">refused</span>`}</td><td><div class="vo-vals">${vals}${more}</div></td></tr>`;
+    }).join("");
+    const ranges = s.ranges.map((r) => `<tr><td><span class="tag">${esc(r.attr)}</span></td><td class="r">${r.class}</td><td>${r.allowed ? ck(true, "allowed") : `<span class="pill bad">refused</span>`}</td><td class="num">${esc(rangeText(r))} <span class="small muted">(indexed range)</span></td></tr>`).join("");
+    return `<div class="card" style="margin-bottom:16px"><h2>${esc(s.name)} <span class="small muted" style="font-weight:400">${s.docs.toLocaleString()} documents</span></h2>`
+      + `<div class="tw"><table class="vo-t"><colgroup><col style="width:90px"><col style="width:64px"><col style="width:96px"><col></colgroup><tr><th>Field</th><th class="r">Class</th><th>Warrant</th><th>Values (documents)</th></tr>${rows}${ranges}</table></div></div>`;
+  }).join("");
+  const cnote = "Search them on the Search page under Custody records: an event, a person, or both.";
+  $("vo-cnote").textContent = cnote;
+  $("vo-events").innerHTML = `<table><tr><th>Event</th><th class="r">Records</th></tr>`
+    + v.events.map(([e, n]) => `<tr><td><span class="tag">${esc(e)}</span></td><td class="r">${n}</td></tr>`).join("") + "</table>";
+  $("vo-people").innerHTML = `<table><tr><th>Person</th><th>Role</th><th class="r">Records signed</th></tr>`
+    + v.people.map((p) => `<tr><td class="mono">${esc(p.id)}</td><td>${esc(p.role)}</td><td class="r">${p.records}</td></tr>`).join("") + "</table>";
+  for (const b of $("vo-sources").querySelectorAll("button.vo-v")) b.onclick = () => {
+    $("q-s").value = b.dataset.q; $("q-psi").value = ""; setPlane("evidence"); location.hash = "#search";
+  };
 }
 
 function actionTitle(a) {
@@ -1017,7 +1103,7 @@ async function pollChain() {
 }
 
 // ------------------------------------------------------------ pages
-const PAGES = ["guide", "ingest", "custody", "search", "chain", "perf", "walk"];
+const PAGES = ["guide", "ingest", "custody", "search", "vocab", "chain", "perf", "walk"];
 let page = "guide";
 function route() {
   const h = location.hash.replace("#", "");
@@ -1027,6 +1113,7 @@ function route() {
   window.scrollTo(0, 0);
   if (page === "perf") { schedulePerf(0); resizeCharts(); }
   if (page === "chain" && !cx.timer) pollChain();
+  if (page === "vocab" && state) renderVocab((state.corners || {}).vocab, (state.corners || {}).classes);
 }
 window.addEventListener("hashchange", route);
 

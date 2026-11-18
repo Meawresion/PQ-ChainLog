@@ -23,7 +23,7 @@
 //! ⛔ No number shown here reaches any document: one validator, a
 //! host-software Secure Module, a laptop.
 
-use std::collections::{BTreeSet, HashMap};
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::time::Instant;
 
 use pqcl_capsule::Event;
@@ -586,15 +586,151 @@ impl Demo {
                                "access": r.may(Event::Access)}})
             }).collect::<Vec<_>>(),
             "storage": storage(client, ais),
+            "vocab": vocabulary(client),
             "warrants": warrants,
             "classes": [
                 ["src kind dir ext state", "1–5", true],
                 ["log host user act status", "6–9", true],
                 ["bytes ts dur (ranges)", "10–12", true],
                 ["ip net", "20–21", false],
+                ["proto", "22", false],
             ],
         })
     }
+}
+
+/// One source's share of the query vocabulary.
+#[derive(Default)]
+struct Source {
+    docs: usize,
+    /// field → value → documents carrying `field:value`.
+    fields: BTreeMap<String, HashMap<String, usize>>,
+    /// Range attribute → (lowest, highest) indexed value.
+    ranges: BTreeMap<&'static str, (u64, u64)>,
+}
+
+/// The Query reference page: every field and value the evidence index can be
+/// asked about, and every event and person on the custody plane, derived from
+/// what the client holds now (its documents, its opened records) so the page
+/// cannot drift from the data. Each field's values are capped for display;
+/// `distinct` says how many there are.
+fn vocabulary(client: &super::Client) -> Value {
+    const SHOW: usize = 40;
+    const NAMES: [&str; 4] = ["Synthetic logs", "Disk image", "Network capture", "Other"];
+    let in_scope = |idx: usize, field: &str| {
+        client.warrants.get(idx).is_some_and(|w| {
+            let (lo, hi) = w.warrant.scope.bounds();
+            (lo..=hi).contains(&class_of(field))
+        })
+    };
+
+    let mut src: [Source; 4] = Default::default();
+    for d in &client.docs {
+        let has = |p: &str| d.keywords.iter().any(|k| k.starts_with(p));
+        let i = if has("src:disk-image") {
+            1
+        } else if has("src:pcap") {
+            2
+        } else if has("log:") {
+            0
+        } else {
+            3
+        };
+        let s = &mut src[i];
+        s.docs += 1;
+        for k in &d.keywords {
+            if let Some((f, v)) = k.split_once(':') {
+                *s.fields
+                    .entry(f.to_owned())
+                    .or_default()
+                    .entry(v.to_owned())
+                    .or_default() += 1;
+            }
+        }
+        for (a, v) in &d.numbers {
+            let e = s.ranges.entry(a.name()).or_insert((*v, *v));
+            e.0 = e.0.min(*v);
+            e.1 = e.1.max(*v);
+        }
+    }
+    let sources: Vec<Value> = NAMES
+        .iter()
+        .zip(&src)
+        .filter(|(_, s)| s.docs > 0)
+        .map(|(name, s)| {
+            let fields: Vec<Value> = s
+                .fields
+                .iter()
+                .map(|(f, vals)| {
+                    let mut v: Vec<(&String, &usize)> = vals.iter().collect();
+                    v.sort_by(|a, b| b.1.cmp(a.1).then_with(|| a.0.cmp(b.0)));
+                    let shown: Vec<Value> =
+                        v.iter().take(SHOW).map(|(k, n)| json!([k, n])).collect();
+                    json!({"field": f, "class": class_of(f), "allowed": in_scope(0, f),
+                           "distinct": v.len(), "values": shown})
+                })
+                .collect();
+            let ranges: Vec<Value> = s
+                .ranges
+                .iter()
+                .map(|(a, (lo, hi))| {
+                    json!({"attr": a, "class": class_of(a), "allowed": in_scope(0, a),
+                           "min": lo, "max": hi})
+                })
+                .collect();
+            json!({"name": name, "docs": s.docs, "fields": fields, "ranges": ranges})
+        })
+        .collect();
+    let (events, people) = custody_vocabulary(client);
+    json!({
+        "evidence_scope": client.warrants.first().map(|w| w.warrant.scope.bounds()),
+        "custody_scope": client.warrants.get(1).map(|w| w.warrant.scope.bounds()),
+        "custody_allowed": {"evt": in_scope(1, "evt"), "actor": in_scope(1, "actor")},
+        "sources": sources,
+        "events": events,
+        "people": people,
+    })
+}
+
+/// The custody plane's vocabulary: every event a record can carry, with how
+/// many the opened bodies hold, and every enrolled person with the records
+/// they signed.
+fn custody_vocabulary(client: &super::Client) -> (Vec<Value>, Vec<Value>) {
+    let all = [
+        Event::Collect,
+        Event::Transfer,
+        Event::Access,
+        Event::Analyze,
+        Event::Export,
+        Event::Seal,
+        Event::Dispose,
+    ];
+    let mut counts: HashMap<&str, usize> = HashMap::new();
+    let mut signed = vec![0usize; client.custodians.len()];
+    for h in &client.held {
+        for b in &h.bodies {
+            *counts.entry(graph::event_name(b.event)).or_default() += 1;
+        }
+        for &s in &h.signers {
+            if let Some(n) = signed.get_mut(s) {
+                *n += 1;
+            }
+        }
+    }
+    let events: Vec<Value> = all
+        .iter()
+        .map(|e| {
+            let n = graph::event_name(*e);
+            json!([n, counts.get(n).copied().unwrap_or(0)])
+        })
+        .collect();
+    let people: Vec<Value> = client
+        .custodians
+        .iter()
+        .zip(&signed)
+        .map(|(c, n)| json!({"id": c.actor_id, "role": c.role, "records": n}))
+        .collect();
+    (events, people)
 }
 
 /// Bytes each side holds now, by what they are. Counted from the structures
