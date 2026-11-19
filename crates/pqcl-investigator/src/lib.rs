@@ -14,6 +14,7 @@ pub mod chain;
 pub mod demo;
 pub mod docs;
 pub mod explorer;
+pub mod files;
 pub mod graph;
 pub mod perf;
 pub mod web;

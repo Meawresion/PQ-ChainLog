@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo data on disk</title>
+<style>
+:root {
+  --bg: #f7f7f5; --surface: #ffffff; --inset: #f0efec; --line: #e3e1dc; --ink: #1d1c1a; --ink-2: #4a4843;
+  --muted: #7a776f; --accent: #2457c5; --accent-bg: #e8eefb; --ok: #2e7d4f; --ok-bg: #e5f3ea; --warn: #a15c00; --warn-bg: #fbf0dd;
+  --bad: #b3261e; --bad-bg: #fbe7e5; --term: #16181d; --term-ink: #d6dbe4;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #151514; --surface: #1d1d1b; --inset: #262624; --line: #33322f; --ink: #ecebe7; --ink-2: #c5c3bd;
+          --muted: #8f8c84; --accent: #7ea6f7; --accent-bg: #23304a; --ok: #6cc28f; --ok-bg: #1d3326; --warn: #e0a35a; --warn-bg: #3a2c17;
+          --bad: #f08a80; --bad-bg: #3d1f1c; --term: #0f1013; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.55 var(--sans); }
+.page { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+h1 { font-size: 24px; margin: 0; font-weight: 600; }
+header a { color: var(--accent); text-decoration: none; font-size: 13px; }
+.lede { color: var(--ink-2); max-width: 80ch; margin: 4px 0 24px; }
+h2 { font-size: 16px; margin: 32px 0 10px; font-weight: 600; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 500; font-size: 12px; }
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mono { font-family: var(--mono); font-size: 12.5px; }
+.muted { color: var(--muted); } .small { font-size: 12px; }
+tr.go { cursor: pointer; } tr.go:hover td { background: var(--inset); }
+.pill { font-size: 11.5px; padding: 1px 8px; border-radius: 6px; background: var(--inset); color: var(--ink-2); white-space: nowrap; }
+.pill.ok { background: var(--ok-bg); color: var(--ok); } .pill.warn { background: var(--warn-bg); color: var(--warn); } .pill.bad { background: var(--bad-bg); color: var(--bad); }
+.grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 16px; }
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.tabs button { font: inherit; font-size: 12.5px; padding: 5px 10px; border-radius: 7px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); cursor: pointer; }
+.tabs button.on { background: var(--accent-bg); color: var(--accent); border-color: transparent; }
+.tabs button:disabled { opacity: 0.5; cursor: default; }
+.crumbs { font-family: var(--mono); font-size: 12.5px; margin-bottom: 8px; color: var(--muted); }
+.crumbs a { color: var(--accent); cursor: pointer; }
+.cmd { display: flex; align-items: center; gap: 8px; background: var(--term); color: var(--term-ink); border-radius: 8px; padding: 7px 10px; font-family: var(--mono); font-size: 12.5px; margin-bottom: 8px; overflow-x: auto; white-space: nowrap; }
+.cmd::before { content: "$"; color: #7f8796; }
+.cmd span { flex: 1; }
+.cmd button, .copy { font: inherit; font-size: 11px; background: transparent; border: 1px solid #3a3f4a; color: #aab2c0; border-radius: 5px; padding: 1px 7px; cursor: pointer; }
+pre.out { background: var(--term); color: var(--term-ink); border-radius: 8px; padding: 12px 14px; font-family: var(--mono); font-size: 12px; line-height: 1.5; max-height: 460px; overflow: auto; margin: 0; white-space: pre; }
+.who { border-left: 3px solid var(--accent); background: var(--inset); padding: 8px 12px; border-radius: 0 8px 8px 0; margin-bottom: 10px; font-size: 13px; }
+.err { color: var(--bad); font-size: 13px; }
+.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+label.chk { font-size: 12.5px; color: var(--ink-2); display: flex; gap: 6px; align-items: center; }
+ul.notes { margin: 0; padding-left: 18px; } ul.notes li { margin: 6px 0; max-width: 90ch; }
+.mem td:first-child { width: 55%; }
+#ls table { table-layout: fixed; }
+#ls td:first-child { word-break: break-all; }
+#ls th:nth-child(2), #ls td:nth-child(2) { width: 84px; }
+#ls th:nth-child(3), #ls td:nth-child(3) { width: 84px; }
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <h1>Where the demo's data lives</h1>
+  <a href="/">← back to the dashboard</a>
+</header>
+<p class="lede">Click a folder to run a real <span class="mono">ls -la</span> on it now, and click a file to <span class="mono">cat</span> it (or see the first 512 bytes in hex, like <span class="mono">xxd | head</span>, if it is binary). Everything is read-only and comes from the disk at the moment you click. Each listing also shows the command that gives the same answer in a terminal, run from <span class="mono">~/pq-chainlog/implementation</span>.</p>
+
+<h2>The four places on disk</h2>
+<div class="card"><table id="places">
+  <tr><th>What</th><th>Folder</th><th>What you will see</th><th></th></tr>
+</table></div>
+
+<h2>Look inside, live</h2>
+<div class="grid">
+  <div class="card">
+    <div class="tabs" id="tabs"></div>
+    <div class="row"><label class="chk"><input type="checkbox" id="auto"> refresh every 2 s (watch files appear when you ingest)</label></div>
+    <div class="crumbs" id="crumbs"></div>
+    <div class="cmd"><span id="ls-cmd"></span><button data-copy="ls-cmd">copy</button></div>
+    <div class="err" id="ls-err"></div>
+    <div id="ls"></div>
+  </div>
+  <div class="card">
+    <div id="who"></div>
+    <div class="cmd"><span id="cat-cmd">click a file on the left</span><button data-copy="cat-cmd">copy</button></div>
+    <div class="err" id="cat-err"></div>
+    <pre class="out" id="cat">(nothing selected)</pre>
+    <p class="small muted" id="cat-note"></p>
+  </div>
+</div>
+
+<h2>Not on disk: held in the dashboard process's memory</h2>
+<p class="lede" style="margin-bottom:10px">The encrypted search index, the cross-tags, the custody records, the Merkle leaves and every key live only in memory, so there is nothing to <span class="mono">ls</span>. These are their sizes right now, counted from the structures themselves.</p>
+<div class="grid">
+  <div class="card mem"><h2 style="margin-top:0">What the server (AIS) holds</h2><table id="mem-store"></table></div>
+  <div class="card mem"><h2 style="margin-top:0">What the investigator's client holds</h2><table id="mem-client"></table></div>
+</div>
+<p class="small muted">To see them as the system shows them: <a href="/#search">Search</a>, <a href="/#custody">Chain of custody</a>, <a href="/#chain">Chain explorer</a>, <a href="/#perf">Performance</a>.</p>
+
+<h2>Commands for a second terminal</h2>
+<div class="card" id="cmds"></div>
+
+<h2>Things to know</h2>
+<div class="card"><ul class="notes">
+  <li><b>The store is wiped when each demo starts</b>, and the chain folder is deleted when you press Ctrl-C. Nothing carries over between runs.</li>
+  <li><b>demo-synthetic is not wiped.</b> Burst numbers restart at 001 each run, so new files overwrite old ones of the same number; higher-numbered files from an earlier, longer run stay until you delete them.</li>
+  <li><b>Look, don't edit.</b> Changing a byte in the store by hand is exactly what the Tamper button does, and the next verify or audit flags that item. Reading is harmless, and this page can only read.</li>
+  <li><b>Private keys are never shown.</b> The chain folder holds the validator's key; this page lists it and refuses to open it.</li>
+  <li><b><span class="mono">/api/state</span> is the investigator's view.</b> It includes what the investigator's client has decrypted, such as which hex file is which item. The server has none of that.</li>
+</ul></div>
+
+<h2>A moment for the audience</h2>
+<div class="card"><ol class="notes" style="padding-left:20px">
+  <li>On the Ingestion page, ingest a burst.</li>
+  <li>Here, open <b>Synthetic bursts</b> and click the newest <span class="mono">synthetic-burst-NNN.log</span>: plain text, mallory's failed logins and all.</li>
+  <li>Open <b>Payload store</b>: one more file has appeared, named by a hex ID. Click it: ciphertext. Nothing in the folder says what the evidence is or who handled it.</li>
+  <li>The blue box above the output says which item the investigator knows it to be. That knowledge is in the client, not on the server.</li>
+</ol></div>
+</div>
+
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const q = (s) => /^[A-Za-z0-9._/@-]+$/.test(s) ? s : "'" + s.replace(/'/g, "'\\''") + "'";
+const size = (n) => n < 1024 ? `${n} B` : n < 1048576 ? `${(n / 1024).toFixed(1)} KiB` : n < 1073741824 ? `${(n / 1048576).toFixed(1)} MiB` : `${(n / 1073741824).toFixed(2)} GiB`;
+const when = (s) => s ? new Date(s * 1000).toLocaleTimeString([], {hour: "2-digit", minute: "2-digit", second: "2-digit"}) : "";
+
+const PLACES = [
+  {id: "store", tab: "Payload store", what: "Encrypted evidence: the server's payload store", see: "One file per item, named by its capsule ID in hex, never by file name. AES-256-GCM ciphertext: the disk image, the capture, and each ingested burst."},
+  {id: "synthetic", tab: "Synthetic bursts", what: "Synthetic log bursts, before sealing", see: "Plain text. The agent's input (the log it collected), not what the server stores."},
+  {id: "artefacts", tab: "Original artefacts", what: "The original artefacts", see: "The real evidence files from Digital Corpora. The forensic tools read them through a read-only mount."},
+  {id: "chain", tab: "Demo chain", what: "The demo chain (Besu)", see: "The node's database and its validator key (never shown). Exists only while the demo runs. Easier to read through the Chain explorer."},
+];
+let roots = [], cur = {root: "store", path: ""}, state = null, timer = null;
+
+async function getJSON(url) { const r = await fetch(url, {cache: "no-store"}); return r.json(); }
+
+async function loadRoots() {
+  roots = (await getJSON("/api/fs/roots")).roots || [];
+  const byId = Object.fromEntries(roots.map((r) => [r.id, r]));
+  $("places").innerHTML = `<tr><th>What</th><th>Folder</th><th>What you will see</th><th></th></tr>` + PLACES.map((p) => {
+    const r = byId[p.id] || {};
+    return `<tr class="go" data-root="${p.id}"><td><b>${esc(p.what)}</b></td><td class="mono">${esc(r.shown || "")}/</td><td>${esc(p.see)}</td>`
+      + `<td>${r.exists ? '<span class="pill ok">exists</span>' : '<span class="pill warn">not yet</span>'}</td></tr>`;
+  }).join("");
+  $("tabs").innerHTML = PLACES.map((p) => `<button data-root="${p.id}" class="${p.id === cur.root ? "on" : ""}">${esc(p.tab)}</button>`).join("");
+}
+
+function crumbs() {
+  const r = roots.find((x) => x.id === cur.root) || {shown: cur.root};
+  const parts = cur.path ? cur.path.split("/") : [];
+  $("crumbs").innerHTML = `<a data-path="">${esc(r.shown)}</a>` + parts.map((s, i) => ` / <a data-path="${esc(parts.slice(0, i + 1).join("/"))}">${esc(s)}</a>`).join("");
+}
+
+async function ls() {
+  crumbs();
+  const v = await getJSON(`/api/fs/ls?root=${encodeURIComponent(cur.root)}&path=${encodeURIComponent(cur.path)}`);
+  $("ls-err").textContent = v.ok ? "" : v.error;
+  $("ls-cmd").textContent = `ls -la ${q(v.shown || "")}/`;
+  if (!v.ok) { $("ls").innerHTML = ""; return; }
+  if (!v.exists) { $("ls").innerHTML = `<p class="muted">This folder does not exist yet. ${cur.root === "chain" ? "It appears while the demo runs." : cur.root === "synthetic" ? "It appears with the first ingested burst." : "It appears during the warm-up."}</p>`; return; }
+  const items = itemsByEid();
+  const rows = v.entries.map((e) => {
+    const p = cur.path ? `${cur.path}/${e.name}` : e.name;
+    const known = cur.root === "store" && items[e.name] ? `<div class="small muted">investigator knows: ${esc(items[e.name].file)}</div>` : "";
+    const tag = e.secret ? ' <span class="pill bad">private key: not shown</span>' : "";
+    return `<tr class="${e.secret ? "" : "go"}" data-${e.dir ? "dir" : "file"}="${esc(p)}"><td class="mono">${esc(e.name)}${e.dir ? "/" : ""}${tag}${known}</td>`
+      + `<td class="r">${e.dir ? "" : size(e.size)}</td><td class="r muted">${when(e.modified)}</td></tr>`;
+  }).join("");
+  $("ls").innerHTML = v.entries.length
+    ? `<table><tr><th>Name</th><th class="r">Size</th><th class="r">Modified</th></tr>${rows}</table><p class="small muted">${v.entries.length} entries</p>`
+    : `<p class="muted">Empty.</p>`;
+}
+
+function itemsByEid() {
+  const out = {};
+  for (const c of (state && state.capsules) || []) if (c.eid) out[c.eid] = c;
+  return out;
+}
+
+async function cat(path) {
+  const v = await getJSON(`/api/fs/cat?root=${encodeURIComponent(cur.root)}&path=${encodeURIComponent(path)}`);
+  $("cat-err").textContent = v.ok ? "" : v.error;
+  const shownPath = v.shown || path;
+  $("cat-cmd").textContent = !v.ok ? `cat ${q(shownPath)}` : v.kind === "text" ? `cat ${q(shownPath)}` : `xxd ${q(shownPath)} | head -32`;
+  $("cat").textContent = v.ok ? (v.kind === "text" ? v.text : v.hex) : "";
+  $("cat-note").textContent = v.ok ? `${size(v.size)} in total; showing ${v.kind === "text" ? "the first " + size(v.bytes) + " as text" : "the first " + v.bytes + " bytes in hex"}${v.truncated ? " (the rest is not shown)" : ""}.` : "";
+  const name = path.split("/").pop();
+  const c = cur.root === "store" ? itemsByEid()[name] : null;
+  $("who").innerHTML = c
+    ? `<div class="who"><b>The server sees</b> a file named <span class="mono">${esc(name.slice(0, 16))}…</span> and these bytes.<br><b>The investigator's client knows</b> it is item ${c.index}, <span class="mono">${esc(c.file)}</span> (${esc(c.kind)}), held by ${esc(c.holder)}. Sealed digest d_ev <span class="mono">${esc(String(c.d_ev).slice(0, 16))}…</span>${c.integrity ? (c.integrity.ok ? ' · last check: <span class="pill ok">intact</span>' : ' · last check: <span class="pill bad">tampered</span>') : ""}</div>`
+    : cur.root === "synthetic" ? `<div class="who">The agent's own copy, before sealing. The server never receives this file in the clear.</div>` : "";
+}
+
+async function refreshState() { try { state = await getJSON("/api/state"); renderMem(); } catch (e) { /* the dashboard may be restarting */ } }
+function renderMem() {
+  const st = (state && state.corners && state.corners.storage) || null;
+  const t = (rows) => rows ? rows.map(([k, n]) => `<tr><td>${esc(k)}</td><td class="r">${size(Number(n))}</td></tr>`).join("") : `<tr><td class="muted">available once the warm-up has finished</td></tr>`;
+  $("mem-store").innerHTML = t(st && st.store);
+  $("mem-client").innerHTML = t(st && st.client);
+}
+
+const CMDS = [
+  ["cd ~/pq-chainlog/implementation", "run the rest from here"],
+  ["ls -la target/demo-store/", "the server's view: hex names, encrypted blobs"],
+  ["xxd target/demo-store/<file> | head", "ciphertext (cat prints binary noise; xxd is readable)"],
+  ["cat target/demo-synthetic/synthetic-burst-001.log", "the same burst as plain text, on the agent side"],
+  ["sha256sum target/demo-store/*", "before and after the Tamper button: one line changes"],
+  [`curl -s -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","id":1,"method":"eth_blockNumber","params":[]}' http://127.0.0.1:8555`, "ask the chain for its block height"],
+  ["curl -s http://127.0.0.1:8080/api/state | python3 -m json.tool | less", "what the dashboard page reads (the investigator's view)"],
+];
+$("cmds").innerHTML = CMDS.map(([c, d], i) => `<div class="cmd"><span id="c${i}">${esc(c)}</span><button data-copy="c${i}">copy</button></div><p class="small muted" style="margin:-4px 0 10px 4px">${esc(d)}</p>`).join("");
+
+document.addEventListener("click", (e) => {
+  const cp = e.target.closest("[data-copy]");
+  if (cp) { const t = $(cp.dataset.copy).textContent; if (navigator.clipboard) navigator.clipboard.writeText(t).then(() => { cp.textContent = "copied"; setTimeout(() => { cp.textContent = "copy"; }, 1200); }); return; }
+  const r = e.target.closest("[data-root]");
+  if (r) { cur = {root: r.dataset.root, path: ""}; for (const b of $("tabs").querySelectorAll("button")) b.classList.toggle("on", b.dataset.root === cur.root); ls(); if (r.closest("#places")) $("tabs").scrollIntoView({behavior: "smooth", block: "start"}); return; }
+  const c = e.target.closest("#crumbs a");
+  if (c) { cur.path = c.dataset.path; ls(); return; }
+  const d = e.target.closest("tr[data-dir]");
+  if (d) { cur.path = d.dataset.dir; ls(); return; }
+  const f = e.target.closest("tr[data-file]");
+  if (f) cat(f.dataset.file);
+});
+$("auto").onchange = () => {
+  clearInterval(timer);
+  if ($("auto").checked) timer = setInterval(() => { refreshState(); ls(); }, 2000);
+};
+
+(async () => { await refreshState(); await loadRoots(); await ls(); setInterval(refreshState, 5000); })();
+</script>
+</body>
+</html>

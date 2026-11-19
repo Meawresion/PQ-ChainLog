@@ -26,6 +26,8 @@ use serde_json::{Value, json};
 use crate::demo::{Config, Demo, WARM_UP};
 
 const INDEX: &str = include_str!("../assets/index.html");
+/// Where the demo's data lives, with a live read-only `ls` and `cat`.
+const STORAGE: &str = include_str!("../assets/storage.html");
 
 /// How often the worker refreshes the snapshot when idle, so the block height
 /// and the badges stay current without a click.
@@ -51,6 +53,8 @@ struct Shared {
     /// Why the warm-up stopped, if it failed.
     warm_error: Mutex<Option<String>>,
     jobs: Mutex<mpsc::Sender<Job>>,
+    /// The folders the Storage page may read ([`crate::files`]).
+    roots: Vec<crate::files::Root>,
 }
 
 /// Serve the dashboard on `127.0.0.1:port` until the process exits. With
@@ -73,6 +77,7 @@ pub fn serve(cfg: Config, port: u16, warm_up: bool) -> std::io::Result<()> {
         busy: Mutex::new(Some("starting".to_owned())),
         warm_error: Mutex::new(None),
         jobs: Mutex::new(tx),
+        roots: crate::files::roots(&cfg.repo, &cfg.store),
     });
     // The Performance page's sampler: kernel counters every 50 ms, the
     // evidence store's directory on disk, and the chain node's container.
@@ -199,12 +204,19 @@ fn handle(mut stream: TcpStream, shared: &Shared) -> std::io::Result<()> {
     let (path, query) = target.split_once('?').unwrap_or((target, ""));
 
     match (method, path) {
-        ("GET", "/") => respond(
-            &mut stream,
-            200,
-            "text/html; charset=utf-8",
-            INDEX.as_bytes(),
-        ),
+        ("GET", "/" | "/storage.html") => {
+            let page = if path == "/" { INDEX } else { STORAGE };
+            respond(
+                &mut stream,
+                200,
+                "text/html; charset=utf-8",
+                page.as_bytes(),
+            )
+        }
+        ("GET", p) if p.starts_with("/api/fs/") => {
+            let v = fs_request(shared, &p["/api/fs/".len()..], query);
+            reply(&mut stream, &v)
+        }
         ("GET", "/api/state") => {
             let mut state = lock(&shared.snapshot).clone();
             state["busy"] = json!(*lock(&shared.busy));
@@ -270,6 +282,57 @@ fn handle(mut stream: TcpStream, shared: &Shared) -> std::io::Result<()> {
 fn reply(stream: &mut TcpStream, v: &Value) -> std::io::Result<()> {
     let code = if v["ok"] == true { 200 } else { 409 };
     respond(stream, code, "application/json", v.to_string().as_bytes())
+}
+
+/// The Storage page's `roots`, `ls` or `cat`, from `?root=…&path=…`.
+fn fs_request(shared: &Shared, what: &str, query: &str) -> Value {
+    let arg = |k: &str| {
+        query
+            .split('&')
+            .find_map(|kv| kv.strip_prefix(k).and_then(|v| v.strip_prefix('=')))
+            .map(percent_decode)
+            .unwrap_or_default()
+    };
+    let (root, rel) = (arg("root"), arg("path"));
+    let out = match what {
+        "roots" => Ok(json!({"roots": crate::files::list_roots(&shared.roots)})),
+        "ls" => crate::files::ls(&shared.roots, &root, &rel),
+        "cat" => crate::files::cat(&shared.roots, &root, &rel),
+        _ => Err(format!("no file request {what}")),
+    };
+    match out {
+        Ok(mut v) => {
+            v["ok"] = json!(true);
+            v
+        }
+        Err(e) => json!({"ok": false, "error": e}),
+    }
+}
+
+/// `%2F` and `+` back to `/` and space, for one query value.
+fn percent_decode(s: &str) -> String {
+    let b = s.as_bytes();
+    let mut out = Vec::with_capacity(b.len());
+    let mut i = 0;
+    while i < b.len() {
+        match b[i] {
+            b'%' if i + 2 < b.len() => {
+                let hex = std::str::from_utf8(&b[i + 1..i + 3])
+                    .ok()
+                    .and_then(|h| u8::from_str_radix(h, 16).ok());
+                if let Some(v) = hex {
+                    out.push(v);
+                    i += 3;
+                    continue;
+                }
+                out.push(b'%');
+            }
+            b'+' => out.push(b' '),
+            c => out.push(c),
+        }
+        i += 1;
+    }
+    String::from_utf8_lossy(&out).into_owned()
 }
 
 fn lock<T>(m: &Mutex<T>) -> MutexGuard<'_, T> {
